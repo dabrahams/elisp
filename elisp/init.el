@@ -63,9 +63,10 @@
 (setq custom-file (expand-file-name "custom.el" init-path))
 (load-file custom-file)
 
-(setq init-packages-path (expand-file-name "packages" init-path)
-      init-settings-path (expand-file-name "settings" init-path)
-      init-persistence-path (expand-file-name "persistence" init-path))
+(setq init-packages-path (expand-file-name "packages.d" init-path)
+      init-config-path (expand-file-name "config.d" init-path)
+      init-autoloads-path (expand-file-name "autoloads.d" init-path)
+)
 
 (defun find-subdirs-containing (dir pattern)
   "Return a list of all deep subdirectories of DIR that contain files
