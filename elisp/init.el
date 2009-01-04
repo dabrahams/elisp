@@ -63,9 +63,9 @@
 (setq custom-file (expand-file-name "custom.el" init-path))
 (load-file custom-file)
 
-(setq init-packages-path (expand-file-name "packages.d" init-path)
+(setq init-packages-path (expand-file-name "package.d" init-path)
       init-config-path (expand-file-name "config.d" init-path)
-      init-autoloads-path (expand-file-name "autoload.d" init-path)
+      init-autoload-path (expand-file-name "autoload.d" init-path)
 )
 
 (defun find-subdirs-containing (dir pattern)
@@ -140,8 +140,25 @@ new directories are prepended to emacs's initial Info path."
 ; settings files
 (setq running-xemacs (string-match "XEmacs" (emacs-version)))
 
-; Load ~/elisp/settings/*-settings.el, in sorted order.
-(dolist (file (directory-files init-autoloads-path t "^\\([^.]\\|\\.[^#]\\).*\\.el$"))
+; Load ~/elisp/config.d/*.el (in sorted order).
+(dolist (file (directory-files init-config-path t "^\\([^.]\\|\\.[^#]\\).*\\.el$"))
   (load-file file))
+
+; Prepare all autoloads.d/xxx-setup.el files to load automatically
+; after the xxx library.  See
+; http://www.emacsblog.org/2007/10/07/declaring-emacs-bankruptcy/#comment-5937
+(dolist 
+    ;; For file in (*-setup.el files in init-autoload-path)
+    (file 
+     (let ((default-directory init-autoload-path))
+       (mapcar 'file-name-sans-extension
+               (file-expand-wildcards "*-setup.el")))
+     )
+
+  (eval-after-load
+      ;; convert the first part of the filename to a symbol
+      (intern 
+       (and (string-match "^\\(.*\\)-setup" file) (match-string 1 file)))
+    `(load ,(expand-file-name file init-autoload-path))))
 
 (provide 'init)
