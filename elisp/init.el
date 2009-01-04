@@ -65,7 +65,7 @@
 
 (setq init-packages-path (expand-file-name "packages.d" init-path)
       init-config-path (expand-file-name "config.d" init-path)
-      init-autoloads-path (expand-file-name "autoloads.d" init-path)
+      init-autoloads-path (expand-file-name "autoload.d" init-path)
 )
 
 (defun find-subdirs-containing (dir pattern)
@@ -141,7 +141,7 @@ new directories are prepended to emacs's initial Info path."
 (setq running-xemacs (string-match "XEmacs" (emacs-version)))
 
 ; Load ~/elisp/settings/*-settings.el, in sorted order.
-(dolist (file (directory-files init-settings-path t "^\\([^.]\\|\\.[^#]\\).*\\.el$"))
+(dolist (file (directory-files init-autoloads-path t "^\\([^.]\\|\\.[^#]\\).*\\.el$"))
   (load-file file))
 
 (provide 'init)
