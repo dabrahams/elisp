@@ -1,15 +1,15 @@
-[submodule "elisp/packages/git-emacs"]
-	path = elisp/packages/git-emacs
+[submodule "git-emacs"]
+	path = elisp/packages.d/git-emacs
 	url = git://github.com/tsgates/git-emacs.git
-[submodule "elisp/packages/egg"]
-	path = elisp/packages/egg
+[submodule "egg-el"]
+	path = elisp/packages.d/egg
 	url = git://github.com/bogolisk/egg.git
-[submodule "elisp/packages/muse"]
-	path = elisp/packages/muse
+[submodule "muse-el"]
+	path = elisp/packages.d/muse
 	url = git://repo.or.cz/muse-el.git
-[submodule "elisp/packages/planner"]
-	path = elisp/packages/planner
+[submodule "planner-el"]
+	path = elisp/packages.d/planner
 	url = git://repo.or.cz/planner-el.git
-[submodule "elisp/packages/remember"]
-	path = elisp/packages/remember
+[submodule "remember-el"]
+	path = elisp/packages.d/remember
 	url = git://repo.or.cz/remember-el.git
