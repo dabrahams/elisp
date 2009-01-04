@@ -1,0 +1,3 @@
+[submodule "elisp/packages/git-emacs"]
+	path = elisp/packages/git-emacs
+	url = git://github.com/tsgates/git-emacs.git
