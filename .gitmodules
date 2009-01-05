@@ -16,3 +16,6 @@
 [submodule ".git_externals/git"]
 	path = .git_externals/git
 	url = git://git.kernel.org/pub/scm/git/git.git
+[submodule "elisp/package.d/magit"]
+	path = elisp/package.d/magit
+	url = git://gitorious.org/magit/mainline.git
