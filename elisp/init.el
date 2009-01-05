@@ -91,7 +91,10 @@ not up to date.  This can be run from the command line with:
 $ emacs -l ~/.emacs -batch -f byte-recompile-init-path"
   (interactive)
   (dolist (dir (find-subdirs-containing init-packages-path "\\.el$"))
-    (byte-recompile-directory dir 0)))
+    (byte-recompile-directory dir 0)
+    (let ((generated-autoload-file (expand-file-name "my-loaddefs.el" init-path)))
+      (update-directory-autoloads dir))
+))
 
 (defun add-init-path-to-load-path ()
   "Add the subdirectories of init-path that contain elisp files to the
