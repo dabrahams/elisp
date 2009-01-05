@@ -40,6 +40,7 @@ We want our file buffers to stay up-to-date with changes on disk")
 Some people don't embed linebreaks in their paragraphs; this will force-add them.")
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(initial-frame-alist (quote ((menu-bar-lines . 1) (tool-bar-lines . 0) (font-backend . "xft") (font . "Bitstream Vera Sans Mono-10.5"))))
  '(message-cite-prefix-regexp "\\([ 	]*[_.[:word:]]+>+\\|[ 	]*[]>|]\\)+" nil nil "
 Removed \"}\" from the allowable characters because I often type that when writing replies.")
  '(mm-attachment-override-types (quote ("text/x-vcard" "application/pkcs7-mime" "application/x-pkcs7-mime" "application/pkcs7-signature" "application/x-pkcs7-signature" "image/*")) nil nil "
