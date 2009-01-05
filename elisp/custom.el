@@ -63,7 +63,7 @@ Tool bars take up valuable screen real-estate for icons whose meaning I forget")
 I never like being nannied by regular browsers either.")
  '(w3m-default-display-inline-images t)
  '(w3m-display-ins-del nil)
- '(w3m-icon-directory "~/elisp/images/w3m")
+ '(w3m-icon-directory "~/elisp/package.d/w3m-el/icons")
  '(w3m-use-cookies t)
  '(x-select-enable-clipboard t))
 (custom-set-faces
