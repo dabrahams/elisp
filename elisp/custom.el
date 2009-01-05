@@ -61,7 +61,10 @@ Tool bars take up valuable screen real-estate for icons whose meaning I forget")
  '(truncate-partial-width-windows nil)
  '(w3m-confirm-leaving-secure-page t nil nil "
 I never like being nannied by regular browsers either.")
+ '(w3m-default-display-inline-images t)
  '(w3m-display-ins-del nil)
+ '(w3m-icon-directory "~/elisp/images/w3m")
+ '(w3m-use-cookies t)
  '(x-select-enable-clipboard t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
