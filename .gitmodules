@@ -13,3 +13,6 @@
 [submodule "elisp/package.d/remember-el"]
 	path = elisp/package.d/remember-el
 	url = git://repo.or.cz/remember-el.git
+[submodule ".git_externals/git"]
+	path = .git_externals/git
+	url = git://git.kernel.org/pub/scm/git/git.git
