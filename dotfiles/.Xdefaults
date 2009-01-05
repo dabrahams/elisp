@@ -1,0 +1,6 @@
+Emacs.FontBackend: xft
+Emacs.font: Bitstream Vera Sans Mono-10.5
+Emacs.toolBar: 0
+Emacs.menuBar: 1
+
+

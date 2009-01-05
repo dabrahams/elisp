@@ -1,0 +1,4 @@
+.Xdefaults: needs to be set up with 
+
+   xrdb -merge .Xdefaults
+

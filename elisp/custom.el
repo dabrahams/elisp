@@ -15,13 +15,33 @@ Blinking cursor just annoys me")
  '(browse-url-browser-function (quote w3m-browse-url))
  '(canlock-password "963afd5a40a33c7f59217100af5a7c1648af74a1")
  '(default-frame-alist (quote ((menu-bar-lines . 1) (font-backend . "xft") (font . "Bitstream Vera Sans Mono-10.5"))) nil nil "
-Despite what the customize interface says, menu-bar-lines and tool-bar-lines are
-set to 1 as part of the default value.  However, customizing tool-bar-mode to nil
-sets tool-bar-lines to zero here.
+This is really just a way of hanging onto and documenting my
+settings for for default-frame-alist, which currently aren't
+needed since I have an .Xdefaults file containing:
 
-According to <http://article.gmane.org/gmane.emacs.devel/99324>, we need to explicitly set the font-backend to XFT or we won't get antialiasing.  
+  Emacs.FontBackend: xft
+  Emacs.font: Bitstream Vera Sans Mono-10.5
+  Emacs.toolBar: 0
+  Emacs.menuBar: 1
 
-Had to evaluate (x-select-font) to find out the name of the font that emacs would recognize.")
+Note that, on ubuntu at least, one must do 
+
+  xrdb -merge ~/.Xdefaults
+
+to get the changes to take effect
+
+Despite what the customize interface says, menu-bar-lines and 
+tool-bar-lines are set to 1 as part of the default value.  
+However, customizing tool-bar-mode to nil sets tool-bar-lines
+to zero here.
+
+According to <http://article.gmane.org/gmane.emacs.devel/99324>, 
+we need to explicitly set the font-backend to XFT or we won't 
+get antialiasing.  
+
+Had to evaluate (x-select-font) to find out the name of the
+font that emacs would recognize.
+")
  '(delete-selection-mode t nil nil "
 Creates normal editor behavior: select a region and begin
 typing, the region is replaced")
@@ -40,7 +60,6 @@ We want our file buffers to stay up-to-date with changes on disk")
 Some people don't embed linebreaks in their paragraphs; this will force-add them.")
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
- '(initial-frame-alist (quote ((menu-bar-lines . 1) (tool-bar-lines . 0) (font-backend . "xft") (font . "Bitstream Vera Sans Mono-10.5"))))
  '(message-cite-prefix-regexp "\\([ 	]*[_.[:word:]]+>+\\|[ 	]*[]>|]\\)+" nil nil "
 Removed \"}\" from the allowable characters because I often type that when writing replies.")
  '(mm-attachment-override-types (quote ("text/x-vcard" "application/pkcs7-mime" "application/x-pkcs7-mime" "application/pkcs7-signature" "application/x-pkcs7-signature" "image/*")) nil nil "
