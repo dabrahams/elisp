@@ -5,9 +5,6 @@
     (insert "\non " (format-time-string "%a %b %d %Y" (date-to-time (mail-header-date message-reply-headers))) ", "
     (replace-regexp-in-string "@" "-AT-" (mail-header-from message-reply-headers)) " wrote:\n\n")))
 
-(add-hook 'message-mode-hook
-          '(lambda () (auto-fill-mode t)))
-
 (when
     (ignore-errors (require 'mailcrypt))
   (mc-setversion "gpg")

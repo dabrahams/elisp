@@ -74,6 +74,8 @@ Some people don't embed linebreaks in their paragraphs; this will force-add them
  '(inhibit-startup-screen t)
  '(message-cite-prefix-regexp "\\([ 	]*[_.[:word:]]+>+\\|[ 	]*[]>|]\\)+" nil nil "
 Removed \"}\" from the allowable characters because I often type that when writing replies.")
+ '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) nil nil "\"
+Automatically wrap text during email composition\"")
  '(mm-attachment-override-types (quote ("text/x-vcard" "application/pkcs7-mime" "application/x-pkcs7-mime" "application/pkcs7-signature" "application/x-pkcs7-signature" "image/*")) nil nil "
 Added image/* to display attached images inline")
  '(mm-discouraged-alternatives (quote ("text/html" "text/richtext" "image/.*")) nil nil "
