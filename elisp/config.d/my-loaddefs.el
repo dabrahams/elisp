@@ -75,8 +75,8 @@ Recalculate all blame information in the current buffer
 ;;;### (autoloads (mew-shimbun-expire mew-shimbun-expire-all mew-shimbun-re-retrieve-all
 ;;;;;;  mew-shimbun-re-retrieve mew-shimbun-retrieve-all mew-shimbun-retrieve
 ;;;;;;  mew-shimbun-goto-folder mew-shimbun-goto-unseen-folder) "mew-shimbun"
-;;;;;;  "../package.d/emacs-w3m/shimbun/mew-shimbun.el" (18197 61166))
-;;; Generated autoloads from ../package.d/emacs-w3m/shimbun/mew-shimbun.el
+;;;;;;  "../package.d/w3m-el/shimbun/mew-shimbun.el" (18197 61166))
+;;; Generated autoloads from ../package.d/w3m-el/shimbun/mew-shimbun.el
 
 (autoload 'mew-shimbun-goto-unseen-folder "mew-shimbun" "\
 Goto folder for SHIMBUN to have a few new messages.
@@ -124,9 +124,9 @@ Expire this shimbun folder.
 
 ;;;***
 
-;;;### (autoloads (mime-w3m-preview-text/html) "mime-w3m" "../package.d/emacs-w3m/mime-w3m.el"
+;;;### (autoloads (mime-w3m-preview-text/html) "mime-w3m" "../package.d/w3m-el/mime-w3m.el"
 ;;;;;;  (18197 61165))
-;;; Generated autoloads from ../package.d/emacs-w3m/mime-w3m.el
+;;; Generated autoloads from ../package.d/w3m-el/mime-w3m.el
 
 (autoload 'mime-w3m-preview-text/html "mime-w3m" "\
 Not documented
@@ -417,9 +417,9 @@ supplied.
 ;;;***
 
 ;;;### (autoloads (gnus-group-make-shimbun-groups gnus-group-make-shimbun-group
-;;;;;;  gnus-summary-refer-shimbun-article) "nnshimbun" "../package.d/emacs-w3m/shimbun/nnshimbun.el"
+;;;;;;  gnus-summary-refer-shimbun-article) "nnshimbun" "../package.d/w3m-el/shimbun/nnshimbun.el"
 ;;;;;;  (18734 31102))
-;;; Generated autoloads from ../package.d/emacs-w3m/shimbun/nnshimbun.el
+;;; Generated autoloads from ../package.d/w3m-el/shimbun/nnshimbun.el
 
 (autoload 'gnus-summary-refer-shimbun-article "nnshimbun" "\
 Show a shimbun article pointed to by the given URL.
@@ -442,9 +442,9 @@ Create all nnshimbun groups prepared for SERVER.
 ;;;***
 
 ;;;### (autoloads (octet-mime-setup mime-view-octet mime-preview-octet
-;;;;;;  octet-find-file octet-buffer) "octet" "../package.d/emacs-w3m/octet.el"
+;;;;;;  octet-find-file octet-buffer) "octet" "../package.d/w3m-el/octet.el"
 ;;;;;;  (17133 57129))
-;;; Generated autoloads from ../package.d/emacs-w3m/octet.el
+;;; Generated autoloads from ../package.d/w3m-el/octet.el
 
 (autoload 'octet-buffer "octet" "\
 View octet-stream content according to `octet-type-filter-alist'.
@@ -1792,9 +1792,8 @@ relative only to the time worked today, and not to past time.
 
 ;;;### (autoloads (w3m-buffer w3m-region w3m-find-file w3m-browse-url
 ;;;;;;  w3m w3m-gohome w3m-goto-url-new-session w3m-goto-url w3m-download
-;;;;;;  w3m-retrieve) "w3m" "../package.d/emacs-w3m/w3m.el" (18777
-;;;;;;  43742))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m.el
+;;;;;;  w3m-retrieve) "w3m" "../package.d/w3m-el/w3m.el" (18777 43742))
+;;; Generated autoloads from ../package.d/w3m-el/w3m.el
 
 (autoload 'w3m-retrieve "w3m" "\
 Retrieve web contents pointed to by URL.
@@ -1938,9 +1937,9 @@ See `w3m-region' for the optional arguments.
 
 ;;;***
 
-;;;### (autoloads (w3m-antenna w3m-about-antenna) "w3m-antenna" "../package.d/emacs-w3m/w3m-antenna.el"
+;;;### (autoloads (w3m-antenna w3m-about-antenna) "w3m-antenna" "../package.d/w3m-el/w3m-antenna.el"
 ;;;;;;  (18712 53399))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-antenna.el
+;;; Generated autoloads from ../package.d/w3m-el/w3m-antenna.el
 
 (autoload 'w3m-about-antenna "w3m-antenna" "\
 Not documented
@@ -1957,8 +1956,8 @@ Report changes of WEB sites, which is specified in `w3m-antenna-sites'.
 ;;;### (autoloads (w3m-setup-bookmark-menu w3m-about-bookmark w3m-bookmark-view-new-session
 ;;;;;;  w3m-bookmark-view w3m-bookmark-add-current-url-group w3m-bookmark-add-all-urls
 ;;;;;;  w3m-bookmark-add-current-url w3m-bookmark-add-this-url) "w3m-bookmark"
-;;;;;;  "../package.d/emacs-w3m/w3m-bookmark.el" (18712 53399))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-bookmark.el
+;;;;;;  "../package.d/w3m-el/w3m-bookmark.el" (18712 53399))
+;;; Generated autoloads from ../package.d/w3m-el/w3m-bookmark.el
 
 (autoload 'w3m-bookmark-add-this-url "w3m-bookmark" "\
 Add link under cursor to bookmark.
@@ -2004,9 +2003,9 @@ Setup w3m bookmark items in menubar.
 ;;;***
 
 ;;;### (autoloads (w3m-about-cookie w3m-cookie w3m-cookie-get w3m-cookie-set
-;;;;;;  w3m-cookie-shutdown) "w3m-cookie" "../package.d/emacs-w3m/w3m-cookie.el"
+;;;;;;  w3m-cookie-shutdown) "w3m-cookie" "../package.d/w3m-el/w3m-cookie.el"
 ;;;;;;  (18537 33443))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-cookie.el
+;;; Generated autoloads from ../package.d/w3m-el/w3m-cookie.el
 
 (autoload 'w3m-cookie-shutdown "w3m-cookie" "\
 Save cookies, and reset cookies' data.
@@ -2036,9 +2035,9 @@ Make the html contents to display and to enable you to manage cookies.
 
 ;;;***
 
-;;;### (autoloads (w3m-dtree w3m-about-dtree) "w3m-dtree" "../package.d/emacs-w3m/w3m-dtree.el"
+;;;### (autoloads (w3m-dtree w3m-about-dtree) "w3m-dtree" "../package.d/w3m-el/w3m-dtree.el"
 ;;;;;;  (18197 61165))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-dtree.el
+;;; Generated autoloads from ../package.d/w3m-el/w3m-dtree.el
 
 (autoload 'w3m-about-dtree "w3m-dtree" "\
 Not documented
@@ -2053,9 +2052,9 @@ If called with 'prefix argument', display all directorys and files.
 
 ;;;***
 
-;;;### (autoloads (w3m-fb-mode) "w3m-fb" "../package.d/emacs-w3m/w3m-fb.el"
+;;;### (autoloads (w3m-fb-mode) "w3m-fb" "../package.d/w3m-el/w3m-fb.el"
 ;;;;;;  (17681 2386))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-fb.el
+;;; Generated autoloads from ../package.d/w3m-el/w3m-fb.el
 
 (defvar w3m-fb-mode nil "\
 Non-nil if W3m-Fb mode is enabled.
@@ -2074,9 +2073,9 @@ This allows frame-local lists of buffers (tabs).
 
 ;;;***
 
-;;;### (autoloads (w3m-filter) "w3m-filter" "../package.d/emacs-w3m/w3m-filter.el"
+;;;### (autoloads (w3m-filter) "w3m-filter" "../package.d/w3m-el/w3m-filter.el"
 ;;;;;;  (18560 15090))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-filter.el
+;;; Generated autoloads from ../package.d/w3m-el/w3m-filter.el
 
 (autoload 'w3m-filter "w3m-filter" "\
 Apply filtering rule of URL against a content in this buffer.
@@ -2085,9 +2084,9 @@ Apply filtering rule of URL against a content in this buffer.
 
 ;;;***
 
-;;;### (autoloads (w3m-fontify-forms) "w3m-form" "../package.d/emacs-w3m/w3m-form.el"
+;;;### (autoloads (w3m-fontify-forms) "w3m-form" "../package.d/w3m-el/w3m-form.el"
 ;;;;;;  (18777 43743))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-form.el
+;;; Generated autoloads from ../package.d/w3m-el/w3m-form.el
 
 (autoload 'w3m-fontify-forms "w3m-form" "\
 Process half-dumped data and fontify forms in this buffer.
@@ -2096,9 +2095,9 @@ Process half-dumped data and fontify forms in this buffer.
 
 ;;;***
 
-;;;### (autoloads (w3m-link-numbering-mode) "w3m-lnum" "../package.d/emacs-w3m/w3m-lnum.el"
+;;;### (autoloads (w3m-link-numbering-mode) "w3m-lnum" "../package.d/w3m-el/w3m-lnum.el"
 ;;;;;;  (18197 61165))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-lnum.el
+;;; Generated autoloads from ../package.d/w3m-el/w3m-lnum.el
 
 (autoload 'w3m-link-numbering-mode "w3m-lnum" "\
 Minor mode to enable operations using link numbers.
@@ -2107,9 +2106,9 @@ Minor mode to enable operations using link numbers.
 
 ;;;***
 
-;;;### (autoloads (w3m-namazu w3m-about-namazu) "w3m-namazu" "../package.d/emacs-w3m/w3m-namazu.el"
+;;;### (autoloads (w3m-namazu w3m-about-namazu) "w3m-namazu" "../package.d/w3m-el/w3m-namazu.el"
 ;;;;;;  (18197 61165))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-namazu.el
+;;; Generated autoloads from ../package.d/w3m-el/w3m-namazu.el
 
 (autoload 'w3m-about-namazu "w3m-namazu" "\
 Not documented
@@ -2123,9 +2122,9 @@ Search indexed files with Namazu.
 
 ;;;***
 
-;;;### (autoloads (w3m-perldoc w3m-about-perldoc) "w3m-perldoc" "../package.d/emacs-w3m/w3m-perldoc.el"
+;;;### (autoloads (w3m-perldoc w3m-about-perldoc) "w3m-perldoc" "../package.d/w3m-el/w3m-perldoc.el"
 ;;;;;;  (18197 61165))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-perldoc.el
+;;; Generated autoloads from ../package.d/w3m-el/w3m-perldoc.el
 
 (autoload 'w3m-about-perldoc "w3m-perldoc" "\
 Not documented
@@ -2140,9 +2139,9 @@ View Perl documents.
 ;;;***
 
 ;;;### (autoloads (w3m-search-uri-replace w3m-search-new-session
-;;;;;;  w3m-search) "w3m-search" "../package.d/emacs-w3m/w3m-search.el"
+;;;;;;  w3m-search) "w3m-search" "../package.d/w3m-el/w3m-search.el"
 ;;;;;;  (18537 33441))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-search.el
+;;; Generated autoloads from ../package.d/w3m-el/w3m-search.el
 
 (autoload 'w3m-search "w3m-search" "\
 Search QUERY using SEARCH-ENGINE.
@@ -2167,9 +2166,9 @@ Generate query string for ENGINE from URI matched by last search.
 ;;;***
 
 ;;;### (autoloads (w3m-setup-session-menu w3m-session-select w3m-session-save)
-;;;;;;  "w3m-session" "../package.d/emacs-w3m/w3m-session.el" (18777
+;;;;;;  "w3m-session" "../package.d/w3m-el/w3m-session.el" (18777
 ;;;;;;  43743))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-session.el
+;;; Generated autoloads from ../package.d/w3m-el/w3m-session.el
 
 (autoload 'w3m-session-save "w3m-session" "\
 Save list of displayed session.
@@ -2188,9 +2187,9 @@ Setup w3m session items in menubar.
 
 ;;;***
 
-;;;### (autoloads (w3m-replace-symbol) "w3m-symbol" "../package.d/emacs-w3m/w3m-symbol.el"
+;;;### (autoloads (w3m-replace-symbol) "w3m-symbol" "../package.d/w3m-el/w3m-symbol.el"
 ;;;;;;  (18250 38291))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-symbol.el
+;;; Generated autoloads from ../package.d/w3m-el/w3m-symbol.el
 
 (autoload 'w3m-replace-symbol "w3m-symbol" "\
 Not documented
@@ -2199,9 +2198,9 @@ Not documented
 
 ;;;***
 
-;;;### (autoloads (w3m-about-weather w3m-weather) "w3m-weather" "../package.d/emacs-w3m/w3m-weather.el"
+;;;### (autoloads (w3m-about-weather w3m-weather) "w3m-weather" "../package.d/w3m-el/w3m-weather.el"
 ;;;;;;  (18197 61165))
-;;; Generated autoloads from ../package.d/emacs-w3m/w3m-weather.el
+;;; Generated autoloads from ../package.d/w3m-el/w3m-weather.el
 
 (autoload 'w3m-weather "w3m-weather" "\
 Display weather report.
@@ -2216,87 +2215,13 @@ Not documented
 ;;;***
 
 ;;;### (autoloads nil nil ("../package.d/dwa-c++.el" "../package.d/dwa-rectangle.el"
-;;;;;;  "../package.d/dwa-util.el" "../package.d/emacs-w3m/attic/addpath.el"
-;;;;;;  "../package.d/emacs-w3m/attic/rfc2368.el" "../package.d/emacs-w3m/doc/ptexinfmt.el"
-;;;;;;  "../package.d/emacs-w3m/mew-w3m.el" "../package.d/emacs-w3m/shimbun/sb-2ch.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-airs.el" "../package.d/emacs-w3m/shimbun/sb-aljazeera.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-arch-bluegate.el" "../package.d/emacs-w3m/shimbun/sb-asahi-html.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-asahi-mytown.el" "../package.d/emacs-w3m/shimbun/sb-asahi.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-atmarkit.el" "../package.d/emacs-w3m/shimbun/sb-atom-hash.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-atom.el" "../package.d/emacs-w3m/shimbun/sb-bbc.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-bbdb-ml.el" "../package.d/emacs-w3m/shimbun/sb-cgi-board.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-cnet-jp.el" "../package.d/emacs-w3m/shimbun/sb-cnet.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-cnn-jp.el" "../package.d/emacs-w3m/shimbun/sb-coldsync.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-debian-jp.el" "../package.d/emacs-w3m/shimbun/sb-debian.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-debugmagazin-de.el" "../package.d/emacs-w3m/shimbun/sb-dennou.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-digiko.el" "../package.d/emacs-w3m/shimbun/sb-elips.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-emacs-w3m.el" "../package.d/emacs-w3m/shimbun/sb-emacswiki.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-engadget-ja.el" "../package.d/emacs-w3m/shimbun/sb-excite.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-exconn.el" "../package.d/emacs-w3m/shimbun/sb-f1fan.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-fau.el" "../package.d/emacs-w3m/shimbun/sb-ffii.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-fml.el" "../package.d/emacs-w3m/shimbun/sb-gendai-net.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-geocrawler.el" "../package.d/emacs-w3m/shimbun/sb-glimpse.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-gnome.el" "../package.d/emacs-w3m/shimbun/sb-haiku-os.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-hash.el" "../package.d/emacs-w3m/shimbun/sb-heise.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-hns.el" "../package.d/emacs-w3m/shimbun/sb-ibm-dev.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-impress.el" "../package.d/emacs-w3m/shimbun/sb-infoshop.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-itmedia.el" "../package.d/emacs-w3m/shimbun/sb-japantimes.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-javaconf.el" "../package.d/emacs-w3m/shimbun/sb-jpilot.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-jpo.el" "../package.d/emacs-w3m/shimbun/sb-kantei.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-kde.el" "../package.d/emacs-w3m/shimbun/sb-laut-de.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-linuxce-jp.el" "../package.d/emacs-w3m/shimbun/sb-lotusex.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-lump.el" "../package.d/emacs-w3m/shimbun/sb-m17n.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-macosx-jp.el" "../package.d/emacs-w3m/shimbun/sb-mailarc.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-mailman.el" "../package.d/emacs-w3m/shimbun/sb-mainichi.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-makanai.el" "../package.d/emacs-w3m/shimbun/sb-marc-aims.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-meadow.el" "../package.d/emacs-w3m/shimbun/sb-mew.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-mhonarc.el" "../package.d/emacs-w3m/shimbun/sb-mozilla-jp.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-msdn.el" "../package.d/emacs-w3m/shimbun/sb-msports-nifty.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-multi.el" "../package.d/emacs-w3m/shimbun/sb-n24-de.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-namazu.el" "../package.d/emacs-w3m/shimbun/sb-netbsd.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-nikkansports.el" "../package.d/emacs-w3m/shimbun/sb-nikkei.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-nytimes.el" "../package.d/emacs-w3m/shimbun/sb-opentechpress-jp.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-orca.el" "../package.d/emacs-w3m/shimbun/sb-palmfan.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-pcweb-column.el" "../package.d/emacs-w3m/shimbun/sb-perlentaucher-de.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-pilot-link.el" "../package.d/emacs-w3m/shimbun/sb-pilot-mailsync.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-plucker.el" "../package.d/emacs-w3m/shimbun/sb-pocketgames.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-rakuten.el" "../package.d/emacs-w3m/shimbun/sb-redhat.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-rediff.el" "../package.d/emacs-w3m/shimbun/sb-rss-blogs.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-rss-hash.el" "../package.d/emacs-w3m/shimbun/sb-rss.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-ruby.el" "../package.d/emacs-w3m/shimbun/sb-sankei.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-savannah.el" "../package.d/emacs-w3m/shimbun/sb-scipy.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-security-memo.el" "../package.d/emacs-w3m/shimbun/sb-slashdot-jp.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-slashdot.el" "../package.d/emacs-w3m/shimbun/sb-sml.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-sourceforge-jp.el" "../package.d/emacs-w3m/shimbun/sb-spiegel.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-sponichi.el" "../package.d/emacs-w3m/shimbun/sb-squeak-dev.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-squeak-ja.el" "../package.d/emacs-w3m/shimbun/sb-sueddeutsche-de.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-tcup.el" "../package.d/emacs-w3m/shimbun/sb-tdiary-ml.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-tdiary.el" "../package.d/emacs-w3m/shimbun/sb-tech-on.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-texfaq.el" "../package.d/emacs-w3m/shimbun/sb-text.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-the-onion.el" "../package.d/emacs-w3m/shimbun/sb-the-register.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-tigris.el" "../package.d/emacs-w3m/shimbun/sb-toshiba.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-vinelinux.el" "../package.d/emacs-w3m/shimbun/sb-w3m-dev.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-welt-de.el" "../package.d/emacs-w3m/shimbun/sb-wiki.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-wikimedia.el" "../package.d/emacs-w3m/shimbun/sb-wincefan.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-wired-jp.el" "../package.d/emacs-w3m/shimbun/sb-x51.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-xemacs.el" "../package.d/emacs-w3m/shimbun/sb-yahoo-auctions.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-yahoo-sports.el" "../package.d/emacs-w3m/shimbun/sb-yahoo.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-yomiuri-html.el" "../package.d/emacs-w3m/shimbun/sb-yomiuri.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/sb-zdnet-jp.el" "../package.d/emacs-w3m/shimbun/sb-zeit-de.el"
-;;;;;;  "../package.d/emacs-w3m/shimbun/shimbun.el" "../package.d/emacs-w3m/w3m-bug.el"
-;;;;;;  "../package.d/emacs-w3m/w3m-ccl.el" "../package.d/emacs-w3m/w3m-ems.el"
-;;;;;;  "../package.d/emacs-w3m/w3m-favicon.el" "../package.d/emacs-w3m/w3m-hist.el"
-;;;;;;  "../package.d/emacs-w3m/w3m-image.el" "../package.d/emacs-w3m/w3m-load.el"
-;;;;;;  "../package.d/emacs-w3m/w3m-mail.el" "../package.d/emacs-w3m/w3m-proc.el"
-;;;;;;  "../package.d/emacs-w3m/w3m-rss.el" "../package.d/emacs-w3m/w3m-tabmenu.el"
-;;;;;;  "../package.d/emacs-w3m/w3m-ucs.el" "../package.d/emacs-w3m/w3m-util.el"
-;;;;;;  "../package.d/emacs-w3m/w3m-xmas.el" "../package.d/emacs-w3m/w3mhack.el"
-;;;;;;  "../package.d/git-contrib/git.el" "../package.d/git-contrib/vc-git.el"
-;;;;;;  "../package.d/git-emacs/git-blame.el" "../package.d/git-emacs/git-emacs.el"
-;;;;;;  "../package.d/git-emacs/git-modeline.el" "../package.d/initsplit.el"
-;;;;;;  "../package.d/maxframe.el" "../package.d/muse-el/contrib/cgi.el"
-;;;;;;  "../package.d/muse-el/contrib/htmlize-hack.el" "../package.d/muse-el/contrib/httpd.el"
-;;;;;;  "../package.d/muse-el/examples/ikiwiki/muse-init-project.el"
+;;;;;;  "../package.d/dwa-util.el" "../package.d/git-contrib/git.el"
+;;;;;;  "../package.d/git-contrib/vc-git.el" "../package.d/git-emacs/git-blame.el"
+;;;;;;  "../package.d/git-emacs/git-emacs.el" "../package.d/git-emacs/git-modeline.el"
+;;;;;;  "../package.d/initsplit.el" "../package.d/magit/50magit.el"
+;;;;;;  "../package.d/magit/magit.el" "../package.d/maxframe.el"
+;;;;;;  "../package.d/muse-el/contrib/cgi.el" "../package.d/muse-el/contrib/htmlize-hack.el"
+;;;;;;  "../package.d/muse-el/contrib/httpd.el" "../package.d/muse-el/examples/ikiwiki/muse-init-project.el"
 ;;;;;;  "../package.d/muse-el/examples/ikiwiki/muse-init-simple.el"
 ;;;;;;  "../package.d/muse-el/examples/johnw/muse-init.el" "../package.d/muse-el/examples/mwolson/muse-init.el"
 ;;;;;;  "../package.d/muse-el/experimental/muse-cite.el" "../package.d/muse-el/experimental/muse-mathml.el"
@@ -2316,15 +2241,88 @@ Not documented
 ;;;;;;  "../package.d/planner-el/planner-zoom.el" "../package.d/planner-el/scripts/planner-build.el"
 ;;;;;;  "../package.d/planner-el/test/planner-cyclic-test.el" "../package.d/planner-el/test/planner-test.el"
 ;;;;;;  "../package.d/remember-el/read-file-name.el" "../package.d/remember-el/remember-experimental.el"
-;;;;;;  "../package.d/remember-el/scripts/remember-build.el") (18785
-;;;;;;  63680 747232))
+;;;;;;  "../package.d/remember-el/scripts/remember-build.el" "../package.d/w3m-el/attic/addpath.el"
+;;;;;;  "../package.d/w3m-el/attic/rfc2368.el" "../package.d/w3m-el/doc/ptexinfmt.el"
+;;;;;;  "../package.d/w3m-el/mew-w3m.el" "../package.d/w3m-el/shimbun/sb-2ch.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-airs.el" "../package.d/w3m-el/shimbun/sb-aljazeera.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-arch-bluegate.el" "../package.d/w3m-el/shimbun/sb-asahi-html.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-asahi-mytown.el" "../package.d/w3m-el/shimbun/sb-asahi.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-atmarkit.el" "../package.d/w3m-el/shimbun/sb-atom-hash.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-atom.el" "../package.d/w3m-el/shimbun/sb-bbc.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-bbdb-ml.el" "../package.d/w3m-el/shimbun/sb-cgi-board.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-cnet-jp.el" "../package.d/w3m-el/shimbun/sb-cnet.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-cnn-jp.el" "../package.d/w3m-el/shimbun/sb-coldsync.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-debian-jp.el" "../package.d/w3m-el/shimbun/sb-debian.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-debugmagazin-de.el" "../package.d/w3m-el/shimbun/sb-dennou.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-digiko.el" "../package.d/w3m-el/shimbun/sb-elips.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-emacs-w3m.el" "../package.d/w3m-el/shimbun/sb-emacswiki.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-engadget-ja.el" "../package.d/w3m-el/shimbun/sb-excite.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-exconn.el" "../package.d/w3m-el/shimbun/sb-f1fan.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-fau.el" "../package.d/w3m-el/shimbun/sb-ffii.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-fml.el" "../package.d/w3m-el/shimbun/sb-gendai-net.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-geocrawler.el" "../package.d/w3m-el/shimbun/sb-glimpse.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-gnome.el" "../package.d/w3m-el/shimbun/sb-haiku-os.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-hash.el" "../package.d/w3m-el/shimbun/sb-heise.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-hns.el" "../package.d/w3m-el/shimbun/sb-ibm-dev.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-impress.el" "../package.d/w3m-el/shimbun/sb-infoshop.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-itmedia.el" "../package.d/w3m-el/shimbun/sb-japantimes.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-javaconf.el" "../package.d/w3m-el/shimbun/sb-jpilot.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-jpo.el" "../package.d/w3m-el/shimbun/sb-kantei.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-kde.el" "../package.d/w3m-el/shimbun/sb-laut-de.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-linuxce-jp.el" "../package.d/w3m-el/shimbun/sb-lotusex.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-lump.el" "../package.d/w3m-el/shimbun/sb-m17n.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-macosx-jp.el" "../package.d/w3m-el/shimbun/sb-mailarc.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-mailman.el" "../package.d/w3m-el/shimbun/sb-mainichi.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-makanai.el" "../package.d/w3m-el/shimbun/sb-marc-aims.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-meadow.el" "../package.d/w3m-el/shimbun/sb-mew.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-mhonarc.el" "../package.d/w3m-el/shimbun/sb-mozilla-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-msdn.el" "../package.d/w3m-el/shimbun/sb-msports-nifty.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-multi.el" "../package.d/w3m-el/shimbun/sb-n24-de.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-namazu.el" "../package.d/w3m-el/shimbun/sb-netbsd.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-nikkansports.el" "../package.d/w3m-el/shimbun/sb-nikkei.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-nytimes.el" "../package.d/w3m-el/shimbun/sb-opentechpress-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-orca.el" "../package.d/w3m-el/shimbun/sb-palmfan.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-pcweb-column.el" "../package.d/w3m-el/shimbun/sb-perlentaucher-de.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-pilot-link.el" "../package.d/w3m-el/shimbun/sb-pilot-mailsync.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-plucker.el" "../package.d/w3m-el/shimbun/sb-pocketgames.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-rakuten.el" "../package.d/w3m-el/shimbun/sb-redhat.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-rediff.el" "../package.d/w3m-el/shimbun/sb-rss-blogs.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-rss-hash.el" "../package.d/w3m-el/shimbun/sb-rss.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-ruby.el" "../package.d/w3m-el/shimbun/sb-sankei.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-savannah.el" "../package.d/w3m-el/shimbun/sb-scipy.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-security-memo.el" "../package.d/w3m-el/shimbun/sb-slashdot-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-slashdot.el" "../package.d/w3m-el/shimbun/sb-sml.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-sourceforge-jp.el" "../package.d/w3m-el/shimbun/sb-spiegel.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-sponichi.el" "../package.d/w3m-el/shimbun/sb-squeak-dev.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-squeak-ja.el" "../package.d/w3m-el/shimbun/sb-sueddeutsche-de.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-tcup.el" "../package.d/w3m-el/shimbun/sb-tdiary-ml.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-tdiary.el" "../package.d/w3m-el/shimbun/sb-tech-on.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-texfaq.el" "../package.d/w3m-el/shimbun/sb-text.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-the-onion.el" "../package.d/w3m-el/shimbun/sb-the-register.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-tigris.el" "../package.d/w3m-el/shimbun/sb-toshiba.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-vinelinux.el" "../package.d/w3m-el/shimbun/sb-w3m-dev.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-welt-de.el" "../package.d/w3m-el/shimbun/sb-wiki.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-wikimedia.el" "../package.d/w3m-el/shimbun/sb-wincefan.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-wired-jp.el" "../package.d/w3m-el/shimbun/sb-x51.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-xemacs.el" "../package.d/w3m-el/shimbun/sb-yahoo-auctions.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-yahoo-sports.el" "../package.d/w3m-el/shimbun/sb-yahoo.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-yomiuri-html.el" "../package.d/w3m-el/shimbun/sb-yomiuri.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-zdnet-jp.el" "../package.d/w3m-el/shimbun/sb-zeit-de.el"
+;;;;;;  "../package.d/w3m-el/shimbun/shimbun.el" "../package.d/w3m-el/w3m-bug.el"
+;;;;;;  "../package.d/w3m-el/w3m-ccl.el" "../package.d/w3m-el/w3m-ems.el"
+;;;;;;  "../package.d/w3m-el/w3m-favicon.el" "../package.d/w3m-el/w3m-hist.el"
+;;;;;;  "../package.d/w3m-el/w3m-image.el" "../package.d/w3m-el/w3m-load.el"
+;;;;;;  "../package.d/w3m-el/w3m-mail.el" "../package.d/w3m-el/w3m-proc.el"
+;;;;;;  "../package.d/w3m-el/w3m-rss.el" "../package.d/w3m-el/w3m-tabmenu.el"
+;;;;;;  "../package.d/w3m-el/w3m-ucs.el" "../package.d/w3m-el/w3m-util.el"
+;;;;;;  "../package.d/w3m-el/w3m-xmas.el" "../package.d/w3m-el/w3mhack.el")
+;;;;;;  (18786 43614 265402))
 
 ;;;***
 
 (provide 'my-loaddefs)
 ;; Local Variables:
 ;; version-control: never
-;; no-byte-compile: t
 ;; no-update-autoloads: t
 ;; coding: utf-8
 ;; End:

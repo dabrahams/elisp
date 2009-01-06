@@ -63,7 +63,7 @@
 (setq custom-file (expand-file-name "custom.el" init-path))
 (load-file custom-file)
 
-(setq init-packages-path (expand-file-name "package.d" init-path)
+(setq init-package-path (expand-file-name "package.d" init-path)
       init-config-path (expand-file-name "config.d" init-path)
       init-autoload-path (expand-file-name "autoload.d" init-path)
 )
@@ -85,17 +85,48 @@ that match PATTERN."
       (setq files (cdr files)))
     ret))
 
+(defun ensure-byte-compilable-autoload-file (file)
+  "If FILE doesn't already exist, create it as a byte-compilable
+  autoload file (the default created by autoload.el has a local
+  no-byte-compile variable that suppresses byte compilation)."
+  ;; Make sure my own autoload-file is byte-compilable.  If we don't
+  ;; explicitly strip out the no-byte-compile variable, autoload.el
+  ;; will create it on demand
+  (unless (file-exists-p file)
+    (write-region 
+     (replace-regexp-in-string ";; no-byte-compile: t\n" "" (autoload-rubric file)) nil file)
+    (with-current-buffer (find-file-noselect file)
+      (save-buffer))
+    ))
+
+(require 'autoload)
 (defun byte-recompile-init-path ()
-  "Recompile all the .el files under init-packages-path, if they're
+  "Recompile all the .el files under init-package-path, if they're
 not up to date.  This can be run from the command line with:
 $ emacs -l ~/.emacs -batch -f byte-recompile-init-path"
   (interactive)
-  (let ((generated-autoload-file (expand-file-name "my-loaddefs.el" init-config-path)))
-    (dolist (dir (find-subdirs-containing init-packages-path "\\.el$"))
-      (byte-recompile-directory dir 0)
-      (update-directory-autoloads dir))
-    (byte-recompile-file loaddefs))
-  )
+
+  (let ((generated-autoload-file ; tells update-directory-autoloads where to stick it
+         (expand-file-name "my-loaddefs.el" init-config-path))
+        (package-dirs
+         (find-subdirs-containing init-package-path "\\.el$"))
+        (config-dirs
+         (find-subdirs-containing init-config-path "\\.el$"))
+        )
+
+    ;; Make sure my own autoload-file is byte-compilable.  
+    (ensure-byte-compilable-autoload-file generated-autoload-file)
+
+    ;; byte compile all my packages and grab their autoloads
+    (dolist (d package-dirs)
+      (byte-recompile-directory d 0)
+      (update-directory-autoloads d)
+      )
+
+    ;; my autoload-file lives in config.d/ so we can compile that now.
+    (dolist (d config-dirs)
+      (byte-recompile-directory d 0))
+    ))
 
 (defun add-init-path-to-load-path ()
   "Add the subdirectories of init-path that contain elisp files to the
