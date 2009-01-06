@@ -72,14 +72,31 @@ We want our file buffers to stay up-to-date with changes on disk")
 Some people don't embed linebreaks in their paragraphs; this will force-add them.")
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(mail-user-agent (quote gnus-user-agent) nil nil "
+Gnus Message with full Gnus features")
+ '(message-citation-line-function (quote my-message-insert-citation-line) nil nil "
+Make sure peoples' email addresses are (trivially) obscured")
  '(message-cite-prefix-regexp "\\([ 	]*[_.[:word:]]+>+\\|[ 	]*[]>|]\\)+" nil nil "
 Removed \"}\" from the allowable characters because I often type that when writing replies.")
+ '(message-default-headers "" nil nil "
+Always Bcc: myself")
+ '(message-dont-reply-to-names (quote ("dave@boost-consulting\\.com" "dave@boostpro\\.com" "david\\.abrahams@rcn\\.com" "boost\\.consulting@gmail\\.com" "dave\\.boostpro@gmail\\.com" "Undisclosed-recipients[:;]*")))
+ '(message-forward-ignored-headers (quote ("^Content-Transfer-Encoding:" "^X-Gnus" "^X-" "^Received:" "^User-Agent:" "^References:")))
  '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) nil nil "\"
 Automatically wrap text during email composition\"")
+ '(message-send-mail-function (quote message-smtpmail-send-it) nil nil "
+If we ever go back to using a local exim MTA, we'll set this back to message-send-mail-with-sendmail")
+ '(message-subject-re-regexp "^[ 	]*\\(\\([Rr][Ee]\\|[Aa][Ww]\\)\\(\\[[0-9]*\\]\\)*:[ 	]*\\)*[ 	]*" nil nil "
+Handle Germans' Aw: version of Re:")
+ '(message-subject-trailing-was-query t nil nil "
+always strip the trailing old subject in (was: ...) subjects")
+ '(message-syntax-checks (quote ((sender . disabled) (long-lines . disabled))) nil nil "
+Don't complain about long lines, please")
  '(mm-attachment-override-types (quote ("text/x-vcard" "application/pkcs7-mime" "application/x-pkcs7-mime" "application/pkcs7-signature" "application/x-pkcs7-signature" "image/*")) nil nil "
 Added image/* to display attached images inline")
  '(mm-discouraged-alternatives (quote ("text/html" "text/richtext" "image/.*")) nil nil "
 The documentation for this variable says it all")
+ '(mm-inline-text-html-with-images t)
  '(muse-project-alist (quote (("WikiPlanner" ("~/plans" :default "index" :major-mode planner-mode :visit-link planner-visit-link)))))
  '(org-agenda-files (quote ("~/organizer.org")))
  '(ps-font-family (quote Helvetica))
@@ -87,12 +104,17 @@ The documentation for this variable says it all")
  '(server-mode nil nil nil "
 Always run a server so we can open files in existing emacs frames.")
  '(show-paren-mode t)
+ '(smtpmail-default-smtp-server "www.boostpro.com")
+ '(smtpmail-local-domain "boostpro.com")
+ '(smtpmail-smtp-service 587)
+ '(smtpmail-starttls-credentials (quote (("www.boostpro.com" 587 "" ""))))
  '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
  '(tool-bar-mode nil nil nil "
 Tool bars take up valuable screen real-estate for icons whose meaning I forget")
  '(tramp-backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
  '(tramp-encoding-shell "bash")
  '(truncate-partial-width-windows nil)
+ '(user-mail-address "dave@boostpro.com")
  '(w3m-confirm-leaving-secure-page t nil nil "
 I never like being nannied by regular browsers either.")
  '(w3m-default-display-inline-images t)
