@@ -221,5 +221,9 @@
                      (message 80 point))))
     ))
 
+(require 'gnus-cite)
+(loop for x in gnus-cite-face-list do 
+      (set-face-background x "#F0F0F0"))
+
 (require 'gnus-spec)
 (gnus-compile)
