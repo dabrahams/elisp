@@ -11,17 +11,18 @@ new directories are prepended to emacs's initial Info path."
   (setq Info-directory-list
         (append (find-subdirs-containing-info init-path) initial-info-path)))
 
-;;; Make sure we have /sbin in the path - SUSE puts install-info there
-(add-to-list 'exec-path "/sbin")
-
 (defun add-info-dir-files-to-path (tree)
   "Add all the info files under TREE to info \"dir\" files"
   (let ((info-dirs (find-subdirs-containing-info tree)))
     (mapcar (lambda (dir)
 	      (dolist (file (directory-files dir t "\\.info\\'"))
-		(call-process "install-info" nil t nil
-			      (format "--infodir=%s" dir) file
-                              )))
+                (let ((dir-file (format "%s/dir" dir)))
+                  (if 
+                      (or (not (file-exists-p dir-file))
+                          (file-newer-than-file-p file dir-file))
+                      (call-process "install-info" nil t nil
+                                    (format "--dir-file=%s" dir-file) file
+                                    )))))
 	    info-dirs)))
 
 ;;; Create dir files for any info files in the init-path
