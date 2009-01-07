@@ -48,20 +48,20 @@ typing, the region is replaced")
  '(diff-jump-to-old-file t)
  '(dired-listing-switches "-alh" nil nil "
 Added -h so I can read file sizes")
- '(ediff-custom-diff-options "-u" nil nil "\"
-Show me unified diffs by default\"")
- '(ediff-highlight-all-diffs nil nil nil "\"
-only highlight the selected diff (keeps down gray cruft onscreen)\"")
- '(ediff-keep-variants t nil nil "\"
+ '(ediff-custom-diff-options "-u" nil nil "
+Show me unified diffs by default")
+ '(ediff-highlight-all-diffs nil nil nil "
+only highlight the selected diff (keeps down gray cruft onscreen)")
+ '(ediff-keep-variants t nil nil "
 Any unchanged buffers in the ediff are removed when the session ends. 
 `C-u q' to override when quitting.")
  '(ediff-merge-filename-prefix "")
  '(ediff-skip-merge-regions-that-differ-from-default nil)
- '(ediff-split-window-function (quote split-window-horizontally) nil nil "\"
-Show diffs side-by-side\"")
- '(ediff-window-setup-function (quote ediff-setup-windows-plain) nil nil "\"
+ '(ediff-split-window-function (quote split-window-horizontally) nil nil "
+Show diffs side-by-side")
+ '(ediff-window-setup-function (quote ediff-setup-windows-plain) nil nil "
 Run Ediff all in one frame.  The default when there's a window manager is for
-emacs to pop up a separate frame for the `*Ediff Control Panel*' buffer\"")
+emacs to pop up a separate frame for the `*Ediff Control Panel*' buffer")
  '(erc-modules (quote (autoaway autojoin button completion fill irccontrols list log match menu move-to-prompt netsplit networks noncommands readonly ring smiley sound stamp track)))
  '(gdb-max-frames 100 nil nil "
 Increased the number of stack frames displayed from 40")
@@ -82,8 +82,8 @@ Removed \"}\" from the allowable characters because I often type that when writi
 Always Bcc: myself")
  '(message-dont-reply-to-names (quote ("dave@boost-consulting\\.com" "dave@boostpro\\.com" "david\\.abrahams@rcn\\.com" "boost\\.consulting@gmail\\.com" "dave\\.boostpro@gmail\\.com" "Undisclosed-recipients[:;]*")))
  '(message-forward-ignored-headers (quote ("^Content-Transfer-Encoding:" "^X-Gnus" "^X-" "^Received:" "^User-Agent:" "^References:")))
- '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) nil nil "\"
-Automatically wrap text during email composition\"")
+ '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) t nil "
+Automatically wrap text during email composition")
  '(message-send-mail-function (quote message-smtpmail-send-it) nil nil "
 If we ever go back to using a local exim MTA, we'll set this back to message-send-mail-with-sendmail")
  '(message-subject-re-regexp "^[ 	]*\\(\\([Rr][Ee]\\|[Aa][Ww]\\)\\(\\[[0-9]*\\]\\)*:[ 	]*\\)*[ 	]*" nil nil "
@@ -101,7 +101,7 @@ The documentation for this variable says it all")
  '(org-agenda-files (quote ("~/organizer.org")))
  '(ps-font-family (quote Helvetica))
  '(ps-font-info-database (quote ((Courier (fonts (normal . "Courier") (bold . "Courier-Bold") (italic . "Courier-Oblique") (bold-italic . "Courier-BoldOblique")) (size . 10.0) (line-height . 10.55) (space-width . 6.0) (avg-char-width . 6.0)) (Helvetica (fonts (normal . "Helvetica") (bold . "Helvetica-Bold") (italic . "Helvetica-Oblique") (bold-italic . "Helvetica-BoldOblique")) (size . 10.0) (line-height . 11.56) (space-width . 2.78) (avg-char-width . 5.09243)) (Times (fonts (normal . "Times-Roman") (bold . "Times-Bold") (italic . "Times-Italic") (bold-italic . "Times-BoldItalic")) (size . 10.0) (line-height . 11.0) (space-width . 2.5) (avg-char-width . 4.71432)) (Palatino (fonts (normal . "Palatino-Roman") (bold . "Palatino-Bold") (italic . "Palatino-Italic") (bold-italic . "Palatino-BoldItalic")) (size . 10.0) (line-height . 12.1) (space-width . 2.5) (avg-char-width . 5.08676)) (Helvetica-Narrow (fonts (normal . "Helvetica-Narrow") (bold . "Helvetica-Narrow-Bold") (italic . "Helvetica-Narrow-Oblique") (bold-italic . "Helvetica-Narrow-BoldOblique")) (size . 10.0) (line-height . 11.56) (space-width . 2.2796) (avg-char-width . 4.17579)) (NewCenturySchlbk (fonts (normal . "NewCenturySchlbk-Roman") (bold . "NewCenturySchlbk-Bold") (italic . "NewCenturySchlbk-Italic") (bold-italic . "NewCenturySchlbk-BoldItalic")) (size . 10.0) (line-height . 12.15) (space-width . 2.78) (avg-char-width . 5.31162)) (AvantGarde-Book (fonts (normal . "AvantGarde-Book") (italic . "AvantGarde-BookOblique")) (size . 10.0) (line-height . 11.77) (space-width . 2.77) (avg-char-width . 5.45189)) (AvantGarde-Demi (fonts (normal . "AvantGarde-Demi") (italic . "AvantGarde-DemiOblique")) (size . 10.0) (line-height . 12.72) (space-width . 2.8) (avg-char-width . 5.51351)) (Bookman-Demi (fonts (normal . "Bookman-Demi") (italic . "Bookman-DemiItalic")) (size . 10.0) (line-height . 11.77) (space-width . 3.4) (avg-char-width . 6.05946)) (Bookman-Light (fonts (normal . "Bookman-Light") (italic . "Bookman-LightItalic")) (size . 10.0) (line-height . 11.79) (space-width . 3.2) (avg-char-width . 5.67027)) (Symbol (fonts (normal . "Symbol")) (size . 10.0) (line-height . 13.03) (space-width . 2.5) (avg-char-width . 3.24324)) (Zapf-Dingbats (fonts (normal . "Zapf-Dingbats")) (size . 10.0) (line-height . 9.63) (space-width . 2.78) (avg-char-width . 2.78)) (ZapfChancery-MediumItalic (fonts (normal . "ZapfChancery-MediumItalic")) (size . 10.0) (line-height . 11.45) (space-width . 2.2) (avg-char-width . 4.10811)) (Zapf-Chancery-MediumItalic (fonts (normal . "ZapfChancery-MediumItalic")) (size . 10.0) (line-height . 11.45) (space-width . 2.2) (avg-char-width . 4.10811)))))
- '(server-mode nil nil nil "
+ '(server-mode t nil nil "
 Always run a server so we can open files in existing emacs frames.")
  '(show-paren-mode t)
  '(smtpmail-default-smtp-server "www.boostpro.com")
