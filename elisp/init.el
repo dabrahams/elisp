@@ -13,7 +13,7 @@
 ;;; This file, init.el, goes in ~/elisp.  That way, the entire
 ;;; contents of your .emacs file can be:
 ;;;
-;;; (load-file "~/elisp/init.el")
+;;; (load "~/elisp/init")
 ;;;
 ;;; If you use xemacs, put that line in ~/.xemacs/init.el
 ;;; 
@@ -57,8 +57,25 @@
 
 ;;; Hopefully you'll never have to look at this file again!
 
+(defun strip-lisp-suffix (filename)
+"Strip off any lisp suffix such as \".el\" to retrieve a library
+name that can be loaded with emacs finding the most-optimized
+representation."
+  (catch 'stripped
+   (dolist (suf (get-load-suffixes))
+     (let ((stripped 
+            (replace-regexp-in-string (concat ".\\(" (regexp-quote suf) "\\)\\'")
+                                      "" filename nil nil 1)))
+       (if (not (equal stripped filename))
+         (throw 'stripped stripped))))
+   filename))
+
+(defun load-optimized (file-or-library-name)
+  "Load a compiled version of the file or library if possible; else load a source version"
+  (load (strip-lisp-suffix file-or-library-name)))
+
 (setq custom-file (expand-file-name "custom.el" init-path))
-(load-file custom-file)
+(load-optimized custom-file)
 
 (setq init-package-path (expand-file-name "package.d" init-path)
       init-config-path (expand-file-name "config.d" init-path)
@@ -114,32 +131,25 @@ $ emacs -l ~/.emacs -batch -f byte-recompile-init-path"
         (non-package-dirs
          (append (find-subdirs-containing-elisp init-config-path)
                  (find-subdirs-containing-elisp init-autoload-path)))
-        (save-byte-compile-verbose byte-compile-verbose)
-        (save-font-lock-verbose (and (boundp 'font-lock-verbose) font-lock-verbose))
         )
     
-    (unwind-protect
-        (setq byte-compile-verbose nil)
-        (if (boundp 'font-lock-verbose) (setq font-lock-verbose nil))
+    (letf ((byte-compile-verbose nil) (font-lock-verbose nil) (noninteractive t))
 
-        (progn
-          ;; Make sure my own autoload-file is byte-compilable.  
-          (ensure-byte-compilable-autoload-file generated-autoload-file)
+      ;; Make sure my own autoload-file is byte-compilable.  
+      (ensure-byte-compilable-autoload-file generated-autoload-file)
 
-          ;; byte compile all my packages and grab their autoloads
-          (dolist (d package-dirs)
-            (byte-recompile-directory d 0)
-            (update-directory-autoloads d)
-            )
+      ;; byte compile all my packages and grab their autoloads
+      (dolist (d package-dirs)
+        (byte-recompile-directory d 0)
+        (update-directory-autoloads d)
+        )
 
-          ;; my autoload-file lives in config.d/ so we can compile that now.
-          (dolist (d config-dirs)
-            (byte-recompile-directory d 0))
-          )
-      (setq byte-compile-verbose save-byte-compile-verbose)
-      (if (boundp 'font-lock-verbose) (setq font-lock-verbose save-font-lock-verbose))
+      ;; my autoload-file lives in config.d/ so we can compile that now.
+      (dolist (d non-package-dirs)
+        (byte-recompile-directory d 0))
       )
-    ))
+    )
+  )
 
 (defun add-init-path-to-load-path ()
   "Add the subdirectories of init-path that contain elisp files to the
@@ -159,7 +169,7 @@ prepended to emacs's initial load-path."
 
 ; Load ~/elisp/config.d/*.el (in sorted order).
 (dolist (file (directory-files init-config-path t "^\\([^.]\\|\\.[^#]\\).*\\.el$"))
-  (load-file file))
+  (load-optimized file))
 
 ; Prepare all autoloads.d/xxx-setup.el files to load automatically
 ; after the xxx library.  See
@@ -178,6 +188,6 @@ prepended to emacs's initial load-path."
       ;; setup file
       (intern 
        (and (string-match "^\\(.*\\)-setup" file) (match-string 1 file)))
-    `(load ,(expand-file-name file init-autoload-path))))
+    `(load-optimized ,(expand-file-name file init-autoload-path))))
 
 (provide 'init)
