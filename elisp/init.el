@@ -105,6 +105,7 @@ that match PATTERN."
 not up to date.  This can be run from the command line with:
 $ emacs -l ~/.emacs -batch -f byte-recompile-init-path"
   (interactive)
+  (require 'bytecomp)
 
   (let ((generated-autoload-file ; tells update-directory-autoloads where to stick it
          (expand-file-name "my-loaddefs.el" init-config-path))
