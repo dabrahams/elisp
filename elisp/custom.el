@@ -24,6 +24,9 @@ needed since I have an .Xdefaults file containing:
   Emacs.toolBar: 0
   Emacs.menuBar: 1
 
+Doing it in .Xdefaults prevents the initial window from flashing
+and resizing.
+
 Note that, on ubuntu at least, one must do 
 
   xrdb -merge ~/.Xdefaults
