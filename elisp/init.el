@@ -1,9 +1,6 @@
 ;;; Stolen directly from http://teichman.org/~peter/init.el.  Only a
 ;;; few small modifications
 
-;;; Everybody needs things like ignore-errors and such.
-(require 'cl)
-
 ;;; Here is my .emacs setup.  It has grown over a period of a few
 ;;; years.  It allows you to keep an elisp tree in version control,
 ;;; and makes it easy to try out new packages from time to time.
@@ -85,6 +82,9 @@ that match PATTERN."
       (setq files (cdr files)))
     ret))
 
+(defun find-subdirs-containing-elisp (dir)
+  (find-subdirs-containing dir "\\.el\\(\\.gz\\)?\\'"))
+
 (defun ensure-byte-compilable-autoload-file (file)
   "If FILE doesn't already exist, create it as a byte-compilable
   autoload file (the default created by autoload.el has a local
@@ -109,23 +109,35 @@ $ emacs -l ~/.emacs -batch -f byte-recompile-init-path"
   (let ((generated-autoload-file ; tells update-directory-autoloads where to stick it
          (expand-file-name "my-loaddefs.el" init-config-path))
         (package-dirs
-         (find-subdirs-containing init-package-path "\\.el$"))
-        (config-dirs
-         (find-subdirs-containing init-config-path "\\.el$"))
+         (find-subdirs-containing-elisp init-package-path))
+        (non-package-dirs
+         (append (find-subdirs-containing-elisp init-config-path)
+                 (find-subdirs-containing-elisp init-autoload-path)))
+        (save-byte-compile-verbose byte-compile-verbose)
+        (save-font-lock-verbose (and (boundp 'font-lock-verbose) font-lock-verbose))
         )
+    
+    (unwind-protect
+        (setq byte-compile-verbose nil)
+        (if (boundp 'font-lock-verbose) (setq font-lock-verbose nil))
 
-    ;; Make sure my own autoload-file is byte-compilable.  
-    (ensure-byte-compilable-autoload-file generated-autoload-file)
+        (progn
+          ;; Make sure my own autoload-file is byte-compilable.  
+          (ensure-byte-compilable-autoload-file generated-autoload-file)
 
-    ;; byte compile all my packages and grab their autoloads
-    (dolist (d package-dirs)
-      (byte-recompile-directory d 0)
-      (update-directory-autoloads d)
+          ;; byte compile all my packages and grab their autoloads
+          (dolist (d package-dirs)
+            (byte-recompile-directory d 0)
+            (update-directory-autoloads d)
+            )
+
+          ;; my autoload-file lives in config.d/ so we can compile that now.
+          (dolist (d config-dirs)
+            (byte-recompile-directory d 0))
+          )
+      (setq byte-compile-verbose save-byte-compile-verbose)
+      (if (boundp 'font-lock-verbose) (setq font-lock-verbose save-font-lock-verbose))
       )
-
-    ;; my autoload-file lives in config.d/ so we can compile that now.
-    (dolist (d config-dirs)
-      (byte-recompile-directory d 0))
     ))
 
 (defun add-init-path-to-load-path ()
@@ -134,42 +146,11 @@ load-path.  This can safely be run many times in a session, without
 adding multiple copies of the directories.  The new directories are
 prepended to emacs's initial load-path."
   (interactive)
-  (setq load-path (append (find-subdirs-containing init-path "\\.el$") initial-load-path)))
+  (setq load-path (append (find-subdirs-containing-elisp init-path) initial-load-path)))
 
 ;;; Add the init-path tree to the load-path
 (setq initial-load-path load-path)
 (add-init-path-to-load-path)
-
-(defun add-init-path-to-info-path ()
-  "Add the subdirectories of init-path that contain info directory
-files to the Info-directory-list.  This can safely be run many times
-in a session, without adding multiple copies of the directories.  The
-new directories are prepended to emacs's initial Info path."
-  (interactive)
-  (setq Info-directory-list (append (find-subdirs-containing init-path "\\.info$") initial-info-path)))
-
-;;; Make sure we have /sbin in the path - SUSE puts install-info there
-(add-to-list 'exec-path "/sbin")
-
-(defun add-info-dir-files-to-path (tree)
-  "Add all the info files under TREE to info \"dir\" files"
-  (let* ((info-regex "\\.info$")
-	 (info-dirs (find-subdirs-containing tree info-regex)))
-    (mapcar (lambda (dir)
-	      (dolist (file (directory-files dir t info-regex))
-		(call-process "install-info" nil nil nil
-			      (format "--dir-file=%s/dir" dir)
-			      (format "--info-file=%s" file))))
-	    info-dirs)))
-
-;;; Create dir files for any info files in the init-path
-(add-info-dir-files-to-path init-path)
-
-;;; Add the init-path tree to the Info path
-(require 'info)
-(info-initialize)
-(setq initial-info-path Info-directory-list)
-(add-init-path-to-info-path)
 
 ; So you can tell the difference between GNU Emacs and XEmacs in your
 ; settings files
@@ -192,6 +173,8 @@ new directories are prepended to emacs's initial Info path."
 
   (eval-after-load
       ;; convert the first part of the filename to a symbol
+      ;; identifying the package on which we want to piggyback this
+      ;; setup file
       (intern 
        (and (string-match "^\\(.*\\)-setup" file) (match-string 1 file)))
     `(load ,(expand-file-name file init-autoload-path))))
