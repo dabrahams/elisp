@@ -115,6 +115,7 @@ Tool bars take up valuable screen real-estate for icons whose meaning I forget")
  '(tramp-encoding-shell "bash")
  '(truncate-partial-width-windows nil)
  '(user-mail-address "dave@boostpro.com")
+ '(vc-diff-switches "-du")
  '(w3m-confirm-leaving-secure-page t nil nil "
 I never like being nannied by regular browsers either.")
  '(w3m-default-display-inline-images t)
