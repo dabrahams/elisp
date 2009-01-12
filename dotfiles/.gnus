@@ -1,1 +1,1 @@
-/home/dave/src/techarcana/elisp/.gnus
+../elisp/.gnus
