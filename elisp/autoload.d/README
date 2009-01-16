@@ -1,0 +1,9 @@
+This directory probably ought to be renamed as "autoload" means
+something slightly different to Emacs.
+
+Files named xxxx-setup.el are automatically loaded after xxxx.el is
+loaded.
+
+Other files in this directory are on the back burner, awaiting use,
+and should probably be moved to a backup directory.
+
