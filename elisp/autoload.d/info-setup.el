@@ -20,7 +20,7 @@ new directories are prepended to emacs's initial Info path."
                   (if 
                       (or (not (file-exists-p dir-file))
                           (file-newer-than-file-p file dir-file))
-                      (call-process "install-info" nil t nil
+                      (call-process "install-info" nil (get-buffer "*Messages*") nil
                                     (format "--dir-file=%s" dir-file) file
                                     )))))
 	    info-dirs)))
