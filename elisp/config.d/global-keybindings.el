@@ -1,5 +1,9 @@
 (require 'dwa-util)
 
+;; find-file-at-point -- a feature I've wanted forever and somehow
+;; never realized was built into Emacs!
+(ffap-bindings)
+
 ;; Navigation by words
 (global-set-key [(control ?,)] 'backward-word)
 (global-set-key [(control ?.)] 'forward-word)
