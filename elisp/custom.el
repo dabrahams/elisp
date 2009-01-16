@@ -14,7 +14,7 @@ always collected in a common directory")
 Blinking cursor just annoys me")
  '(browse-url-browser-function (quote w3m-browse-url))
  '(canlock-password "963afd5a40a33c7f59217100af5a7c1648af74a1")
- '(default-frame-alist (quote ((menu-bar-lines . 1) (font-backend . "xft") (font . "Bitstream Vera Sans Mono 10") (tool-bar-lines . 0))) nil nil "
+ '(default-frame-alist (quote ((menu-bar-lines . 1) (font-backend . "xft") (font . "Bitstream Vera Sans Mono-10.5") (tool-bar-lines . 0))) nil nil "
 This is really just a way of hanging onto and documenting my
 settings for for default-frame-alist, which currently aren't
 needed since I have an .Xdefaults file containing:
