@@ -1,3 +1,4 @@
+*.elc
 dir.old
 /elisp/package.d/bbdb/Makefile
 /elisp/package.d/bbdb/autom4te.cache/output.0
