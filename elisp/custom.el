@@ -66,6 +66,10 @@ Show diffs side-by-side")
 Run Ediff all in one frame.  The default when there's a window manager is for
 emacs to pop up a separate frame for the `*Ediff Control Panel*' buffer")
  '(erc-modules (quote (autoaway autojoin button completion fill irccontrols list log match menu move-to-prompt netsplit networks noncommands readonly ring smiley sound stamp track)))
+ '(explicit-bash-args (quote ("--noediting" "-i" "-l")) nil nil "
+added -l so it would take things out of my .bash_profile, like (on boostpro.com) the prompt pattern.  Otherwise I get this abomination: ///bd5882fff11dd5c2900e1ce95b895e66")
+ '(explicit-shell-file-name "bash" nil nil "
+Giving an explicit path like /bin/bash (the default from my Linux boxen) fails on FreeBSD where the file doesn't live there.")
  '(gdb-max-frames 100 nil nil "
 Increased the number of stack frames displayed from 40")
  '(global-auto-revert-mode t nil nil "
