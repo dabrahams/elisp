@@ -7,3 +7,6 @@
 ;; turn off the nasty system bell
 (setq ring-bell-function (lambda ()))
 
+;; Python egg files are really .zip archives
+(setq auto-mode-alist
+      (cons '("\\.egg\\'" . archive-mode) auto-mode-alist))
