@@ -6,6 +6,8 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(auto-coding-alist (quote (("\\.\\(arc\\|egg\\|zip\\|lzh\\|lha\\|zoo\\|[jew]ar\\|xpi\\|rar\\|ARC\\|ZIP\\|LZH\\|LHA\\|ZOO\\|[JEW]AR\\|XPI\\|RAR\\)\\'" . no-conversion-multibyte) ("\\.\\(exe\\|EXE\\)\\'" . no-conversion) ("\\.\\(sx[dmicw]\\|odt\\|tar\\|tgz\\)\\'" . no-conversion) ("\\.\\(gz\\|Z\\|bz\\|bz2\\|gpg\\)\\'" . no-conversion) ("\\.\\(jpe?g\\|png\\|gif\\|tiff?\\|p[bpgn]m\\)\\'" . no-conversion) ("\\.pdf\\'" . no-conversion) ("/#[^/]+#\\'" . emacs-mule))) nil nil "
+Added Python .egg file handling")
  '(auto-save-file-name-transforms (quote (("\\`/[^/]*:\\([^/]*/\\)*\\([^/]*\\)\\'" "/tmp/\\2" t) ("\\`\\(?:[^/]*/\\)*\\([^/]*\\)\\'" "~/.emacs.d/auto-saves/\\1" t))) nil nil "
 Added a 2nd regexp to try to ensure that the auto-save files are
 always collected in a common directory")
@@ -14,7 +16,7 @@ always collected in a common directory")
 Blinking cursor just annoys me")
  '(browse-url-browser-function (quote w3m-browse-url))
  '(canlock-password "963afd5a40a33c7f59217100af5a7c1648af74a1")
- '(default-frame-alist (quote ((menu-bar-lines . 1) (font-backend . "xft") (font . "Bitstream Vera Sans Mono-10.5") (tool-bar-lines . 0))) nil nil "
+ '(default-frame-alist (quote ((menu-bar-lines . 1) (font-backend . "xft") (font . "Bitstream Vera Sans Mono-10.5"))) nil nil "
 This is really just a way of hanging onto and documenting my
 settings for for default-frame-alist, which currently aren't
 needed since I have an .Xdefaults file containing:
