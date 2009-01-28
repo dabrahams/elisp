@@ -85,11 +85,12 @@ Gnus Message with full Gnus features")
 Make sure peoples' email addresses are (trivially) obscured")
  '(message-cite-prefix-regexp "\\([ 	]*[_.[:word:]]+>+\\|[ 	]*[]>|]\\)+" nil nil "
 Removed \"}\" from the allowable characters because I often type that when writing replies.")
- '(message-default-headers "" nil nil "
+ '(message-default-headers "Bcc: dave@boostpro.com
+" nil nil "
 Always Bcc: myself")
  '(message-dont-reply-to-names (quote ("dave@boost-consulting\\.com" "dave@boostpro\\.com" "david\\.abrahams@rcn\\.com" "boost\\.consulting@gmail\\.com" "dave\\.boostpro@gmail\\.com" "Undisclosed-recipients[:;]*")))
  '(message-forward-ignored-headers (quote ("^Content-Transfer-Encoding:" "^X-Gnus" "^X-" "^Received:" "^User-Agent:" "^References:")))
- '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) nil nil "
+ '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) t nil "
 Automatically wrap text during email composition")
  '(message-send-mail-function (quote message-smtpmail-send-it) nil nil "
 If we ever go back to using a local exim MTA, we'll set this back to message-send-mail-with-sendmail")
