@@ -31,6 +31,25 @@ Relative times may be specified as a series of numbers followed by units:
 
 ;;;***
 
+;;;### (autoloads (any-ini-mode) "any-ini-mode" "../../../../elisp/package.d/any-ini-mode.el"
+;;;;;;  (18811 41158))
+;;; Generated autoloads from ../../../../elisp/package.d/any-ini-mode.el
+
+(autoload 'any-ini-mode "any-ini-mode" "\
+*Major mode for editing config files with syntax highlighting based on a 'source of truth'.
+
+You may set up a default style for all <any>.ini mode buffers, or, more usefully,
+you may set up several styles that will be automatically applied based on the name
+of the file being visited.
+
+See `any-ini-set-my-style' and `any-ini-styles-alist' for more details.
+
+Turning on <any>.ini mode runs the normal hook `any-ini-mode-hook'.
+
+\(fn)" t nil)
+
+;;;***
+
 ;;;### (autoloads (bbdb-insinuate-message bbdb-initialize bbdb-multiple-buffers
 ;;;;;;  bbdb-submit-bug-report) "bbdb" "../package.d/bbdb/lisp/bbdb.el"
 ;;;;;;  (18397 42911))
@@ -1267,6 +1286,155 @@ touchtone.*\\.\\(wav\\|au\\) as named in `bbdb-sound-files'.
 They are stored in `sound-alist' as touchtone0 to touchtone11.
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (bibl-visit-grab) "bibl-grab" "../../../../elisp/package.d/bibl-mode-1.27/bibl-grab.el"
+;;;;;;  (12231 17927))
+;;; Generated autoloads from ../../../../elisp/package.d/bibl-mode-1.27/bibl-grab.el
+
+(autoload 'bibl-visit-grab "bibl-grab" "\
+Grab from the current buffer, visit bibliography file, create a record.
+If called with a prefix argument, search for record entries from
+point, rather than from the top of the current buffer.
+
+See the documentation for `bibl-visit-bibliography' for more details.
+
+\(fn &optional FROM-HERE)" t nil)
+
+;;;***
+
+;;;### (autoloads (bibl-names-mode bibl-names-find-record bibl-visit-list-names
+;;;;;;  bibl-list-names bibl-visit-list-keywords bibl-list-keywords
+;;;;;;  bibl-sort-buffer) "bibl-lists" "../../../../elisp/package.d/bibl-mode-1.27/bibl-lists.el"
+;;;;;;  (12244 36827))
+;;; Generated autoloads from ../../../../elisp/package.d/bibl-mode-1.27/bibl-lists.el
+
+(autoload 'bibl-sort-buffer "bibl-lists" "\
+Sort the contents of a bibliography mode buffer.
+
+If called with a prefix arg, sorts by keyword, otherwise by record
+name.
+
+Uses the value of case-fold-search to determine whether or not to
+ignore case while sorting.
+
+\(fn TYPE)" t nil)
+
+(autoload 'bibl-list-keywords "bibl-lists" "\
+Make a list of the keywords found in a bibliography buffer.
+Call with NO-POP set to something non-nil, or call interactively with
+a prefix argument, to work with less window shuffling.
+
+\(fn &optional NO-POP)" t nil)
+
+(autoload 'bibl-visit-list-keywords "bibl-lists" "\
+Visit a bibliography buffer and make a list of the keywords to be found.
+See the documentation for `bibl-list-keywords' and `bibl-visit-bibliography'.
+
+\(fn &optional NO-POP)" t nil)
+
+(autoload 'bibl-list-names "bibl-lists" "\
+Make a list of the names found in a bibliography buffer.
+Call with NO-POP set to something non-nil, or call interactively with
+a prefix argument, to do this without any window shuffling.
+
+\(fn &optional NO-POP)" t nil)
+
+(autoload 'bibl-visit-list-names "bibl-lists" "\
+Visit a bibliography buffer and make a list of the names to be found.
+See the documentation for `bibl-list-keywords' and `bibl-visit-bibliography'.
+
+\(fn &optional NO-POP)" t nil)
+
+(autoload 'bibl-names-find-record "bibl-lists" "\
+Try to find a record in the bibliography file.
+This operates on a name or keyword taken from a names buffer.  With a
+prefix argument, the search goes from the top.
+
+\(fn &optional FROM-TOP)" t nil)
+
+(autoload 'bibl-names-mode "bibl-lists" "\
+Major mode for tracking keyword and record names for bibliography files.
+Not all that major, but since it's illegal to do anything else while
+in here, I might as well make it so.
+
+Commands:
+\\{bibl-names-mode-map}
+
+Entry to this mode calls the value of `bibl-names-mode-hooks' if that
+value is non-nil.
+
+\(fn &optional TYPE OWNER)" t nil)
+
+;;;***
+
+;;;### (autoloads (bibl-mode bibl-visit-goto bibl-visit-create bibl-visit-bibliography)
+;;;;;;  "bibl-mode" "../../../../elisp/package.d/bibl-mode-1.27/bibl-mode.el"
+;;;;;;  (12245 4524))
+;;; Generated autoloads from ../../../../elisp/package.d/bibl-mode-1.27/bibl-mode.el
+
+(autoload 'bibl-visit-bibliography "bibl-mode" "\
+Visit a bibliography file.
+Uses the value of `bibl-file-name' as a default guess if run
+interactively.  If `bibl-prompt-on-visit' is t, asks the user to
+confirm the filename if called interactively.
+
+\(fn FILE)" t nil)
+
+(autoload 'bibl-visit-create "bibl-mode" "\
+Visit a bibliography file and create a new record.
+See the documentation for `bibl-visit-bibliography'.
+
+\(fn)" t nil)
+
+(autoload 'bibl-visit-goto "bibl-mode" "\
+Visit a bibliography file and go to some record.
+See the documentation for `bibl-visit-bibliography' and
+`bibl-goto-record'.
+
+\(fn)" t nil)
+
+(autoload 'bibl-mode "bibl-mode" "\
+Major mode for editing bibliography files.
+
+By default, we only handle one such buffer at a time (its name should
+be in bibl-file-name).  If you want to use more than one buffer in
+bibliography mode at once, set `bibl-use-any-buffer' to t.  Note that
+you will have to use bibliography mode commands from within
+bibliography mode buffers in that case; they won't work just anywhere
+any longer.
+
+Page delimiter definitions have been changed so that the page movement
+commands (\\[forward-page] and \\[backward-page]) hop between records.
+
+The mode-specific key bindings are as follows:
+
+\\{bibl-mode-prefix-map}
+To access the global key bindings, put a line such as the following in
+your `.emacs':
+  (global-set-key \"\\Cb\" 'bibl-global-map)
+Once bound to something in this way, the global key bindings go like
+this:
+
+\\{bibl-global-map}
+Entry to this mode causes `bibl-mode-hooks' to be run.
+
+\(fn)" t nil)
+
+(define-prefix-command 'bibl-global-map)
+
+(define-key bibl-global-map "c" 'bibl-visit-create)
+
+(define-key bibl-global-map "g" 'bibl-visit-grab)
+
+(define-key bibl-global-map "k" 'bibl-visit-list-keywords)
+
+(define-key bibl-global-map "n" 'bibl-visit-list-names)
+
+(define-key bibl-global-map "o" 'bibl-visit-goto)
+
+(define-key bibl-global-map "v" 'bibl-visit-bibliography)
 
 ;;;***
 
@@ -3529,8 +3697,9 @@ Not documented
 
 ;;;***
 
-;;;### (autoloads nil nil ("../../../../elisp/package.d/bbdb/bits/bbdb-anniv.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-edit.el" "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-ccmail.el"
+;;;### (autoloads nil nil ("../../../../elisp/package.d/any-ini-mode.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-anniv.el" "../../../../elisp/package.d/bbdb/bits/bbdb-edit.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-ccmail.el"
 ;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-eudora.el"
 ;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-export.el"
 ;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-hp200lx.el"
@@ -3556,6 +3725,9 @@ Not documented
 ;;;;;;  "../../../../elisp/package.d/bbdb/texinfo/infohack.el" "../../../../elisp/package.d/bbdb/utils/bbdb-213-310.el"
 ;;;;;;  "../../../../elisp/package.d/bbdb/utils/bbdb-415-510.el"
 ;;;;;;  "../../../../elisp/package.d/bbdb/utils/bbdb-to-netscape.el"
+;;;;;;  "../../../../elisp/package.d/bibl-mode-1.27/bibl-grab.el"
+;;;;;;  "../../../../elisp/package.d/bibl-mode-1.27/bibl-lists.el"
+;;;;;;  "../../../../elisp/package.d/bibl-mode-1.27/bibl-mode.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-rectangle.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-util.el" "../../../../elisp/package.d/egg/egg-grep.el"
 ;;;;;;  "../../../../elisp/package.d/egg/egg.el" "../../../../elisp/package.d/git-emacs/git-blame.el"
@@ -3899,7 +4071,7 @@ Not documented
 ;;;;;;  "../package.d/w3m-el/w3m-proc.el" "../package.d/w3m-el/w3m-rss.el"
 ;;;;;;  "../package.d/w3m-el/w3m-tabmenu.el" "../package.d/w3m-el/w3m-ucs.el"
 ;;;;;;  "../package.d/w3m-el/w3m-util.el" "../package.d/w3m-el/w3m-xmas.el"
-;;;;;;  "../package.d/w3m-el/w3mhack.el") (18807 19615 130892))
+;;;;;;  "../package.d/w3m-el/w3mhack.el") (18814 62675 353335))
 
 ;;;***
 
