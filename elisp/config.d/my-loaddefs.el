@@ -4,7 +4,7 @@
 
 
 ;;;### (autoloads (run-at-time) "FSF-timer" "../package.d/mailcrypt/FSF-timer.el"
-;;;;;;  (18787 56325))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/mailcrypt/FSF-timer.el
 
 (autoload 'run-at-time "FSF-timer" "\
@@ -33,7 +33,7 @@ Relative times may be specified as a series of numbers followed by units:
 
 ;;;### (autoloads (bbdb-insinuate-message bbdb-initialize bbdb-multiple-buffers
 ;;;;;;  bbdb-submit-bug-report) "bbdb" "../package.d/bbdb/lisp/bbdb.el"
-;;;;;;  (18397 42911))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb.el
 
 (autoload 'bbdb-submit-bug-report "bbdb" "\
@@ -86,7 +86,7 @@ Call this function to hook BBDB into `message-mode'.
 
 ;;;### (autoloads (bbdb-include-anniversaries bbdb-anniversaries
 ;;;;;;  bbdb-utilities-anniversaries) "bbdb-anniv" "../package.d/bbdb/bits/bbdb-anniv.el"
-;;;;;;  (15006 27895))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/bits/bbdb-anniv.el
 
 (let ((loads (get 'bbdb-utilities-anniversaries 'custom-loads))) (if (member '"bbdb-anniv" loads) nil (put 'bbdb-utilities-anniversaries 'custom-loads (cons '"bbdb-anniv" loads))))
@@ -121,7 +121,7 @@ Not documented
 ;;;;;;  bbdb-append-records-p bbdb-apply-next-command-to-all-records
 ;;;;;;  bbdb-create bbdb-redisplay-records bbdb-changed bbdb-notes
 ;;;;;;  bbdb-net bbdb-company bbdb-name bbdb bbdb-search-invert-set)
-;;;;;;  "bbdb-com" "../package.d/bbdb/lisp/bbdb-com.el" (18397 42930))
+;;;;;;  "bbdb-com" "../package.d/bbdb/lisp/bbdb-com.el" (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-com.el
 
 (autoload 'bbdb-search-invert-set "bbdb-com" "\
@@ -582,7 +582,7 @@ Changing this variable will show its effect only after clearing the
 ;;;***
 
 ;;;### (autoloads (bbdb-field-edit-del bbdb-field-edit-add) "bbdb-edit"
-;;;;;;  "../package.d/bbdb/bits/bbdb-edit.el" (14977 21490))
+;;;;;;  "../package.d/bbdb/bits/bbdb-edit.el" (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/bits/bbdb-edit.el
 
 (autoload 'bbdb-field-edit-add "bbdb-edit" "\
@@ -599,7 +599,7 @@ If prefix arg exists, delete all existing field values matching VALUE(regexp).
 ;;;***
 
 ;;;### (autoloads (bbdb-create-ftp-site bbdb-ftp) "bbdb-ftp" "../package.d/bbdb/lisp/bbdb-ftp.el"
-;;;;;;  (18011 20884))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-ftp.el
 
 (autoload 'bbdb-ftp "bbdb-ftp" "\
@@ -622,7 +622,7 @@ inserts the new record in the db, sorted alphabetically.
 ;;;;;;  bbdb/gnus-score bbdb/gnus-snarf-signature bbdb/gnus-show-all-recipients
 ;;;;;;  bbdb/gnus-show-records bbdb/gnus-annotate-sender bbdb/gnus-update-records
 ;;;;;;  bbdb/gnus-update-record) "bbdb-gnus" "../package.d/bbdb/lisp/bbdb-gnus.el"
-;;;;;;  (18389 44231))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-gnus.el
 
 (autoload 'bbdb/gnus-update-record "bbdb-gnus" "\
@@ -693,7 +693,7 @@ Call this function to hook BBDB into Gnus.
 ;;;***
 
 ;;;### (autoloads (bbdb-menu bbdb-fontify-buffer) "bbdb-gui" "../package.d/bbdb/lisp/bbdb-gui.el"
-;;;;;;  (17961 17312))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-gui.el
 
 (autoload 'bbdb-fontify-buffer "bbdb-gui" "\
@@ -712,7 +712,7 @@ Not documented
 ;;;;;;  bbdb-auto-notes-hook bbdb-ignore-some-messages-hook bbdb-ignore-selected-messages-hook
 ;;;;;;  bbdb-ignore-most-messages-hook bbdb-extract-field-value bbdb-header-start
 ;;;;;;  bbdb-creation-date-hook bbdb-timestamp-hook) "bbdb-hooks"
-;;;;;;  "../package.d/bbdb/lisp/bbdb-hooks.el" (18011 20885))
+;;;;;;  "../package.d/bbdb/lisp/bbdb-hooks.el" (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-hooks.el
 
 (autoload 'bbdb-timestamp-hook "bbdb-hooks" "\
@@ -793,7 +793,7 @@ get records added for those people you reply to.
 ;;;***
 
 ;;;### (autoloads (bbdb-merge-file bbdb-merge-record) "bbdb-merge"
-;;;;;;  "../package.d/bbdb/lisp/bbdb-merge.el" (17865 1144))
+;;;;;;  "../package.d/bbdb/lisp/bbdb-merge.el" (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-merge.el
 
 (autoload 'bbdb-merge-record "bbdb-merge" "\
@@ -821,7 +821,7 @@ Merge a bbdb file into the in-core bbdb.
 
 ;;;### (autoloads (bbdb-insinuate-mh bbdb/mh-show-sender bbdb/mh-annotate-sender
 ;;;;;;  bbdb/mh-update-record) "bbdb-mhe" "../package.d/bbdb/lisp/bbdb-mhe.el"
-;;;;;;  (17967 44425))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-mhe.el
 
 (autoload 'bbdb/mh-update-record "bbdb-mhe" "\
@@ -854,8 +854,8 @@ Call this function to hook BBDB into MH-E.
 
 ;;;### (autoloads (bbdb-migrate-update-file-version bbdb-migrate-rewrite-all
 ;;;;;;  bbdb-unmigrate-record bbdb-migrate bbdb-migration-query)
-;;;;;;  "bbdb-migrate" "../package.d/bbdb/lisp/bbdb-migrate.el" (18011
-;;;;;;  20885))
+;;;;;;  "bbdb-migrate" "../package.d/bbdb/lisp/bbdb-migrate.el" (18804
+;;;;;;  46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-migrate.el
 
 (autoload 'bbdb-migration-query "bbdb-migrate" "\
@@ -896,7 +896,7 @@ version.
 ;;;***
 
 ;;;### (autoloads (bbdb-obsolete-net-canonicalize-net-hook) "bbdb-obsolete"
-;;;;;;  "../package.d/bbdb/bits/bbdb-obsolete.el" (15646 18903))
+;;;;;;  "../package.d/bbdb/bits/bbdb-obsolete.el" (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/bits/bbdb-obsolete.el
 
 (autoload 'bbdb-obsolete-net-canonicalize-net-hook "bbdb-obsolete" "\
@@ -910,7 +910,7 @@ in the matching record.  The field is set in `bbdb-obsolete-net-field'.
 ;;;***
 
 ;;;### (autoloads (bbdb-utilities-pgp) "bbdb-pgp" "../package.d/bbdb/bits/bbdb-pgp.el"
-;;;;;;  (16183 22987))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/bits/bbdb-pgp.el
 
 (let ((loads (get 'bbdb-utilities-pgp 'custom-loads))) (if (member '"bbdb-pgp" loads) nil (put 'bbdb-utilities-pgp 'custom-loads (cons '"bbdb-pgp" loads))))
@@ -918,7 +918,7 @@ in the matching record.  The field is set in `bbdb-obsolete-net-field'.
 ;;;***
 
 ;;;### (autoloads (bbdb-print) "bbdb-print" "../package.d/bbdb/lisp/bbdb-print.el"
-;;;;;;  (17884 52100))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-print.el
 
 (autoload 'bbdb-print "bbdb-print" "\
@@ -936,7 +936,7 @@ the printout, notably the variables `bbdb-print-alist' and
 ;;;***
 
 ;;;### (autoloads (bbdb-insinuate-reportmail) "bbdb-reportmail" "../package.d/bbdb/lisp/bbdb-reportmail.el"
-;;;;;;  (17884 52100))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-reportmail.el
 
 (autoload 'bbdb-insinuate-reportmail "bbdb-reportmail" "\
@@ -948,7 +948,7 @@ Call this function to hook BBDB into reportmail.
 
 ;;;### (autoloads (bbdb-insinuate-rmail bbdb/rmail-show-sender bbdb/rmail-annotate-sender
 ;;;;;;  bbdb/rmail-update-records bbdb/rmail-update-record) "bbdb-rmail"
-;;;;;;  "../package.d/bbdb/lisp/bbdb-rmail.el" (17961 17377))
+;;;;;;  "../package.d/bbdb/lisp/bbdb-rmail.el" (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-rmail.el
 
 (autoload 'bbdb/rmail-update-record "bbdb-rmail" "\
@@ -992,7 +992,7 @@ Call this function to hook BBDB into RMAIL.
 ;;;***
 
 ;;;### (autoloads (bbdb-insinuate-sc bbdb/sc-default) "bbdb-sc" "../package.d/bbdb/lisp/bbdb-sc.el"
-;;;;;;  (17884 52100))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-sc.el
 
 (autoload 'bbdb/sc-default "bbdb-sc" "\
@@ -1011,7 +1011,7 @@ Call this function to hook BBDB into Supercite.
 
 ;;;### (autoloads (bbdb-rfc822-addresses bbdb-extract-address-components
 ;;;;;;  bbdb-snarf-region bbdb-snarf) "bbdb-snarf" "../package.d/bbdb/lisp/bbdb-snarf.el"
-;;;;;;  (17961 17312))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-snarf.el
 
 (autoload 'bbdb-snarf "bbdb-snarf" "\
@@ -1061,7 +1061,7 @@ version doesn't support multiple addresses.
 
 ;;;### (autoloads (bbdb-srv-add-phone bbdb/srv-auto-create-mail-news-dispatcher
 ;;;;;;  bbdb/srv-handle-headers-with-delay) "bbdb-srv" "../package.d/bbdb/lisp/bbdb-srv.el"
-;;;;;;  (17884 52100))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-srv.el
 
 (autoload 'bbdb/srv-handle-headers-with-delay "bbdb-srv" "\
@@ -1091,8 +1091,8 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (bbdb-test/run-one-test bbdb-test/run-tests bbdb-test/run-all-tests)
-;;;;;;  "bbdb-test" "../package.d/bbdb/testing/bbdb-test.el" (16175
-;;;;;;  39563))
+;;;;;;  "bbdb-test" "../package.d/bbdb/testing/bbdb-test.el" (18804
+;;;;;;  46494))
 ;;; Generated autoloads from ../package.d/bbdb/testing/bbdb-test.el
 
 (autoload 'bbdb-test/run-all-tests "bbdb-test" "\
@@ -1116,7 +1116,7 @@ Not documented
 ;;;;;;  bbdb/vm-set-auto-folder-alist-headers bbdb/vm-set-auto-folder-alist-field
 ;;;;;;  bbdb/vm-show-sender bbdb/vm-show-all-recipients bbdb/vm-show-records
 ;;;;;;  bbdb/vm-annotate-sender bbdb/vm-update-records bbdb/vm-update-record)
-;;;;;;  "bbdb-vm" "../package.d/bbdb/lisp/bbdb-vm.el" (18389 44231))
+;;;;;;  "bbdb-vm" "../package.d/bbdb/lisp/bbdb-vm.el" (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-vm.el
 
 (autoload 'bbdb/vm-update-record "bbdb-vm" "\
@@ -1203,7 +1203,7 @@ Call this function to hook BBDB into VM.
 ;;;***
 
 ;;;### (autoloads (bbdb-insinuate-w3 bbdb-www-grab-homepage bbdb-www)
-;;;;;;  "bbdb-w3" "../package.d/bbdb/lisp/bbdb-w3.el" (17884 52100))
+;;;;;;  "bbdb-w3" "../package.d/bbdb/lisp/bbdb-w3.el" (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-w3.el
 
 (autoload 'bbdb-www "bbdb-w3" "\
@@ -1226,7 +1226,7 @@ Call this function to hook BBDB into W3.
 ;;;***
 
 ;;;### (autoloads (bbdb-whois) "bbdb-whois" "../package.d/bbdb/lisp/bbdb-whois.el"
-;;;;;;  (18011 20885))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-whois.el
 
 (autoload 'bbdb-whois "bbdb-whois" "\
@@ -1238,7 +1238,7 @@ Not documented
 
 ;;;### (autoloads (bbdb-load-touchtones bbdb-sound-volume bbdb-sounds-directory
 ;;;;;;  bbdb-xemacs-display-completion-list) "bbdb-xemacs" "../package.d/bbdb/lisp/bbdb-xemacs.el"
-;;;;;;  (18011 20885))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/bbdb/lisp/bbdb-xemacs.el
 
 (autoload 'bbdb-xemacs-display-completion-list "bbdb-xemacs" "\
@@ -1271,7 +1271,7 @@ They are stored in `sound-alist' as touchtone0 to touchtone11.
 ;;;***
 
 ;;;### (autoloads (egg-minor-mode-find-file-hook egg-minor-mode)
-;;;;;;  "egg" "../package.d/egg/egg.el" (18785 2839))
+;;;;;;  "egg" "../package.d/egg/egg.el" (18805 59039))
 ;;; Generated autoloads from ../package.d/egg/egg.el
 
 (autoload 'egg-minor-mode "egg" "\
@@ -1300,7 +1300,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (egg-grep egg-grep-mode egg-grep-process-setup)
-;;;;;;  "egg-grep" "../package.d/egg/egg-grep.el" (18785 2839))
+;;;;;;  "egg-grep" "../package.d/egg/egg-grep.el" (18805 59039))
 ;;; Generated autoloads from ../package.d/egg/egg-grep.el
 
 (autoload 'egg-grep-process-setup "egg-grep" "\
@@ -1322,7 +1322,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (with-expect) "expect" "../package.d/mailcrypt/expect.el"
-;;;;;;  (18787 56325))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/mailcrypt/expect.el
 
 (autoload 'with-expect "expect" "\
@@ -1344,9 +1344,9 @@ completion.
 
 ;;;***
 
-;;;### (autoloads (git-reblame git-blame-mode) "git-blame" "../../../../elisp/package.d/git-emacs/git-blame.el"
-;;;;;;  (18785 2801))
-;;; Generated autoloads from ../../../../elisp/package.d/git-emacs/git-blame.el
+;;;### (autoloads (git-reblame git-blame-mode) "git-blame" "../package.d/git-contrib/git-blame.el"
+;;;;;;  (18805 59029))
+;;; Generated autoloads from ../package.d/git-contrib/git-blame.el
 
 (autoload 'git-blame-mode "git-blame" "\
 Toggle minor mode for displaying Git blame
@@ -1365,7 +1365,7 @@ Recalculate all blame information in the current buffer
 ;;;### (autoloads (mew-shimbun-expire mew-shimbun-expire-all mew-shimbun-re-retrieve-all
 ;;;;;;  mew-shimbun-re-retrieve mew-shimbun-retrieve-all mew-shimbun-retrieve
 ;;;;;;  mew-shimbun-goto-folder mew-shimbun-goto-unseen-folder) "mew-shimbun"
-;;;;;;  "../package.d/w3m-el/shimbun/mew-shimbun.el" (18197 61166))
+;;;;;;  "../package.d/w3m-el/shimbun/mew-shimbun.el" (18804 46494))
 ;;; Generated autoloads from ../package.d/w3m-el/shimbun/mew-shimbun.el
 
 (autoload 'mew-shimbun-goto-unseen-folder "mew-shimbun" "\
@@ -1415,7 +1415,7 @@ Expire this shimbun folder.
 ;;;***
 
 ;;;### (autoloads (mime-w3m-preview-text/html) "mime-w3m" "../package.d/w3m-el/mime-w3m.el"
-;;;;;;  (18197 61165))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/w3m-el/mime-w3m.el
 
 (autoload 'mime-w3m-preview-text/html "mime-w3m" "\
@@ -1426,14 +1426,14 @@ Not documented
 ;;;***
 
 ;;;### (autoloads nil "muse" "../package.d/muse-el/lisp/muse.el"
-;;;;;;  (18785 2863))
+;;;;;;  (18805 59059))
 ;;; Generated autoloads from ../package.d/muse-el/lisp/muse.el
  (add-to-list 'auto-mode-alist '("\\.muse\\'" . muse-mode-choose-mode))
 
 ;;;***
 
 ;;;### (autoloads (muse-blosxom-new-entry) "muse-blosxom" "../package.d/muse-el/lisp/muse-blosxom.el"
-;;;;;;  (18785 2863))
+;;;;;;  (18805 59059))
 ;;; Generated autoloads from ../package.d/muse-el/lisp/muse-blosxom.el
 
 (autoload 'muse-blosxom-new-entry "muse-blosxom" "\
@@ -1446,7 +1446,7 @@ The page will be initialized with the current date and TITLE.
 ;;;***
 
 ;;;### (autoloads (muse-colors-toggle-inline-images) "muse-colors"
-;;;;;;  "../package.d/muse-el/lisp/muse-colors.el" (18785 2863))
+;;;;;;  "../package.d/muse-el/lisp/muse-colors.el" (18805 59059))
 ;;; Generated autoloads from ../package.d/muse-el/lisp/muse-colors.el
 
 (autoload 'muse-colors-toggle-inline-images "muse-colors" "\
@@ -1458,7 +1458,7 @@ Toggle display of inlined images on/off.
 
 ;;;### (autoloads (muse-import-docbook-files muse-import-docbook)
 ;;;;;;  "muse-import-docbook" "../package.d/muse-el/lisp/muse-import-docbook.el"
-;;;;;;  (18785 2863))
+;;;;;;  (18805 59059))
 ;;; Generated autoloads from ../package.d/muse-el/lisp/muse-import-docbook.el
 
 (autoload 'muse-import-docbook "muse-import-docbook" "\
@@ -1474,7 +1474,7 @@ Convert the Docbook file SRC to Muse, writing output to the DEST file.
 ;;;***
 
 ;;;### (autoloads (muse-import-latex) "muse-import-latex" "../package.d/muse-el/lisp/muse-import-latex.el"
-;;;;;;  (18785 2863))
+;;;;;;  (18805 59059))
 ;;; Generated autoloads from ../package.d/muse-el/lisp/muse-import-latex.el
 
 (autoload 'muse-import-latex "muse-import-latex" "\
@@ -1485,7 +1485,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (muse-message-markup) "muse-message" "../package.d/muse-el/experimental/muse-message.el"
-;;;;;;  (18785 2862))
+;;;;;;  (18805 59059))
 ;;; Generated autoloads from ../package.d/muse-el/experimental/muse-message.el
 
 (autoload 'muse-message-markup "muse-message" "\
@@ -1506,7 +1506,7 @@ function to `message-send-hook'.
 ;;;;;;  muse-browse-result muse-edit-link-at-point muse-insert-relative-link-to-file
 ;;;;;;  muse-decrease-list-item-indentation muse-increase-list-item-indentation
 ;;;;;;  muse-insert-list-item muse-mode-choose-mode muse-mode) "muse-mode"
-;;;;;;  "../package.d/muse-el/lisp/muse-mode.el" (18785 2863))
+;;;;;;  "../package.d/muse-el/lisp/muse-mode.el" (18805 59059))
 ;;; Generated autoloads from ../package.d/muse-el/lisp/muse-mode.el
 
 (autoload 'muse-mode "muse-mode" "\
@@ -1636,7 +1636,7 @@ with modes that set `left-margin', such as
 
 ;;;### (autoloads (muse-project-publish muse-project-publish-this-file
 ;;;;;;  muse-project-find-file) "muse-project" "../package.d/muse-el/lisp/muse-project.el"
-;;;;;;  (18785 2863))
+;;;;;;  (18805 59059))
 ;;; Generated autoloads from ../package.d/muse-el/lisp/muse-project.el
 
 (autoload 'muse-project-find-file "muse-project" "\
@@ -1667,7 +1667,7 @@ Publish the pages of PROJECT that need publishing.
 ;;;***
 
 ;;;### (autoloads (muse-browse-url) "muse-protocols" "../package.d/muse-el/lisp/muse-protocols.el"
-;;;;;;  (18785 2863))
+;;;;;;  (18805 59059))
 ;;; Generated autoloads from ../package.d/muse-el/lisp/muse-protocols.el
 
 (autoload 'muse-browse-url "muse-protocols" "\
@@ -1680,7 +1680,7 @@ If OTHER-WINDOW is non-nil, open in a different window.
 
 ;;;### (autoloads (muse-publish-this-file muse-publish-file muse-publish-region)
 ;;;;;;  "muse-publish" "../package.d/muse-el/lisp/muse-publish.el"
-;;;;;;  (18785 2863))
+;;;;;;  (18805 59059))
 ;;; Generated autoloads from ../package.d/muse-el/lisp/muse-publish.el
 
 (autoload 'muse-publish-region "muse-publish" "\
@@ -1708,7 +1708,7 @@ supplied.
 
 ;;;### (autoloads (gnus-group-make-shimbun-groups gnus-group-make-shimbun-group
 ;;;;;;  gnus-summary-refer-shimbun-article) "nnshimbun" "../package.d/w3m-el/shimbun/nnshimbun.el"
-;;;;;;  (18734 31102))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/w3m-el/shimbun/nnshimbun.el
 
 (autoload 'gnus-summary-refer-shimbun-article "nnshimbun" "\
@@ -1733,7 +1733,7 @@ Create all nnshimbun groups prepared for SERVER.
 
 ;;;### (autoloads (octet-mime-setup mime-view-octet mime-preview-octet
 ;;;;;;  octet-find-file octet-buffer) "octet" "../package.d/w3m-el/octet.el"
-;;;;;;  (17133 57129))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/w3m-el/octet.el
 
 (autoload 'octet-buffer "octet" "\
@@ -1775,7 +1775,7 @@ Octet setting for MIME module.
 ;;;;;;  planner-resolve-position-url planner-browse-position-url
 ;;;;;;  planner-annotation-from-file-with-position planner-annotation-as-kill
 ;;;;;;  planner-mode) "planner" "../package.d/planner-el/planner.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner.el
 
 (autoload 'planner-mode "planner" "\
@@ -1951,8 +1951,8 @@ Show the plan page for the calendar date under point in another window.
 
 ;;;### (autoloads (planner-accomplishments-show planner-accomplishments-update
 ;;;;;;  planner-accomplishments-insinuate) "planner-accomplishments"
-;;;;;;  "../package.d/planner-el/planner-accomplishments.el" (18785
-;;;;;;  2890))
+;;;;;;  "../package.d/planner-el/planner-accomplishments.el" (18805
+;;;;;;  59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-accomplishments.el
 
 (autoload 'planner-accomplishments-insinuate "planner-accomplishments" "\
@@ -1975,7 +1975,7 @@ Display a buffer with the current page's accomplishment report.
 ;;;### (autoloads (planner-appt-use-tasks-and-schedule planner-appt-use-schedule
 ;;;;;;  planner-appt-use-tasks planner-appt-insinuate planner-appt-insinuate-if-today
 ;;;;;;  planner-appt-update) "planner-appt" "../package.d/planner-el/planner-appt.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-appt.el
 
 (autoload 'planner-appt-update "planner-appt" "\
@@ -2016,7 +2016,7 @@ Use both tasks and the schedule to derive appointment alerts.
 
 ;;;### (autoloads (planner-bbdb-resolve-url planner-bbdb-browse-url
 ;;;;;;  planner-bbdb-annotation-from-bbdb) "planner-bbdb" "../package.d/planner-el/planner-bbdb.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-bbdb.el
 
 (autoload 'planner-bbdb-annotation-from-bbdb "planner-bbdb" "\
@@ -2039,7 +2039,7 @@ Replace ID with the blog, web or e-mail address of the BBDB record.
 
 ;;;### (autoloads (planner-bibtex-browse-url planner-bibtex-annotation-old
 ;;;;;;  planner-bibtex-annotation-new) "planner-bibtex" "../package.d/planner-el/planner-bibtex.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-bibtex.el
 
 (autoload 'planner-bibtex-annotation-new "planner-bibtex" "\
@@ -2061,7 +2061,7 @@ If this is a Bibtex URL, jump to it.
 
 ;;;### (autoloads (planner-bookmark-browse-url planner-bookmark-annotation-from-bookmark)
 ;;;;;;  "planner-bookmark" "../package.d/planner-el/planner-bookmark.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-bookmark.el
 
 (autoload 'planner-bookmark-annotation-from-bookmark "planner-bookmark" "\
@@ -2078,7 +2078,7 @@ If this is a bookmark URL, jump to it.
 ;;;***
 
 ;;;### (autoloads (planner-cyclic-create-tasks-maybe) "planner-cyclic"
-;;;;;;  "../package.d/planner-el/planner-cyclic.el" (18785 2890))
+;;;;;;  "../package.d/planner-el/planner-cyclic.el" (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-cyclic.el
 
 (autoload 'planner-cyclic-create-tasks-maybe "planner-cyclic" "\
@@ -2091,7 +2091,7 @@ This will only create tasks for future dates or today.
 
 ;;;### (autoloads (planner-deadline-remove planner-deadline-change
 ;;;;;;  planner-deadline-update) "planner-deadline" "../package.d/planner-el/planner-deadline.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-deadline.el
 
 (autoload 'planner-deadline-update "planner-deadline" "\
@@ -2120,7 +2120,7 @@ Remove the deadline of the current task.
 ;;;;;;  planner-diary-show-day-plan-or-diary planner-diary-insert-all-diaries-maybe
 ;;;;;;  planner-diary-insert-all-diaries planner-diary-update-section)
 ;;;;;;  "planner-diary" "../package.d/planner-el/planner-diary.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-diary.el
 
 (autoload 'planner-diary-update-section "planner-diary" "\
@@ -2172,8 +2172,8 @@ TIME and TEXT are used in the description.
 ;;;***
 
 ;;;### (autoloads (planner-erc-browse-url planner-erc-annotation-from-erc)
-;;;;;;  "planner-erc" "../package.d/planner-el/planner-erc.el" (18785
-;;;;;;  2890))
+;;;;;;  "planner-erc" "../package.d/planner-el/planner-erc.el" (18805
+;;;;;;  59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-erc.el
 
 (autoload 'planner-erc-annotation-from-erc "planner-erc" "\
@@ -2191,7 +2191,7 @@ If this is an IRC URL, jump to it.
 
 ;;;### (autoloads (planner-export-diary planner-export-diary-setup
 ;;;;;;  planner-export-diary-future) "planner-export-diary" "../package.d/planner-el/planner-export-diary.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-export-diary.el
 
 (autoload 'planner-export-diary-future "planner-export-diary" "\
@@ -2215,7 +2215,7 @@ Exports all the schedules or the ones from FROM to TO (inclusive).
 
 ;;;### (autoloads (planner-gnats-browse-url planner-gnats-annotation-from-gnats)
 ;;;;;;  "planner-gnats" "../package.d/planner-el/planner-gnats.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-gnats.el
 
 (autoload 'planner-gnats-annotation-from-gnats "planner-gnats" "\
@@ -2233,7 +2233,7 @@ If this is a Gnats URL, view the pr (view-pr).
 
 ;;;### (autoloads (planner-gnus-browse-url planner-gnus-annotation
 ;;;;;;  planner-gnus-insinuate) "planner-gnus" "../package.d/planner-el/planner-gnus.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-gnus.el
 
 (autoload 'planner-gnus-insinuate "planner-gnus" "\
@@ -2263,7 +2263,7 @@ If this is a Gnus URL, jump to it.
 ;;;### (autoloads (planner-id-setup planner-id-update-tasks-maybe
 ;;;;;;  planner-id-markup planner-id-add-task-id-maybe planner-id-jump-to-linked-task
 ;;;;;;  planner-id-find-task) "planner-id" "../package.d/planner-el/planner-id.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-id.el
 
 (autoload 'planner-id-find-task "planner-id" "\
@@ -2304,7 +2304,7 @@ Hook into `planner-mode'.
 ;;;***
 
 ;;;### (autoloads (planner-ledger-insert-maybe) "planner-ledger"
-;;;;;;  "../package.d/planner-el/planner-ledger.el" (18785 2890))
+;;;;;;  "../package.d/planner-el/planner-ledger.el" (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-ledger.el
 
 (autoload 'planner-ledger-insert-maybe "planner-ledger" "\
@@ -2315,7 +2315,7 @@ Maybe insert ledger sections into a Planner page.
 ;;;***
 
 ;;;### (autoloads (planner-lisp-browse-url) "planner-lisp" "../package.d/planner-el/planner-lisp.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-lisp.el
 
 (autoload 'planner-lisp-browse-url "planner-lisp" "\
@@ -2326,7 +2326,7 @@ If this is a LISP URL, evaluate it.
 ;;;***
 
 ;;;### (autoloads (planner-log-edit-add-note) "planner-log-edit"
-;;;;;;  "../package.d/planner-el/planner-log-edit.el" (18785 2890))
+;;;;;;  "../package.d/planner-el/planner-log-edit.el" (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-log-edit.el
 
 (autoload 'planner-log-edit-add-note "planner-log-edit" "\
@@ -2337,8 +2337,8 @@ Add a note describing the commit to the current planner page.
 ;;;***
 
 ;;;### (autoloads (planner-mhe-browse-url planner-mhe-annotation)
-;;;;;;  "planner-mhe" "../package.d/planner-el/planner-mhe.el" (18785
-;;;;;;  2890))
+;;;;;;  "planner-mhe" "../package.d/planner-el/planner-mhe.el" (18805
+;;;;;;  59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-mhe.el
 
 (autoload 'planner-mhe-annotation "planner-mhe" "\
@@ -2355,7 +2355,7 @@ If this is a MH-E URL, jump to it.
 ;;;***
 
 ;;;### (autoloads (planner-multi-remove-task-from-pool) "planner-multi"
-;;;;;;  "../package.d/planner-el/planner-multi.el" (18785 2890))
+;;;;;;  "../package.d/planner-el/planner-multi.el" (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-multi.el
 
 (autoload 'planner-multi-remove-task-from-pool "planner-multi" "\
@@ -2369,7 +2369,7 @@ Remove completed tasks from `planner-multi-copy-tasks-to-page' if that still lea
 ;;;;;;  planner-notes-index-weeks planner-notes-index-days planner-notes-index
 ;;;;;;  planner-notes-index-month-table-tag planner-notes-index-tag)
 ;;;;;;  "planner-notes-index" "../package.d/planner-el/planner-notes-index.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-notes-index.el
 
 (autoload 'planner-notes-index-tag "planner-notes-index" "\
@@ -2432,7 +2432,7 @@ The current year is included.
 
 ;;;### (autoloads (planner-psvn-log-edit-add-note planner-psvn-browse-url
 ;;;;;;  planner-annotation-from-psvn) "planner-psvn" "../package.d/planner-el/planner-psvn.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-psvn.el
 
 (autoload 'planner-annotation-from-psvn "planner-psvn" "\
@@ -2456,7 +2456,7 @@ Add a note describing the commit via psvn to the current planner page.
 ;;;### (autoloads (planner-rank-update-all planner-rank-update-current-task
 ;;;;;;  planner-rank-change planner-sort-tasks-by-urgency planner-sort-tasks-by-importance
 ;;;;;;  planner-sort-tasks-by-rank) "planner-rank" "../package.d/planner-el/planner-rank.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-rank.el
 
 (autoload 'planner-sort-tasks-by-rank "planner-rank" "\
@@ -2497,8 +2497,8 @@ Re-calculate rank for all tasks in the current page.
 ;;;***
 
 ;;;### (autoloads (planner-rdf-publish-index planner-rdf-publish-file)
-;;;;;;  "planner-rdf" "../package.d/planner-el/planner-rdf.el" (18785
-;;;;;;  2890))
+;;;;;;  "planner-rdf" "../package.d/planner-el/planner-rdf.el" (18805
+;;;;;;  59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-rdf.el
 
 (autoload 'planner-rdf-publish-file "planner-rdf" "\
@@ -2520,7 +2520,7 @@ items.
 ;;;***
 
 ;;;### (autoloads (planner-registry-initialize) "planner-registry"
-;;;;;;  "../package.d/planner-el/planner-registry.el" (18785 2890))
+;;;;;;  "../package.d/planner-el/planner-registry.el" (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-registry.el
 
 (autoload 'planner-registry-initialize "planner-registry" "\
@@ -2533,7 +2533,7 @@ If FROM-SCRATCH is non-nil, make the registry from scratch.
 ;;;***
 
 ;;;### (autoloads (planner-report-generate) "planner-report" "../package.d/planner-el/planner-report.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-report.el
 
 (autoload 'planner-report-generate "planner-report" "\
@@ -2546,7 +2546,7 @@ BEGIN and END are in the format YYYY.MM.DD.
 
 ;;;### (autoloads (planner-rmail-browse-url planner-rmail-annotation-from-mail)
 ;;;;;;  "planner-rmail" "../package.d/planner-el/planner-rmail.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-rmail.el
 
 (autoload 'planner-rmail-annotation-from-mail "planner-rmail" "\
@@ -2563,7 +2563,7 @@ If this is an RMAIL URL, jump to it.
 ;;;***
 
 ;;;### (autoloads (planner-rss-add-note) "planner-rss" "../package.d/planner-el/planner-rss.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-rss.el
 
 (autoload 'planner-rss-add-note "planner-rss" "\
@@ -2576,7 +2576,7 @@ Call with the interactive prefix in order to be prompted for FEED.
 ;;;***
 
 ;;;### (autoloads (planner-schedule-show-end-project) "planner-schedule"
-;;;;;;  "../package.d/planner-el/planner-schedule.el" (18785 2890))
+;;;;;;  "../package.d/planner-el/planner-schedule.el" (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-schedule.el
 
 (autoload 'planner-schedule-show-end-project "planner-schedule" "\
@@ -2589,7 +2589,7 @@ Display the estimated project completion time.
 ;;;### (autoloads (planner-tasks-overview-show-summary planner-tasks-overview-jump
 ;;;;;;  planner-tasks-overview-jump-other-window planner-tasks-overview)
 ;;;;;;  "planner-tasks-overview" "../package.d/planner-el/planner-tasks-overview.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-tasks-overview.el
 
 (autoload 'planner-tasks-overview "planner-tasks-overview" "\
@@ -2617,7 +2617,7 @@ display. planner-multi is required for multiple pages.
 ;;;***
 
 ;;;### (autoloads (planner-colors-timeclock-report-tag) "planner-timeclock"
-;;;;;;  "../package.d/planner-el/planner-timeclock.el" (18785 2890))
+;;;;;;  "../package.d/planner-el/planner-timeclock.el" (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-timeclock.el
 
 (autoload 'planner-colors-timeclock-report-tag "planner-timeclock" "\
@@ -2632,7 +2632,7 @@ the result.
 ;;;;;;  planner-timeclock-summary-show-filter planner-timeclock-summary-show
 ;;;;;;  planner-timeclock-summary-update planner-timeclock-summary-insinuate)
 ;;;;;;  "planner-timeclock-summary" "../package.d/planner-el/planner-timeclock-summary.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-timeclock-summary.el
 
 (autoload 'planner-timeclock-summary-insinuate "planner-timeclock-summary" "\
@@ -2692,7 +2692,7 @@ given.
 ;;;### (autoloads (planner-timeclock-summary-proj-report planner-timeclock-summary-proj-current
 ;;;;;;  planner-timeclock-summary-proj-all) "planner-timeclock-summary-proj"
 ;;;;;;  "../package.d/planner-el/planner-timeclock-summary-proj.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-timeclock-summary-proj.el
 
 (autoload 'planner-timeclock-summary-proj-all "planner-timeclock-summary-proj" "\
@@ -2713,7 +2713,7 @@ Insert time report for PROJECT in the current buffer.
 ;;;***
 
 ;;;### (autoloads (planner-trunk-tasks) "planner-trunk" "../package.d/planner-el/planner-trunk.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-trunk.el
 
 (autoload 'planner-trunk-tasks "planner-trunk" "\
@@ -2730,7 +2730,7 @@ matter what the `planner-trunk-rule-list' said.
 
 ;;;### (autoloads (planner-unix-mail-browse-url planner-unix-mail-annotation-from-mail)
 ;;;;;;  "planner-unix-mail" "../package.d/planner-el/planner-unix-mail.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-unix-mail.el
 
 (autoload 'planner-unix-mail-annotation-from-mail "planner-unix-mail" "\
@@ -2747,8 +2747,8 @@ If this is an UNIX-MAIL URL, jump to it.
 ;;;***
 
 ;;;### (autoloads (planner-vm-browse-url planner-vm-annotation-from-mail)
-;;;;;;  "planner-vm" "../package.d/planner-el/planner-vm.el" (18785
-;;;;;;  2890))
+;;;;;;  "planner-vm" "../package.d/planner-el/planner-vm.el" (18805
+;;;;;;  59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-vm.el
 
 (autoload 'planner-vm-annotation-from-mail "planner-vm" "\
@@ -2765,7 +2765,7 @@ If this is an VM URL, jump to it.
 ;;;***
 
 ;;;### (autoloads (planner-w3m-annotation-from-w3m) "planner-w3m"
-;;;;;;  "../package.d/planner-el/planner-w3m.el" (18785 2890))
+;;;;;;  "../package.d/planner-el/planner-w3m.el" (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-w3m.el
 
 (autoload 'planner-w3m-annotation-from-w3m "planner-w3m" "\
@@ -2778,7 +2778,7 @@ Suitable for use in `planner-annotation-functions'.
 
 ;;;### (autoloads (planner-wl-browse-url planner-wl-annotation-from-wl
 ;;;;;;  planner-wl-insinuate) "planner-wl" "../package.d/planner-el/planner-wl.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-wl.el
 
 (autoload 'planner-wl-insinuate "planner-wl" "\
@@ -2803,7 +2803,7 @@ If this is a Wanderlust URL, jump to it.
 
 ;;;### (autoloads (planner-xtla-log-edit-add-note planner-xtla-browse-url
 ;;;;;;  planner-annotation-from-xtla) "planner-xtla" "../package.d/planner-el/planner-xtla.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/planner-xtla.el
 
 (autoload 'planner-annotation-from-xtla "planner-xtla" "\
@@ -2827,7 +2827,7 @@ See also `planner-xtla-log-edit-notice-commit-function'.
 ;;;***
 
 ;;;### (autoloads (svn-status svn-checkout) "psvn" "../package.d/psvn.el"
-;;;;;;  (18789 2764))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/psvn.el
 
 (autoload 'svn-checkout "psvn" "\
@@ -2853,7 +2853,7 @@ If there is no .svn directory, examine if there is CVS and run
 
 ;;;### (autoloads (remember-diary-extract-entries remember-clipboard
 ;;;;;;  remember-other-frame remember) "remember" "../package.d/remember-el/remember.el"
-;;;;;;  (18785 2915))
+;;;;;;  (18805 59067))
 ;;; Generated autoloads from ../package.d/remember-el/remember.el
 
 (autoload 'remember "remember" "\
@@ -2885,7 +2885,7 @@ Extract diary entries from the region.
 ;;;***
 
 ;;;### (autoloads (remember-bbdb-store-in-mailbox) "remember-bbdb"
-;;;;;;  "../package.d/remember-el/remember-bbdb.el" (18785 2915))
+;;;;;;  "../package.d/remember-el/remember-bbdb.el" (18805 59067))
 ;;; Generated autoloads from ../package.d/remember-el/remember-bbdb.el
 
 (autoload 'remember-bbdb-store-in-mailbox "remember-bbdb" "\
@@ -2899,7 +2899,7 @@ field, for the purpose of appropriate splitting.
 ;;;***
 
 ;;;### (autoloads (remember-location remember-url) "remember-bibl"
-;;;;;;  "../package.d/remember-el/remember-bibl.el" (18785 2915))
+;;;;;;  "../package.d/remember-el/remember-bibl.el" (18805 59067))
 ;;; Generated autoloads from ../package.d/remember-el/remember-bibl.el
 
 (autoload 'remember-url "remember-bibl" "\
@@ -2915,7 +2915,7 @@ Remember a bookmark location in `bibl-mode'.
 ;;;***
 
 ;;;### (autoloads (remember-blosxom) "remember-blosxom" "../package.d/remember-el/remember-blosxom.el"
-;;;;;;  (18785 2915))
+;;;;;;  (18805 59067))
 ;;; Generated autoloads from ../package.d/remember-el/remember-blosxom.el
 
 (autoload 'remember-blosxom "remember-blosxom" "\
@@ -2929,7 +2929,7 @@ This function can be added to `remember-handler-functions'.
 ;;;### (autoloads (remember-emacs-wiki-journal-add-entry-maybe remember-emacs-wiki-journal-add-entry-auto
 ;;;;;;  remember-emacs-wiki-journal-add-entry) "remember-emacs-wiki-journal"
 ;;;;;;  "../package.d/remember-el/remember-emacs-wiki-journal.el"
-;;;;;;  (18785 2915))
+;;;;;;  (18805 59067))
 ;;; Generated autoloads from ../package.d/remember-el/remember-emacs-wiki-journal.el
 
 (autoload 'remember-emacs-wiki-journal-add-entry "remember-emacs-wiki-journal" "\
@@ -2952,7 +2952,7 @@ entry if the first line matches `emacs-wiki-journal-category-regexp'.
 ;;;***
 
 ;;;### (autoloads (remember-planner-append) "remember-planner" "../package.d/remember-el/remember-planner.el"
-;;;;;;  (18785 2915))
+;;;;;;  (18805 59067))
 ;;; Generated autoloads from ../package.d/remember-el/remember-planner.el
 
 (autoload 'remember-planner-append "remember-planner" "\
@@ -2964,7 +2964,7 @@ This function can be added to `remember-handler-functions'.
 ;;;***
 
 ;;;### (autoloads (rst-minor-mode rst-mode) "rst" "../package.d/rst.el"
-;;;;;;  (18784 41537))
+;;;;;;  (18804 46494))
 ;;; Generated autoloads from ../package.d/rst.el
 
 (autoload 'rst-mode "rst" "\
@@ -2989,7 +2989,7 @@ text-mode, like mail-mode..
 ;;;***
 
 ;;;### (autoloads (schedule-completion-time) "schedule" "../package.d/planner-el/contrib/schedule.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/contrib/schedule.el
 
 (autoload 'schedule-completion-time "schedule" "\
@@ -3006,7 +3006,7 @@ gets called.
 ;;;;;;  timeclock-workday-remaining-string timeclock-reread-log timeclock-query-out
 ;;;;;;  timeclock-change timeclock-status-string timeclock-out timeclock-in
 ;;;;;;  timeclock-modeline-display) "timeclock" "../package.d/planner-el/contrib/timeclock.el"
-;;;;;;  (18785 2890))
+;;;;;;  (18805 59064))
 ;;; Generated autoloads from ../package.d/planner-el/contrib/timeclock.el
 
 (autoload 'timeclock-modeline-display "timeclock" "\
@@ -3107,7 +3107,7 @@ relative only to the time worked today, and not to past time.
 
 ;;;### (autoloads (w3m-buffer w3m-region w3m-find-file w3m-browse-url
 ;;;;;;  w3m w3m-gohome w3m-goto-url-new-session w3m-goto-url w3m-download
-;;;;;;  w3m-retrieve) "w3m" "../package.d/w3m-el/w3m.el" (18777 43742))
+;;;;;;  w3m-retrieve) "w3m" "../package.d/w3m-el/w3m.el" (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m.el
 
 (autoload 'w3m-retrieve "w3m" "\
@@ -3253,7 +3253,7 @@ See `w3m-region' for the optional arguments.
 ;;;***
 
 ;;;### (autoloads (w3m-antenna w3m-about-antenna) "w3m-antenna" "../package.d/w3m-el/w3m-antenna.el"
-;;;;;;  (18712 53399))
+;;;;;;  (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-antenna.el
 
 (autoload 'w3m-about-antenna "w3m-antenna" "\
@@ -3271,7 +3271,7 @@ Report changes of WEB sites, which is specified in `w3m-antenna-sites'.
 ;;;### (autoloads (w3m-setup-bookmark-menu w3m-about-bookmark w3m-bookmark-view-new-session
 ;;;;;;  w3m-bookmark-view w3m-bookmark-add-current-url-group w3m-bookmark-add-all-urls
 ;;;;;;  w3m-bookmark-add-current-url w3m-bookmark-add-this-url) "w3m-bookmark"
-;;;;;;  "../package.d/w3m-el/w3m-bookmark.el" (18712 53399))
+;;;;;;  "../package.d/w3m-el/w3m-bookmark.el" (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-bookmark.el
 
 (autoload 'w3m-bookmark-add-this-url "w3m-bookmark" "\
@@ -3319,7 +3319,7 @@ Setup w3m bookmark items in menubar.
 
 ;;;### (autoloads (w3m-about-cookie w3m-cookie w3m-cookie-get w3m-cookie-set
 ;;;;;;  w3m-cookie-shutdown) "w3m-cookie" "../package.d/w3m-el/w3m-cookie.el"
-;;;;;;  (18537 33443))
+;;;;;;  (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-cookie.el
 
 (autoload 'w3m-cookie-shutdown "w3m-cookie" "\
@@ -3351,7 +3351,7 @@ Make the html contents to display and to enable you to manage cookies.
 ;;;***
 
 ;;;### (autoloads (w3m-dtree w3m-about-dtree) "w3m-dtree" "../package.d/w3m-el/w3m-dtree.el"
-;;;;;;  (18197 61165))
+;;;;;;  (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-dtree.el
 
 (autoload 'w3m-about-dtree "w3m-dtree" "\
@@ -3368,7 +3368,7 @@ If called with 'prefix argument', display all directorys and files.
 ;;;***
 
 ;;;### (autoloads (w3m-fb-mode) "w3m-fb" "../package.d/w3m-el/w3m-fb.el"
-;;;;;;  (17681 2386))
+;;;;;;  (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-fb.el
 
 (defvar w3m-fb-mode nil "\
@@ -3389,7 +3389,7 @@ This allows frame-local lists of buffers (tabs).
 ;;;***
 
 ;;;### (autoloads (w3m-filter) "w3m-filter" "../package.d/w3m-el/w3m-filter.el"
-;;;;;;  (18560 15090))
+;;;;;;  (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-filter.el
 
 (autoload 'w3m-filter "w3m-filter" "\
@@ -3400,7 +3400,7 @@ Apply filtering rule of URL against a content in this buffer.
 ;;;***
 
 ;;;### (autoloads (w3m-fontify-forms) "w3m-form" "../package.d/w3m-el/w3m-form.el"
-;;;;;;  (18777 43743))
+;;;;;;  (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-form.el
 
 (autoload 'w3m-fontify-forms "w3m-form" "\
@@ -3411,7 +3411,7 @@ Process half-dumped data and fontify forms in this buffer.
 ;;;***
 
 ;;;### (autoloads (w3m-link-numbering-mode) "w3m-lnum" "../package.d/w3m-el/w3m-lnum.el"
-;;;;;;  (18197 61165))
+;;;;;;  (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-lnum.el
 
 (autoload 'w3m-link-numbering-mode "w3m-lnum" "\
@@ -3422,7 +3422,7 @@ Minor mode to enable operations using link numbers.
 ;;;***
 
 ;;;### (autoloads (w3m-namazu w3m-about-namazu) "w3m-namazu" "../package.d/w3m-el/w3m-namazu.el"
-;;;;;;  (18197 61165))
+;;;;;;  (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-namazu.el
 
 (autoload 'w3m-about-namazu "w3m-namazu" "\
@@ -3438,7 +3438,7 @@ Search indexed files with Namazu.
 ;;;***
 
 ;;;### (autoloads (w3m-perldoc w3m-about-perldoc) "w3m-perldoc" "../package.d/w3m-el/w3m-perldoc.el"
-;;;;;;  (18197 61165))
+;;;;;;  (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-perldoc.el
 
 (autoload 'w3m-about-perldoc "w3m-perldoc" "\
@@ -3455,7 +3455,7 @@ View Perl documents.
 
 ;;;### (autoloads (w3m-search-uri-replace w3m-search-new-session
 ;;;;;;  w3m-search) "w3m-search" "../package.d/w3m-el/w3m-search.el"
-;;;;;;  (18537 33441))
+;;;;;;  (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-search.el
 
 (autoload 'w3m-search "w3m-search" "\
@@ -3481,8 +3481,8 @@ Generate query string for ENGINE from URI matched by last search.
 ;;;***
 
 ;;;### (autoloads (w3m-setup-session-menu w3m-session-select w3m-session-save)
-;;;;;;  "w3m-session" "../package.d/w3m-el/w3m-session.el" (18777
-;;;;;;  43743))
+;;;;;;  "w3m-session" "../package.d/w3m-el/w3m-session.el" (18804
+;;;;;;  46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-session.el
 
 (autoload 'w3m-session-save "w3m-session" "\
@@ -3503,7 +3503,7 @@ Setup w3m session items in menubar.
 ;;;***
 
 ;;;### (autoloads (w3m-replace-symbol) "w3m-symbol" "../package.d/w3m-el/w3m-symbol.el"
-;;;;;;  (18250 38291))
+;;;;;;  (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-symbol.el
 
 (autoload 'w3m-replace-symbol "w3m-symbol" "\
@@ -3514,7 +3514,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (w3m-about-weather w3m-weather) "w3m-weather" "../package.d/w3m-el/w3m-weather.el"
-;;;;;;  (18197 61165))
+;;;;;;  (18804 46495))
 ;;; Generated autoloads from ../package.d/w3m-el/w3m-weather.el
 
 (autoload 'w3m-weather "w3m-weather" "\
@@ -3529,278 +3529,25 @@ Not documented
 
 ;;;***
 
-;;;### (autoloads nil nil ("../../../../elisp/package.d/bbdb/bits/bbdb-anniv.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-edit.el" "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-ccmail.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-eudora.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-export.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-hp200lx.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-passwd.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-ph.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-ldif.el" "../../../../elisp/package.d/bbdb/bits/bbdb-mail-folders.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-obsolete.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-pgp.el" "../../../../elisp/package.d/bbdb/bits/bbdb-signature.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-sort-mailrc.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-to-outlook.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-com.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-ftp.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-gnus.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-gui.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-hooks.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-merge.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-mhe.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-migrate.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-print.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-reportmail.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-rmail.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-sc.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-snarf.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-srv.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-vm.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-w3.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-whois.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-xemacs.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb.el" "../../../../elisp/package.d/bbdb/loadpath.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/misc/bbdb-unmigrate-stuff.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/testing/bbdb-test.el" "../../../../elisp/package.d/bbdb/testing/run-tests.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/texinfo/infohack.el" "../../../../elisp/package.d/bbdb/utils/bbdb-213-310.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/utils/bbdb-415-510.el"
-;;;;;;  "../../../../elisp/package.d/bbdb/utils/bbdb-to-netscape.el"
-;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-rectangle.el"
-;;;;;;  "../../../../elisp/package.d/dwa-util.el" "../../../../elisp/package.d/egg/egg-grep.el"
-;;;;;;  "../../../../elisp/package.d/egg/egg.el" "../../../../elisp/package.d/git-emacs/git-blame.el"
-;;;;;;  "../../../../elisp/package.d/git-emacs/git-emacs.el" "../../../../elisp/package.d/git-emacs/git-modeline.el"
-;;;;;;  "../../../../elisp/package.d/initsplit.el" "../../../../elisp/package.d/magit/50magit.el"
-;;;;;;  "../../../../elisp/package.d/magit/magit.el" "../../../../elisp/package.d/mailcrypt/FSF-timer.el"
-;;;;;;  "../../../../elisp/package.d/mailcrypt/expect.el" "../../../../elisp/package.d/mailcrypt/mailcrypt.el"
-;;;;;;  "../../../../elisp/package.d/mailcrypt/mc-gpg.el" "../../../../elisp/package.d/mailcrypt/mc-pgp.el"
-;;;;;;  "../../../../elisp/package.d/mailcrypt/mc-pgp5.el" "../../../../elisp/package.d/mailcrypt/mc-remail.el"
-;;;;;;  "../../../../elisp/package.d/mailcrypt/mc-setversion.el"
-;;;;;;  "../../../../elisp/package.d/mailcrypt/mc-toplev.el" "../../../../elisp/package.d/mailcrypt/tests/remailer/test-remailer.el"
-;;;;;;  "../../../../elisp/package.d/mailcrypt/tests/remailer/test-remailer2.el"
-;;;;;;  "../../../../elisp/package.d/mailcrypt/tests/test-gpg.el"
-;;;;;;  "../../../../elisp/package.d/maxframe.el" "../../../../elisp/package.d/muse-el/contrib/cgi.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/contrib/htmlize-hack.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/contrib/httpd.el" "../../../../elisp/package.d/muse-el/examples/ikiwiki/muse-init-project.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/examples/ikiwiki/muse-init-simple.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/examples/johnw/muse-init.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/examples/mwolson/muse-init.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-cite.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-mathml.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-message.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-protocol-iw.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-split.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-backlink.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-blosxom.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-book.el" "../../../../elisp/package.d/muse-el/lisp/muse-colors.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-context.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-docbook.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-groff.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-html.el" "../../../../elisp/package.d/muse-el/lisp/muse-http.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-ikiwiki.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-import-docbook.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-import-latex.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-import-xml.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-journal.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-latex.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-latex2png.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-mode.el" "../../../../elisp/package.d/muse-el/lisp/muse-poem.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-project.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-protocols.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-publish.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-regexps.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-texinfo.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-wiki.el" "../../../../elisp/package.d/muse-el/lisp/muse-xml-common.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-xml.el" "../../../../elisp/package.d/muse-el/lisp/muse.el"
-;;;;;;  "../../../../elisp/package.d/muse-el/scripts/muse-build.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/contrib/schedule.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/contrib/timeclock.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-accomplishments.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-appt.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-authz.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-bbdb.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-bibtex.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-bookmark.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-calendar.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-cyclic.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-deadline.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-diary.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-erc.el" "../../../../elisp/package.d/planner-el/planner-experimental.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-export-diary.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-gnats.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-gnus.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-ical.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-id.el" "../../../../elisp/package.d/planner-el/planner-ledger.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-lisp.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-log-edit.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-mhe.el" "../../../../elisp/package.d/planner-el/planner-multi.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-notes-index.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-psvn.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-publish.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-rank.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-rdf.el" "../../../../elisp/package.d/planner-el/planner-registry.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-report.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-rmail.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-rss.el" "../../../../elisp/package.d/planner-el/planner-schedule.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-tasks-overview.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-timeclock-summary-proj.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-timeclock-summary.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-timeclock.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-trunk.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-unix-mail.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-vm.el" "../../../../elisp/package.d/planner-el/planner-w3m.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-wl.el" "../../../../elisp/package.d/planner-el/planner-xtla.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner-zoom.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/planner.el" "../../../../elisp/package.d/planner-el/scripts/planner-build.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/test/planner-cyclic-test.el"
-;;;;;;  "../../../../elisp/package.d/planner-el/test/planner-test.el"
-;;;;;;  "../../../../elisp/package.d/psvn.el" "../../../../elisp/package.d/remember-el/read-file-name.el"
-;;;;;;  "../../../../elisp/package.d/remember-el/remember-autoloads.el"
-;;;;;;  "../../../../elisp/package.d/remember-el/remember-bbdb.el"
-;;;;;;  "../../../../elisp/package.d/remember-el/remember-bibl.el"
-;;;;;;  "../../../../elisp/package.d/remember-el/remember-blosxom.el"
-;;;;;;  "../../../../elisp/package.d/remember-el/remember-emacs-wiki-journal.el"
-;;;;;;  "../../../../elisp/package.d/remember-el/remember-experimental.el"
-;;;;;;  "../../../../elisp/package.d/remember-el/remember-planner.el"
-;;;;;;  "../../../../elisp/package.d/remember-el/remember.el" "../../../../elisp/package.d/remember-el/scripts/remember-build.el"
-;;;;;;  "../../../../elisp/package.d/rst.el" "../../../../elisp/package.d/w3m-el/attic/addpath.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/attic/rfc2368.el" "../../../../elisp/package.d/w3m-el/doc/ptexinfmt.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/mew-w3m.el" "../../../../elisp/package.d/w3m-el/mime-w3m.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/octet.el" "../../../../elisp/package.d/w3m-el/shimbun/mew-shimbun.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/nnshimbun.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-2ch.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-airs.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-aljazeera.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-arch-bluegate.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-asahi-html.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-asahi-mytown.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-asahi.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-atmarkit.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-atom-hash.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-atom.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-bbc.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-bbdb-ml.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-cgi-board.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-cnet-jp.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-cnet.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-cnn-jp.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-coldsync.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-debian-jp.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-debian.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-debugmagazin-de.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-dennou.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-digiko.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-elips.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-emacs-w3m.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-emacswiki.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-engadget-ja.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-excite.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-exconn.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-f1fan.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-fau.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-ffii.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-fml.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-gendai-net.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-geocrawler.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-glimpse.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-gnome.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-haiku-os.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-hash.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-heise.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-hns.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-ibm-dev.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-impress.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-infoshop.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-itmedia.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-japantimes.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-javaconf.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-jpilot.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-jpo.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-kantei.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-kde.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-laut-de.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-linuxce-jp.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-lotusex.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-lump.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-m17n.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-macosx-jp.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mailarc.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mailman.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mainichi.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-makanai.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-marc-aims.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-meadow.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mew.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-mhonarc.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mozilla-jp.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-msdn.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-msports-nifty.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-multi.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-n24-de.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-namazu.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-netbsd.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-nikkansports.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-nikkei.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-nytimes.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-opentechpress-jp.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-orca.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-palmfan.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-pcweb-column.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-perlentaucher-de.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-pilot-link.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-pilot-mailsync.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-plucker.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-pocketgames.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rakuten.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-redhat.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rediff.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rss-blogs.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rss-hash.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rss.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-ruby.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-sankei.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-savannah.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-scipy.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-security-memo.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-slashdot-jp.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-slashdot.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-sml.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-sourceforge-jp.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-spiegel.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-sponichi.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-squeak-dev.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-squeak-ja.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-sueddeutsche-de.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-tcup.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-tdiary-ml.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-tdiary.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-tech-on.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-texfaq.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-text.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-the-onion.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-the-register.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-tigris.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-toshiba.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-vinelinux.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-w3m-dev.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-welt-de.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-wiki.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-wikimedia.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-wincefan.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-wired-jp.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-x51.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-xemacs.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yahoo-auctions.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yahoo-sports.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yahoo.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yomiuri-html.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yomiuri.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-zdnet-jp.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-zeit-de.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/shimbun.el" "../../../../elisp/package.d/w3m-el/w3m-antenna.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-bookmark.el" "../../../../elisp/package.d/w3m-el/w3m-bug.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-ccl.el" "../../../../elisp/package.d/w3m-el/w3m-cookie.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-dtree.el" "../../../../elisp/package.d/w3m-el/w3m-ems.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-favicon.el" "../../../../elisp/package.d/w3m-el/w3m-fb.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-filter.el" "../../../../elisp/package.d/w3m-el/w3m-form.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-hist.el" "../../../../elisp/package.d/w3m-el/w3m-image.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-lnum.el" "../../../../elisp/package.d/w3m-el/w3m-load.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-mail.el" "../../../../elisp/package.d/w3m-el/w3m-namazu.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-perldoc.el" "../../../../elisp/package.d/w3m-el/w3m-proc.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-rss.el" "../../../../elisp/package.d/w3m-el/w3m-search.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-session.el" "../../../../elisp/package.d/w3m-el/w3m-symbol.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-tabmenu.el" "../../../../elisp/package.d/w3m-el/w3m-ucs.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-util.el" "../../../../elisp/package.d/w3m-el/w3m-weather.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-xmas.el" "../../../../elisp/package.d/w3m-el/w3m.el"
-;;;;;;  "../../../../elisp/package.d/w3m-el/w3mhack.el" "../package.d/bbdb/bits/bbdb-filters/bbdb-ccmail.el"
+;;;### (autoloads nil nil ("../package.d/bbdb/bits/bbdb-filters/bbdb-ccmail.el"
 ;;;;;;  "../package.d/bbdb/bits/bbdb-filters/bbdb-eudora.el" "../package.d/bbdb/bits/bbdb-filters/bbdb-export.el"
 ;;;;;;  "../package.d/bbdb/bits/bbdb-filters/bbdb-hp200lx.el" "../package.d/bbdb/bits/bbdb-filters/bbdb-passwd.el"
 ;;;;;;  "../package.d/bbdb/bits/bbdb-filters/bbdb-ph.el" "../package.d/bbdb/bits/bbdb-ldif.el"
 ;;;;;;  "../package.d/bbdb/bits/bbdb-mail-folders.el" "../package.d/bbdb/bits/bbdb-signature.el"
 ;;;;;;  "../package.d/bbdb/bits/bbdb-sort-mailrc.el" "../package.d/bbdb/bits/bbdb-to-outlook.el"
-;;;;;;  "../package.d/bbdb/loadpath.el" "../package.d/bbdb/misc/bbdb-unmigrate-stuff.el"
-;;;;;;  "../package.d/bbdb/testing/run-tests.el" "../package.d/bbdb/texinfo/infohack.el"
-;;;;;;  "../package.d/bbdb/utils/bbdb-213-310.el" "../package.d/bbdb/utils/bbdb-415-510.el"
-;;;;;;  "../package.d/bbdb/utils/bbdb-to-netscape.el" "../package.d/dwa-c++.el"
-;;;;;;  "../package.d/dwa-rectangle.el" "../package.d/dwa-util.el"
-;;;;;;  "../package.d/git-emacs/git-blame.el" "../package.d/git-emacs/git-emacs.el"
-;;;;;;  "../package.d/git-emacs/git-modeline.el" "../package.d/initsplit.el"
-;;;;;;  "../package.d/magit/50magit.el" "../package.d/magit/magit.el"
-;;;;;;  "../package.d/mailcrypt/mailcrypt.el" "../package.d/mailcrypt/mc-gpg.el"
-;;;;;;  "../package.d/mailcrypt/mc-pgp.el" "../package.d/mailcrypt/mc-pgp5.el"
-;;;;;;  "../package.d/mailcrypt/mc-remail.el" "../package.d/mailcrypt/mc-setversion.el"
-;;;;;;  "../package.d/mailcrypt/mc-toplev.el" "../package.d/mailcrypt/tests/remailer/test-remailer.el"
+;;;;;;  "../package.d/bbdb/misc/bbdb-unmigrate-stuff.el" "../package.d/bbdb/testing/run-tests.el"
+;;;;;;  "../package.d/bbdb/texinfo/infohack.el" "../package.d/bbdb/utils/bbdb-213-310.el"
+;;;;;;  "../package.d/bbdb/utils/bbdb-415-510.el" "../package.d/bbdb/utils/bbdb-to-netscape.el"
+;;;;;;  "../package.d/dwa-c++.el" "../package.d/dwa-rectangle.el"
+;;;;;;  "../package.d/dwa-util.el" "../package.d/git-contrib/git.el"
+;;;;;;  "../package.d/git-contrib/vc-git.el" "../package.d/git-emacs/git-blame.el"
+;;;;;;  "../package.d/git-emacs/git-emacs.el" "../package.d/git-emacs/git-modeline.el"
+;;;;;;  "../package.d/initsplit.el" "../package.d/magit/50magit.el"
+;;;;;;  "../package.d/magit/magit.el" "../package.d/mailcrypt/mailcrypt.el"
+;;;;;;  "../package.d/mailcrypt/mc-gpg.el" "../package.d/mailcrypt/mc-pgp.el"
+;;;;;;  "../package.d/mailcrypt/mc-pgp5.el" "../package.d/mailcrypt/mc-remail.el"
+;;;;;;  "../package.d/mailcrypt/mc-setversion.el" "../package.d/mailcrypt/mc-toplev.el"
+;;;;;;  "../package.d/mailcrypt/tests/remailer/test-remailer.el"
 ;;;;;;  "../package.d/mailcrypt/tests/remailer/test-remailer2.el"
 ;;;;;;  "../package.d/mailcrypt/tests/test-gpg.el" "../package.d/maxframe.el"
 ;;;;;;  "../package.d/muse-el/contrib/cgi.el" "../package.d/muse-el/contrib/htmlize-hack.el"
@@ -3823,83 +3570,83 @@ Not documented
 ;;;;;;  "../package.d/planner-el/planner-ical.el" "../package.d/planner-el/planner-publish.el"
 ;;;;;;  "../package.d/planner-el/planner-zoom.el" "../package.d/planner-el/scripts/planner-build.el"
 ;;;;;;  "../package.d/planner-el/test/planner-cyclic-test.el" "../package.d/planner-el/test/planner-test.el"
-;;;;;;  "../package.d/remember-el/read-file-name.el" "../package.d/remember-el/remember-autoloads.el"
-;;;;;;  "../package.d/remember-el/remember-experimental.el" "../package.d/remember-el/scripts/remember-build.el"
-;;;;;;  "../package.d/w3m-el/attic/addpath.el" "../package.d/w3m-el/attic/rfc2368.el"
-;;;;;;  "../package.d/w3m-el/doc/ptexinfmt.el" "../package.d/w3m-el/mew-w3m.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-2ch.el" "../package.d/w3m-el/shimbun/sb-airs.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-aljazeera.el" "../package.d/w3m-el/shimbun/sb-arch-bluegate.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-asahi-html.el" "../package.d/w3m-el/shimbun/sb-asahi-mytown.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-asahi.el" "../package.d/w3m-el/shimbun/sb-atmarkit.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-atom-hash.el" "../package.d/w3m-el/shimbun/sb-atom.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-bbc.el" "../package.d/w3m-el/shimbun/sb-bbdb-ml.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-cgi-board.el" "../package.d/w3m-el/shimbun/sb-cnet-jp.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-cnet.el" "../package.d/w3m-el/shimbun/sb-cnn-jp.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-coldsync.el" "../package.d/w3m-el/shimbun/sb-debian-jp.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-debian.el" "../package.d/w3m-el/shimbun/sb-debugmagazin-de.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-dennou.el" "../package.d/w3m-el/shimbun/sb-digiko.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-elips.el" "../package.d/w3m-el/shimbun/sb-emacs-w3m.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-emacswiki.el" "../package.d/w3m-el/shimbun/sb-engadget-ja.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-excite.el" "../package.d/w3m-el/shimbun/sb-exconn.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-f1fan.el" "../package.d/w3m-el/shimbun/sb-fau.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-ffii.el" "../package.d/w3m-el/shimbun/sb-fml.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-gendai-net.el" "../package.d/w3m-el/shimbun/sb-geocrawler.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-glimpse.el" "../package.d/w3m-el/shimbun/sb-gnome.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-haiku-os.el" "../package.d/w3m-el/shimbun/sb-hash.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-heise.el" "../package.d/w3m-el/shimbun/sb-hns.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-ibm-dev.el" "../package.d/w3m-el/shimbun/sb-impress.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-infoshop.el" "../package.d/w3m-el/shimbun/sb-itmedia.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-japantimes.el" "../package.d/w3m-el/shimbun/sb-javaconf.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-jpilot.el" "../package.d/w3m-el/shimbun/sb-jpo.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-kantei.el" "../package.d/w3m-el/shimbun/sb-kde.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-laut-de.el" "../package.d/w3m-el/shimbun/sb-linuxce-jp.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-lotusex.el" "../package.d/w3m-el/shimbun/sb-lump.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-m17n.el" "../package.d/w3m-el/shimbun/sb-macosx-jp.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-mailarc.el" "../package.d/w3m-el/shimbun/sb-mailman.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-mainichi.el" "../package.d/w3m-el/shimbun/sb-makanai.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-marc-aims.el" "../package.d/w3m-el/shimbun/sb-meadow.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-mew.el" "../package.d/w3m-el/shimbun/sb-mhonarc.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-mozilla-jp.el" "../package.d/w3m-el/shimbun/sb-msdn.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-msports-nifty.el" "../package.d/w3m-el/shimbun/sb-multi.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-n24-de.el" "../package.d/w3m-el/shimbun/sb-namazu.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-netbsd.el" "../package.d/w3m-el/shimbun/sb-nikkansports.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-nikkei.el" "../package.d/w3m-el/shimbun/sb-nytimes.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-opentechpress-jp.el" "../package.d/w3m-el/shimbun/sb-orca.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-palmfan.el" "../package.d/w3m-el/shimbun/sb-pcweb-column.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-perlentaucher-de.el" "../package.d/w3m-el/shimbun/sb-pilot-link.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-pilot-mailsync.el" "../package.d/w3m-el/shimbun/sb-plucker.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-pocketgames.el" "../package.d/w3m-el/shimbun/sb-rakuten.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-redhat.el" "../package.d/w3m-el/shimbun/sb-rediff.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-rss-blogs.el" "../package.d/w3m-el/shimbun/sb-rss-hash.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-rss.el" "../package.d/w3m-el/shimbun/sb-ruby.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-sankei.el" "../package.d/w3m-el/shimbun/sb-savannah.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-scipy.el" "../package.d/w3m-el/shimbun/sb-security-memo.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-slashdot-jp.el" "../package.d/w3m-el/shimbun/sb-slashdot.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-sml.el" "../package.d/w3m-el/shimbun/sb-sourceforge-jp.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-spiegel.el" "../package.d/w3m-el/shimbun/sb-sponichi.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-squeak-dev.el" "../package.d/w3m-el/shimbun/sb-squeak-ja.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-sueddeutsche-de.el" "../package.d/w3m-el/shimbun/sb-tcup.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-tdiary-ml.el" "../package.d/w3m-el/shimbun/sb-tdiary.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-tech-on.el" "../package.d/w3m-el/shimbun/sb-texfaq.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-text.el" "../package.d/w3m-el/shimbun/sb-the-onion.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-the-register.el" "../package.d/w3m-el/shimbun/sb-tigris.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-toshiba.el" "../package.d/w3m-el/shimbun/sb-vinelinux.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-w3m-dev.el" "../package.d/w3m-el/shimbun/sb-welt-de.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-wiki.el" "../package.d/w3m-el/shimbun/sb-wikimedia.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-wincefan.el" "../package.d/w3m-el/shimbun/sb-wired-jp.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-x51.el" "../package.d/w3m-el/shimbun/sb-xemacs.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-yahoo-auctions.el" "../package.d/w3m-el/shimbun/sb-yahoo-sports.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-yahoo.el" "../package.d/w3m-el/shimbun/sb-yomiuri-html.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-yomiuri.el" "../package.d/w3m-el/shimbun/sb-zdnet-jp.el"
-;;;;;;  "../package.d/w3m-el/shimbun/sb-zeit-de.el" "../package.d/w3m-el/shimbun/shimbun.el"
-;;;;;;  "../package.d/w3m-el/w3m-bug.el" "../package.d/w3m-el/w3m-ccl.el"
-;;;;;;  "../package.d/w3m-el/w3m-ems.el" "../package.d/w3m-el/w3m-favicon.el"
-;;;;;;  "../package.d/w3m-el/w3m-hist.el" "../package.d/w3m-el/w3m-image.el"
-;;;;;;  "../package.d/w3m-el/w3m-load.el" "../package.d/w3m-el/w3m-mail.el"
-;;;;;;  "../package.d/w3m-el/w3m-proc.el" "../package.d/w3m-el/w3m-rss.el"
-;;;;;;  "../package.d/w3m-el/w3m-tabmenu.el" "../package.d/w3m-el/w3m-ucs.el"
-;;;;;;  "../package.d/w3m-el/w3m-util.el" "../package.d/w3m-el/w3m-xmas.el"
-;;;;;;  "../package.d/w3m-el/w3mhack.el") (18807 19615 130892))
+;;;;;;  "../package.d/remember-el/read-file-name.el" "../package.d/remember-el/remember-experimental.el"
+;;;;;;  "../package.d/remember-el/scripts/remember-build.el" "../package.d/w3m-el/attic/addpath.el"
+;;;;;;  "../package.d/w3m-el/attic/rfc2368.el" "../package.d/w3m-el/doc/ptexinfmt.el"
+;;;;;;  "../package.d/w3m-el/mew-w3m.el" "../package.d/w3m-el/shimbun/sb-2ch.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-airs.el" "../package.d/w3m-el/shimbun/sb-aljazeera.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-arch-bluegate.el" "../package.d/w3m-el/shimbun/sb-asahi-html.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-asahi-mytown.el" "../package.d/w3m-el/shimbun/sb-asahi.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-atmarkit.el" "../package.d/w3m-el/shimbun/sb-atom-hash.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-atom.el" "../package.d/w3m-el/shimbun/sb-bbc.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-bbdb-ml.el" "../package.d/w3m-el/shimbun/sb-cgi-board.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-cnet-jp.el" "../package.d/w3m-el/shimbun/sb-cnet.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-cnn-jp.el" "../package.d/w3m-el/shimbun/sb-coldsync.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-debian-jp.el" "../package.d/w3m-el/shimbun/sb-debian.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-debugmagazin-de.el" "../package.d/w3m-el/shimbun/sb-dennou.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-digiko.el" "../package.d/w3m-el/shimbun/sb-elips.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-emacs-w3m.el" "../package.d/w3m-el/shimbun/sb-emacswiki.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-engadget-ja.el" "../package.d/w3m-el/shimbun/sb-excite.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-exconn.el" "../package.d/w3m-el/shimbun/sb-f1fan.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-fau.el" "../package.d/w3m-el/shimbun/sb-ffii.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-fml.el" "../package.d/w3m-el/shimbun/sb-gendai-net.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-geocrawler.el" "../package.d/w3m-el/shimbun/sb-glimpse.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-gnome.el" "../package.d/w3m-el/shimbun/sb-haiku-os.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-hash.el" "../package.d/w3m-el/shimbun/sb-heise.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-hns.el" "../package.d/w3m-el/shimbun/sb-ibm-dev.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-impress.el" "../package.d/w3m-el/shimbun/sb-infoshop.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-itmedia.el" "../package.d/w3m-el/shimbun/sb-japantimes.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-javaconf.el" "../package.d/w3m-el/shimbun/sb-jpilot.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-jpo.el" "../package.d/w3m-el/shimbun/sb-kantei.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-kde.el" "../package.d/w3m-el/shimbun/sb-laut-de.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-linuxce-jp.el" "../package.d/w3m-el/shimbun/sb-lotusex.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-lump.el" "../package.d/w3m-el/shimbun/sb-m17n.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-macosx-jp.el" "../package.d/w3m-el/shimbun/sb-mailarc.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-mailman.el" "../package.d/w3m-el/shimbun/sb-mainichi.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-makanai.el" "../package.d/w3m-el/shimbun/sb-marc-aims.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-meadow.el" "../package.d/w3m-el/shimbun/sb-mew.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-mhonarc.el" "../package.d/w3m-el/shimbun/sb-mozilla-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-msdn.el" "../package.d/w3m-el/shimbun/sb-msports-nifty.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-multi.el" "../package.d/w3m-el/shimbun/sb-n24-de.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-namazu.el" "../package.d/w3m-el/shimbun/sb-netbsd.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-nikkansports.el" "../package.d/w3m-el/shimbun/sb-nikkei.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-nytimes.el" "../package.d/w3m-el/shimbun/sb-opentechpress-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-orca.el" "../package.d/w3m-el/shimbun/sb-palmfan.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-pcweb-column.el" "../package.d/w3m-el/shimbun/sb-perlentaucher-de.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-pilot-link.el" "../package.d/w3m-el/shimbun/sb-pilot-mailsync.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-plucker.el" "../package.d/w3m-el/shimbun/sb-pocketgames.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-rakuten.el" "../package.d/w3m-el/shimbun/sb-redhat.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-rediff.el" "../package.d/w3m-el/shimbun/sb-rss-blogs.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-rss-hash.el" "../package.d/w3m-el/shimbun/sb-rss.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-ruby.el" "../package.d/w3m-el/shimbun/sb-sankei.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-savannah.el" "../package.d/w3m-el/shimbun/sb-scipy.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-security-memo.el" "../package.d/w3m-el/shimbun/sb-slashdot-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-slashdot.el" "../package.d/w3m-el/shimbun/sb-sml.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-sourceforge-jp.el" "../package.d/w3m-el/shimbun/sb-spiegel.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-sponichi.el" "../package.d/w3m-el/shimbun/sb-squeak-dev.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-squeak-ja.el" "../package.d/w3m-el/shimbun/sb-sueddeutsche-de.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-tcup.el" "../package.d/w3m-el/shimbun/sb-tdiary-ml.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-tdiary.el" "../package.d/w3m-el/shimbun/sb-tech-on.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-texfaq.el" "../package.d/w3m-el/shimbun/sb-text.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-the-onion.el" "../package.d/w3m-el/shimbun/sb-the-register.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-tigris.el" "../package.d/w3m-el/shimbun/sb-toshiba.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-vinelinux.el" "../package.d/w3m-el/shimbun/sb-w3m-dev.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-welt-de.el" "../package.d/w3m-el/shimbun/sb-wiki.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-wikimedia.el" "../package.d/w3m-el/shimbun/sb-wincefan.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-wired-jp.el" "../package.d/w3m-el/shimbun/sb-x51.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-xemacs.el" "../package.d/w3m-el/shimbun/sb-yahoo-auctions.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-yahoo-sports.el" "../package.d/w3m-el/shimbun/sb-yahoo.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-yomiuri-html.el" "../package.d/w3m-el/shimbun/sb-yomiuri.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-zdnet-jp.el" "../package.d/w3m-el/shimbun/sb-zeit-de.el"
+;;;;;;  "../package.d/w3m-el/shimbun/shimbun.el" "../package.d/w3m-el/w3m-bug.el"
+;;;;;;  "../package.d/w3m-el/w3m-ccl.el" "../package.d/w3m-el/w3m-ems.el"
+;;;;;;  "../package.d/w3m-el/w3m-favicon.el" "../package.d/w3m-el/w3m-hist.el"
+;;;;;;  "../package.d/w3m-el/w3m-image.el" "../package.d/w3m-el/w3m-load.el"
+;;;;;;  "../package.d/w3m-el/w3m-mail.el" "../package.d/w3m-el/w3m-proc.el"
+;;;;;;  "../package.d/w3m-el/w3m-rss.el" "../package.d/w3m-el/w3m-tabmenu.el"
+;;;;;;  "../package.d/w3m-el/w3m-ucs.el" "../package.d/w3m-el/w3m-util.el"
+;;;;;;  "../package.d/w3m-el/w3m-xmas.el" "../package.d/w3m-el/w3mhack.el")
+;;;;;;  (18816 32358 188941))
 
 ;;;***
 
