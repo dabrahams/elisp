@@ -1,5 +1,5 @@
-/elisp/package.d/mailcrypt/dir.old
-/elisp/package.d/w3m-el/doc/dir.old
+*.elc
+dir.old
 /elisp/package.d/bbdb/Makefile
 /elisp/package.d/bbdb/autom4te.cache/output.0
 /elisp/package.d/bbdb/autom4te.cache/requests

@@ -66,6 +66,10 @@ Show diffs side-by-side")
 Run Ediff all in one frame.  The default when there's a window manager is for
 emacs to pop up a separate frame for the `*Ediff Control Panel*' buffer")
  '(erc-modules (quote (autoaway autojoin button completion fill irccontrols list log match menu move-to-prompt netsplit networks noncommands readonly ring smiley sound stamp track)))
+ '(explicit-bash-args (quote ("--noediting" "-i" "-l")) nil nil "
+added -l so it would take things out of my .bash_profile, like (on boostpro.com) the prompt pattern.  Otherwise I get this abomination: ///bd5882fff11dd5c2900e1ce95b895e66")
+ '(explicit-shell-file-name "bash" nil nil "
+Giving an explicit path like /bin/bash (the default from my Linux boxen) fails on FreeBSD where the file doesn't live there.")
  '(gdb-max-frames 100 nil nil "
 Increased the number of stack frames displayed from 40")
  '(global-auto-revert-mode t nil nil "
@@ -85,7 +89,7 @@ Removed \"}\" from the allowable characters because I often type that when writi
 Always Bcc: myself")
  '(message-dont-reply-to-names (quote ("dave@boost-consulting\\.com" "dave@boostpro\\.com" "david\\.abrahams@rcn\\.com" "boost\\.consulting@gmail\\.com" "dave\\.boostpro@gmail\\.com" "Undisclosed-recipients[:;]*")))
  '(message-forward-ignored-headers (quote ("^Content-Transfer-Encoding:" "^X-Gnus" "^X-" "^Received:" "^User-Agent:" "^References:")))
- '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) t nil "
+ '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) nil nil "
 Automatically wrap text during email composition")
  '(message-send-mail-function (quote message-smtpmail-send-it) nil nil "
 If we ever go back to using a local exim MTA, we'll set this back to message-send-mail-with-sendmail")
@@ -115,7 +119,12 @@ Always run a server so we can open files in existing emacs frames.")
  '(tool-bar-mode nil nil nil "
 Tool bars take up valuable screen real-estate for icons whose meaning I forget")
  '(tramp-backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
- '(tramp-encoding-shell "bash")
+ '(tramp-default-proxies-alist (quote (("\\(.*\\.\\)?boostpro.com\\'" "\\`root\\'" "/ssh:%h:"))) nil nil "
+This allows us to use the /sudo: method on boostpro.com, which doesn't allow
+direct ssh as root.  Recall that \\` and \\' are special bos and eos regexp matchers.")
+ '(tramp-encoding-shell "bash" nil nil "
+Needed in order to enable tilde expansion, etc., in remote shells")
+ '(tramp-remote-path (quote (tramp-default-remote-path "/usr/sbin" "/usr/local/sbin" "/usr/local/bin" "/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin")))
  '(truncate-partial-width-windows nil)
  '(user-mail-address "dave@boostpro.com")
  '(vc-diff-switches "-du")
