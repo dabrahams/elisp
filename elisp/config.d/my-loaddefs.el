@@ -31,6 +31,25 @@ Relative times may be specified as a series of numbers followed by units:
 
 ;;;***
 
+;;;### (autoloads (any-ini-mode) "any-ini-mode" "../../../../elisp/package.d/any-ini-mode.el"
+;;;;;;  (18811 41158))
+;;; Generated autoloads from ../../../../elisp/package.d/any-ini-mode.el
+
+(autoload 'any-ini-mode "any-ini-mode" "\
+*Major mode for editing config files with syntax highlighting based on a 'source of truth'.
+
+You may set up a default style for all <any>.ini mode buffers, or, more usefully,
+you may set up several styles that will be automatically applied based on the name
+of the file being visited.
+
+See `any-ini-set-my-style' and `any-ini-styles-alist' for more details.
+
+Turning on <any>.ini mode runs the normal hook `any-ini-mode-hook'.
+
+\(fn)" t nil)
+
+;;;***
+
 ;;;### (autoloads (bbdb-insinuate-message bbdb-initialize bbdb-multiple-buffers
 ;;;;;;  bbdb-submit-bug-report) "bbdb" "../package.d/bbdb/lisp/bbdb.el"
 ;;;;;;  (18804 46494))
@@ -1270,6 +1289,155 @@ They are stored in `sound-alist' as touchtone0 to touchtone11.
 
 ;;;***
 
+;;;### (autoloads (bibl-visit-grab) "bibl-grab" "../../../../elisp/package.d/bibl-mode-1.27/bibl-grab.el"
+;;;;;;  (12231 17927))
+;;; Generated autoloads from ../../../../elisp/package.d/bibl-mode-1.27/bibl-grab.el
+
+(autoload 'bibl-visit-grab "bibl-grab" "\
+Grab from the current buffer, visit bibliography file, create a record.
+If called with a prefix argument, search for record entries from
+point, rather than from the top of the current buffer.
+
+See the documentation for `bibl-visit-bibliography' for more details.
+
+\(fn &optional FROM-HERE)" t nil)
+
+;;;***
+
+;;;### (autoloads (bibl-names-mode bibl-names-find-record bibl-visit-list-names
+;;;;;;  bibl-list-names bibl-visit-list-keywords bibl-list-keywords
+;;;;;;  bibl-sort-buffer) "bibl-lists" "../../../../elisp/package.d/bibl-mode-1.27/bibl-lists.el"
+;;;;;;  (12244 36827))
+;;; Generated autoloads from ../../../../elisp/package.d/bibl-mode-1.27/bibl-lists.el
+
+(autoload 'bibl-sort-buffer "bibl-lists" "\
+Sort the contents of a bibliography mode buffer.
+
+If called with a prefix arg, sorts by keyword, otherwise by record
+name.
+
+Uses the value of case-fold-search to determine whether or not to
+ignore case while sorting.
+
+\(fn TYPE)" t nil)
+
+(autoload 'bibl-list-keywords "bibl-lists" "\
+Make a list of the keywords found in a bibliography buffer.
+Call with NO-POP set to something non-nil, or call interactively with
+a prefix argument, to work with less window shuffling.
+
+\(fn &optional NO-POP)" t nil)
+
+(autoload 'bibl-visit-list-keywords "bibl-lists" "\
+Visit a bibliography buffer and make a list of the keywords to be found.
+See the documentation for `bibl-list-keywords' and `bibl-visit-bibliography'.
+
+\(fn &optional NO-POP)" t nil)
+
+(autoload 'bibl-list-names "bibl-lists" "\
+Make a list of the names found in a bibliography buffer.
+Call with NO-POP set to something non-nil, or call interactively with
+a prefix argument, to do this without any window shuffling.
+
+\(fn &optional NO-POP)" t nil)
+
+(autoload 'bibl-visit-list-names "bibl-lists" "\
+Visit a bibliography buffer and make a list of the names to be found.
+See the documentation for `bibl-list-keywords' and `bibl-visit-bibliography'.
+
+\(fn &optional NO-POP)" t nil)
+
+(autoload 'bibl-names-find-record "bibl-lists" "\
+Try to find a record in the bibliography file.
+This operates on a name or keyword taken from a names buffer.  With a
+prefix argument, the search goes from the top.
+
+\(fn &optional FROM-TOP)" t nil)
+
+(autoload 'bibl-names-mode "bibl-lists" "\
+Major mode for tracking keyword and record names for bibliography files.
+Not all that major, but since it's illegal to do anything else while
+in here, I might as well make it so.
+
+Commands:
+\\{bibl-names-mode-map}
+
+Entry to this mode calls the value of `bibl-names-mode-hooks' if that
+value is non-nil.
+
+\(fn &optional TYPE OWNER)" t nil)
+
+;;;***
+
+;;;### (autoloads (bibl-mode bibl-visit-goto bibl-visit-create bibl-visit-bibliography)
+;;;;;;  "bibl-mode" "../../../../elisp/package.d/bibl-mode-1.27/bibl-mode.el"
+;;;;;;  (12245 4524))
+;;; Generated autoloads from ../../../../elisp/package.d/bibl-mode-1.27/bibl-mode.el
+
+(autoload 'bibl-visit-bibliography "bibl-mode" "\
+Visit a bibliography file.
+Uses the value of `bibl-file-name' as a default guess if run
+interactively.  If `bibl-prompt-on-visit' is t, asks the user to
+confirm the filename if called interactively.
+
+\(fn FILE)" t nil)
+
+(autoload 'bibl-visit-create "bibl-mode" "\
+Visit a bibliography file and create a new record.
+See the documentation for `bibl-visit-bibliography'.
+
+\(fn)" t nil)
+
+(autoload 'bibl-visit-goto "bibl-mode" "\
+Visit a bibliography file and go to some record.
+See the documentation for `bibl-visit-bibliography' and
+`bibl-goto-record'.
+
+\(fn)" t nil)
+
+(autoload 'bibl-mode "bibl-mode" "\
+Major mode for editing bibliography files.
+
+By default, we only handle one such buffer at a time (its name should
+be in bibl-file-name).  If you want to use more than one buffer in
+bibliography mode at once, set `bibl-use-any-buffer' to t.  Note that
+you will have to use bibliography mode commands from within
+bibliography mode buffers in that case; they won't work just anywhere
+any longer.
+
+Page delimiter definitions have been changed so that the page movement
+commands (\\[forward-page] and \\[backward-page]) hop between records.
+
+The mode-specific key bindings are as follows:
+
+\\{bibl-mode-prefix-map}
+To access the global key bindings, put a line such as the following in
+your `.emacs':
+  (global-set-key \"\\Cb\" 'bibl-global-map)
+Once bound to something in this way, the global key bindings go like
+this:
+
+\\{bibl-global-map}
+Entry to this mode causes `bibl-mode-hooks' to be run.
+
+\(fn)" t nil)
+
+(define-prefix-command 'bibl-global-map)
+
+(define-key bibl-global-map "c" 'bibl-visit-create)
+
+(define-key bibl-global-map "g" 'bibl-visit-grab)
+
+(define-key bibl-global-map "k" 'bibl-visit-list-keywords)
+
+(define-key bibl-global-map "n" 'bibl-visit-list-names)
+
+(define-key bibl-global-map "o" 'bibl-visit-goto)
+
+(define-key bibl-global-map "v" 'bibl-visit-bibliography)
+
+;;;***
+
 ;;;### (autoloads (egg-minor-mode-find-file-hook egg-minor-mode)
 ;;;;;;  "egg" "../package.d/egg/egg.el" (18805 59039))
 ;;; Generated autoloads from ../package.d/egg/egg.el
@@ -1344,9 +1512,9 @@ completion.
 
 ;;;***
 
-;;;### (autoloads (git-reblame git-blame-mode) "git-blame" "../package.d/git-contrib/git-blame.el"
-;;;;;;  (18805 59029))
-;;; Generated autoloads from ../package.d/git-contrib/git-blame.el
+;;;### (autoloads (git-reblame git-blame-mode) "git-blame" "../../../../elisp/package.d/git-emacs/git-blame.el"
+;;;;;;  (18785 2801))
+;;; Generated autoloads from ../../../../elisp/package.d/git-emacs/git-blame.el
 
 (autoload 'git-blame-mode "git-blame" "\
 Toggle minor mode for displaying Git blame
@@ -3529,7 +3697,269 @@ Not documented
 
 ;;;***
 
+<<<<<<< HEAD:elisp/config.d/my-loaddefs.el
 ;;;### (autoloads nil nil ("../package.d/bbdb/bits/bbdb-filters/bbdb-ccmail.el"
+=======
+;;;### (autoloads nil nil ("../../../../elisp/package.d/any-ini-mode.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-anniv.el" "../../../../elisp/package.d/bbdb/bits/bbdb-edit.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-ccmail.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-eudora.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-export.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-hp200lx.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-passwd.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-ph.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-ldif.el" "../../../../elisp/package.d/bbdb/bits/bbdb-mail-folders.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-obsolete.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-pgp.el" "../../../../elisp/package.d/bbdb/bits/bbdb-signature.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-sort-mailrc.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-to-outlook.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-com.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-ftp.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-gnus.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-gui.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-hooks.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-merge.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-mhe.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-migrate.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-print.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-reportmail.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-rmail.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-sc.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-snarf.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-srv.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-vm.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-w3.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-whois.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-xemacs.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb.el" "../../../../elisp/package.d/bbdb/loadpath.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/misc/bbdb-unmigrate-stuff.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/testing/bbdb-test.el" "../../../../elisp/package.d/bbdb/testing/run-tests.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/texinfo/infohack.el" "../../../../elisp/package.d/bbdb/utils/bbdb-213-310.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/utils/bbdb-415-510.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/utils/bbdb-to-netscape.el"
+;;;;;;  "../../../../elisp/package.d/bibl-mode-1.27/bibl-grab.el"
+;;;;;;  "../../../../elisp/package.d/bibl-mode-1.27/bibl-lists.el"
+;;;;;;  "../../../../elisp/package.d/bibl-mode-1.27/bibl-mode.el"
+;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-rectangle.el"
+;;;;;;  "../../../../elisp/package.d/dwa-util.el" "../../../../elisp/package.d/egg/egg-grep.el"
+;;;;;;  "../../../../elisp/package.d/egg/egg.el" "../../../../elisp/package.d/git-emacs/git-blame.el"
+;;;;;;  "../../../../elisp/package.d/git-emacs/git-emacs.el" "../../../../elisp/package.d/git-emacs/git-modeline.el"
+;;;;;;  "../../../../elisp/package.d/initsplit.el" "../../../../elisp/package.d/magit/50magit.el"
+;;;;;;  "../../../../elisp/package.d/magit/magit.el" "../../../../elisp/package.d/mailcrypt/FSF-timer.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/expect.el" "../../../../elisp/package.d/mailcrypt/mailcrypt.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/mc-gpg.el" "../../../../elisp/package.d/mailcrypt/mc-pgp.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/mc-pgp5.el" "../../../../elisp/package.d/mailcrypt/mc-remail.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/mc-setversion.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/mc-toplev.el" "../../../../elisp/package.d/mailcrypt/tests/remailer/test-remailer.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/tests/remailer/test-remailer2.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/tests/test-gpg.el"
+;;;;;;  "../../../../elisp/package.d/maxframe.el" "../../../../elisp/package.d/muse-el/contrib/cgi.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/contrib/htmlize-hack.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/contrib/httpd.el" "../../../../elisp/package.d/muse-el/examples/ikiwiki/muse-init-project.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/examples/ikiwiki/muse-init-simple.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/examples/johnw/muse-init.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/examples/mwolson/muse-init.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-cite.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-mathml.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-message.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-protocol-iw.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-split.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-backlink.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-blosxom.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-book.el" "../../../../elisp/package.d/muse-el/lisp/muse-colors.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-context.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-docbook.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-groff.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-html.el" "../../../../elisp/package.d/muse-el/lisp/muse-http.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-ikiwiki.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-import-docbook.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-import-latex.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-import-xml.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-journal.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-latex.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-latex2png.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-mode.el" "../../../../elisp/package.d/muse-el/lisp/muse-poem.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-project.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-protocols.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-publish.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-regexps.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-texinfo.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-wiki.el" "../../../../elisp/package.d/muse-el/lisp/muse-xml-common.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-xml.el" "../../../../elisp/package.d/muse-el/lisp/muse.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/scripts/muse-build.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/contrib/schedule.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/contrib/timeclock.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-accomplishments.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-appt.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-authz.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-bbdb.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-bibtex.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-bookmark.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-calendar.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-cyclic.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-deadline.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-diary.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-erc.el" "../../../../elisp/package.d/planner-el/planner-experimental.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-export-diary.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-gnats.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-gnus.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-ical.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-id.el" "../../../../elisp/package.d/planner-el/planner-ledger.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-lisp.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-log-edit.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-mhe.el" "../../../../elisp/package.d/planner-el/planner-multi.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-notes-index.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-psvn.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-publish.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-rank.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-rdf.el" "../../../../elisp/package.d/planner-el/planner-registry.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-report.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-rmail.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-rss.el" "../../../../elisp/package.d/planner-el/planner-schedule.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-tasks-overview.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-timeclock-summary-proj.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-timeclock-summary.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-timeclock.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-trunk.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-unix-mail.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-vm.el" "../../../../elisp/package.d/planner-el/planner-w3m.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-wl.el" "../../../../elisp/package.d/planner-el/planner-xtla.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-zoom.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner.el" "../../../../elisp/package.d/planner-el/scripts/planner-build.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/test/planner-cyclic-test.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/test/planner-test.el"
+;;;;;;  "../../../../elisp/package.d/psvn.el" "../../../../elisp/package.d/remember-el/read-file-name.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-autoloads.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-bbdb.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-bibl.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-blosxom.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-emacs-wiki-journal.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-experimental.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-planner.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember.el" "../../../../elisp/package.d/remember-el/scripts/remember-build.el"
+;;;;;;  "../../../../elisp/package.d/rst.el" "../../../../elisp/package.d/w3m-el/attic/addpath.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/attic/rfc2368.el" "../../../../elisp/package.d/w3m-el/doc/ptexinfmt.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/mew-w3m.el" "../../../../elisp/package.d/w3m-el/mime-w3m.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/octet.el" "../../../../elisp/package.d/w3m-el/shimbun/mew-shimbun.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/nnshimbun.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-2ch.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-airs.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-aljazeera.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-arch-bluegate.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-asahi-html.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-asahi-mytown.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-asahi.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-atmarkit.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-atom-hash.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-atom.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-bbc.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-bbdb-ml.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-cgi-board.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-cnet-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-cnet.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-cnn-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-coldsync.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-debian-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-debian.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-debugmagazin-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-dennou.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-digiko.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-elips.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-emacs-w3m.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-emacswiki.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-engadget-ja.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-excite.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-exconn.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-f1fan.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-fau.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-ffii.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-fml.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-gendai-net.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-geocrawler.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-glimpse.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-gnome.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-haiku-os.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-hash.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-heise.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-hns.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-ibm-dev.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-impress.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-infoshop.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-itmedia.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-japantimes.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-javaconf.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-jpilot.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-jpo.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-kantei.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-kde.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-laut-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-linuxce-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-lotusex.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-lump.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-m17n.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-macosx-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mailarc.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mailman.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mainichi.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-makanai.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-marc-aims.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-meadow.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mew.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-mhonarc.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mozilla-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-msdn.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-msports-nifty.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-multi.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-n24-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-namazu.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-netbsd.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-nikkansports.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-nikkei.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-nytimes.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-opentechpress-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-orca.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-palmfan.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-pcweb-column.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-perlentaucher-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-pilot-link.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-pilot-mailsync.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-plucker.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-pocketgames.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rakuten.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-redhat.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rediff.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rss-blogs.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rss-hash.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rss.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-ruby.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-sankei.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-savannah.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-scipy.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-security-memo.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-slashdot-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-slashdot.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-sml.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-sourceforge-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-spiegel.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-sponichi.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-squeak-dev.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-squeak-ja.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-sueddeutsche-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-tcup.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-tdiary-ml.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-tdiary.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-tech-on.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-texfaq.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-text.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-the-onion.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-the-register.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-tigris.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-toshiba.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-vinelinux.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-w3m-dev.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-welt-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-wiki.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-wikimedia.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-wincefan.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-wired-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-x51.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-xemacs.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yahoo-auctions.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yahoo-sports.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yahoo.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yomiuri-html.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yomiuri.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-zdnet-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-zeit-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/shimbun.el" "../../../../elisp/package.d/w3m-el/w3m-antenna.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-bookmark.el" "../../../../elisp/package.d/w3m-el/w3m-bug.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-ccl.el" "../../../../elisp/package.d/w3m-el/w3m-cookie.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-dtree.el" "../../../../elisp/package.d/w3m-el/w3m-ems.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-favicon.el" "../../../../elisp/package.d/w3m-el/w3m-fb.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-filter.el" "../../../../elisp/package.d/w3m-el/w3m-form.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-hist.el" "../../../../elisp/package.d/w3m-el/w3m-image.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-lnum.el" "../../../../elisp/package.d/w3m-el/w3m-load.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-mail.el" "../../../../elisp/package.d/w3m-el/w3m-namazu.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-perldoc.el" "../../../../elisp/package.d/w3m-el/w3m-proc.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-rss.el" "../../../../elisp/package.d/w3m-el/w3m-search.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-session.el" "../../../../elisp/package.d/w3m-el/w3m-symbol.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-tabmenu.el" "../../../../elisp/package.d/w3m-el/w3m-ucs.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-util.el" "../../../../elisp/package.d/w3m-el/w3m-weather.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-xmas.el" "../../../../elisp/package.d/w3m-el/w3m.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3mhack.el" "../package.d/bbdb/bits/bbdb-filters/bbdb-ccmail.el"
+>>>>>>> mcbain:elisp/config.d/my-loaddefs.el
 ;;;;;;  "../package.d/bbdb/bits/bbdb-filters/bbdb-eudora.el" "../package.d/bbdb/bits/bbdb-filters/bbdb-export.el"
 ;;;;;;  "../package.d/bbdb/bits/bbdb-filters/bbdb-hp200lx.el" "../package.d/bbdb/bits/bbdb-filters/bbdb-passwd.el"
 ;;;;;;  "../package.d/bbdb/bits/bbdb-filters/bbdb-ph.el" "../package.d/bbdb/bits/bbdb-ldif.el"
@@ -3570,6 +4000,7 @@ Not documented
 ;;;;;;  "../package.d/planner-el/planner-ical.el" "../package.d/planner-el/planner-publish.el"
 ;;;;;;  "../package.d/planner-el/planner-zoom.el" "../package.d/planner-el/scripts/planner-build.el"
 ;;;;;;  "../package.d/planner-el/test/planner-cyclic-test.el" "../package.d/planner-el/test/planner-test.el"
+<<<<<<< HEAD:elisp/config.d/my-loaddefs.el
 ;;;;;;  "../package.d/remember-el/read-file-name.el" "../package.d/remember-el/remember-experimental.el"
 ;;;;;;  "../package.d/remember-el/scripts/remember-build.el" "../package.d/w3m-el/attic/addpath.el"
 ;;;;;;  "../package.d/w3m-el/attic/rfc2368.el" "../package.d/w3m-el/doc/ptexinfmt.el"
@@ -3647,6 +4078,344 @@ Not documented
 ;;;;;;  "../package.d/w3m-el/w3m-ucs.el" "../package.d/w3m-el/w3m-util.el"
 ;;;;;;  "../package.d/w3m-el/w3m-xmas.el" "../package.d/w3m-el/w3mhack.el")
 ;;;;;;  (18816 32358 188941))
+=======
+;;;;;;  "../package.d/remember-el/read-file-name.el" "../package.d/remember-el/remember-autoloads.el"
+;;;;;;  "../package.d/remember-el/remember-experimental.el" "../package.d/remember-el/scripts/remember-build.el"
+;;;;;;  "../package.d/w3m-el/attic/addpath.el" "../package.d/w3m-el/attic/rfc2368.el"
+;;;;;;  "../package.d/w3m-el/doc/ptexinfmt.el" "../package.d/w3m-el/mew-w3m.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-2ch.el" "../package.d/w3m-el/shimbun/sb-airs.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-aljazeera.el" "../package.d/w3m-el/shimbun/sb-arch-bluegate.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-asahi-html.el" "../package.d/w3m-el/shimbun/sb-asahi-mytown.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-asahi.el" "../package.d/w3m-el/shimbun/sb-atmarkit.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-atom-hash.el" "../package.d/w3m-el/shimbun/sb-atom.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-bbc.el" "../package.d/w3m-el/shimbun/sb-bbdb-ml.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-cgi-board.el" "../package.d/w3m-el/shimbun/sb-cnet-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-cnet.el" "../package.d/w3m-el/shimbun/sb-cnn-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-coldsync.el" "../package.d/w3m-el/shimbun/sb-debian-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-debian.el" "../package.d/w3m-el/shimbun/sb-debugmagazin-de.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-dennou.el" "../package.d/w3m-el/shimbun/sb-digiko.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-elips.el" "../package.d/w3m-el/shimbun/sb-emacs-w3m.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-emacswiki.el" "../package.d/w3m-el/shimbun/sb-engadget-ja.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-excite.el" "../package.d/w3m-el/shimbun/sb-exconn.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-f1fan.el" "../package.d/w3m-el/shimbun/sb-fau.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-ffii.el" "../package.d/w3m-el/shimbun/sb-fml.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-gendai-net.el" "../package.d/w3m-el/shimbun/sb-geocrawler.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-glimpse.el" "../package.d/w3m-el/shimbun/sb-gnome.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-haiku-os.el" "../package.d/w3m-el/shimbun/sb-hash.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-heise.el" "../package.d/w3m-el/shimbun/sb-hns.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-ibm-dev.el" "../package.d/w3m-el/shimbun/sb-impress.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-infoshop.el" "../package.d/w3m-el/shimbun/sb-itmedia.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-japantimes.el" "../package.d/w3m-el/shimbun/sb-javaconf.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-jpilot.el" "../package.d/w3m-el/shimbun/sb-jpo.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-kantei.el" "../package.d/w3m-el/shimbun/sb-kde.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-laut-de.el" "../package.d/w3m-el/shimbun/sb-linuxce-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-lotusex.el" "../package.d/w3m-el/shimbun/sb-lump.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-m17n.el" "../package.d/w3m-el/shimbun/sb-macosx-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-mailarc.el" "../package.d/w3m-el/shimbun/sb-mailman.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-mainichi.el" "../package.d/w3m-el/shimbun/sb-makanai.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-marc-aims.el" "../package.d/w3m-el/shimbun/sb-meadow.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-mew.el" "../package.d/w3m-el/shimbun/sb-mhonarc.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-mozilla-jp.el" "../package.d/w3m-el/shimbun/sb-msdn.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-msports-nifty.el" "../package.d/w3m-el/shimbun/sb-multi.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-n24-de.el" "../package.d/w3m-el/shimbun/sb-namazu.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-netbsd.el" "../package.d/w3m-el/shimbun/sb-nikkansports.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-nikkei.el" "../package.d/w3m-el/shimbun/sb-nytimes.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-opentechpress-jp.el" "../package.d/w3m-el/shimbun/sb-orca.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-palmfan.el" "../package.d/w3m-el/shimbun/sb-pcweb-column.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-perlentaucher-de.el" "../package.d/w3m-el/shimbun/sb-pilot-link.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-pilot-mailsync.el" "../package.d/w3m-el/shimbun/sb-plucker.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-pocketgames.el" "../package.d/w3m-el/shimbun/sb-rakuten.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-redhat.el" "../package.d/w3m-el/shimbun/sb-rediff.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-rss-blogs.el" "../package.d/w3m-el/shimbun/sb-rss-hash.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-rss.el" "../package.d/w3m-el/shimbun/sb-ruby.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-sankei.el" "../package.d/w3m-el/shimbun/sb-savannah.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-scipy.el" "../package.d/w3m-el/shimbun/sb-security-memo.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-slashdot-jp.el" "../package.d/w3m-el/shimbun/sb-slashdot.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-sml.el" "../package.d/w3m-el/shimbun/sb-sourceforge-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-spiegel.el" "../package.d/w3m-el/shimbun/sb-sponichi.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-squeak-dev.el" "../package.d/w3m-el/shimbun/sb-squeak-ja.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-sueddeutsche-de.el" "../package.d/w3m-el/shimbun/sb-tcup.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-tdiary-ml.el" "../package.d/w3m-el/shimbun/sb-tdiary.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-tech-on.el" "../package.d/w3m-el/shimbun/sb-texfaq.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-text.el" "../package.d/w3m-el/shimbun/sb-the-onion.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-the-register.el" "../package.d/w3m-el/shimbun/sb-tigris.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-toshiba.el" "../package.d/w3m-el/shimbun/sb-vinelinux.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-w3m-dev.el" "../package.d/w3m-el/shimbun/sb-welt-de.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-wiki.el" "../package.d/w3m-el/shimbun/sb-wikimedia.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-wincefan.el" "../package.d/w3m-el/shimbun/sb-wired-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-x51.el" "../package.d/w3m-el/shimbun/sb-xemacs.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-yahoo-auctions.el" "../package.d/w3m-el/shimbun/sb-yahoo-sports.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-yahoo.el" "../package.d/w3m-el/shimbun/sb-yomiuri-html.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-yomiuri.el" "../package.d/w3m-el/shimbun/sb-zdnet-jp.el"
+;;;;;;  "../package.d/w3m-el/shimbun/sb-zeit-de.el" "../package.d/w3m-el/shimbun/shimbun.el"
+;;;;;;  "../package.d/w3m-el/w3m-bug.el" "../package.d/w3m-el/w3m-ccl.el"
+;;;;;;  "../package.d/w3m-el/w3m-ems.el" "../package.d/w3m-el/w3m-favicon.el"
+;;;;;;  "../package.d/w3m-el/w3m-hist.el" "../package.d/w3m-el/w3m-image.el"
+;;;;;;  "../package.d/w3m-el/w3m-load.el" "../package.d/w3m-el/w3m-mail.el"
+;;;;;;  "../package.d/w3m-el/w3m-proc.el" "../package.d/w3m-el/w3m-rss.el"
+;;;;;;  "../package.d/w3m-el/w3m-tabmenu.el" "../package.d/w3m-el/w3m-ucs.el"
+;;;;;;  "../package.d/w3m-el/w3m-util.el" "../package.d/w3m-el/w3m-xmas.el"
+;;;;;;  "../package.d/w3m-el/w3mhack.el") (18814 62675 353335))
+>>>>>>> mcbain:elisp/config.d/my-loaddefs.el
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../elisp/package.d/bbdb/bits/bbdb-anniv.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-edit.el" "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-ccmail.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-eudora.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-export.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-hp200lx.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-passwd.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-filters/bbdb-ph.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-ldif.el" "../../../../elisp/package.d/bbdb/bits/bbdb-mail-folders.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-obsolete.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-pgp.el" "../../../../elisp/package.d/bbdb/bits/bbdb-signature.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-sort-mailrc.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/bits/bbdb-to-outlook.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-com.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-ftp.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-gnus.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-gui.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-hooks.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-merge.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-mhe.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-migrate.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-print.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-reportmail.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-rmail.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-sc.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-snarf.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-srv.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-vm.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-w3.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb-whois.el" "../../../../elisp/package.d/bbdb/lisp/bbdb-xemacs.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/lisp/bbdb.el" "../../../../elisp/package.d/bbdb/loadpath.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/misc/bbdb-unmigrate-stuff.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/testing/bbdb-test.el" "../../../../elisp/package.d/bbdb/testing/run-tests.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/texinfo/infohack.el" "../../../../elisp/package.d/bbdb/utils/bbdb-213-310.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/utils/bbdb-415-510.el"
+;;;;;;  "../../../../elisp/package.d/bbdb/utils/bbdb-to-netscape.el"
+;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-rectangle.el"
+;;;;;;  "../../../../elisp/package.d/dwa-util.el" "../../../../elisp/package.d/egg/egg-grep.el"
+;;;;;;  "../../../../elisp/package.d/egg/egg.el" "../../../../elisp/package.d/git-emacs/git-blame.el"
+;;;;;;  "../../../../elisp/package.d/git-emacs/git-emacs.el" "../../../../elisp/package.d/git-emacs/git-modeline.el"
+;;;;;;  "../../../../elisp/package.d/initsplit.el" "../../../../elisp/package.d/magit/50magit.el"
+;;;;;;  "../../../../elisp/package.d/magit/magit.el" "../../../../elisp/package.d/mailcrypt/FSF-timer.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/expect.el" "../../../../elisp/package.d/mailcrypt/mailcrypt.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/mc-gpg.el" "../../../../elisp/package.d/mailcrypt/mc-pgp.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/mc-pgp5.el" "../../../../elisp/package.d/mailcrypt/mc-remail.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/mc-setversion.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/mc-toplev.el" "../../../../elisp/package.d/mailcrypt/tests/remailer/test-remailer.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/tests/remailer/test-remailer2.el"
+;;;;;;  "../../../../elisp/package.d/mailcrypt/tests/test-gpg.el"
+;;;;;;  "../../../../elisp/package.d/maxframe.el" "../../../../elisp/package.d/muse-el/contrib/cgi.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/contrib/htmlize-hack.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/contrib/httpd.el" "../../../../elisp/package.d/muse-el/examples/ikiwiki/muse-init-project.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/examples/ikiwiki/muse-init-simple.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/examples/johnw/muse-init.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/examples/mwolson/muse-init.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-cite.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-mathml.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-message.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-protocol-iw.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/experimental/muse-split.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-backlink.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-blosxom.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-book.el" "../../../../elisp/package.d/muse-el/lisp/muse-colors.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-context.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-docbook.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-groff.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-html.el" "../../../../elisp/package.d/muse-el/lisp/muse-http.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-ikiwiki.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-import-docbook.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-import-latex.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-import-xml.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-journal.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-latex.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-latex2png.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-mode.el" "../../../../elisp/package.d/muse-el/lisp/muse-poem.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-project.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-protocols.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-publish.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-regexps.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-texinfo.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-wiki.el" "../../../../elisp/package.d/muse-el/lisp/muse-xml-common.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/lisp/muse-xml.el" "../../../../elisp/package.d/muse-el/lisp/muse.el"
+;;;;;;  "../../../../elisp/package.d/muse-el/scripts/muse-build.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/contrib/schedule.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/contrib/timeclock.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-accomplishments.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-appt.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-authz.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-bbdb.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-bibtex.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-bookmark.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-calendar.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-cyclic.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-deadline.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-diary.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-erc.el" "../../../../elisp/package.d/planner-el/planner-experimental.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-export-diary.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-gnats.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-gnus.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-ical.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-id.el" "../../../../elisp/package.d/planner-el/planner-ledger.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-lisp.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-log-edit.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-mhe.el" "../../../../elisp/package.d/planner-el/planner-multi.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-notes-index.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-psvn.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-publish.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-rank.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-rdf.el" "../../../../elisp/package.d/planner-el/planner-registry.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-report.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-rmail.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-rss.el" "../../../../elisp/package.d/planner-el/planner-schedule.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-tasks-overview.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-timeclock-summary-proj.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-timeclock-summary.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-timeclock.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-trunk.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-unix-mail.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-vm.el" "../../../../elisp/package.d/planner-el/planner-w3m.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-wl.el" "../../../../elisp/package.d/planner-el/planner-xtla.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner-zoom.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/planner.el" "../../../../elisp/package.d/planner-el/scripts/planner-build.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/test/planner-cyclic-test.el"
+;;;;;;  "../../../../elisp/package.d/planner-el/test/planner-test.el"
+;;;;;;  "../../../../elisp/package.d/psvn.el" "../../../../elisp/package.d/remember-el/read-file-name.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-autoloads.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-bbdb.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-bibl.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-blosxom.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-emacs-wiki-journal.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-experimental.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember-planner.el"
+;;;;;;  "../../../../elisp/package.d/remember-el/remember.el" "../../../../elisp/package.d/remember-el/scripts/remember-build.el"
+;;;;;;  "../../../../elisp/package.d/rst.el" "../../../../elisp/package.d/w3m-el/attic/addpath.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/attic/rfc2368.el" "../../../../elisp/package.d/w3m-el/doc/ptexinfmt.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/mew-w3m.el" "../../../../elisp/package.d/w3m-el/mime-w3m.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/octet.el" "../../../../elisp/package.d/w3m-el/shimbun/mew-shimbun.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/nnshimbun.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-2ch.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-airs.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-aljazeera.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-arch-bluegate.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-asahi-html.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-asahi-mytown.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-asahi.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-atmarkit.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-atom-hash.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-atom.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-bbc.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-bbdb-ml.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-cgi-board.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-cnet-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-cnet.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-cnn-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-coldsync.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-debian-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-debian.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-debugmagazin-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-dennou.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-digiko.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-elips.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-emacs-w3m.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-emacswiki.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-engadget-ja.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-excite.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-exconn.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-f1fan.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-fau.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-ffii.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-fml.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-gendai-net.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-geocrawler.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-glimpse.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-gnome.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-haiku-os.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-hash.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-heise.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-hns.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-ibm-dev.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-impress.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-infoshop.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-itmedia.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-japantimes.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-javaconf.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-jpilot.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-jpo.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-kantei.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-kde.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-laut-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-linuxce-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-lotusex.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-lump.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-m17n.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-macosx-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mailarc.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mailman.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mainichi.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-makanai.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-marc-aims.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-meadow.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mew.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-mhonarc.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-mozilla-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-msdn.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-msports-nifty.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-multi.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-n24-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-namazu.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-netbsd.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-nikkansports.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-nikkei.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-nytimes.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-opentechpress-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-orca.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-palmfan.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-pcweb-column.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-perlentaucher-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-pilot-link.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-pilot-mailsync.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-plucker.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-pocketgames.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rakuten.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-redhat.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rediff.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rss-blogs.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rss-hash.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-rss.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-ruby.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-sankei.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-savannah.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-scipy.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-security-memo.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-slashdot-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-slashdot.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-sml.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-sourceforge-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-spiegel.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-sponichi.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-squeak-dev.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-squeak-ja.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-sueddeutsche-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-tcup.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-tdiary-ml.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-tdiary.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-tech-on.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-texfaq.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-text.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-the-onion.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-the-register.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-tigris.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-toshiba.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-vinelinux.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-w3m-dev.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-welt-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-wiki.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-wikimedia.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-wincefan.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-wired-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-x51.el" "../../../../elisp/package.d/w3m-el/shimbun/sb-xemacs.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yahoo-auctions.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yahoo-sports.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yahoo.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yomiuri-html.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-yomiuri.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-zdnet-jp.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/sb-zeit-de.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/shimbun/shimbun.el" "../../../../elisp/package.d/w3m-el/w3m-antenna.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-bookmark.el" "../../../../elisp/package.d/w3m-el/w3m-bug.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-ccl.el" "../../../../elisp/package.d/w3m-el/w3m-cookie.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-dtree.el" "../../../../elisp/package.d/w3m-el/w3m-ems.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-favicon.el" "../../../../elisp/package.d/w3m-el/w3m-fb.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-filter.el" "../../../../elisp/package.d/w3m-el/w3m-form.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-hist.el" "../../../../elisp/package.d/w3m-el/w3m-image.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-lnum.el" "../../../../elisp/package.d/w3m-el/w3m-load.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-mail.el" "../../../../elisp/package.d/w3m-el/w3m-namazu.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-perldoc.el" "../../../../elisp/package.d/w3m-el/w3m-proc.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-rss.el" "../../../../elisp/package.d/w3m-el/w3m-search.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-session.el" "../../../../elisp/package.d/w3m-el/w3m-symbol.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-tabmenu.el" "../../../../elisp/package.d/w3m-el/w3m-ucs.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-util.el" "../../../../elisp/package.d/w3m-el/w3m-weather.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3m-xmas.el" "../../../../elisp/package.d/w3m-el/w3m.el"
+;;;;;;  "../../../../elisp/package.d/w3m-el/w3mhack.el") (18816 35351
+;;;;;;  891934))
 
 ;;;***
 
