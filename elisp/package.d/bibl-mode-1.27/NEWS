@@ -1,0 +1,80 @@
+bibl-mode NEWS -- history of user-visible changes.
+Copyright (C) 1994, 1995 Bryan O'Sullivan.
+Time-stamp: <95/06/05 22:58:51 bosullvn>
+See the end for copying conditions.
+
+Please send bibl-mode bug reports to <bug-bibl@serpentine.com>.
+
+Changes from 1.25 to 1.27
+
+Mousing an entry in a names/keywords buffer now searches repeatedly
+through the bibliography buffer, rather than from the top.
+
+Byte compilation problems fixed.
+
+Calling external browsers now works properly.  Incidentally, here is
+the method I use to access URLs (I run Kyle Jones' VM mailer; see the
+`bibliography' file in this distribution for a pointer):
+  (setq bibl-web-interface (if window-system
+			       'vm-mouse-send-url-to-netscape
+			     'w3-fetch))
+  (autoload 'w3-fetch "w3" "Autoload w3." t)
+  (autoload 'vm-mouse-send-url-to-netscape "vm" "Mouse with View Mail." t)
+This has the useful property that if I am running under a window
+system and already have a Netscape process running, that Netscape is
+used when I want to go to a record.  Win, win.
+
+Changes from 1.23e to 1.25
+
+The Perl scripts for displaying a bibliography file on the Web have
+been certified healthy.
+
+The bibl2html script now needs Perl 5 to run.  Tweaking it to run
+under Perl 4 should not be hard, however.
+
+Records beginning with unwanted words such as `an' or `the' are now
+sorted according to the second word on their titles rather than the
+first.
+
+Changes from 1.23e to 2.0
+
+Spiffy new HTML conversion code now provides clickable forms instead
+of the old lame lists.  Adapted from code written by Andrew Condon.
+
+You can now access local files using `file' URLs by leaving off the
+leading `//' in the URL.
+
+Changes from 1.23 to 1.23e
+
+Further bug fixes.
+
+TeXinfo documentation has been written.  This file has been created.
+
+This package now works *correctly* (it used to half work) if you're
+not running Emacs under a window system.
+
+The bibliography file header is no longer visible in Emacs windows.
+
+Bibl-sort-buffer will now sort by keyword too.  The sort isn't stable,
+though.
+
+----------------------------------------------------------------------
+Copyright information:
+
+Copyright (C) 1994 Bryan O'Sullivan
+
+   Permission is granted to anyone to make or distribute verbatim
+   copies of this document as received, in any medium, provided that
+   the copyright notice and this permission notice are preserved, thus
+   giving the recipient permission to redistribute in turn.
+
+   Permission is granted to distribute modified versions of this
+   document, or of portions of it, under the above conditions,
+   provided also that they carry prominent notices stating who last
+   changed them.
+
+Local variables:
+mode: indented-text
+local-write-file-hooks: (time-stamp)
+time-stamp-active: t
+end:

@@ -1,0 +1,39 @@
+FILES IN THIS DISTRIBUTION:
+
+- ChangeLog: a history of changes to each source file
+
+- MANIFEST: this file
+
+- Makefile: for compiling the elisp code and building the documentation
+
+- NEWS: a history of user-visible changes
+
+- README: this file
+
+- TODO: a wish list for future changes
+
+- bibl-grab.el: code for creating partial records from the contents of
+  mail and news buffers
+
+- bibl-lists.el: name and keyword listing code and other stuff which
+  is likely to be rarely used
+
+- bibl-mode.el: the main body of Emacs Lisp code which does the
+  editing work
+
+- bibl-mode.texi: TeXinfo documentation for bibl-mode
+
+- bibl2html: a Perl 5 script which converts a bibliography file into
+  HTML, so you can put together a Web-friendly pointers file for other
+  people to access
+
+- bibl-grep: a Common Gateway Interface (CGI) script (written in Perl)
+  for processing requests posted from people looking at your
+  bibliography.html file (as created by bibl2html)
+
+- slim-bibl-file: a Perl script which reduces the size of a
+  bibliography file by weeding out entries which don't match its given
+  keywords
+
+- bibliography: my own bibliography file, to get you started and give
+  an example of what you can do

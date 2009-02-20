@@ -1,0 +1,107 @@
+#!/usr/local/bin/perl
+#
+# bibl-grep -- parse a HTML form request and return a smaller bib file
+# Copyright (C) 1994 Bryan O'Sullivan
+#
+# Author: Andrew Condon <afcondon@dsg.cs.tcd.ie>
+# Modified-By: Bryan O'Sullivan <bos@serpentine.com>
+# $Revision: 1.2 $
+# $Date: 1995/05/23 22:19:16 $
+# $Source: /u/other/ugrad/bosullvn/lib/elisp/bibl-mode/RCS/bibl-grep,v $
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2, or (at
+# your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+# COMMENTARY:
+#
+# This Common Gateway Interface script parses a HTTP POST request, as
+# sent by the likes of Mosaic.  Requests come in the form of single
+# key words, and these are used to create a smaller bib file on the
+# fly.  This smaller file contains only entries with the given key
+# words, which is sent back to the requesting party as the result of
+# the POST.
+#
+# This script has been tested under both NCSA and CERN httpds.  Since
+# the current crop of httpds are pretty lame about providing useful
+# information in the event of a problem, this sort of code is hard to
+# debug.  Ugh.
+#
+# Install this script wherever you are supposed to put CGI programs on
+# your system.
+#
+# NOTE: under the CERN and NCSA http daemons, this script is run with
+# a minimal clue as to What's Going On.  Make sure all filenames in
+# here are absolute, or this script will keel over!
+
+$home = "/u/other/ugrad/bosullvn";
+
+# This must point to wherever you have the slim-bibl-file program
+# installed.
+
+$biblgrep="$home/lib/elisp/bibl-mode/slim-bibl-file";
+
+# This must point to wherever you have the bibl2html program
+# installed.
+
+$bibl2html="$home/bin/bibl2html";
+
+# This must point to your bibliography file.
+
+$bib = "$home/etc/bibliography";
+
+
+# You shouldn't have to change anything below this point.
+
+
+$length = $ENV{"CONTENT_LENGTH"} ||
+    die "No content length given!";
+
+read(STDIN, $query, $length) ||
+    die "No data given!";
+
+&url_decode($query);
+
+foreach (split(/\\0/,$Decoded{'keywords'})){
+    tr/A-Z/a-z/;
+    $args .= " \"$_\" ";
+}
+
+$hgrep = `$biblgrep $args < $bib | $bibl2html`;
+$length = (length $hgrep);
+
+print<<EOF;
+Content-Type: text/html
+Content-Length: $length
+
+$hgrep
+EOF
+
+# Url_decode splits up and de-munges a URL-encoded string.  Puts the
+# resulting (key, value) pairs in the %Decoded associative array.
+
+sub url_decode {
+    local ($orig) = @_;
+    local (@spl, @urls);
+    local ($out, $val);
+
+    @urls = split(/\&/, $orig);
+
+    foreach $thing (@urls) {
+	@spl = split(/=/, $thing);
+	($val, $out) = @spl;
+	$out =~ s/\+/ /g;
+	$out =~ s/%(..)/pack("H2",$1)/ge;
+	$Decoded{$val} = $out;
+    }
+}

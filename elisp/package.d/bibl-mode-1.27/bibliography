@@ -1,0 +1,1737 @@
+File format 1.  The mode of this bibliography file is -*- bibl -*-.
+
+Name: SLaTeX
+Keywords: LaTeX, Scheme
+Description: SLaTeX is a program for typesetting Scheme code in LaTeX
+    files.  It understands both version 2.09 and 2e source files.
+Location: ftp://cs.rice.edu/public/dorai
+Author: Dorai Sitaram <dorai@ses.com>
+Record: bosullvn@gosset.maths.tcd.ie Fri May 19 21:24:44 1995
+
+Name: The Elements of Typographic Style
+Keywords: typesetting, typography
+Description: Jim Blandy says: "Here's a book on typography hailed by
+    folks like Hermann Zapf as really valuable.  The author typeset
+    the book himself, so you get to see the results of his
+    philosophy."
+Author: Robert Bringhurst
+Record: bosullvn@gosset.maths.tcd.ie Fri May 19 15:37:16 1995
+
+Name: Hypermail
+Keywords: archives, mail, World Wide Web
+Description: A very useful program for archiving mailing lists so that
+    messages are accessible over the Web.
+Location: ftp://ftp.eit.com/web.software/hypermail
+Location: http://www.eit.com/software/hypermail/hypermail.html
+Author: Kevin Hughes <kevinh@eit.com>
+Record: bosullvn@gosset.maths.tcd.ie Thu May  4 22:52:41 1995
+
+Name: The Ethnologue, 11th edition
+Keywords: languages, internationalisation
+Description: A fairly up-to-date on-line database of 6,500 of the
+    world's languages.
+Location: gopher://sil.org:70/11/gopher_root/ethnologue
+Record: bosullvn@gosset.maths.tcd.ie Mon May  1 01:56:32 1995
+
+Name: The Unicode home page
+Keywords: internationalisation
+Description: Information pertaining to the ISO Unicode standard.
+Location: http://www.unicode.org
+Record: bosullvn@gosset.maths.tcd.ie Mon May  1 01:55:55 1995
+
+Name: Computer Related Repetitive Strain Injury Primer Web Page
+Keywords: repetitive strain injury
+Description: Contains information on preventing and dealing with RSI,
+    and links to other RSI-related info on the Web.
+Location: http://www.engr.unl.edu/ee/eeshop/rsi.html
+Author: Paul Marxhausen <mpaul@unlinfo.unl.edu>
+Record: bosullvn@gosset.maths.tcd.ie Fri Apr 21 15:02:11 1995
+
+Name: Healthwise
+Keywords: health, servers
+Description: An anonymous service for answering random physical and
+    mental health-related questions.  Includes an archive of past
+    answers.
+Location: http://www.cc.columbia.edu/cu/healthwise
+Contact: webmaster@www.cc.columbia.edu
+Record: bosullvn@gosset.maths.tcd.ie Wed Mar  1 19:43:34 1995
+
+Name: The Comprehensive TeX Archive Network (CTAN)
+Keywords: TeX, LaTeX, typesetting, archives
+Description: CTAN is a set of fully-mirrored ftp sites providing the
+    most complete, up-to-date TeX-related software possible.
+Location: http://jasper.ora.com/ctan.html
+Location: ftp://ftp.tex.ac.uk/tex-archive
+Location: ftp://ftp.shsu.edu/tex-archive
+Contact: texserver@tex.ac.uk, ftpmail@ftp.shsu.edu, Norman Walsh <norm@ora.com>
+Record: bosullvn@gosset.maths.tcd.ie Mon Feb  6 16:24:21 1995
+
+Name: Common Lisp -- the Language, Revision 2
+Keywords: Common Lisp, books
+Description: The book defining Common Lisp, on the Web.
+Location: http://www.cs.cmu.edu:8001/Web/Groups/AI/html/cltl/cltl2.html
+Author: Guy L. Steele <gls@ai.mit.edu>
+Contact: Mark Kantrowitz <mkant+@cs.cmu.edu>
+Record: bosullvn@bell.maths.tcd.ie Thu Dec 15 17:05:20 1994
+
+Name: HAKMEM
+Keywords: algorithms, papers, MIT AI Lab, mathematics
+Description: A record of the grandest small-scale hacks of the AI lab
+    in its heyday.  Includes everything from astonishing bit-twiddling
+    to heavy algebra to swapping variables using prog1.
+Location: ftp://mc.lcs.mit.edu/its/ai/ed/hakmem.1.Z
+Location: ftp://relay.cs.toronto.edu/doc/hakmem.Z
+Record: bosullvn@bell.maths.tcd.ie Tue Dec  6 16:21:15 1994
+
+Name: TinyFugue
+Keywords: MUDs, clients
+Description: A screen-oriented client for most any type of MUD.
+Location: file://tf.tcp.com/pub/tinyfugue
+Location: http://www.tcp.com/hawkeye/tf.html
+Author: Ken Keys <hawkeye@tcp.com>
+Record: bosullvn@gosset.maths.tcd.ie Tue Nov 15 21:37:54 1994
+
+Name: OCEAN home page
+Keywords: design automation, World Wide Web
+Description: Description and documentation on OCEAN, Delft's
+    sea-of-gates VLSI design system.
+Location: http://olt.et.tudelft.nl/ocean/ocean.html
+Record: bosullvn@bell.maths.tcd.ie Sat Nov  5 23:59:46 1994
+
+Name: VLSI design rule checking stuff
+Keywords: design automation, design rules, World Wide Web
+Description: Lots of useful things at the MIT Microsystems Technology
+    Laboratories (MTL).  Do a search on "design rule".
+Location: http://goesser.mit.edu
+Contact: Michael B. McIlrath <mbm@mit.edu>
+Record: bosullvn@bell.maths.tcd.ie Sat Nov  5 23:34:00 1994
+
+Name: The Go Page
+Keywords: go, boardgames
+Description: Information on Go and past games, together with pointers
+    to other Go resources on the net.
+Location: http://www.cs.utexas.edu/go
+Contact: Norman Richards <orb@ccwf.cc.utexas.edu>
+Record: bos@avon.dcs.gla.ac.uk Thu Sep 15 23:26:50 1994
+
+Name: Trent's GNU Page
+Keywords: free software
+Description: An unofficial archive of FSF-related material.
+Location: http://www.cs.pdx.edu/~trent/gnu/gnu.html
+Author: Trent A. Fisher <trent@gnurd.uu.pdx.edu>
+Record: bos@avon.dcs.gla.ac.uk Mon Aug 29 14:20:19 1994
+
+Name: Tiny CLOS
+Keywords: objects, Scheme, Common Lisp, CLOS
+Description: An implementation of a core subset of CLOS, written in
+    Scheme.  Provides a nice base language, and a core MOP which needs
+    a little optimisation.
+Location: file://ftp.parc.xerox.com/pub/mops
+Author: Gregor Kiczales <Gregor@parc.xerox.com>
+Record: bos@avon.dcs.gla.ac.uk Wed Aug 10 19:31:05 1994
+
+Name: Scheme repository
+Keywords: Scheme, archives
+Description: All kinds of Scheme-related stuff.
+Location: http://www.cs.indiana.edu/scheme-repository/SRhome.html
+Location: file://ftp.inria.fr/lang/Scheme
+Location: file://faui80.informatik.uni-erlangen.de/pub/scheme/yorku
+Contact: scheme-repository-request@cs.indiana.edu
+Record: bos@avon.dcs.gla.ac.uk Mon Aug  8 23:36:56 1994
+Updated: bosullvn@gosset.maths.tcd.ie Fri Nov 18 19:48:18 1994
+
+Name: The Movie Database
+Keywords: movies, archives
+Description: Look up all kinds of information on movies and TV shows,
+    including reviews, cast lists, plot synopses, and user votes.
+Location: http://www.cm.cf.ac.uk/Movies
+Contact: Robert Hartill <Robert.Hartill@cm.cf.ac.uk>
+Record: bos@avon.dcs.gla.ac.uk Sun Aug  7 18:22:33 1994
+
+Name: ECHO - EURODICTAUTOM
+Keywords: translation, dictionaries
+Description: An automatic dictionary of technical and official terms,
+    giving translations between eight different languages.
+Location: http://www.uni-frankfurt.de/~felix/eurodictautom.html
+Contact: Felix Gëhtgens <felix@cs.uni-frankfurt.de>
+Record: bos@avon.dcs.gla.ac.uk Sun Aug  7 00:18:00 1994
+
+Name: Portable Document Format Reference Manual
+Keywords: documentation, books
+Description: Description of PDF.
+ISBN: 0-210-62628-4
+Publisher: Addison-Wesley
+Record: bos@avon.dcs.gla.ac.uk Thu Aug  4 13:35:06 1994
+
+Name: Cheers
+Keywords: television
+Description: Well, it's a dog-eat-dog world, Sammy, and I'm wearing
+    Milk-Bone underwear.
+Location: file://cathouse.org/pub/cathouse/television/cheers
+Record: bos@avon.dcs.gla.ac.uk Wed Aug  3 23:22:38 1994
+
+Name: The Secular Web
+Keywords: atheism
+Description: Resources related to atheism, secular humanism, and free
+    thought, including a collection of freethought literature by such
+    authors as Charles Bradlaugh, Joseph McCabe, Charles Watts, and
+    Thomas Paine.  Also included in the Freethought Web are the
+    complete works of Robert G. Ingersoll.
+Location: http://freethought.tamu.edu
+Contact: Brett G. Lemoine <blemoine@atheist.tamu.edu>
+Record: bos@avon.dcs.gla.ac.uk Tue Aug  2 11:46:50 1994
+
+Name: The Quotations Page
+Keywords: literature, humour
+Description: loQtus is a storehouse of large quotations archives as
+    well as a regularly-updated shelf for periodically-posted
+    quotation services.  It features several megabytes full of
+    quotations, spanning the staunchly literary to the humorous.
+Location: http://pubweb.ucdavis.edu/Documents/Quotations/homepage.html
+Contact: Jason R. Newquist <jrnewquist@ucdavis.edu>
+Record: bos@avon.dcs.gla.ac.uk Tue Aug  2 11:44:32 1994
+
+Name: TeX-related documantation
+Keywords: TeX, documentation, LaTeX
+Description: A collection of miscellaneous TeX-related documentation.
+    Some manuals have been converted to hypertext, but the majority
+    are in DVI format.
+Location: http://www.cl.cam.ac.uk/TeXdoc/TeXdocs.html
+Contact: Martyn Johnson <maj@cl.cam.ac.uk>
+Record: bos@karkar.dcs.gla.ac.uk Tue Jul 26 17:40:56 1994
+
+Name: GlimpseHTTP
+Keywords: World Wide Web
+Description: GlimpseHTTP is a collection of tools that allows you to
+    use the glimpse search engine to combine efficient search and
+    browse facilities on your HTTP server.  Glimpse is an extension of
+    agrep that keeps a very small index (typically 2-7% of the total
+    text) and allows efficient grep-like queries (with Booleans)
+    throughout the whole file system.  If you have several nested
+    directories which the user may browse, glimpseHTTP can be used to
+    automatically add a search form to each directory such that only
+    the relevant directories will be included in the search.
+Location: file://cs.arizona.edu/glimpse
+Location: http://glimpse.cs.arizona.edu:1994
+Author: Paul Klark <paul@cs.arizona.edu>
+Record: bos@karkar.dcs.gla.ac.uk Thu Jul 21 11:02:48 1994
+
+Name: Slab -O- Concrete
+Keywords: small press, comics, zines
+Description: Weird stuff distributor for the UK.  They carry titles
+    like: Too Much Coffee Man, Infinite Onion, Way Out Strips, and
+    more.  Plus, they look like a good connection for ordering
+    material produced in the US.  Write to: PO Box 298, Sheffield, S10
+    1YU, UK, or c/o PO Box 821388-162, Dallas TX 75382.  AGE STMT!!
+Contact: Holy Temple of Mass Consumption <slack@ncsu.edu>
+Record: bos@karkar.dcs.gla.ac.uk Sat Jul 16 20:33:18 1994
+
+Name: The Devil's Dictionary
+Keywords: humour, literature
+Description: From the preface to the 1911 edition: ``The Devil's
+    Dictionary was begun in a weekly paper in 1881, and was continued
+    in a desultory way at long intervals until 1906.  In that year a
+    large part of it was published in covers with the title The
+    Cynic's Word Book, a name which the author had not the power to
+    reject or happiness to approve.  To quote the publishers of the
+    present work: "This more reverent title had previously been forced
+    upon him by the religious scruples of the last newspaper in which
+    a part of the work had appeared, with the natural consequence that
+    when it came out in covers the country already had been flooded by
+    its imitators with a score of 'cynic' books -- The Cynic's This,
+    The Cynic's That, and The Cynic's t'Other. Most of these books
+    were merely stupid, though some of them added the distinction of
+    silliness.  Among them, they brought the word 'cynic' into
+    disfavor so deep that any book bearing it was discredited in
+    advance of publication."  Meantime, too, some of the enterprising
+    humorists of the country had helped themselves to such parts of
+    the work as served their needs, and many of its definitions,
+    anecdotes, phrases and so forth, had become more or less current
+    in popular speech.  This explanation is made, not with any pride
+    of priority in trifles, but in simple denial of possible charges
+    of plagiarism, which is no trifle.  In merely resuming his own the
+    author hopes to be held guiltless by those to whom the work is
+    addressed -- enlightened souls who prefer dry wines to sweet,
+    sense to sentiment, wit to humor and clean English to slang.  A
+    conspicuous, and it is hope not unpleasant, feature of the book is
+    its abundant illustrative quotations from eminent poets, chief of
+    whom is that learned and ingenius cleric, Father Gassalasca Jape,
+    S.J., whose lines bear his initials.  To Father Jape's kindly
+    encouragement and assistance the author of the prose text is
+    greatly indebted.''
+Location: http://www.vestnett.no/cgi-bin/devil
+Contact: Magnus Y. Alvestad <magnus@ii.uib.no>
+Record: bos@karkar.dcs.gla.ac.uk Wed Jul 13 14:51:38 1994
+Updated: bosullvn@gosset.maths.tcd.ie Wed Mar  1 16:17:10 1995
+
+Name: Revised^4 Report on the Algorithmic Language Scheme
+Keywords: Scheme, documentation, standards
+Description: You know it and love it.  Now browse it on the Web.
+Location: file://swiss-ftp.ai.mit.edu/pub/scm/HTML/r4rs_toc.html
+Contact: Aubrey Jaffer <jaffer@ai.mit.edu>
+Record: bos@karkar.dcs.gla.ac.uk Fri Jul  8 10:36:12 1994
+Updated: bosullvn@bell.maths.tcd.ie Tue Nov  8 15:11:25 1994
+
+Name: RAID band-aid postings
+Keywords: operating systems, performance, filesystems
+Description: A fairly heated discussion (but with a reasonable amount
+    of useful information included) ran on filesystem performance in
+    comp.os.research from mid-June until some time in July.  Check it
+    out in the archives some time.
+Location: file://ftp.cse.ucsc.edu/pub/comp.os.research/94
+Record: bos@karkar.dcs.gla.ac.uk Thu Jul  7 12:59:25 1994
+
+Name: Plan 9 UTF stuff
+Keywords: internationalisation, Plan 9
+Description: Information on the multibyte character support in Plan 9,
+    including details and characteristics of the UTF (a subset of
+    Unicode) encoding.
+Location: file://research.att.com/dist/plan9man/09utf.ps.Z
+Location: file://totoro.cyclic.com/u/cyclic/wreavoc/documents/UTF.ps.gz
+Author: Rob Pike <rob@research.att.com>
+Record: bos@avon.dcs.gla.ac.uk Thu Jun 30 11:58:36 1994
+Updated: bos@serpentine.com Sun Jun  4 23:06:26 1995
+
+Name: Applied Cryptography
+Keywords: books, Internet, politics, protocols, cryptography, surveys, algorithms, electronic freedom
+Description: Talks about cryptography.  Chapters on protocols:
+    authentication, secret sharing, signatures, fair coin flips,
+    elections, digital cash, lots more.  Chapters on algorithms:
+    basics, DES, many symmetric and public-key encryption algorithms,
+    one-way hash functions, random sequence generators, lots more.
+    Entire chapter on politics: NSA, EFF, lots more.  Source code for
+    many things included.
+Author: Bruce Schneier
+Publisher: Wiley
+Date: 1994
+ISBN: 0-471-59756-2
+Record: jimb@totoro.bio.indiana.edu Thu Jun  6 00:12:23 1994
+
+Name: Collection of Computer Science Bibliographies
+Keywords: bibliographies, computer science
+Description: A collection of bibliographies in various fields of
+    computer science is available via anonymous ftp and the World Wide
+    Web.  The bibliographies contain about 260,000 references, most of
+    which are references to journal articles, conference papers or
+    technical reports.  The collection has been formed by using
+    various freely accessible services in the Internet (anonymous ftp,
+    mailserver, wais, telnet) and converting each bibliography into a
+    uniform BibTeX format.  It is organised in files containing
+    references to a (more or less) specific area within computer
+    science.
+Location: http://glimpse.cs.arizona.edu:1994/bib
+Location: http://liinwww.ira.uka.de/bibliography/index.html
+Location: file://ftp.ira.uka.de/pub/bibliography
+Location: file://ftp.cs.umanitoba.ca/pub/bibliographies
+Contact: Alf-Christian Achilles <achilles@ira.uka.de>
+Record: bos@avon.dcs.gla.ac.uk Thu Jun 30 10:30:54 1994
+Updated: bosullvn@gosset.maths.tcd.ie Wed Mar 22 12:14:37 1995
+
+Name: Hyperbole
+Keywords: hypertext, Emacs, World Wide Web, Internet
+Description: Hyperbole is an open, efficient, programmable information
+    management and hypertext system.  It is intended for everyday work
+    on any UNIX platform supported by GNU Emacs.  It also works with
+    the versions of Emacs that support multiple X windows: GNU Emacs
+    V19, Epoch and Lemacs.  Hyperbole allows hypertext buttons to be
+    embedded within unstructured and structured files, mail messages
+    and news articles.  It offers intuitive mouse-based control of
+    information display within multiple windows.  It also provides
+    point-and-click access to Info manuals, ftp archives, Wide-Area
+    Information Servers (WAIS), and the World-Wide Web (WWW) hypertext
+    system through encapsulations of software that support these
+    protocols.
+Location: file://ftp.cs.brown.edu/pub/hyperbole
+Author: Bob Weiner <rsw@cs.brown.edu>
+Contact: hyperbole@cs.brown.edu
+Record: bos@marcus.dcs.gla.ac.uk Mon Jun 27 21:11:30 1994
+
+Name: The Backcountry Home Page
+Keywords: outdoors
+Description: This page is an attempt to organize and archive the
+    backcountry related information that is available on the Internet,
+    i.e. ``net.wisdom''. Much of the information contained here has
+    been gleaned from the rec.backcountry Usenet newsgroup.
+Location: http://io.datasys.swri.edu/
+Contact: Stephen Johns <johns@swri.edu>
+Record: bos@marcus.dcs.gla.ac.uk Sun Jun 26 22:31:37 1994
+
+Name: A Gallery of Interactive On-Line Geometry
+Keywords: geometry, mathematics
+Description: Play with tilings of the plane, discrete symmetry groups
+    of the hyperbolic plane, Teichmuller space, and much more.
+Location: http://www.geom.umn.edu/apps/gallery.html
+Contact: webmaster@geom.umn.edu
+Record: bos@savage.dcs.gla.ac.uk Fri Jun 24 11:21:27 1994
+
+Name: TOP
+Keywords: sources, Unix, system software
+Description: TOP is a program which gives continual reports about the
+    state of the system, including a list of the top CPU-using
+    processes.  Version 3 of TOP has three primary design goals: to
+    provide an accurate snapshot of the system and process state, not
+    be one of the top processes itself, and to be as portable as
+    possible.
+Location: file://eecs.nwu.edu/pub/top
+Author: William LeFebvre <phil@eecs.nwu.edu>
+Record: bos@savage.dcs.gla.ac.uk Mon Jun 13 23:00:42 1994
+
+Name: Ultimate Chicken Sandwich
+Keywords: food, sources, sandwiches, chicken
+Ingredients: chicken breast, small ciabatta loaf, parsley, thyme,
+    cumin, paprika, lemon juice, honey, olive oil, tabasco sauce,
+    crushed chillies
+Description: Take the chicken breast.  Flatten it out with the flat of
+    a cleaver, and cut shallow lines along it.  Get some lettuce.
+    Chop it up.  Take the ciabatta loaf, or some other sort of crusty
+    bread roll of your choice and the appropriate dimensions.  Split
+    it and toast lightly while you ...
+        ... take the spices, honey, lemon juice (or white wine
+    vinegar), tabasco sauce, and olive oil.  Mush 'em together (you
+    don't need much; about two tablespoonsful all told) and coat the
+    chicken breast in the mix.
+        Superheat a frying pan.  Put the ring on full blast.  Go open
+    all the windows and turn the extractor fan on full.  When the pan
+    is *very* hot, pour a little oil on and throw the chicken on.
+    There will be smoke all over the shop.  Keep turning the chicken,
+    and pour on a little oil every so often, for one or two minutes.
+    The outer flesh and spicy stuff should go black.
+        Turn the ring down to normal frying temperature, and continue
+    to fry for another five minutes or so.
+        Spread some mayo on the warm toasty bread.  Put the lettuce
+    on.  Throw your now-cooked chicken on, and pop the other half of
+    the bread on top.  Eat.  Enjoy.
+Author: Bryan O'Sullivan <bosullvn@maths.tcd.ie>
+Record: bosullvn@walton.maths.tcd.ie Mon Jun  6 04:24:21 1994
+
+Name: Ultimate Chicken Sandwich - Mark II
+Keywords: food, sources, sandwiches, chicken
+Ingredients: chicken breast, small ciabatta loaf, cranberry sauce,
+    garlic salt, sage and onion stuffing
+Description: Take the chicken breast.  Sprinkle on garlic salt to
+    taste.  Fry it up in the pan.  Split the ciabatta loaf and toast
+    it lightly.  Smoosh it with cranberry sauce.  Slap the chicken on.
+    Smoosh the stuffing on top.  Pop the other half of the ciabatta on
+    top.  Eat.  Enjoy.
+Author: Marcie Jones <jones_m@csvax1.ucc.ie>
+Record: bosullvn@walton.maths.tcd.ie Mon Jun  6 04:30:15 1994
+
+Name: A Practical Introduction to Denotational Semantics
+Keywords: denotational semantics, books
+Description: Quoth Steve Rowley <sgr@ai.mit.edu>: `Allison emphasizes
+    the Pascaloid family of languages.  However, armed with an
+    understanding of denotational semantics at this level, and the
+    semantics appendix to the Scheme report, you will find the rest
+    not at all difficult.  Indeed, one of the hallmarks of Scheme is
+    that it has a SIMPLER semantic definition than Pascal/C, because
+    it imposes fewer limitations.  Simplicity is power.'
+Author: Lloyd Allison
+ISBN: 0-521-31423-2
+Publisher: Cambridge University Press
+Date: 1986
+Record: bosullvn@walton.maths.tcd.ie Fri Jun  3 12:35:52 1994
+
+Name: Denotational Semantics: The Scott-Strachey Approach to Programming Language Theory
+Keywords: denotational semantics, books
+Description: Says Steve Rowley <sgr@ai.mit.edu>: `Stoy is an excellent
+    book, if you want to start from mathematical foundations and are a
+    big fan of the mathematical style.  You should read it sometime in
+    your career, if only to build character.'
+Author: Joseph E. Stoy
+ISBN: 0-262-69076-4
+Publisher: MIT Press
+Date: 1977
+Record: bosullvn@walton.maths.tcd.ie Fri Jun  3 12:33:28 1994
+
+Name: Remote control for Mosaic 2.4 and up
+Keywords: World Wide Web, Emacs
+Description: NCSA Mosaic 2.4 has a feature whereby a running Mosaic
+    process can have a URL to access sent to it by another process.
+    Mike Walker has written some elisp which does the job from Emacs.
+    To use from bibl-mode, grab the code, and set bibl-web-interface
+    to 'mrc-view-url.
+Location: http://ice-www.larc.nasa.gov/~mike/mrc-lib.el
+Location: http://www.ncsa.uiuc.edu/SDG/Software/Mosaic/Docs/remote-control.html
+Author: Mike Walker <M.D.Walker@larc.nasa.gov>
+Record: bosullvn@walton.maths.tcd.ie Sun May 29 15:35:30 1994
+
+Name: Why are there so few female computer scientists?
+Keywords: sociology, computer science, papers
+Description: A very interesting paper on the causes of the low number
+    of practising female computer professionals, and potential
+    solutions to this problem.
+Location: http://www.ai.mit.edu/people/ellens/pap/pap.html
+Author: Ellen Spertus <ellens@ai.mit.edu>
+Record: bosullvn@walton.maths.tcd.ie Tue May 24 22:03:14 1994
+
+Name: Mother Tongue
+Keywords: linguistics, books
+Description: This books traces the etymological and linguistic
+    evolution of English.  Humorous as well as erudite.
+Publisher: Penguin Books
+Author: Bill Bryson
+Date: 1991
+Record: bosullvn@walton.maths.tcd.ie Tue May 17 17:16:24 1994
+
+Name: Computer science technical reports SDI service
+Keywords: technical reports, archives, papers
+Description: As part of the ARPA Electronic Library Project, the
+    Database Group at Stanford is providing a Selective Dissemination
+    of Information (SDI) service to disseminate information about
+    computer science technical reports.  Have a server email you
+    periodic announcements of new papers on topics that interest you.
+Location: http://cs-tr.cs.cornell.edu/Info/cstr.html
+Contact: Tak Yan <tyan@cs.stanford.edu>, elib@db.stanford.edu
+Record: bosullvn@walton.maths.tcd.ie Sat May  7 00:25:01 1994
+
+Name: Partial evaluation resources
+Keywords: partial evaluation, bibliographies, archives
+Description: Online information and bibliographies relating to the
+    Jones, Gomard, and Sestoft book on partial evaluation.
+Contact: Peter Sestoft <sestoft@id.dth.dk>
+Location: file://ftp.diku.dk/pub/diku/dists/jones-book
+Record: bosullvn@walton.maths.tcd.ie Fri May  6 00:18:45 1994
+
+Name: Programming languages research page
+Keywords: programming languages
+Description: A collection of information and resources for research in
+    programming language theory, design, implementation, and related
+    areas.
+Location: http://www.hensa.ac.uk/mirror/http://www.cs.cmu.edu:8001/afs/cs.cmu.edu/user/mleone/web/language-research.html
+Location: http://www.cs.cmu.edu:8001/afs/cs.cmu.edu/user/mleone/web/language-research.html
+Contact: Mark Leone <mleone@cs.cmu.edu>
+Record: bosullvn@walton.maths.tcd.ie Fri May  6 00:05:20 1994
+
+Name: SASOS archive
+Keywords: mailing lists, archives
+Description: Archive of old messages on the Single Address Space
+    Operating Systems mailing list.
+Location: file://cs.dartmouth.edu/pub/sasos/list-archive
+Location: http://www.cs.dartmouth.edu/cs_archive/sasos/sasos.html
+Location: http://web.cs.city.ac.uk/archive/sasos/sasos.html
+Contact: sasos-request@cs.dartmouth.edu
+Record: bosullvn@salmon.maths.tcd.ie Tue Apr 26 22:35:31 1994
+Updated: bos@karkar.dcs.gla.ac.uk Mon Jul 18 16:54:09 1994
+
+Name: Sharlit -- a tool for building optimisers
+Keywords: compilers, papers, optimisers
+Location: file://suif.stanford.edu/pub/papers/tjiang92.ps
+Author: Steve Tjiang <tjiang@synopsis.com>, John L. Hennessy <jlh@vsop.stanford.edu>
+Journal: SIGPLAN Notices 27(7)
+Date: 1992
+Record: bosullvn@walton.maths.tcd.ie Fri Apr 22 17:52:48 1994
+
+Name: The LaTeX Companion
+Keywords: LaTeX, typesetting
+Description: Comprehensive treatise of those points not fully
+    discussed in Leslie Lamport's book `LaTeX: A Document Preparation
+    System', plus lots of info on the extensions of the new LaTeX
+    release, LaTeX 2e.
+Author: Michel Goossens, Frank Mittelbach, Alexander Samarin
+Publisher: Addison-Wesley
+Date: 1994
+ISBN: 0-201-54199-8
+Record: kold@cs.oberlin.edu Thu Apr 21 15:22:10 1994
+
+Name: LaTeX 2e
+Keywords: LaTeX, sources
+Description: This is the forerunner of LaTeX 3, and has supersedes
+    LaTeX 2.09 (yep, it's upwardly compatible).  Includes lots of
+    extra useful functionality above that in 2.09, such as the ability
+    to easily use PostScript rather than Knuth's fonts (handy for
+    low-res printing).
+Location: file://ftp.dante.de/tex-archive/macros/latex2e
+Location: file://pip.shsu.edu/tex-archive/macros/latex2e
+Location: http://www.doc.ic.ac.uk/public/packages/TeX/uk-tex/macros/latex2e
+Contact: latex-bugs@rus.uni-stuttgart.de
+Record: bosullvn@walton.maths.tcd.ie Thu Apr 21 02:19:21 1994
+Updated: bosullvn@gosset.maths.tcd.ie Tue Jan 17 13:34:33 1995
+
+Name: AstroWeb
+Keywords: astronomy
+Description: A useful start-off site for astronomy resources on the Web.
+Location: http://cdsweb.u-strasbg.fr/astroweb.html
+Location: http://fits.cv.nrao.edu/www/astronomy.html
+Record: bosullvn@walton.maths.tcd.ie Sun Apr 17 17:27:02 1994
+
+Name: Shakespearian insult server
+Keywords: humour
+Description: Connect repeatedly for a different baroque insult each time.
+Location: http://oz.sas.upenn.edu/miscellany/insult.script
+Contact: Ranjit Bhatnagar <ranjit@gradient.cis.upenn.edu>
+Record: bosullvn@walton.maths.tcd.ie Sun Apr 17 17:19:05 1994
+
+Name: EInet Galaxy
+Keywords: World Wide Web
+Description: A pretty comprehensive information source for all kinds
+    of pages on the Web.
+Location: http://galaxy.einet.net/galaxy.html
+Contact: galaxy@einet.net
+Record: bosullvn@walton.maths.tcd.ie Sun Apr 17 17:15:40 1994
+
+Name: Willow
+Keywords: bibliographies, Internet, sources, World Wide Web
+Description: Willow is a general purpose information retrieval tool.
+    It provides a single, easy-to-use graphical user interface
+    (X/Motif) to any number of text-based bibliographic databases.  It
+    is fully compatible with WWW/Mosaic and the Z39.50 database access
+    protocol.  There is a WWW/Mosaic home page which fully documents
+    Willow, with color screen-shots of the interface, live demos, a
+    technical description of the architecture, and more.  In addition
+    to the source code, pre-compiled binaries are available for
+    DEC/Ultrix, Sun/Solaris, IBM RS6000/AIX, and DEC/vax-bsd.
+Location: http://www.cac.washington.edu/willow/home.html
+Location: file://ftp.cac.washington.edu/willow
+Contact: willow@cac.washington.edu
+Record: bosullvn@walton.maths.tcd.ie Sat Apr 16 18:36:52 1994
+
+Name: Vibrant
+Keywords: graphics, user interfaces, libraries, sources
+Description: Vibrant is a high-level, multi-platform user interface
+    development library designed and implemented by Jonathan Kans at
+    NCBI.  Vibrant is designed to act as an intermediary between an
+    application program and the underlying windowing system toolkit.
+    The philosophy behind Vibrant is that everything in the published
+    user interface guidelines for the various windowing systems (i.e.,
+    the generic behavior of windows, menus, buttons, etc., to which
+    all programs should conform) is taken care of automatically,
+    without needing attention from the programmer.
+Location: file://ncbi.nlm.nih.gov/toolbox/ncbi_tools
+Author: Jonathan Kans <kans@ncbi.nlm.nih.gov>
+Record: bosullvn@walton.maths.tcd.ie Fri Apr 15 17:17:44 1994
+Updated: bosullvn@bell.maths.tcd.ie Wed Nov 23 20:08:04 1994
+
+Name: The magic garden explained: the internals of UNIX System V, Release 4
+Keywords: books, Unix
+Description: Quoth Peter Chubb <peterc@sour.sw.oz.au>: `this book
+    gives a detailed look at the internal algorithms and data
+    strutures used in System V release 4.0.  It can be used as a
+    commentary on the source, as an adjunct to the header files, as a
+    guide to using crash(1M), or to give more details when writing
+    device drivers.'  Apparently a very good book, and more detailed
+    than other Unix internals books.
+Author: Berny Goodheart, James Cox
+ISBN: 0-13-098138-9
+Publisher: Prentice Hall
+Date: 1994
+Record: bosullvn@walton.maths.tcd.ie Fri Apr 15 17:17:44 1994
+
+Name: SLaTeX
+Keywords: Scheme, LaTeX, sources
+Description: A package for formatting Scheme code nicely within LaTeX
+    documents.
+Location: file://cs.rice.edu/public/slatex.tar.Z
+Author: Dorai Sitaram <dorai@cs.rice.edu>
+Record: bosullvn@walton.maths.tcd.ie Thu Apr 14 22:56:18 1994
+
+Name: Garbage-collecting storage allocator
+Keywords: garbage collection, memory allocation, sources
+Description: A mostly-copying garbage collecting allocator which runs
+    about as fast as code written with malloc and free, and has memory
+    performance which is about as good.  Provides a drop-in
+    replacement for malloc and free.  Runs on *lots* of different
+    systems, including non-Unix ones.  Can also be used to trace
+    memory leaks and memory overwrite problems.  Will run as a
+    generational collector, if asked, to cut down response time burps.
+Location: file://ftp.parc.xerox.com/pub/gc
+Contact: Hans-Jürgen Böhm <boehm@parc.xerox.com>
+Record: bosullvn@walton.maths.tcd.ie Fri Apr  8 22:07:28 1994
+
+Name: Customalloc: efficient synthesised memory allocators
+Keywords: memory allocation, sources, papers
+Description: A paper describing an automatically-generated memory
+    allocator and the performance of the allocators it generates.  The
+    allocators are built based on data gathered from program traces;
+    the resulting codes run up to ten times faster than ordinary
+    allocators.  The paper also notes that programmer-tuned custom
+    memory manager code quite often has *worse* performance than stock
+    code.
+Location: file://ftp.cs.colorado.edu/pub/misc/customalloc-1.0.tar.Z
+Author: Dirk Grunwald <grunwald@cs.colorado.edu>, Ben Zorn <zorn@cs.colorado.edu>
+Journal: Software -- Practice and Experience 23(8)
+Date: August 1993
+Record: bosullvn@walton.maths.tcd.ie Fri Apr  8 21:58:58 1994
+
+Name: Computers and intractability -- a guide to the theory of NP-completeness
+Keywords: computability, books
+Description: Good book on computability issues; also lists a large
+    number of proven NP-complete algorithms. See also Harel, D.,
+    `Algorithmics -- the Spirit of Computing', Addison-Wesley 1987.
+Author: M. R. Garey, D. S. Johnson
+Publisher: W. H. Freeman
+Record: bosullvn@walton.maths.tcd.ie Thu Apr 28 23:42:35 1994
+
+Name: The measured cost of conservative garbage collection
+Keywords: garbage collection, papers, sources
+Description: Compares Böhm and Weiser's conservative mostly-copying
+    collector with BSD, SunOS, and GNU implementations of malloc, and
+    shows that it performs about as well.  Good for waving at
+    malloc/free diehards.
+Author: Benjamin Zorn <zorn@cs.colorado.edu>
+Journal: Software -- Practice and Experience 23(7)
+Date: July 1993
+Record: bosullvn@walton.maths.tcd.ie Fri Apr  8 22:28:51 1994
+
+Name: The Greeks
+Keywords: history, Greece, culture, books
+Description: Noel Chiappa <jnc@lcs.mit.edu> says: `The book in
+    question is perhaps the best general introduction to the Greeks
+    I've ever seen; a constant companion since undergrad days. Since
+    I'm a firm adherent of the school of thought which says you aren't
+    *really* educated unless you've studied them ("their sharper
+    shadow enfolds us all"), I highly recommend it to everyone.'
+Author: H. D. F. Kitto
+Record: jimb@totoro.bio.indiana.edu Thur Apr  7 00:00:00 1994
+
+Name: Functional languages and graphical user interfaces
+Keywords: functional programming, graphics
+Description: Allegedly a good paper.  Briefly covers the standard I/O
+    models (CPS, monadic, etc.), then goes on to discuss GUIs,
+    covering the Fudgets system and Concurrent Clean.
+Location: file://minster.york.ac.uk/reports/YCS-94-223.ps.Z
+Author: Rob Noble <rjn@minster.york.ac.uk>, Colin Runciman <colin@minster.york.ac.uk>
+Record: bosullvn@walton.maths.tcd.ie Wed Apr  6 16:16:39 1994
+
+Name: The Z shell
+Keywords: shells, sources
+Description: A nice shell.  There's not much to choose between this
+    and bash (zsh is smaller, but rather more buggy).
+Location: file://ftp.princeton.edu/pub/zsh
+Contact: zsh-request@cs.uow.edu.au, zsh-list@cs.uow.edu.au
+Record: bosullvn@walton.maths.tcd.ie Wed Apr  6 15:01:18 1994
+
+Name: Xpm library
+Keywords: graphics, X Windows, sources
+Description: From the README: `Here is provided a library containing a
+    set of four functions, similar to the X bitmap functions as
+    defined in the Xlib: XpmCreatePixmapFromData,
+    XpmCreateDataFromPixmap, XpmReadFileToPixmap and
+    XpmWriteFileFromPixmap for respectively including, storing,
+    reading and writing this format, plus four other:
+    XpmCreateImageFromData, XpmCreateDataFromImage, XpmReadFileToImage
+    and XpmWriteFileFromImage for working with images instead of
+    pixmaps.'
+Location: file://ftp.x.org/contrib
+Location: file://avahi.inria.fr/pub
+Author: Arnaud Lehors <lehors@sophia.inria.fr>
+Record: bosullvn@walton.maths.tcd.ie Wed Apr  6 13:32:40 1994
+
+Name: Xfaces
+Keywords: sources, email, X Windows
+Description: Quoth Jamie Zawinski: `Lately I've been using xfaces
+    (3.3, from ftp.x.org).  This is what xbiff++ wanted to be when it
+    grew up - it can display a set of bitmaps, one for each message in
+    your mailbox, and comes with a big set of bitmaps for most of the
+    institutions on the net.  It can also display the name, or
+    subject, or whatever, below the bitmaps.  It understands X-Face:
+    headers.  And you can configure it to ignore certain messages, or
+    to group certain messages together.  For example, I have it
+    configured so that it displays all mail in certain categories
+    (basically, one category for each mailing list that I'm on, plus a
+    category for stuff from variants on "mailer-daemon") as a single
+    icon, with the count of the number of messages in that category in
+    the upper left corner of the icon.'
+Location: file://ftp.x.org/contrib
+Location: file://ftp.cs.indiana.edu/pub/faces/xfaces
+Author: Christopher B. Liebman <liebman@zod.clark.net>
+Record: bosullvn@walton.maths.tcd.ie Wed Apr  6 13:15:45 1994
+
+Name: Bibliography mode
+Keywords: Emacs, packages, sources
+Description: A package for maintaining bibliography files, i.e.
+    databases of information on a variety of useful information.  Also
+    allows data on the net to be accessed with ease.  Runs under FSF
+    and Lucid Emacs 19.
+Location: file://ftp.maths.tcd.ie/pub/bosullvn/elisp/bibl-mode.tar.gz
+Location: http://www.maths.tcd.ie/~bosullvn/bibliography.html
+Location: http://www.hmc.edu/~jared/packages/emacs/bibl-mode
+Author: Bryan O'Sullivan <bos@serpentine.com>
+Record: bosullvn@walton.maths.tcd.ie Mon Apr  4 23:52:44 1994
+Updated: bos@serpentine.com Sat May 27 17:26:24 1995
+
+Name: Multiple precision number package archive
+Keywords: sources, archives, mathematics
+Description: A whole slew of different extended integer and rational
+    number math packages are archived, or pointed at, here.
+Location: file://ftp.funet.fi/pub/sci/math/multiplePrecision
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:25:03 1994
+
+Name: W3
+Keywords: Emacs, packages, sources, World Wide Web
+Description: W3 is a hypertext (specifically World Wide Web) browser
+    for emacs.  The browser supports all HTML elements, and every url
+    type except wais - which will be coming soon, as soon as I figure
+    out how wais.el works.  If you are using Lucid Emacs, Epoch, or
+    Emacs19, W3 will support multiple fonts, highlighting, etc.  If
+    you are using a version of Epoch that was compiled with the
+    add-graphic-zone extensions, you will be able to view inlinded
+    images within the emacs buffer (currently supports 11 types of
+    embedded graphics, but you must have the pbmplus package to use
+    this).
+Author: William M. Perry <wmperry@indiana.edu>
+Location: file://ftp.cs.indiana.edu/pub/elisp/w3
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Dylan stuff
+Keywords: Dylan
+Description: Web resources on Apple's Dylan language.
+Location: http://www.cambridge.apple.com/dylan/dylan.html
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+Updated: bos@serpentine.com Mon May 29 22:38:50 1995
+
+Name: Anime archive site
+Keywords: archives, graphics, anime
+Description: FTP site with lots of anime gifs.
+Location: file://biom3.univ-lyon1.fr/pub/images
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: The RICHH archive
+Keywords: fiction
+Description: Yow!  Lots of RICHH articles in one place!
+Location: http://www.mit.edu:8001/afs/athena/user/t/h/thomasc/Public/richh/richh.html
+Author: richh@netcom.com
+Contact: Thomas Colthurst <thomasc@athena.mit.edu>
+Record: bosullvn@walton.maths.tcd.ie Tue May 17 17:16:21 1994
+
+Name: GI Scheme Archive
+Keywords: archives, Scheme, sources
+Description: The German Computer Science Society SCHEME Archive
+Location: file://faui80.informatik.uni-erlangen.de/pub/scheme
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: External memory manager example
+Keywords: operating systems, papers
+Description: `... you'll find the sources for a very simple external
+    memory manager used in a tutorial on external memory management
+    (netmem.shar, netmem.shar.README).  It doesn't actually do DSM,
+    but is a good vehicle for understanding the external memory
+    management interfaces.'
+Location: file://mach.cs.cmu.edu/doc/published/ex-pag.tutorial
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: The Simple Book
+Keywords: books, management
+Description: I'm not sure, but it seems to be about how to run
+    organizations and hold technical discussions.  RMS typed in a
+    section of it for Roland McGrath to explain why he discourages
+    discussions.
+Author: Marshall T. Rose
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: North American Directory Forum
+Keywords: Internet, servers, archives, standards
+Description: Information about the people who are now running what
+    remains of the whois database.
+Location: file://ftp.ics.uci.edu/mrose/nadf
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Process migration papers
+Keywords: operating systems, papers
+Description: Papers about process migration and NORMA stuff under
+    Mach.
+Location: file://drei.informatik.uni-kl.de/pub/outgoing/dejan.ps.Z
+Location: file://drei.informatik.uni-kl.de/pub/outgoing/sedms2.ps.Z
+Author: Dejan Milojicic <dejan@informatik.uni-kl.de>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Coke server
+Keywords: protocols, servers
+Description: A machine on the net hooked up to a coke machine.  Roland
+    McGrath says: `you can connect to the Coke port to do all the Coke
+    operations you can do from the Coke terminal.  I don't remember
+    the port number ... is it COKE on a telephone keypad?'
+Location: telnet://camelot.ai.mit.edu:2653/
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: HTML helper mode
+Keywords: World Wide Web, Emacs, packages, sources
+Description: Html-helper-mode makes it easier to edit HTML documents
+    from within emacs. It shares some features with the other HTML
+    modes and was originally based on Marc Andreessen's
+    html-mode. html-helper-mode has been tested with emacs18 and
+    emacs19, and should also work fine with Lucid and Epoch.  The main
+    feature is that HTML tags are part of the mode: one simple
+    keysequence will insert them for you. Alternately you can complete
+    on a partial tag in the buffer. There's also support for
+    indentation of nested lists, new buffer skeletons, timestamps,
+    syntax colouring and various other useful things. See the WWW
+    document for a full explanation.  Version 2.0 is the first
+    official release after two beta tests. It is only slightly
+    different from the last beta release, version 1.34.
+Location: file://ftp.reed.edu/pub/src
+Contact: Nelson Minar <nelson@reed.edu>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: The comp.os.research FAQ
+Keywords: FAQs, Internet, World Wide Web, operating systems
+Description: Doesn't just cover overview OS research material, but
+    also points to interesting books, papers, and software packages of
+    wider interest (e.g. threads packages).  Access via the Web is the
+    way to go.
+Location: file://ftp.maths.tcd.ie/pub/bosullvn/comp.os.research
+Location: http://www.maths.tcd.ie/scrg/os-faq.html
+Author: Bryan O'Sullivan <bosullvn@maths.tcd.ie>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: HTML mode
+Keywords: World Wide Web, Emacs, packages, sources
+Description: With this package it is very easy to write html pages for
+    the World Wide Web (WWW). For example, in most cases the user gets
+    help to construct a specific link by examples or by a completition
+    list with possible input strings.
+Location: file://info.cern.ch/pub/www/contrib/hm--html-menus-4.1.tar.gz
+Location: file://sunsite.unc.edu/pub/Linux/apps/editors/emacs/hm--html-menus-4.1.tar.gz
+Location: file://ftp.rrzn.uni-hannover.de/pub/unix/editors/lemacs/contrib/hm--html-menus-4.1.tar.gz
+Contact: Heiko Münkel <muenkel@daedalus.tnt.uni-hannover.de>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: comp.lang.misc archives
+Keywords: archives, free software, languages, surveys
+Description: Catalogue of free compilers/interpreters/language tools.
+Location: file://rtfm.mit.edu/pub/usenet-by-group/comp.lang.misc
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: prooftree.tex
+Keywords: TeX, logic
+Description: TeX macros for formatting proof trees.  Paul Taylor
+    <pt@doc.ic.ac.uk> sez: `...which you can get from [the address
+    below], where the diagrams are too.  Popular though these macros
+    are, they are only a prototype (albeit better than most of the
+    alternatives).  Personally, I prefer the box method (boxproof.tex)
+    of proof.'
+Location: file://theory.doc.ic.ac.uk//tex/contrib/Taylor/tex
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Network freedom info
+Keywords: Internet, electronic freedom
+Description: Michael Chui <mchui@cs.indiana.edu> writes: `I do try to
+    keep up with the EFF and CPSR announcements on comp.org.eff.talk
+    and comp.org.eff.news, though.  WIRED magazine also has a lot of
+    relevant material.'
+Location: http://www.wired.com/
+Location: http://www.eff.org/
+Location: news:comp.org.eff.talk
+Location: news:comp.org.eff.news
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: UnderWorld Industries' Web's Edge page
+Keywords: World Wide Web
+Description: An interestiing and eclectic mix of stuff; fringe culture,
+    Web's edge.  Go there and see for yourself.
+Location: http://kzsu.stanford.edu/uwi.html
+Contact: Jon Van Oast <jon@kzsu.stanford.edu>
+Record: bosullvn@walton.maths.tcd.ie Sat May  7 21:38:44 1994
+
+Name: Generic Window Manager
+Keywords: X Windows, sources
+Description: A window manager you can customize using its own
+    programming language.
+Location: file://ftp.x.org/contrib/gwm
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Miscellaneous papers
+Keywords: papers
+Description: Chris Haynes says: `There are a bunch of types papers in
+    dvi form in /nfs/sunfish/u/chaynes/types/papers.  TOILPOPL.dvi is
+    Bruce's OOP paper.  Several of the Sheard papers deal with type
+    reflection problems.  They look very interesting, but I haven't
+    had a change to study them yet.  You might enjoy browsing the
+    abstracts of papers in this directory with a dvi previewer.'
+Location: file://blandy@kiwi.ucs.indiana.edu/nfs/sunfish/u/chaynes/types/papers
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: A commonsense approach to the theory of error correcting codes
+Keywords: papers
+Description: Karl Fogel <kfogel@cs.oberlin.edu> says it's cool.
+Author: Benjamin Arazi
+Publisher: MIT Press
+Date: 1988
+ISBN: 0-262-01098-4
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Scheme 48
+Keywords: Scheme, sources, interpreters
+Description: A Scheme interpreter written entirely in Scheme.  Very
+    clean structure.  Compiler-only; interactive interpreter compiles
+    its input before executing it.  All code is compiled down to a
+    byte-code, interpreted by a virtual machine written in a subset of
+    Scheme which can be easily compiled into good C.
+Location: file://ftp.ai.mit.edu/pub/s48/scheme48.tar.gz
+Location: http://www-swiss.ai.mit.edu/~jar/s48.html
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: PreScheme compiler
+Keywords: Scheme, sources, compilers
+Description: a compiler that translates a subset of scheme into
+    idiomatic C code (i.e. values are not tagged, loops become loops,
+    etcetera).  Sort of strictly typed, but doesn't use Hindley-Milner
+    type inference.  Used to compile the Scheme 48 virtual machine.
+Location: file://martigny.ai.mit.edu/pub/jar/rk/compiler.2.22.94.tar.Z
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+Updated: bos@karkar.dcs.gla.ac.uk Fri Aug 26 16:03:01 1994
+
+Name: Dr. Fun
+Keywords: graphics
+Description: An on-line Gary Larson-esque feast of fun, without any of
+    Larson's boundaries of good taste.
+Location: http://sunsite.unc.edu/Dave/drfun.html
+Location: http://www.mcc.ac.uk/Dr-Fun/drfun.html
+Location: http://www.mcc.ac.uk/Dr-Fun/Dr-Fun/latest.jpg
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+Updated: bos@serpentine.com Mon Jun  5 23:05:00 1995
+
+Name: Managing the Non-Profit Organization
+Keywords: books, management
+Description: Joe Arceneaux says: `Peter Drucker, the management guru,
+    has a book out called ``Managing the Non-Profit Organization''.  It
+    has a lot to say about dealing with people in the non-profit
+    context.'
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Internet System Handbook
+Keywords: books, Internet, protocols, system administration
+Description: It's about things like the DNS, etcetera.  Quoth Karl
+    Fogel <kfogel@cs.oberlin.edu>: `I also bought (for $46) the
+    Internet System Handbook, the big textbook-like tome with the
+    pastel pink/green/yellowish cover, written by people on the IETF.
+    It's answering all my questions and more -- check it out if you
+    get a chance.  The best of the several DNS sections in it begins
+    on or around page 477...'  Latest reprint with corrections appears
+    to be from Jan. 1993.
+Author: Daniel C. Lynch, Marshall T. Rose, editors
+Publisher: Addison-Wesley
+ISBN: 0-201-56741-5
+Record: bosullvn@walton.maths.tcd.ie Mon Apr  4 23:32:35 1994
+
+Name: Cyrillic fonts
+Keywords: fonts, internationalisation
+Description: It's a long way to ftp, but ...
+Location: file://etlport.etl.go.jp/pub/mule/fonts/ETL
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Xfig
+Keywords: sources, graphics, X Windows
+Description: Xfig is a menu-driven tool that allows the user to draw
+    and manipulate objects interactively in an X window.  The
+    resulting pictures can be saved, printed on postscript printers or
+    converted to a variety of other formats (e.g. to allow inclusion
+    in LaTeX documents).
+Location: file://ftp.x.org/contrib/R5fixes/xfig-patches/xfig.2.1.8.tar.Z
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: fastDNAml
+Keywords: sources, molecular biology
+Description: A program for doing maximum-likelihood phylogenetic analysis.
+Location: file://sunflower.bio.indiana.edu/bio/mb/fastDNAml
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: RFC mailing list
+Keywords: Internet, mailing lists, protocols, standards
+Description: A mailing list for announcements of new RFC's and perhaps
+    some other things.
+Contact: rfc-dist@nic.ddn.mil
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: UNIX Network Programming
+Keywords: books, Internet, Unix
+Author: W. Richard Stevens
+Description: `There are probably eight copies around your campus --
+    it's a classic on the level of K&R or Foley and van Damme.
+    Prentice Hall publishes it, ISBN 0-13-949876-1.'
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Glasgow papers archive
+Keywords: archives, languages, Haskell, papers
+Description: An FTP archive containing papers written by people from
+    Glasgow.
+Location: file://ftp.dcs.glasgow.ac.uk//pub/glasgow-fp/papers
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Mach FTP archive and home page
+Keywords: archives, documentation, mailing lists, operating systems, papers, sources
+Description: An FTP archive for all the MACH stuff.  Contains MK
+    source code, papers, the mach3 mailing list FAQ, etcetera.
+    Because of CMU's screwy FTP server (or is it AFS?), you can't use
+    ange-ftp on it.
+Location: file://mach.cs.cmu.edu/
+Location: http://www.cs.cmu.edu:8001/afs/cs.cmu.edu/project/mach/public/www/mach.html
+Record: bosullvn@walton.maths.tcd.ie Sat Apr 16 23:12:05 1994
+
+Name: Insidious Big Brother Database
+Keywords: Emacs, mail, sources, packages
+Description: Keeps track of all email addresses and other information
+    about people with whom you deal.
+Location: file://ftp.lucid.com/pub/hacks
+Author: Jamie Zawinski <jwz@lucid.com>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: MPI information
+Keywords: parallel programming, sources
+Description: Implementations and documentation on the MPI message
+    passing interface standard.
+Location: file://ftp.epcc.ed.ac.uk/pub/chimp/release
+Location: http://www.mcs.anl.gov/mpi/mpi-report/mpi-report.html
+Location: file://info.mcs.anl.gov/pub/mpi
+Location: file://tbag.osc.edu/pub/lam
+Location: http://www.netlib.org/mpi/
+Location: http://www.cs.msstate.edu/dist_computing/mpi.html
+Contact: epcc-support@ed.ac.uk
+Record: bosullvn@walton.maths.tcd.ie Fri May 13 16:35:49 1994
+
+Name: Ranjit's playground
+Keywords: World Wide Web
+Description: Lots and lots and lots of stuff, all interesting.
+Location: http://oz.sas.upenn.edu/
+Contact: Ranjit Bhatnagar <ranjit@gradient.cis.upenn.edu>
+Record: bosullvn@walton.maths.tcd.ie Sun May  8 01:43:33 1994
+
+Name: AUC TeX
+Keywords: TeX, Emacs, sources, packages
+Description: Spiffy package for editing LaTeX documents under Emacs.
+Location: file://ftp.iesd.auc.dk/pub/emacs-lisp
+Location: http://www.iesd.auc.dk/~amanda/auctex/
+Author: Per Abrahamson <abraham@iesd.auc.dk>
+Record: bosullvn@walton.maths.tcd.ie Wed May  4 14:05:32 1994
+
+Name: HOST
+Keywords: journals, history, science, technology
+Description: Good and interesting stuff -- an electronic bulletin for
+    the history and philosophy of science and technology.
+Location: file://epas.utoronto.ca/pub/ihpst
+Contact: Julian Smith <jsmith@epas.utoronto.ca>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: The task of a referee
+Keywords: journals, papers
+Description: Worth looking at before writing a paper.
+Author: A. Smith
+Journal: IEEE Computer (23:4), pp. 65-79
+Date: April 1990
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: A bibliography on garbage collection
+Keywords: garbage collection, bibliographies
+Description: This paper references literature related to garbage
+    collection in uniprocessor, parallel, distributed, real-time,
+    object-oriented, functional and logic programming systems.
+Author: Nandakumar Sankaran <nandu@cs.clemson.edu>
+Location: file://ftp.cs.clemson.edu/pub/papers/nandu
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Survey of real-time operating systems
+Keywords: operating systems, surveys
+Description: From the abstract: `This paper describes current research
+    in real time operating systems.  Due to its importance to
+    real-time systems, we begin this survey with a brief summary of
+    relevant results in real-time scheduling and synchronization.
+    Real-time operating systems are described in terms of the
+    primitives and constructs offered to application programs. In
+    addition, the effects of underlying computer architectures on
+    real-time operating systems are discussed, followed by a
+    description of benchmarks and evaluation methods for real-time
+    systems.'
+Author: Kaushik Ghosh <kaushik@cc.gatech.edu>
+Location: file://ftp.cc.gatech.edu/pub/tech_reports/1993/GIT-CC-93-18.ps.Z
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Surveys of garbage collection techniques
+Keywords: garbage collection, surveys, bibliographies
+Description: Paul Wilson writes: `The only broad, modern survey of GC
+    techniques I know of is mine from the proceedings of the
+    International Workshop on Memory Management.  (I would never say
+    such a thing myself, but I'm told it's pretty good :-).  For one
+    thing, it's got the first coherent discussion of various
+    incremental techniques.
+        `There's also a new, long version that I've submitted to
+    Computing Surveys.  It's 60-odd pages of 2-up 10pt text, plus
+    about 160 citations.  Even so, it doesn't cover parallel and
+    distributed GC's.  (I think the discussion of incremental
+    techniques lays the right groundwork for understanding distributed
+    GC techniques, though.)'  See the readme file for more details.
+Contact: Paul Wilson <wilson@cs.utexas.edu>
+Location: file://ftp.cs.utexas.edu/pub/garbage
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: JumpStation
+Keywords: Internet, World Wide Web
+Description: Uses Mosaic forms to search the Web for data.  Seems to
+    be pretty comprehensive.
+Location: http://www.stir.ac.uk/jsbin/js
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Bugtrack
+Keywords: debugging, sources
+Description: Bugtrack is a support system for tracking bug reports.
+    As a new bug report arrive, you create a ``bug'', assigning it a
+    priority, severity and difficulty.  The bug reports are collected
+    in folders, much like RMAIL folders.  You can get a summary of the
+    bug reports, sorted by priority, severity, difficulty or
+    chronological.  The summary normally excludes ``closed'' bugs, but
+    if you give a prefix argument the summary will also include
+    inactive bug reports.  See also: GNATS.
+Location: file://ftp.lysator.liu.se/pub/emacs
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Parallel functional programming bibliography
+Keywords: archives, functional programming, bibliographies
+Description: This bibliography cites and comments more than 350
+    publications on the parallel functional programming research of
+    the last 15 years. It focuses on the software aspect of this area,
+    i.e. on languages, compile-time analysis techniques (in particular
+    for strictness and weight analysis), code generation, and runtime
+    systems. Excluded from this bibliography are publications on
+    special architectures and on garbage collection unless they
+    contain aspects interesting for above areas. Most bibliographic
+    items are listed inclusive their full abstracts.
+Location: file://ftp.risc.uni-linz.ac.at/pub/reports/parlabpfpbib.ps.Z
+Location: file://ftp.risc.uni-linz.ac.at/pub/reports/parlabpfpbib.dvi.Z
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: AVES
+Keywords: archives, graphics
+Description: Have you checked out AVES lately?  Bird gifs available
+    via ftp or gopher.
+Location: file://vitruvius.cecer.army.mil/pub
+Contact: Russ Glaeser <rglaeser@cecer.army.mil>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Portable Scheme debugger
+Keywords: Scheme, debugging, sources
+Description: Psd is a source level debugger for R4RS-compliant Scheme
+    interpreters.  It includes a major mode for Emacs, and allows
+    breakpoints to be set and cleared, evaluation to be
+    single-stepped, and many other features.
+Location: file://ftp.cs.tut.fi/pub/src/languages/schemes
+Location: file://swiss-ftp.ai.mit.edu/pub/scm
+Author: Pertti Kellomäki <pk@cs.tut.fi>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+Updated: bos@avon.dcs.gla.ac.uk Wed Aug  3 20:54:30 1994
+
+Name: gnu.emacs.sources archive
+Keywords: archives, sources, Emacs
+Description: Archive of things posted to the gnu.emacs.sources
+    newsgroup.
+Location: file://wuarchive.wustl.edu/usenet/gnu.emacs.sources
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Managing NFS and NIS
+Keywords: system administration, networking, NFS, NIS, Internet
+Author: Hal Stern
+Description: Covers NFS and NIS (YP) system administration.  Includes
+    useful things like NFS internals, network security, centralising
+    mail services, debugging network problems, NFS tuning, the
+    automounter, and PC/NFS.
+ISBN: 0-937175-75-7
+Publisher: O'Reilly
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Gofer
+Keywords: functional programming, Haskell, sources
+Description: An interpreter and compiler for a language very similar
+    to Haskell; much faster to use than GHC or HBC for small programs,
+    because it compiles and loads programs amazingly quickly.  Written
+    in C, and portable; you don't need a big machine.
+Location: file://nebula.cs.yale.edu/pub/haskell/gofer
+Contact: Mark Jones <jones-mark@cs.yale.edu>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Haskell Report v1.2
+Keywords: functional programming, Haskell
+Description: The standard for the Haskell functional programming
+    language.
+Location: file://nebula.cs.yale.edu/pub/haskell/report
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: A gentle introduction to Haskell
+Keywords: tutorials, Haskell, functional programming
+Description: A tutorial paper for the Haskell language from the May
+    1992 edition of SIGPLAN Notices (by Hudak and Fasel).  Should be
+    read with the Haskell report nearby.
+Location: file://nebula.cs.yale.edu/pub/haskell/tutorial
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: The FSF -- gnu.ai.mit.edu
+Keywords: logins, Internet
+Description: The GNU Project machines.  Login via gate-[1-3] from outside.
+    68k NEWS-OS: spiff  [gate-3]
+    HP-9000/375 4.3BSD: albert, churchy, geech, mole
+    HP-9000/384 HP/UX-7.0: goldman, kropotkin, nutrimat
+    PC/RT 4.3BSD: wombat  [gate-2]
+    RS/6000 AIX-3.2: hal
+    Sun-3/140 SunOS: apple-gunkies
+    Sun-3/60 SunOS: sugar-bombs  [gate-1]
+Location: telnet://gate-1.gnu.ai.mit.edu
+Location: telnet://gate-2.gnu.ai.mit.edu
+Location: telnet://gate-3.gnu.ai.mit.edu
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Lecture Notes in Computer Science no. 371
+Keywords: compilers, papers, books
+Description: According to Werner Assmann (assmann@prosun.first.gmd.de),
+    this book covers various techniques used to make compilers run faster.
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: SCM
+Keywords: Scheme, sources, interpreters
+Description: Fast Scheme interpreter; widely used.  The internals look
+    rather cheesy.  Runs on most Unix variants, and a lot of non-Unix
+    machines also (DOS, Amiga, ...).
+Contact: Aubrey Jaffer <jaffer@ai.mit.edu>
+Location: file://altdorf.ai.mit.edu/pub/jaffer
+Record: bosullvn@walton.maths.tcd.ie Thu Apr 14 14:51:57 1994
+
+Name: SWITCHinfo FTP server
+Keywords: Internet, archives
+Description: A good place to get GNU software in Switzerland, as well
+    as other stuff.
+Location: file://ftp.switch.ch/mirror/gnu
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: xkernel MachNetIPC stuff
+Keywords: Mach, sources
+Description: Got this message sent to the xkernel-interest@cs.arizona.edu
+    and xkernel-mnipc@cs.arizona.edu lists, as well as the mach mailing
+    lists:
+      The xkernel group at the University of Arizona is pleased to
+    announce the beta release of MachNetIPC, which extends Mach3 IPC
+    semantics to a general network environment.  The work is described
+    in the Usenix 93 Mach Symposium proceedings.
+      To retrieve the software, anonymous ftp to cs.arizona.edu and get
+    the files README.machnetipc and machnetipc.tar.Z in the xkernel
+    directory.  This release contains all source code for MachNetIPC,
+    supporting protocols, and backwards compatible xkernel
+    infrastructure enhancements.  If you are not already running the
+    xkernel version 3.2, you will need to retrieve the file
+    xkernel.tar.Z and install that first.
+Location: file://cs.arizona.edu/xkernel
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: BSD T-shirts
+Description: The new 4.4BSD T-shirts are just now hot off the
+    presses. The new art has the BSD Daemon standing in Birkenstocks
+    on top of the world skewering a deflated deathstar on his
+    trident. Under the picture is the text ``Free the Berkeley
+    4.4!''. The shirts are available only in ash, as that color is
+    designed to integrate with the six color half tone artwork. The
+    shirts are Hanes ``Beefy-T'' preshrunk 100% cotton; they are
+    generously cut, so after their first washing will fit similarly to
+    a polyester shirt of the same size. The available sizes are M, L,
+    and XL; the cost is $15 each (shipments to California are $13.86
+    plus $1.14 sales tax). In quantities of ten or more, the price is
+    $12.50 each (shipments to California are $11.55 plus $0.95 sales
+    tax). There is a mailing fee of $4.00 independent of order size
+    (for orders outside the United States, the mailing fee is $4.00 if
+    you want your order sent by surface mail or $8.00 if you want your
+    order sent via airmail).  To order, send me your postal address
+    and mail your check or money order (payable in US dollars) to:
+	Kirk McKusick
+	1614 Oxford St
+	Berkeley, CA 94709-1608
+	USA
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: config.guess
+Keywords: free software, FSF, sources
+Description: A shell script to guess the configuration name for the
+    system on which it runs.
+Contact: configure@cygnus.com
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: VM
+Keywords: Emacs, mail, sources
+Description: A mail reader for GNU Emacs.
+Location: file://ftp.uu.net/networking/mail/vm
+Contact: Kyle Jones <kyle_jones@wonderworks.com>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+Updated: bos@serpentine.com Sat May 27 16:30:27 1995
+
+Name: regex
+Keywords: regular expressions, C libraries, sources
+Description: A library for matching and searching for regular
+    expressions.
+Location: file://ftp.cs.umb.edu/pub/gnu
+Contact: Jim Blandy <jimb@gnu.ai.mit.edu>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Requests For Comments - documents describing Internet protocols
+Keywords: Internet, standards, protocols, archives, papers, RFCs
+Description: Articles describing many protocols used on the Internet.
+Location: file://ftp.uu.net/inet/rfc
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: FAQ for alt.cd-rom
+Keywords: CD ROMs, FAQs
+Location: file://wc.cdrom.com/pub/faq
+Contact: Jim Raehl
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Persistence of Vision Ray Tracer FTP site info...
+Keywords: graphics, ray tracing
+Description: Ray tracer, successor to DKBtrace.
+Location: file://alfred.ccs.carleton.ca/pub/dkbtrace/gifs
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: DECstation frame buffer drivers, hardware info
+Keywords: hardware, documentation, DEC
+Location: file://crl.dec.com/
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Other notable DEC trash
+Keywords: DEC, archives
+Location: file://gatekeeper.dec.com/
+Location: file://decuac.dec.com/
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Emacs Lisp archive
+Keywords: Emacs, archives
+Description: Loads of packages for GNU Emacs and its derivatives.
+Location: file://archive.cis.ohio-state.edu/pub/gnu/emacs/elisp-archive
+Contact: Dave Brennan <brennan@rtp.dg.com>, Dave Sill <de5@ornl.gov>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Xemacs
+Keywords: Emacs, X Windows, sources
+Description: Xemacs is a powerful, extensible text editor with full
+    GUI support, and is upwardly compatible with industry-standard GNU
+    Emacs.  It stems from a collaboration of Lucid, Inc. with Sun
+    Microsystems, Inc. and the University of Illinois.  Xemacs is
+    currently in version 19.10, which offers very nice Motif menus and
+    scroll bars, inline images, multiple fonts, colors, mode-based
+    highlighting, etc. etc. etc. ad nauseum.
+Location: file://cs.uiuc.edu/pub/lepoch-files/lemacs
+Location: file://ftp.lucid.com/pub/lemacs
+Contact: help-lucid-emacs@lucid.com
+Author: Jamie Zawinski <jwz@mcom.com>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+Updated: bosullvn@bell.maths.tcd.ie Mon Oct 24 17:45:50 1994
+
+Name: comp.archives references
+Keywords: archives
+Description: Doesn't archive cool programs; instead, archives netnews
+    articles which say where to get cool programs.
+Location: file://cs.dal.ca/pub/comp.archives
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Zebu
+Keywords: Scheme, parsers, sources
+Description: LALR(1) parser generator which generates Scheme code.
+Location: file://utsun.s.u-tokyo.ac.jp/lang/scheme-utl/zebu
+Superceded-by: lalr.shar
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Cool weather stuff
+Keywords: weather, graphics, servers
+Description: GIF images of weather maps, references to other sites
+    with geological and meteorological data.
+Location: file://vmd.cso.uiuc.edu/wx
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Xbattle
+Keywords: games, X Windows
+Description: Real-time strategy game for X Windows in which players
+    direct the flow of sludge to fight other players' sludge, and take
+    over their sludge sources.
+Contact: xbattle@park.bu.edu
+Location: file://park.bu.edu/pub/xbattle
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Gambit
+Keywords: Scheme, papers
+Description: Scheme interpreter and compiler for 68000's.  Uses a
+    virtual machine, and perhaps supports parallel evaluation on
+    appropriate architectures.
+Location: file://acorn.cs.brandeis.edu/dist
+Location: file://trex.iro.umontreal.ca/pub/gambit
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Dylan book
+Keywords: Scheme, documentation
+Description: Book published by Apple describing their new language,
+    Dylan.  It's an object-oriented child of Scheme.  Send mail to
+    the EMail-address given below, and that person will send you a
+    copy of the book.
+Contact: dylan-manual-request@cambridge.apple.com
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Dylan mailing list and newsgroup
+Keywords: Scheme, mailing lists
+Description: Mailing list for the discussion of Dylan.  Gatewayed to
+    comp.lang.dylan.
+Contact: info-dylan@cambridge.apple.com
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: EuLisp
+Keywords: Scheme
+Description: Another object-oriented extension to Scheme.  Popular in
+    Europe.
+Location: file://liasun3.epfl.ch/pub/lisp/eulisp
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Polyworld
+Keywords: artificial life
+Description: Artificial life system which runs on SGI machines.
+Location: file://ftp.apple.com/pub/polyworld
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: X Window System
+Keywords: X Windows, documentation
+Contact: Jim Gettys <jg@crl.dec.com>, Bob Scheifler <rws@x.org>
+Description: A book about X Windows recommended by Stephen Gildea.
+Record: bosullvn@walton.maths.tcd.ie Thu Apr 14 13:44:12 1994
+
+Name: Plan 9 papers
+Keywords: Plan 9, operating systems, papers
+Description: David Carlton said: There would indeed seem to be some
+    new Plan 9 papers available - the manual is now available, and
+    also some more miscellaneous papers.  (The old ones are in
+    plan9doc.)  If you want to use ghostscript/view on the manual,
+    apply totoro:~carlton/etc/plan-9-ps-doc-patch to it.
+Location: ftp://plan9.att.com/plan9/plan9man
+Location: ftp://plan9.att.com/plan9/plan9doc
+Contact: Rob Pike <rob@research.att.com>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+Updated: bosullvn@gosset.maths.tcd.ie Mon May  1 02:26:24 1995
+
+Name: Glasgow Haskell Compiler (GHC)
+Keywords: functional programming, Haskell
+Description: Peyton Jones's compiler, translating Haskell into C.
+Location: file://ftp.dcs.glasgow.ac.uk/pub/haskell/glasgow
+Contact: haskell@dcs.glasgow.ac.uk
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: HBC (Chalmers' Haskell B Compiler)
+Keywords: functional programming, Haskell
+Description: Haskell B. is a (small) extension of Haskell 1.1,
+    (Haskell 1.1 is described in the Haskell report).  This release of
+    hbc (the Haskell B.  compiler) contains some major changes and the
+    object code is incompatible with the previous versions.
+Location: file://cs.ucsd.edu/pub/lml
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Scheme repository
+Keywords: Scheme, archives, papers
+Description: Repository for papers about Scheme, Scheme
+    implementations, etcetera.  They have R4RS.
+Contact: scheme-repository-request@cs.indiana.edu
+Location: http://www.cs.indiana.edu/scheme-repository/home.html
+Location: file://ftp.cs.indiana.edu/pub/scheme-repository
+Location: file://ftp.inria.fr/lang/Scheme
+Location: file://faui80.informatik.uni-erlangen.de/pub/scheme/yorku
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+Updated: bosullvn@bell.maths.tcd.ie Wed Nov 23 21:42:45 1994
+
+Name: Lyrics Archive
+Keywords: archives, music
+Description: "...and thanks to the lyrics archive, late of ftp.uwp.edu"
+Location: file://ftp.sunet.se/pub/music/lyrics
+Location: http://www.mcc.ac.uk/Lyrics
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+Updated: bos@savage Fri Jun 17 18:21:19 1994
+
+Name: Guide to the Internet
+Keywords: Internet
+Description: Introductory texts on the Internet
+Location: file://ftp.nwnet.net/user-docs
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: On-line unpacked X sources
+Keywords: X Windows, sources
+Description: Some X sources (perhaps all?) unpacked and ready to read.
+Location: file://ftp.x.org/pub/R5untarred
+Record: bosullvn@walton.maths.tcd.ie Thu Apr 28 23:28:52 1994
+
+Name: Xpaint
+Keywords: X Windows, sources
+Description: ?
+Location: file://ftp.inria.fr/X/contrib/clients
+Record: bosullvn@walton.maths.tcd.ie Thu Apr 14 14:52:48 1994
+
+Name: copyright.list
+Keywords: FSF, copyright
+Description: A list of all people who have signed over rights of
+    things to the FSF, and what they've assigned.
+Location: file://gnu.ai.mit.edu/home/fsf/rms/gnuorg/copyright.list
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: GNU coding standards
+Keywords: FSF, standards
+Description: The GNU coding standards - code written for GNU should
+    conform to these standards.
+Location: file://gnu.ai.mit.edu//home/fsf/rms/gnuorg/standards.texi
+Record: bosullvn@walton.maths.tcd.ie Thu Apr 14 14:52:45 1994
+
+Name: Ispell
+Keywords: Emacs
+Description: A decent spell-checker for Emacs
+Location: file://ftp.switch.ch/mirror/gnu
+Record: bosullvn@walton.maths.tcd.ie Thu Apr 14 14:52:51 1994
+
+Name: Pictures from space
+Keywords: archives, graphics
+Description: Pictures of the Earth (and just about anything else) from
+    space.  They've got animation, and lots of other stuff.
+Location: http://stsci.edu/top.html
+Location: file://ames.arc.nasa.gov/pub/SPACE
+Record: bosullvn@walton.maths.tcd.ie Thu Apr 14 14:52:58 1994
+
+Name: Bash -- the Bourne Again shell
+Keywords: shells, free software
+Description: The GNU shell, compatible with the Bourne Shell and POSIX
+Location: file://ftp.switch.ch/mirror/gnu
+Contact: bash-Contacts@ai.mit.edu
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Indiana CS department technical report archive
+Keywords: archives, Scheme, papers
+Description: Archive of technical reports produced by Indiana
+    University's CS department, which is where Chez Scheme is written.
+    See IU tech report 355.
+Location: file://ftp.cs.indiana.edu/pub
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Tgif
+Keywords: graphics, X Windows
+Description: Xlib based interactive 2-D drawing facility under X11.
+    Supports hierarchical construction of drawings and easy navigation
+    between sets of drawings.  It can also be used to launch
+    applications.
+Location: file://delphi.cs.ucla.edu/pub/tgif
+Contact: William Chia-Wei Cheng <william@cs.ucla.edu>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: longopts.table
+Keywords: standards, documentation, FSF
+Description: List of long option names and what they mean, to help
+    people use option names consistently across programs.
+Location: file://gnu.ai.mit.edu//gd/gnu/doc/longopts.table
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Thunder-Thumbs
+Keywords: mail, servers
+Description: A silly little mail-server for information about this guy.
+    Finger siffert@spot.colorado.edu for help.
+Contact: Curt Siffert <siffert@colorado.edu>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: rx -- regexp matcher
+Keywords: regular expressions, C libraries
+Description: An alternate implementation of a regexp matcher.  Tom
+    Lord (the author) writes: Rx is at the stage of working well
+    enough for performance tests, but it is not yet a full regex.c
+    replacement.  The immediate plans for rx are to do the necessary
+    work to replace regex.c.  Because of local drainbamage, ange-ftp
+    won't work for that file.  Also, after logging as anonymous, you
+    should cd to the rx directory in one step, not stopping in
+    intermediate directories.  In that tar file, snapshot/README is
+    the next thing to read.
+Location: file://src.doc.ic.ac.uk/pub/gnu/rx-0.05.tar.gz
+Contact: Tom Lord <lord@cygnus.com>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Es, the extensible shell
+Keywords: sources, shells
+Description: It's a shell.  Noah Friedman writes: Well, the difference
+    is, most shells (zsh, bash, etc) have a million little kludges,
+    and after all they they're still not very flexible.  They're big
+    and bloated and slow.
+    `es', on the other hand, has a cleaner syntax (it is very unlike
+    sh).  The quoting rules are far less hairy.  And it's extremely
+    flexible---even the top REPL can be replaced.  It's just a shell
+    function.  (and while dynamic scope is still possible, the
+    capability of lexical scope is an incredible win).
+Location: file://ftp.white.toronto.edu/pub/es
+Contact: es@hawkwind.utcs.toronto.edu
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Linux T-shirt
+Keywords: graphics, operating systems
+Description: T-shirt with the linux logo.  Matt Welsh
+    <mdw@tc.cornell.edu> writes: `On the shirt (which I've got on
+    right now :)) the word "Linux" is in red and the gull (okay, Storm
+    Petrel) is black.'
+Location: file://tc.cornell.edu/pub/mdw/linux-seagull.ps.z
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: XV
+Keywords: graphics, sources, X Windows
+Description: Pixel image viewing program - supports many formats, has
+    zoom and colour/image manipulation facilities.
+Location: file://linc.cis.upenn.edu/pub/xv
+Contact: bradley@cis.upenn.edu
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Cookie server
+Keywords: Internet, servers
+Description: Telnet to port 1234 at astro.temple.edu, and it gives you
+    a cookie!  Seems to be defunct now.
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: WRL Tech Report Service
+Description: Database of technical papers from DEC.  For more info,
+    send it a message with the subject "help".
+Contact: wrl-techreports@decwrl.dec.com
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Self-adjusting binary trees
+Keywords: papers
+Description: The original paper on splay trees, a self-balancing,
+    amortised binary tree structure.
+Journal: Journal of the ACM (32), pp. 652-686
+Date: 1985
+Author: D. D. Sleator, R. E. Tarjan
+Record: bosullvn@walton.maths.tcd.ie Sat Apr 16 19:45:15 1994
+
+Name: lalr.shar
+Keywords: parsers, Scheme, sources
+Supercedes: Zebu
+Description: An LALR parser generator by Mark Johnson.  Kennis says
+    it's a lot better than Zebu, which wasn't written portably.
+Location: file://nexus.yorku.ca/pub/scheme/scm/lalr.shar
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: BIND
+Keywords: Internet, protocols, servers, sources
+Description: A set of programs for handling the DNS (includes named,
+    dig, nslookup, etc.).
+Location: file://gatekeeper.dec.com/pub/misc/vixie
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Concert/C
+Keywords: sources, distributed programming, C programming
+Description: A language for distributed C programming that extends
+    ANSI C to support distribution and process dynamics.  Concert/C
+    provides process creation and termination primitives,
+    interconnection primitives, and supports RPC and asynchronous
+    typed message passing.
+Location: file://software.watson.ibm.com/pub/concert
+Contact: concert-c@watson.ibm.com
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: PVM
+Keywords: sources, parallel programming
+Description: A software system that enables a collection of
+    heterogeneous computers to be used in parallel.  It includes
+    libraries of user-callable functions and a daemon program which
+    cordinates inter-machine activity.
+Location: file://netlib2.cs.utk.edu/pvm3
+Contact: pvm@msr.epm.ornl.gov
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:27:47 1994
+
+Name: Adobe Illustrator Document Format Specification Version 3.0 (draft)
+Keywords: PostScript
+Description: A description of the files Adobe Illustrator is willing
+    to read, distributed by the PostScript Developer Support Group.
+    Bryan O'Sullivan <bosullvn@maths.tcd.ie> says, `I picked up this
+    piece of information from a file at the Scheme repository, which
+    consists of some code intended to produce output readable by
+    Illustrator and some commentary.'
+Location: file://ftp.cs.indiana.edu/pub/scheme-repository/adobe.shar
+Record: bosullvn@walton.maths.tcd.ie Wed May 25 23:42:29 1994
+
+Name: ELP, the Emacs Lisp profiler
+Keywords: Emacs, packages
+Description: This is a new version of ELP, an Emacs Lisp Profiler for
+    Emacs 19 (both Lucid and FSF).
+Location: file://archive.cis.ohio-state.edu/pub/gnu/emacs/elisp-archive/misc/elp.el.Z
+Contact: Barry A. Warsaw <warsaw@cen.com>
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994

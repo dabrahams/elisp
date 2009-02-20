@@ -1,0 +1,63 @@
+#!/usr/local/bin/perl
+#
+# slim-bibl-file -- return a smaller bib file
+# Copyright (C) 1994, 1995 Bryan O'Sullivan
+#
+# Author: Andrew Condon <afcondon@dsg.cs.tcd.ie>
+# Modified-By: Bryan O'Sullivan <bos@serpentine.com>
+# $Revision: 1.2 $
+# $Date: 1995/05/23 22:19:56 $
+# $Source: /u/other/ugrad/bosullvn/lib/elisp/bibl-mode/RCS/slim-bibl-file,v $
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2, or (at
+# your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+# COMMENTARY:
+#
+# Sort of grep through a bibliography file, producing another one of
+# the same sort, but only containing entries which have the given
+# keywords (as command line arguments) in them.
+#
+# If you're using this in a CGI setting, make sure that bibl-grep
+# knows exactly where this file is.
+
+foreach $i (0 .. $#ARGV){
+    $keywords{$ARGV[$i]} = 1;
+}
+	
+# Get past the header glop.
+
+while (<STDIN>) {
+    print;
+    last if ($_ eq "\f\n");
+}
+
+$*=1;
+
+$/="";
+
+while (<STDIN>) {
+    $record=$_;
+
+    if ($keywords = /^Keywords:\s(.*)\n/) {
+	$keywords = $1;
+	$keywords =~ tr/A-Z/a-z/;
+	foreach $i (split(/, /, $keywords)) {
+	    if ($keywords{$i}) { 
+		print $record;
+		last;
+	    }
+	}
+    }
+}
