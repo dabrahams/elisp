@@ -16,6 +16,7 @@ always collected in a common directory")
 Blinking cursor just annoys me")
  '(browse-url-browser-function (quote w3m-browse-url))
  '(canlock-password "963afd5a40a33c7f59217100af5a7c1648af74a1")
+ '(cursor-type (quote box))
  '(default-frame-alist (quote ((menu-bar-lines . 1) (font-backend . "xft") (font . "Bitstream Vera Sans Mono-10.5"))) nil nil "
 This is really just a way of hanging onto and documenting my
 settings for for default-frame-alist, which currently aren't
@@ -81,6 +82,8 @@ We want our file buffers to stay up-to-date with changes on disk")
 Some people don't embed linebreaks in their paragraphs; this will force-add them.")
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(mac-command-modifier (quote meta))
+ '(mac-option-modifier (quote super))
  '(mail-user-agent (quote gnus-user-agent) nil nil "
 Gnus Message with full Gnus features")
  '(message-citation-line-function (quote my-message-insert-citation-line) nil nil "
@@ -92,7 +95,7 @@ Removed \"}\" from the allowable characters because I often type that when writi
 Always Bcc: myself")
  '(message-dont-reply-to-names (quote ("dave@boost-consulting\\.com" "dave@boostpro\\.com" "david\\.abrahams@rcn\\.com" "boost\\.consulting@gmail\\.com" "dave\\.boostpro@gmail\\.com" "Undisclosed-recipients[:;]*")))
  '(message-forward-ignored-headers (quote ("^Content-Transfer-Encoding:" "^X-Gnus" "^X-" "^Received:" "^User-Agent:" "^References:")))
- '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) t nil "
+ '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) nil nil "
 Automatically wrap text during email composition")
  '(message-send-mail-function (quote message-smtpmail-send-it) nil nil "
 If we ever go back to using a local exim MTA, we'll set this back to message-send-mail-with-sendmail")

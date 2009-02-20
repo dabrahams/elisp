@@ -127,8 +127,8 @@
     gnus-summary-low-read
     gnus-summary-normal-read))
 
-(defvar my-gnus-group-face-attributes '(:family "Dejavu Sans" :weight normal :width semicondensed))
-(defvar my-gnus-summary-face-attributes '(:family "Dejavu Sans" :weight normal :width semicondensed))
+(defvar my-gnus-group-face-attributes '(:family "Dejavu Sans" :weight normal :width condensed))
+(defvar my-gnus-summary-face-attributes '(:family "Dejavu Sans" :weight normal :width condensed))
 
 (dolist (facename my-gnus-group-faces)
   (apply 'set-face-attribute facename nil my-gnus-group-face-attributes))

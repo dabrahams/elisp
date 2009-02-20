@@ -18,13 +18,11 @@
 ;; turn off the nasty system bell
 (setq ring-bell-function (lambda ()))
 
-<<<<<<< HEAD:elisp/config.d/more-init.el
 ;; Python egg files are really .zip archives
 (setq auto-mode-alist
       (cons '("\\.egg\\'" . archive-mode) auto-mode-alist))
-=======
+
 ;; Create the auto-save directory if it doesn't exist.  See
 ;; customization of variable: auto-save-file-name-transforms
 (make-directory "~/.emacs.d/auto-saves" t)
 
->>>>>>> dd4a6fa388fbcb2bdab6fcda14288444fc252ef4:elisp/config.d/more-init.el
