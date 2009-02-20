@@ -1,0 +1,331 @@
+Wed Jun  7 03:40:58 1995  Bryan O'Sullivan  <bos@serpentine.com>
+
+	* bibl-mode.el ((not window-system)): moved a paren to make mouse
+	bindings work correctly.
+
+Tue Jun  6 18:25:13 1995  Bryan O'Sullivan  <bos@serpentine.com>
+
+	* bibl-lists.el (bibl-list-names): fixed dumb bug pertaining to
+	moving "the" and so on to the end of a string.
+
+Mon Jun  5 22:17:18 1995  Bryan O'Sullivan  <bos@serpentine.com>
+
+	* bibl-mode.el (bibl-maintainer-address): updated mailing list
+	address.
+
+	* bibl-mode.texi (Reporting Problems): updated mailing list
+	address.
+
+	* bibl-lists.el (bibl-names-mouse-select): changed to search
+	repeatedly through the bibliography buffer, rather than from the
+	top each time.
+
+Sat May 27 16:20:49 1995  Bryan O'Sullivan  <bos@serpentine.com>
+
+	* Makefile (bibl-mode): updated dependencies in order to build
+        properly.
+	(dist): changed action and dependencies for including bibliography
+	file, since it now resides on a different filesystem to the
+	bibl-mode sources.
+	(DISTFILES): removed $HOME/etc/bibliography.
+
+	* bibl-lists.el, bibl-grab.el ('bibl-mode): added require to fix
+	byte compilation problems.
+
+Wed May 24 18:03:24 1995  Bryan O'Sullivan  <bos@serpentine.com>
+
+	* Makefile (dist): fixed install procedure.
+	(bibl-mode-*.tar.gz): new target.
+
+	* bibl-mode.el (bibl-find-resource-internal): reordered arguments
+	to fix calling external programs.
+
+Tue May 23 21:44:02 1995  Bryan O'Sullivan  <bos@serpentine.com>
+
+	* Makefile (dist), (install-dist): new targets.
+	(DISTFILES): new variable.
+
+	* bibl2html (loop): improved handling of names beginning with
+	`the', `a', or `an'.
+
+	* all files: updated my email address.
+
+	* bibl-lists.el (bibl-names-menu): added from-top search option.
+	Kudos to G. Dinesh Dutt.
+	(bibl-names-find-record): added from-top search option.
+	(bibl-names-repeat-search): new function.
+	(bibl-list-names): further improved handling of	names beginning
+	with `the', `an' or `a'.
+
+	* bibl-mode.el (bibl-user-name): updated to use user-mail-address,
+	unless undefined.
+
+Thu Sep 15 13:09:39 1994  Bryan O'Sullivan  (bos@avon.dcs.gla.ac.uk)
+
+	* bibl-mode.el ((not window-system)): something changed in the
+	definition of easy-menu-define.
+
+Sat Sep  3 16:59:13 1994  Bryan O'Sullivan  (bos@karkar.dcs.gla.ac.uk)
+
+	* bibl-mode.texi (Accessing Records): updated information on
+	accessing local files.
+
+	* slim-bibl-file: new file.
+
+	* bibl-grep: new file.
+
+	* bibl2html: modified to allow form use.
+
+Wed Aug 31 18:23:08 1994  Bryan O'Sullivan  (bos@karkar.dcs.gla.ac.uk)
+
+	* bibl-mode.el (bibl-find-resource-internal): now allows local
+	files to be referenced (if you drop the two leading slashes).
+	I've forgotten who suggested this.
+
+Wed Aug 10 19:39:52 1994  Bryan O'Sullivan  (bos@avon.dcs.gla.ac.uk)
+
+	* bibl-lists.el (bibl-list-names): improved handling of names
+	beginning with `the'.
+
+Thu Jul 21 20:46:30 1994  Bryan O'Sullivan  (bos@karkar.dcs.gla.ac.uk)
+
+	* bibl-mode.el (bibl-file-name): changed default value.
+
+Mon Jul 18 19:36:16 1994  Bryan O'Sullivan  (bos@karkar.dcs.gla.ac.uk)
+
+	* bibl-mode.el (bibl-mode): changed forward-line to
+	re-search-forward, as prompted by David Carlton.
+
+Mon Jul 11 20:58:20 1994  Bryan O'Sullivan  (bos@karkar.dcs.gla.ac.uk)
+
+	* bibl-mode.el (bibl-indentation): new variable.
+	(bibl-indent-line): new function.
+	(bibl-goto-previous-header): new function.
+	(bibl-goto-next-header): new function.  Sort of hairy right now.
+	Really should do syntax table tweakage.  Ugh.
+	(bibl-fill-paragraph): new function.  Suggested by Peter Jackson.
+	(bibl-fill-region-as-paragraph): new function.
+	(bibl-dont-fill): new variable.
+
+Fri Jul  8 15:01:14 1994  Bryan O'Sullivan  (bos@karkar.dcs.gla.ac.uk)
+
+	* bibl-mode.el (bibl-find-resource-internal): made allowance for
+	`//' in front of telnet hostnames.
+
+Thu Jun 30 11:32:21 1994  Bryan O'Sullivan  (bos@avon.dcs.gla.ac.uk)
+
+	* bibl-lists.el (bibl-names-mode-map): added another key binding
+	for compatibility with occur and such.
+
+Mon Jun 27 13:31:55 1994  Bryan O'Sullivan  (bos@savage.dcs.gla.ac.uk)
+
+	* bibl-mode.el (bibl-mouse-record): run-hook-with-args call fixed.
+
+Wed Jun  8 12:02:48 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.texi: new file.
+
+	* bibl-mode.el (bibl-mode-prefix-map): moved keymap bindings
+	outside of window system dependent code.
+
+Mon Jun  6 16:35:57 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el (bibl-visit-bibliography): removed the superfluous
+        call to bibl-mode.
+
+Sun Jun  5 00:12:05 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el (bibl-global-map): autoload key bindings.
+	(bibl-mode): we now narrow to useful region on running.
+	(bibl-buffer-min): changed to a defalias.
+
+	* bibl-lists.el (bibl-names-mode): special mode class added.
+
+Sat Jun  4 23:50:24 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-lists.el (bibl-sort-buffer): now sort by keyword too (but
+	the sort isn't stable, and doesn't sub-order by name).
+	(bibl-names-mode): buffer-local variable name changes.
+
+Fri Jun  3 19:46:30 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-lists.el (bibl-names-mode-map): lemacs menu fix.
+
+	* bibl-mode.el: lemacs menu fix.
+
+Thu Jun  2 21:03:26 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el (bibl-mode-prefix-map): changed bindings for global
+	menu.
+	(bibl-lucid-file-menu): changed bindings.
+	(fboundp 'bibl-list-names): added new autoloads.
+	(bibl-visit-create): new function.
+	(bibl-visit-goto): new function.
+	(bibl-lucid-menu): lemacs point-moving lossage removed.
+	(bibl-global-map): added new bindings.
+
+	* bibl-lists.el (bibl-visit-list-keywords): new function.
+	(bibl-visit-list-names): new function.
+
+	* bibl-mode.el (bibl-mode-prefix-map): no longer try window
+	system stuff on ordinary terminals.
+
+	* bibl-lists.el (bibl-lists-menu): new variable.
+	(bibl-names-mode-map): no longer try window system stuff on
+	ordinary terminals.
+
+	* bibl-mode.el (bibl-mode-menu): new variable.  Switched over to
+	Lucid-style menus wherever possible.
+
+Wed Jun  1 10:06:29 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-lists.el: moved credits for help to top of bibl-mode.el.
+
+	* bibl-mode.el (bibl-visit-create): fixed call to
+	bibl-visit-bibliography.
+	(bibl-lucid-file-menu): more Lucid compatibility stuff from Rohit
+	Namjoshi.
+
+	(bibl-create-record): introduced an `Updated' entry, suggested by
+	Ray Nickson.
+	(bibl-mouse-record): fixed to grok `Updated' entries.
+	* bibl-grab.el (bibl-grab-fields): fixed as above.
+
+Tue May 31 17:50:03 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-grab.el: new file.  Thanks to Ray Nickson for his code and
+	suggestions.
+	(bibl-grab-start-regexp): new variable.
+	(bibl-grab-end-regexp): new variable.
+	(bibl-grab-default-subexp): new variable.
+	(bibl-visit-grab): changed to allow search from top of buffer.
+
+	* bibl-mode.el (bibl-buffer): new function.
+	(bibl-global-map): new variable.
+	(bibl-mode-prefix-map): re-enabled file submenu.
+
+	* bibl-lists.el (bibl-names-mouse-select): changed interactive
+	calling spec.
+
+	* bibl-mode.el (bibl-mouse-record): changed interactive calling
+	spec and doc string.
+
+Sun May 29 15:40:38 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el (bibl-mode-prefix-map): frobbed the menus some.
+	Changed all strings with `reference' to `resource' for
+	consistency.
+
+	* bibl-lists.el (bibl-sort-buffer): new function.
+
+	* bibl-mode.el (bibl-mode-prefix-map): changed binding of
+	bibl-mouse-record so as not to interfere with normal X client
+	bindings.
+
+Thu May 26 00:09:52 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	(bibl-find-reference-internal): changed use of bibl-web-interface.
+	(bibl-mail-contact): fix suggested by Paul Harrington for the
+	latest version of mh-e.
+
+Wed May 25 13:54:11 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el (bibl-mail-contact): rewritten to use interactive
+	calling spec intelligently.
+	(bibl-find-reference-internal): fixed arguments to string-match at
+	the top.
+	(bibl-mouse-record): new function.
+	(bibl-custom-record-hooks): new variable.
+
+	* bibl-lists.el (bibl-names-mode): fixed another 19.23-hosing bug,
+	pointed out by Dean Andrews.
+	(bibl-names-find-record): fixed assignment to from-top.
+	(bibl-fsf-mouse-select): new function.
+	(bibl-lucid-mouse-select): moved from bibl-mode.el.
+	(bibl-names-mouse-select): merged bibl-fsf-mouse-select and
+	bibl-lucid-mouse-select into one.  Duh.
+
+Tue May 24 11:18:19 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el (bibl-mode): Noah Friedman suggested a few
+	speedups, using the likes of setq instead of set.
+
+	* bibl-mode.el: made some documentation fixes, pointed out by Fred
+	Douglis.
+
+Sun May 22 22:26:41 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el (bibl-mode): fixed a legacy bug which caused emacs
+	19.23 to bomb out.
+
+Wed May 18 16:42:27 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el (bibl-web-interface): changed default Web browser
+	to TkWWW, as suggested by RMS.
+
+Tue May 17 16:53:25 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el (bibl-update-record-fields): renamed
+	bibl-record-elements to bibl-record-fields, and wrote this
+	function which regenerates bibl-record-template and
+	bibl-record-alist after updates to bibl-record-fields.
+
+	* (bibl-visit-bibliography): added a new variable,
+	bibl-prompt-on-visit.  See the doc string.
+
+	* (bibl-update-record-fields): added a new variable,
+	bibl-custom-record-fields.
+
+	* (bibl-create-record): changed the call to bibl-update-r and
+	kill-line to reduce lossage.
+
+	* (bibl-update-r): no longer does an (insert-char "\n").
+
+Thu May 12 00:12:44 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el (bibl-emacs-flavour): fixed bug in detecting
+	presence of Lucid.
+
+Wed May 11 16:17:13 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* Support for Lucid Emacs added, courtesy of Richard Everson.
+	
+	* bibl-mode.el: Upgraded license to version 2 of the GPL (RMS
+	pointed this out).
+	(bibl-find-reference-internal): commented out the ange-ftp
+	requirement to keep efs users happy.
+
+	* Moved more code (bibl-names-mode, bibl-names-find-record, and
+	keymap setup) to bibl-lists.el.
+
+	* bibl-mode.el (bibl-mode): Changed string-to-number to
+	string-to-int for Lucid support.
+
+Fri May  6 22:12:15 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el: Moved the listing code into bibl-lists.el, to
+	speed up startup some.
+
+Sat Apr 23 15:41:21 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el (bibl-create-record): now does a (push-mark) before
+	going to the top of the bibl file, suggested by Karl Fogel.
+
+Thu Apr  7 18:18:45 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el (bibl-update-record): Redefined this, along with
+	its keymap entries.  It had been mixed up with `bibl-update-r'.
+	(bibl-find-reference-internal): noticed some Scheme/Elisp
+	confusion.  Replaced `display' with `message'.  Duh.
+
+Tue Apr  5 02:34:16 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bibl-mode.el: Made URLs the default location type.  Quite a few
+	other changes, not listed here because I forgot at the time.
+
+	* bibl-mode.el: Improved the documentation and comments.
+
+Sun Mar 20 19:17:23 1994  Bryan O'Sullivan  (bosullvn@walton.maths.tcd.ie)
+
+	* bib-mode.el: Froze version 1.1.
+

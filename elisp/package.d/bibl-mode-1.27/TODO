@@ -1,0 +1,22 @@
+Tue May 23 23:16:56 1995  Bryan O'Sullivan  <bos@serpentine.com>
+
+	* Update bibl-grep to allow multiple fields to be selected on
+	during a forms-based search.
+
+Mon Sep  5 21:43:03 1994  Bryan O'Sullivan  (bos@karkar.dcs.gla.ac.uk)
+
+	* Flush out CERN httpd lossage under RISC/os to test Perl scripts.
+
+	* Look up Killian Murphy's on-the-fly HTML translation stuff.
+
+	* Think about adding keyword completion (a la Harald Backer).
+
+Mon Mar  4 11:17:13 1994  Bryan O'Sullivan  (bosullvn@maths.tcd.ie)
+
+	* Talk to Karl Fogel about integrating with bookmark.el.
+
+	* Maybe look at talking to BBDB.
+
+Local variables:
+major-mode: change-log
+End:

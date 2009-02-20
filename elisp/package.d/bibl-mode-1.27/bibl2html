@@ -1,0 +1,257 @@
+#!/usr/local/bin/perl
+#
+# bibl2html -- convert a bibliography file to HTML
+# Copyright (C) 1994 Bryan O'Sullivan
+#
+# Author: Bryan O'Sullivan <bos@serpentine.com>
+# Keywords: bibliographies, databases, World Wide Web
+# $Revision: 1.3 $
+# $Date: 1995/05/23 22:12:47 $
+# $Source: /u/other/ugrad/bosullvn/lib/elisp/bibl-mode/RCS/bibl2html,v $
+#
+# This program is free software; you can redistribute it and/or
+# modify it under the terms of the GNU General Public License as
+# published by the Free Software Foundation; either version 2, or (at
+# your option) any later version.
+#
+# This program is distributed in the hope that it will be useful, but
+# WITHOUT ANY WARRANTY; without even the implied warranty of
+# MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+# General Public License for more details.
+#
+# You should have received a copy of the GNU General Public License
+# along with this program; if not, write to the Free Software
+# Foundation, Inc., 675 Mass Ave, Cambridge, MA 02139, USA.
+#
+# COMMENTARY:
+#
+# This script converts a bibl-mode file into a HTML file with
+# hyperlinks.  Probably not very useful to anyone, but it beats
+# doing real work ;-)
+#
+# You should edit the header and footer text portions of this file
+# before running it yourself, and then run as follows:
+#	bibl2html [bibliography-file] [html-file]
+# Defaults are to read from stdin and write to stdout.
+#
+# If you are including inline HTML, be sure to escape the angle
+# brackets you use with backslashes.
+
+require 5.000;
+
+# Set this to wherever your bibl-grep program lives.  But note that
+# the form this string takes must be a URL!
+
+$biblgrep = "http://www.maths.tcd.ie/cgi-bin/bibl-grep";
+
+# The only bits you should need to tweak below this are
+
+# Open the source and target files.
+
+$bibl = $#ARGV >= 0 ? $ARGV[0] : "-";
+$html = $#ARGV >= 1 ? $ARGV[1] : "-";
+
+open(BIBL, "<$bibl")
+    or die "$bibl: $!";
+
+open(HTML, ">$html")
+    or die "$html: $!";
+     
+
+# Skip past the bib file header.
+
+while (<BIBL> ne "\f\n") {
+    # do nothing
+}
+
+$l = "&lt;";
+$g = "&gt;";
+$date = `date`;
+
+loop: while ($line = <BIBL>) {
+    # Blank lines are record separators.
+    
+    if ($line eq "\n" && $in_record) {
+	$html_Output .= "</DL>\n<HR>\n\n";
+	$in_record = $location = 0;	# reset flags
+	next loop;
+    }
+    
+    # We don't want to print the dates of record modifications.
+    
+    if ($line =~ /^(Record|Updated):/) {
+	next loop;
+    }
+
+    # Change angle brackets to their HTML equivalents.
+    
+    $line =~ s/</$l/g unless ($line =~ /\\(\\\\)*</);
+    $line =~ s/>/$g/g unless ($line =~ /\\(\\\\)*>/);
+    $line =~ s/\\(.)/$1/g;
+
+    $in_record = 1;			# we are inside a record
+
+    # Special case headers.  A record name gets a level-2 HTML header.
+    
+    if ($line =~ /^Name:\s(.*)$/) {
+	$name = $1;
+	$idx_name = $name;
+	$idx_name =~ s/^(The|A|An)[\s]+(.*)/\u\2, \l\1/i;
+	$link = $idx_name;
+	$link =~ s/[-\s_,.:]+/-/g;
+	$link =~ tr/A-Z/a-z/;
+	
+	$html_Output .= sprintf("<H2> <A NAME=\"%s\">%s</A> </H2>\n<P>\n<DL>\n",
+			 $link, $name);
+	$name_index[++$#name_index] = "<A HREF=\"#$link\">$idx_name</A><BR>\n";
+	next loop;
+    }
+
+    # We only output the `Location' header once per record.  Make
+    # entries under such headers be hyperlinks.
+	
+    if ($line =~ /^Location:\s(.*)$/) {
+	if (!$location) {
+	    $html_Output .= "<DT>\n<B> Location </B>\n<DD>\n<A HREF=\"$1\">$1</A>\n";
+	    $location = 1;
+	} else {
+	    $html_Output .= "<DD>\n<A HREF=\"$1\">$1</A>\n";
+	}
+	next loop;
+    }
+
+    if ($line =~ /^Keywords:\s(.*)$/) {
+	$keywords .= "$1, ";
+	$html_Output .= "<DT>\n<B> Key words </B>\n<DD>\n$1\n";
+	next loop;
+    }
+    
+    # Other headers.
+    
+    if ($line =~ /^([a-zA-Z]+):\s(.*)$/) {
+	$html_Output .= "<DT>\n<B> $1 </B>\n<DD>\n$2\n";
+	next loop;
+    }
+
+    $html_Output .= $line;
+}
+
+# End of file.
+
+if ($in_record) {
+    $html_Output .= "</DL>\n";
+}
+
+# Mess with our indices.
+
+@name_index = sort {$a cmp $b;} @name_index;
+
+@keywords = split(/,\s/, $keywords);
+@keywords = sort no_case @keywords;
+
+# Keep unique key words.
+
+for ($i = 1; $i < $#keywords; $i++) {
+    if ((uc $keywords[$i]) ne (uc $keywords[$i-1])) {
+	$keys[++$#keys] = $keywords[$i];
+    }
+}
+
+$keywords = '<OPTION> ' . join('<OPTION> ', @keys);
+$nkeys = $#keys + 1;
+
+$nnames = $#name_index + 1;
+
+# More header text.  Edit to suit.
+
+$box_height = 10;
+
+# You may wish to tweak the text below to follow your wishes.
+
+print HTML <<END_OF_HEADER;
+<HEAD>
+<TITLE>Bryan's Pointers Phile</TITLE>
+</HEAD>
+
+<!-- Change this to your own email address. -->
+
+<LINK rel=MADE HREF="mailto:bos\@serpentine.com">
+
+<BODY>
+
+<!-- Munge the next two paragraphs to suit yourself.  You don't *have*
+     to credit me, but it would be nice if you did. -->
+
+<H1>
+Bryan's Pointers Phile
+</H1>
+
+<P>
+This document is an automatically-translated HTML version of my
+bibliography file, in which I keep track of all kinds of information,
+both on the Internet and elsewhere.  It can be vaguely useful and
+interesting to browse through.  The contents consist of a <I>lot</I>
+of programming-related material, but there is a variety of other
+stuff in there too.
+
+<P>
+There are currently $nnames records, and $nkeys keywords.
+<BR>
+Last updated: $date.
+<P>    
+<CENTER>
+
+<!-- Change this address to suit yourself too. -->
+
+<ADDRESS>
+<A HREF="http://www.maths.tcd.ie/~bosullvn"><IMG
+SRC="http://www.maths.tcd.ie/~bosullvn/icons/me.gif" ALIGN=MIDDLE BORDER=0 WIDTH=76 HEIGHT=121>
+Bryan O'Sullivan</A>
+</ADDRESS>
+</CENTER>
+
+<HR>
+
+<H1> <A NAME="Sorted-Key-Word-Index">Sorted key word index</A> </H1>
+
+<P>
+
+<FORM METHOD="POST" ACTION="$biblgrep">
+  <SELECT NAME="keywords" MULTIPLE SIZE=$box_height ALIGN=MIDDLE>
+  $keywords
+  </SELECT>
+  <P>
+  To narrow down the number of records being displayed, choose a keyword
+  from the list above, 
+  and press the <INPUT TYPE="submit" VALUE="submit"> button.
+  To reset the form, press the <INPUT TYPE="reset" VALUE="reset"> button.
+</FORM>
+
+<HR>
+
+<H1> <A HNAME="Sorted-Name-Index">Sorted record name index</A> </H1>
+
+<P>
+@name_index
+<P>
+
+<HR>
+
+END_OF_HEADER
+
+# No more user-serviceable parts beyond this point.
+
+print HTML $html_Output;
+
+print HTML <<END_OF_FOOTER;
+</BODY>
+END_OF_FOOTER
+sub no_case {
+    local ($x) = $a;
+    local ($y) = $b;
+
+    $x =~ tr/A-Z/a-z/;
+    $y =~ tr/A-Z/a-z/;
+
+    return $x cmp $y;
+}

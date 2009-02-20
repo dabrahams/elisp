@@ -1,0 +1,226 @@
+Hey Emacs, this file is -*- indented-text -*-  !!
+
+This is bibl-mode, a package intended for editing what we will call,
+for want of a better name, `bibliography files', using either Emacs 19
+or XEmacs (formerly Lucid Emacs).
+
+I picked up the notion of using a bibliography file while working for
+a time with Jim Blandy <jimb@cyclic.com>, and have found it so
+useful that I finally sat down to write some non-trivial support for
+it.  I find this package to be very useful too, so my time may not
+have been wasted (more to the point, I can now waste my time with
+greater efficiency).
+
+My bibliography file consists of all kinds of random pieces of
+information: I keep in it pointers to useful sites on the net, books
+that are worth reading, and various other things.  The main use for
+this package is for keeping track of all these data, and thereby
+attempting to address the one problem that no software systems
+currently seem to attack.
+
+The Internet quite probably has available whatever information it is
+you want on a subject somewhere, but you will have trouble finding it
+(yes, there is Archie and there are FAQs, but the problem still
+exists).  What I usually do, upon seeing a posting or receiving a
+piece of email pertaining to some subject which interests me, or upon
+finding an interesting page on the Web, is create a bibliography entry
+for it, with (if possible) a URL pointing to whatever it may be.  This
+can be invaluable for references in the future.
+
+Bob Weiner's Hyperbole package provides a superset of bibl-mode's
+functionality to Emacs users (it does not include features for
+converting bibliography files for display on the Web); however, I find
+it has too many boondoggles of questionable use for me to be happy to
+use it.
+
+
+
+What sorts of features are provided?
+
+- List all keywords in alphabetical order (bibl-list-keywords), and
+  cycle through all records which contain these from the buffer which
+  is popped up (bibl-names-find-record).  Plus you can mouse around
+  this way too.
+
+- List all subjects, again in alphabetical order (bibl-list-names),
+  and select individual records as above (with the mouse too).
+
+- Use the mouse, or completion (yaay!), to do either of the above
+  without getting too fiddly with other buffers (bibl-goto-record).
+
+- Automagically create partial or full new records from the contents
+  of mail or news buffers.
+
+- Add, tidy up, and remove records with ease.
+
+- Use short key sequences to get at resources on the net or email
+  maintainers, contact people, etc.  We currently `know about' email,
+  the World-Wide Web, files, and telnet sessions, with the latter two
+  just being special cases of the Web support.
+
+- Runs under both FSF Emacs 19 and XEmacs.
+
+
+
+Many thanks to Karl Fogel <kfogel@cyclic.com> and Jim Blandy
+<jimb@cyclic.com> for their original help, code, and suggestions, and
+to Jamie Zawinski <jwz@netscape.com> for his very useful BBDB package,
+which gave me some ideas.  Some bibl-mode code has also been taken and
+adapted from Per Abrahemsen's excellent AUC TeX package.
+
+Further thanks to Richard Everson <rme@camelot.rockefeller.edu> and
+Rohit Namjoshi <rohit@austin.wireline.slb.com> for their Lucid
+Emacs compatibility fixes, and to Ray Nickson <nickson@cs.uq.oz.au>
+for his code and suggestions about grabbing information from mail
+and news buffers.  Other people are credited for their feedback and
+help in the ChangeLog file.
+
+
+
+HOW TO USE:
+
+First of all, you may have to tweak the Makefile a little in order to
+get bibl-mode to compile.  Then running `make' should get everything
+you need going.  You should be able to safely ignore any compilation
+errors given by either Emacs or Makeinfo.
+
+In your `~/.emacs', put something like the following:
+    (autoload 'bibl-visit-bibliography "bibl-mode"
+      "Autoload bibliography mode." t)
+    (autoload 'bibl-mode "bibl-mode" "Autoload bibliography mode." t)
+    (setq bibl-file-name "~/my-bibl-dir/my-bibl-file")
+    (global-set-key "\C-cb" 'bibl-global-map)
+Now just type `M-x bibl-visit-bibliography' (this will have been
+short-cut to `C-c b v' in the example above) (or alternatively, type
+`M-x bibl-mode' on an empty buffer), and off you go!
+
+Bibliography mode defaults to expecting that you have TkWWW or some
+other stand-alone browser, but will also use William Perry's W3
+package for accessing the World-Wide Web from within Emacs.  You can
+change the default behaviour by setting the variables
+`bibl-web-interface' and `bibl-use-elisp' appropriately in your
+`~/.emacs'.
+
+See the TeXinfo documentation for further details.
+
+
+
+REQUIREMENTS:
+
+If you are running FSF Emacs prior to 19.23 (I don't know what the
+situation is for XEmacs users), you will have to get easymenu.el, and
+possibly also reporter.el.  Both of these packages are available from
+the Ohio State elisp archive.  See the sample bibliography file
+provided with this package for information.
+
+If you run FSF Emacs prior to 19.23 and encounter problems running
+bibl-mode after fetching easymenu.el (it may bomb out, saying `invalid
+byte code blah blah blah'), make sure you have the easymenu code
+loaded, then recompile the bibl-mode Lisp files and restart your
+Emacs.  This problem is caused by bibl-mode thinking it is calling a
+function defined by easymenu, when it is actually calling a macro.
+
+Note that what used to be called easymenu.el in the AUC TeX
+distribution is now called auc-menu.el.
+
+If you are running a version of FSF Emacs earlier than 19.23 (I don't
+know what the situation is for XEmacs users), you should copy the
+following definition into your `.emacs':
+
+(defun run-hook-with-args (hook &rest args)
+  "Run HOOK with the specified arguments ARGS.
+HOOK should be a symbol, a hook variable.  If HOOK has a non-nil
+value, that value may be a function or a list of functions to be
+called to run the hook.  If the value is a function, it is called with
+the given arguments and its return value is returned.  If it is a list
+of functions, those functions are called, in order,
+with the given arguments ARGS.
+It is best not to depend on the value return by `run-hook-with-args',
+as that may change."
+  (and (boundp hook)
+       (symbol-value hook)
+       (let ((value (symbol-value hook)))
+	 (if (and (listp value) (not (eq (car value) 'lambda)))
+	     (mapcar '(lambda (foo) (apply foo args))
+		     value)
+	   (apply value args)))))
+
+Should you intend to use the Perl scripts provided with this package
+to let others on the Web access your bibliography file, you will have
+to edit them very slightly to suit your local setup.  Just follow the
+directions in each script.  Note that Perl 5 is currently required to
+run bibl2html; it should not be difficult to make it run under Perl 4,
+however.
+
+
+
+RELATED INFORMATION:
+
+If you find yourself using this package much, you may wish to join its
+associated mailing and discussion list, <info-bibl@serpentine.com>.
+Send mail to <info-bibl-request@serpentine.com> and ask to be
+subscribed; the address is a human (me).
+
+Should you wish to get started with a non-empty bibliography file, you
+can access mine, the latest version of which is always available from:
+    file://ftp.maths.tcd.ie/pub/bosullvn/elisp/bibliography
+
+An automagically-translated HTML version of this bibliography file is
+also available on the Web:
+    http://www.maths.tcd.ie/~bosullvn/bibliography.html
+
+If you wish to report a bug, please use `M-x bibl-submit-bug-report'
+and edit the template accordingly.
+
+Updates to this code are posted periodically to the Usenet newsgroup
+gnu.emacs.sources, and patches are sent out on the info-bibl mailing
+list (and more rarely on gnu.emacs.sources).  The latest version of
+the full package may always be obtained via anonymous ftp from:
+    file://ftp.maths.tcd.ie/pub/bosullvn/elisp/bibl-mode.tar.gz
+
+Jared Rhine <Jared_Rhine@hmc.edu> maintains a mirror of bibl-mode at
+    http://www.hmc.edu/~jared/packages/emacs/bibl-mode
+
+
+
+EXAMPLE BIBLIOGRAPHY ENTRIES:
+
+Name: W3
+Keywords: World Wide Web, protocols, Emacs, packages, sources
+Description: W3 is a hypertext (specifically World Wide Web) browser
+    for emacs.  The browser supports all HTML elements, and every url
+    type except wais - which will be coming soon, as soon as I figure
+    out how wais.el works.  If you are using Lucid Emacs, Epoch, or
+    Emacs19, W3 will support multiple fonts, highlighting, etc.  If
+    you are using a version of Epoch that was compiled with the
+    add-graphic-zone extensions, you will be able to view inlinded
+    images within the emacs buffer (currently supports 11 types of
+    embedded graphics, but you must have the pbmplus package to use
+    this).
+Author: William M. Perry <wmperry@indiana.edu>
+Location: file://cs.indiana.edu/pub/elisp/w3
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: comp.lang.misc archives
+Keywords: archives, free software, languages, surveys
+Description: Catalogue of free compilers/interpreters/language tools.
+Location: file://rtfm.mit.edu/pub/usenet-by-group/comp.lang.misc
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Dr. Fun
+Keywords: graphics
+Description: Silly pictures.
+Location: http://sunsite.unc.edu/Dave/drfun.html
+Record: bosullvn@walton.maths.tcd.ie Tue Mar 29 22:23:55 1994
+
+Name: Remote control for Mosaic 2.4 and up
+Keywords: World Wide Web, Emacs
+Description: NCSA Mosaic 2.4 has a feature whereby a running Mosaic
+    process can have a URL to access sent to it by another process.
+    Mike Walker has written some elisp which does the job from Emacs.
+    To use from bibl-mode, grab the code, and set bibl-web-interface
+    to 'mrc-view-url.
+Location: file://cmb00.larc.nasa.gov/pub/misc/mrc-lib.el
+Location: http://www.ncsa.uiuc.edu/SDG/Software/Mosaic/Docs/remote-control.html
+Author: Mike Walker <M.D.Walker@larc.nasa.gov>
+Record: bosullvn@walton.maths.tcd.ie Sun May 29 15:35:30 1994
