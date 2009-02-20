@@ -139,6 +139,9 @@ I never like being nannied by regular browsers either.")
  '(w3m-display-ins-del nil)
  '(w3m-icon-directory "~/elisp/package.d/w3m-el/icons")
  '(w3m-use-cookies t)
+ '(warning-suppress-types (quote ((\(undo\ discard-info\)))) nil nil "
+Without this, emacs pops up annoying warnings in, e.g., *shell* buffers
+where I don't expect it to be keeping undo history anyway")
  '(x-select-enable-clipboard t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
