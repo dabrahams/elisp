@@ -124,9 +124,8 @@ Always run a server so we can open files in existing emacs frames.")
  '(tool-bar-mode nil nil nil "
 Tool bars take up valuable screen real-estate for icons whose meaning I forget")
  '(tramp-backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
- '(tramp-default-proxies-alist (quote (("\\(.*\\.\\)?boostpro.com\\'" "\\`root\\'" "/ssh:%h:"))) nil nil "
-This allows us to use the /sudo: method on boostpro.com, which doesn't allow
-direct ssh as root.  Recall that \\` and \\' are special bos and eos regexp matchers.")
+ '(tramp-default-proxies-alist (quote (("\\`.*\\'" "\\`root\\'" "/ssh:%h:"))) nil nil "
+Since most remote places don't allow direct root login, logging in anywhere as root will proxy in through my own account by default.")
  '(tramp-encoding-shell "bash" nil nil "
 Needed in order to enable tilde expansion, etc., in remote shells")
  '(tramp-remote-path (quote (tramp-default-remote-path "/usr/sbin" "/usr/local/sbin" "/usr/local/bin" "/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin")))
