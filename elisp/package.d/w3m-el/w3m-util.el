@@ -1,6 +1,6 @@
 ;;; w3m-util.el --- Utility macros and functions for emacs-w3m
 
-;; Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008
+;; Copyright (C) 2001, 2002, 2003, 2004, 2005, 2006, 2007, 2008, 2009
 ;; TSUCHIYA Masatoshi <tsuchiya@namazu.org>
 
 ;; Authors: TSUCHIYA Masatoshi <tsuchiya@namazu.org>,
@@ -210,6 +210,15 @@ to the position where the property exists."
   (if position
       `(get-text-property ,position 'w3m-image)
     `(w3m-get-text-property-around 'w3m-image)))
+
+(defmacro w3m-image-alt (&optional position)
+  "Return the value of the `w3m-image-alt' property at the given POSITION.
+NOTE: If POSITION is omitted, it searches for the property in one
+character before and behind the current position, and point will move
+to the position where the property exists."
+  (if position
+      `(get-text-property ,position 'w3m-image-alt)
+    `(w3m-get-text-property-around 'w3m-image-alt)))
 
 (defmacro w3m-submit (&optional position)
   "Return the value of the `w3m-submit' property at the given POSITION.
@@ -1079,6 +1088,36 @@ If SECONDS is omitted, it defaults to 0.5."
 		       (w3m-force-window-update)))
 		   buffer))
   (defalias 'w3m-force-window-update-later 'ignore))
+
+(if (fboundp 'read-number)
+    (defalias 'w3m-read-number 'read-number)
+  (defun w3m-read-number (prompt &optional default)
+    "Read a numeric value in the minibuffer, prompting with PROMPT.
+DEFAULT specifies a default value to return if the user just types RET.
+The value of DEFAULT is inserted into PROMPT."
+    (let ((n nil))
+      (when default
+	(setq prompt
+	      (if (string-match "\\(\\):[ \t]*\\'" prompt)
+		  (replace-match (format " (default %s)" default) t t prompt 1)
+		(w3m-replace-in-string prompt "[ \t]*\\'"
+				       (format " (default %s) " default)
+				       t))))
+      (while
+	  (progn
+	    (let ((str (read-from-minibuffer
+			prompt nil nil nil nil
+			(and default (number-to-string default)))))
+	      (condition-case nil
+		  (setq n (cond
+			   ((zerop (length str)) default)
+			   ((stringp str) (read str))))
+		(error nil)))
+	    (unless (numberp n)
+	      (message "Please enter a number.")
+	      (sit-for 1)
+	      t)))
+      n)))
 
 (defun w3m-make-menu-item (japan english)
   "Make menu item."
