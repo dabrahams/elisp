@@ -9,10 +9,11 @@
       (osx-plist-update-environment)))
 
 ;; Maximize emacs on startup
-(and nil (ignore-errors
+(ignore-errors
   (require 'maxframe)
-  (setq mf-max-width 1600)  ;; Pixel width of main monitor.
-  (add-hook 'window-setup-hook 'maximize-frame t)))
+  (if (eq system-type 'gnu/linux)
+   (setq mf-max-width 1600))  ;; Pixel width of main monitor.
+  (add-hook 'window-setup-hook 'maximize-frame t))
 
 ;; This is probably not the best way to do it, but...
 ;; 
