@@ -1,8 +1,8 @@
 ;;; psvn.el --- Subversion interface for emacs
-;; Copyright (C) 2002-2008 by Stefan Reichoer
+;; Copyright (C) 2002-2009 by Stefan Reichoer
 
 ;; Author: Stefan Reichoer <stefan@xsteve.at>
-;; $Id: psvn.el 34661 2008-12-10 19:42:22Z xsteve $
+;; $Id: psvn.el 35820 2009-02-11 21:35:14Z xsteve $
 
 ;; psvn.el is free software; you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
@@ -253,7 +253,7 @@
       (require 'diff-mode))
   (error nil))
 
-(defconst svn-psvn-revision "$Id: psvn.el 34661 2008-12-10 19:42:22Z xsteve $"
+(defconst svn-psvn-revision "$Id: psvn.el 35820 2009-02-11 21:35:14Z xsteve $"
   "The revision number of psvn.")
 
 ;;; user setable variables
@@ -1453,9 +1453,11 @@ The hook svn-pre-run-hook allows to monitor/modify the ARGLIST."
            ;; find last error message and show it.
            (goto-char (point-max))
            (if (re-search-backward "^svn: " nil t)
-               (let ((error-strings))
-                 (while (looking-at "^svn: ")
+               (let ((error-strings)
+                     (beginning-of-buffer))
+                 (while (and (looking-at "^svn: ") (not beginning-of-buffer))
                    (setq error-strings (append error-strings (list (buffer-substring-no-properties (+ 5 (svn-point-at-bol)) (svn-point-at-eol)))))
+                   (setq beginning-of-buffer (bobp))
                    (forward-line -1))
                  (svn-process-handle-error (mapconcat 'identity (reverse error-strings) "\n")))
              (message "svn failed: %s" event)))
@@ -3401,13 +3403,15 @@ This means we mark
 * all modified files
 * all files scheduled for addition
 * all files scheduled for deletion
+* all files with modified properties
 
 The last two categories include all copied and moved files.
 If called with a prefix ARG, unmark all such files."
   (interactive "P")
   (svn-status-mark-added arg)
   (svn-status-mark-modified arg)
-  (svn-status-mark-deleted arg))
+  (svn-status-mark-deleted arg)
+  (svn-status-mark-modified-properties arg))
 
 (defun svn-status-unset-all-usermarks ()
   (interactive)
