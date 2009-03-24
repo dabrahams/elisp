@@ -113,7 +113,28 @@ Added image/* to display attached images inline")
 The documentation for this variable says it all")
  '(mm-inline-text-html-with-images t)
  '(muse-project-alist (quote (("WikiPlanner" ("~/plans" :default "index" :major-mode planner-mode :visit-link planner-visit-link)))))
- '(org-agenda-files (quote ("~/organizer.org")))
+ '(ns-alternate-modifier (quote super) t)
+ '(ns-command-modifier (quote meta) t)
+ '(org-agenda-custom-commands (quote (("d" todo #("DELEGATED" 0 9 (face org-warning)) nil) ("c" todo #("DONE|DEFERRED|CANCELLED" 0 23 (face org-warning)) nil) ("w" todo #("WAITING" 0 7 (face org-warning)) nil) ("W" agenda "" ((org-agenda-ndays 21))) ("A" agenda "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))) (org-agenda-ndays 1) (org-agenda-overriding-header "Today's Priority #A tasks: "))) ("u" alltodo "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote scheduled) (quote deadline) (quote regexp) "<[^>
+]+>"))) (org-agenda-overriding-header "Unscheduled TODO entries: "))))) nil nil "
+As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-agenda-files (quote ("~/todo.org")) nil nil "
+As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-agenda-skip-deadline-if-done t nil nil "
+As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-agenda-skip-scheduled-if-done t nil nil "
+As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-agenda-start-on-weekday nil nil nil "
+As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-default-notes-file "~/notes.org" nil nil "
+As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-fast-tag-selection-single-key (quote expert) nil nil "
+As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-remember-templates (quote (("" 116 "* TODO %?
+  %u" "~/todo.org" "Tasks" nil) ("" 110 "* %u %?" "~/notes.org" "Notes" nil))) nil nil "
+As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-reverse-note-order t nil nil "
+As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
  '(ps-font-family (quote Helvetica))
  '(ps-font-info-database (quote ((Courier (fonts (normal . "Courier") (bold . "Courier-Bold") (italic . "Courier-Oblique") (bold-italic . "Courier-BoldOblique")) (size . 10.0) (line-height . 10.55) (space-width . 6.0) (avg-char-width . 6.0)) (Helvetica (fonts (normal . "Helvetica") (bold . "Helvetica-Bold") (italic . "Helvetica-Oblique") (bold-italic . "Helvetica-BoldOblique")) (size . 10.0) (line-height . 11.56) (space-width . 2.78) (avg-char-width . 5.09243)) (Times (fonts (normal . "Times-Roman") (bold . "Times-Bold") (italic . "Times-Italic") (bold-italic . "Times-BoldItalic")) (size . 10.0) (line-height . 11.0) (space-width . 2.5) (avg-char-width . 4.71432)) (Palatino (fonts (normal . "Palatino-Roman") (bold . "Palatino-Bold") (italic . "Palatino-Italic") (bold-italic . "Palatino-BoldItalic")) (size . 10.0) (line-height . 12.1) (space-width . 2.5) (avg-char-width . 5.08676)) (Helvetica-Narrow (fonts (normal . "Helvetica-Narrow") (bold . "Helvetica-Narrow-Bold") (italic . "Helvetica-Narrow-Oblique") (bold-italic . "Helvetica-Narrow-BoldOblique")) (size . 10.0) (line-height . 11.56) (space-width . 2.2796) (avg-char-width . 4.17579)) (NewCenturySchlbk (fonts (normal . "NewCenturySchlbk-Roman") (bold . "NewCenturySchlbk-Bold") (italic . "NewCenturySchlbk-Italic") (bold-italic . "NewCenturySchlbk-BoldItalic")) (size . 10.0) (line-height . 12.15) (space-width . 2.78) (avg-char-width . 5.31162)) (AvantGarde-Book (fonts (normal . "AvantGarde-Book") (italic . "AvantGarde-BookOblique")) (size . 10.0) (line-height . 11.77) (space-width . 2.77) (avg-char-width . 5.45189)) (AvantGarde-Demi (fonts (normal . "AvantGarde-Demi") (italic . "AvantGarde-DemiOblique")) (size . 10.0) (line-height . 12.72) (space-width . 2.8) (avg-char-width . 5.51351)) (Bookman-Demi (fonts (normal . "Bookman-Demi") (italic . "Bookman-DemiItalic")) (size . 10.0) (line-height . 11.77) (space-width . 3.4) (avg-char-width . 6.05946)) (Bookman-Light (fonts (normal . "Bookman-Light") (italic . "Bookman-LightItalic")) (size . 10.0) (line-height . 11.79) (space-width . 3.2) (avg-char-width . 5.67027)) (Symbol (fonts (normal . "Symbol")) (size . 10.0) (line-height . 13.03) (space-width . 2.5) (avg-char-width . 3.24324)) (Zapf-Dingbats (fonts (normal . "Zapf-Dingbats")) (size . 10.0) (line-height . 9.63) (space-width . 2.78) (avg-char-width . 2.78)) (ZapfChancery-MediumItalic (fonts (normal . "ZapfChancery-MediumItalic")) (size . 10.0) (line-height . 11.45) (space-width . 2.2) (avg-char-width . 4.10811)) (Zapf-Chancery-MediumItalic (fonts (normal . "ZapfChancery-MediumItalic")) (size . 10.0) (line-height . 11.45) (space-width . 2.2) (avg-char-width . 4.10811)))))
  '(server-mode t nil nil "
@@ -127,8 +148,7 @@ Always run a server so we can open files in existing emacs frames.")
  '(tool-bar-mode nil nil nil "
 Tool bars take up valuable screen real-estate for icons whose meaning I forget")
  '(tramp-backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
- '(tramp-default-proxies-alist (quote (("\\`.*\\'" "\\`root\\'" "/ssh:%h:"))) nil nil "
-Since most remote places don't allow direct root login, logging in anywhere as root will proxy in through my own account by default.")
+ '(tramp-default-proxies-alist (quote (("\\`localhost\\'" "\\`root\\'" "/sudo::") ("\\`127.0.0.1\\'" "\\`root\\'" "/sudo::") ("\\`\\'" "\\`root\\'" "/sudo::") ("\\`.+\\'" "\\`root\\'" "/ssh:%h:"))))
  '(tramp-encoding-shell "bash" nil nil "
 Needed in order to enable tilde expansion, etc., in remote shells")
  '(tramp-remote-path (quote (tramp-default-remote-path "/usr/sbin" "/usr/local/sbin" "/usr/local/bin" "/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin")))

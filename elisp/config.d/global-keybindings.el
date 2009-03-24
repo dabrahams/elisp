@@ -40,3 +40,5 @@
 
 (require 'windmove)
 (windmove-default-keybindings 'meta)
+
+(define-key global-map [(control meta ?r)] 'remember)
