@@ -8,7 +8,7 @@
 
 ;;;### (autoloads (w3m-buffer w3m-region w3m-find-file w3m-browse-url
 ;;;;;;  w3m w3m-gohome w3m-goto-url-new-session w3m-goto-url w3m-download
-;;;;;;  w3m-retrieve) "w3m" "w3m.el" (18777 43742))
+;;;;;;  w3m-retrieve) "w3m" "w3m.el" (18853 43228))
 ;;; Generated autoloads from w3m.el
 
 (autoload 'w3m-retrieve "w3m" "\
@@ -54,8 +54,8 @@ car of a cell is used as the content-type and the cdr of a cell is
 used as the body.
 If the fifth argument REFERER is specified, it is used for a Referer:
 field for this request.
-The remaining HANDLER and ELEMENT[1] are for the internal operations
-of emacs-w3m.
+The remaining HANDLER, ELEMENT[1], and NO-POPUP are for the
+internal operations of emacs-w3m.
 You can also use \"quicksearch\" url schemes such as \"gg:emacs\" which
 would search for the term \"emacs\" with the Google search engine.  See
 the `w3m-search' function and the variable `w3m-uri-replace-alist'.
@@ -65,7 +65,7 @@ already been registered in the `w3m-history-flat' variable.  It is
 corresponding to URL to be retrieved at this time, not for the url of
 the current page.
 
-\(fn URL &optional RELOAD CHARSET POST-DATA REFERER HANDLER ELEMENT)" t nil)
+\(fn URL &optional RELOAD CHARSET POST-DATA REFERER HANDLER ELEMENT NO-POPUP)" t nil)
 
 (autoload 'w3m-goto-url-new-session "w3m" "\
 Visit World Wide Web pages in a new session.
@@ -154,7 +154,7 @@ See `w3m-region' for the optional arguments.
 ;;;***
 
 ;;;### (autoloads (w3m-antenna w3m-about-antenna) "w3m-antenna" "w3m-antenna.el"
-;;;;;;  (18712 53399))
+;;;;;;  (18846 37976))
 ;;; Generated autoloads from w3m-antenna.el
 
 (autoload 'w3m-about-antenna "w3m-antenna" "\
@@ -172,7 +172,7 @@ Report changes of WEB sites, which is specified in `w3m-antenna-sites'.
 ;;;### (autoloads (w3m-setup-bookmark-menu w3m-about-bookmark w3m-bookmark-view-new-session
 ;;;;;;  w3m-bookmark-view w3m-bookmark-add-current-url-group w3m-bookmark-add-all-urls
 ;;;;;;  w3m-bookmark-add-current-url w3m-bookmark-add-this-url) "w3m-bookmark"
-;;;;;;  "w3m-bookmark.el" (18712 53399))
+;;;;;;  "w3m-bookmark.el" (18853 43228))
 ;;; Generated autoloads from w3m-bookmark.el
 
 (autoload 'w3m-bookmark-add-this-url "w3m-bookmark" "\
@@ -219,8 +219,8 @@ Setup w3m bookmark items in menubar.
 ;;;***
 
 ;;;### (autoloads (w3m-about-cookie w3m-cookie w3m-cookie-get w3m-cookie-set
-;;;;;;  w3m-cookie-shutdown) "w3m-cookie" "w3m-cookie.el" (18537
-;;;;;;  33443))
+;;;;;;  w3m-cookie-shutdown) "w3m-cookie" "w3m-cookie.el" (18846
+;;;;;;  37976))
 ;;; Generated autoloads from w3m-cookie.el
 
 (autoload 'w3m-cookie-shutdown "w3m-cookie" "\
@@ -252,7 +252,7 @@ Make the html contents to display and to enable you to manage cookies.
 ;;;***
 
 ;;;### (autoloads (w3m-dtree w3m-about-dtree) "w3m-dtree" "w3m-dtree.el"
-;;;;;;  (18197 61165))
+;;;;;;  (18846 37976))
 ;;; Generated autoloads from w3m-dtree.el
 
 (autoload 'w3m-about-dtree "w3m-dtree" "\
@@ -268,7 +268,7 @@ If called with 'prefix argument', display all directorys and files.
 
 ;;;***
 
-;;;### (autoloads (w3m-fb-mode) "w3m-fb" "w3m-fb.el" (17681 2386))
+;;;### (autoloads (w3m-fb-mode) "w3m-fb" "w3m-fb.el" (18846 37976))
 ;;; Generated autoloads from w3m-fb.el
 
 (defvar w3m-fb-mode nil "\
@@ -288,8 +288,8 @@ This allows frame-local lists of buffers (tabs).
 
 ;;;***
 
-;;;### (autoloads (w3m-filter) "w3m-filter" "w3m-filter.el" (18560
-;;;;;;  15090))
+;;;### (autoloads (w3m-filter) "w3m-filter" "w3m-filter.el" (18846
+;;;;;;  37976))
 ;;; Generated autoloads from w3m-filter.el
 
 (autoload 'w3m-filter "w3m-filter" "\
@@ -299,8 +299,8 @@ Apply filtering rule of URL against a content in this buffer.
 
 ;;;***
 
-;;;### (autoloads (w3m-fontify-forms) "w3m-form" "w3m-form.el" (18777
-;;;;;;  43743))
+;;;### (autoloads (w3m-fontify-forms) "w3m-form" "w3m-form.el" (18846
+;;;;;;  37976))
 ;;; Generated autoloads from w3m-form.el
 
 (autoload 'w3m-fontify-forms "w3m-form" "\
@@ -311,7 +311,7 @@ Process half-dumped data and fontify forms in this buffer.
 ;;;***
 
 ;;;### (autoloads (w3m-link-numbering-mode) "w3m-lnum" "w3m-lnum.el"
-;;;;;;  (18197 61165))
+;;;;;;  (18853 43228))
 ;;; Generated autoloads from w3m-lnum.el
 
 (autoload 'w3m-link-numbering-mode "w3m-lnum" "\
@@ -322,7 +322,7 @@ Minor mode to enable operations using link numbers.
 ;;;***
 
 ;;;### (autoloads (w3m-namazu w3m-about-namazu) "w3m-namazu" "w3m-namazu.el"
-;;;;;;  (18197 61165))
+;;;;;;  (18846 37976))
 ;;; Generated autoloads from w3m-namazu.el
 
 (autoload 'w3m-about-namazu "w3m-namazu" "\
@@ -338,7 +338,7 @@ Search indexed files with Namazu.
 ;;;***
 
 ;;;### (autoloads (w3m-perldoc w3m-about-perldoc) "w3m-perldoc" "w3m-perldoc.el"
-;;;;;;  (18197 61165))
+;;;;;;  (18846 37976))
 ;;; Generated autoloads from w3m-perldoc.el
 
 (autoload 'w3m-about-perldoc "w3m-perldoc" "\
@@ -354,7 +354,7 @@ View Perl documents.
 ;;;***
 
 ;;;### (autoloads (w3m-search-uri-replace w3m-search-new-session
-;;;;;;  w3m-search) "w3m-search" "w3m-search.el" (18537 33441))
+;;;;;;  w3m-search) "w3m-search" "w3m-search.el" (18846 37976))
 ;;; Generated autoloads from w3m-search.el
 
 (autoload 'w3m-search "w3m-search" "\
@@ -379,8 +379,9 @@ Generate query string for ENGINE from URI matched by last search.
 
 ;;;***
 
-;;;### (autoloads (w3m-setup-session-menu w3m-session-select w3m-session-save)
-;;;;;;  "w3m-session" "w3m-session.el" (18777 43743))
+;;;### (autoloads (w3m-session-last-crashed-session w3m-session-last-autosave-session
+;;;;;;  w3m-setup-session-menu w3m-session-select w3m-session-save)
+;;;;;;  "w3m-session" "w3m-session.el" (18853 43228))
 ;;; Generated autoloads from w3m-session.el
 
 (autoload 'w3m-session-save "w3m-session" "\
@@ -398,10 +399,20 @@ Setup w3m session items in menubar.
 
 \(fn)" nil nil)
 
+(autoload 'w3m-session-last-autosave-session "w3m-session" "\
+Not documented
+
+\(fn)" nil nil)
+
+(autoload 'w3m-session-last-crashed-session "w3m-session" "\
+Not documented
+
+\(fn)" nil nil)
+
 ;;;***
 
 ;;;### (autoloads (w3m-replace-symbol) "w3m-symbol" "w3m-symbol.el"
-;;;;;;  (18250 38291))
+;;;;;;  (18853 43228))
 ;;; Generated autoloads from w3m-symbol.el
 
 (autoload 'w3m-replace-symbol "w3m-symbol" "\
@@ -412,7 +423,7 @@ Not documented
 ;;;***
 
 ;;;### (autoloads (w3m-about-weather w3m-weather) "w3m-weather" "w3m-weather.el"
-;;;;;;  (18197 61165))
+;;;;;;  (18846 37976))
 ;;; Generated autoloads from w3m-weather.el
 
 (autoload 'w3m-weather "w3m-weather" "\

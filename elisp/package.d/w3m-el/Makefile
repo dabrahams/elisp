@@ -1,19 +1,19 @@
 INSTALL      = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
-prefix       = /usr/local
+prefix       = /Applications/Emacs.app/Contents
 datarootdir  = ${prefix}/share
 datadir      = ${datarootdir}
 infodir      = ${datarootdir}/info
-lispdir      = $(prefix)/share/emacs/site-lisp/w3m
+lispdir      = $(datadir)/emacs/site-lisp/w3m
 srcdir       = .
 PACKAGEDIR   = NONE
-ICONDIR      = $(prefix)/share/emacs/23.0.60/etc/images/w3m
+ICONDIR      = $(prefix)/Resources/etc/images/w3m
 ADDITIONAL_LOAD_PATH = NONE
 
 SHELL        = /bin/sh
 
 
-EMACS   = /usr/local/bin/emacs
+EMACS   = /Applications/Emacs.app/Contents/MacOS/Emacs
 VANILLA_FLAG = -q -no-site-file --no-unibyte
 FLAGS   = $(VANILLA_FLAG) -batch -l $(srcdir)/w3mhack.el $(ADDITIONAL_LOAD_PATH)
 

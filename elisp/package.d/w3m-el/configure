@@ -2350,7 +2350,7 @@ fi
 if test "${EMACS_cv_SYS_flavor+set}" = set; then
   echo $ECHO_N "(cached) $ECHO_C" >&6
 else
-
+    #set -x
 	OUTPUT=./conftest-$$
 	echo ${XEMACSDEBUG}${EMACS}' '${VANILLA_FLAG}' -batch -eval '\''(let ((x '"${elisp}"')) (write-region (if (stringp x) (princ x) (prin1-to-string x)) nil "'${OUTPUT}'" nil 5))'\' >& 5 2>&1
 	eval ${XEMACSDEBUG}${EMACS}' '${VANILLA_FLAG}' -batch -eval '\''(let ((x '"${elisp}"')) (write-region (if (stringp x) (princ x) (prin1-to-string x)) nil "'${OUTPUT}'" nil 5))'\' >& 5 2>&1
@@ -2358,7 +2358,7 @@ else
 	echo "=> ${retval}" >& 5 2>&1
 	rm -f ${OUTPUT}
 	EMACS_cv_SYS_flavor="${retval}"
-
+   #set +x
 fi
 
 flavor="${EMACS_cv_SYS_flavor}"

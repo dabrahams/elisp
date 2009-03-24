@@ -7953,7 +7953,8 @@ or a list which consists of the following elements:
 
 (easy-menu-define w3m-link-menu w3m-link-map "w3m link menu."
   `(,(if (or (featurep 'xemacs)
-	     (< emacs-major-version 22))
+	     (memq system-type '(darwin macos))
+             (< emacs-major-version 22))
 	 "Link")
     [,(w3m-make-menu-item "リンクをこのセッションで開く"
 			  "Open Link in This Session")

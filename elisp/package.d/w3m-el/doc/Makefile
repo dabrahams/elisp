@@ -3,7 +3,7 @@
 INSTALL      = /usr/bin/install -c
 INSTALL_DATA = ${INSTALL} -m 644
 INSTALL_INFO = install-info
-prefix       = /usr/local
+prefix       = /Applications/Emacs.app/Contents
 datarootdir  = ${prefix}/share
 infodir      = ${datarootdir}/info
 srcdir       = .
@@ -18,9 +18,9 @@ MAKEINFO     = makeinfo
 TEXI2DVI     = texi2dvi
 PTEX         = false
 JBIBTEX      = false
-DVIPDFMX     = dvipdfmx
+DVIPDFMX     = false
 TEXI2PDF     = texi2pdf
-EMACS        = /usr/local/bin/emacs
+EMACS        = /Applications/Emacs.app/Contents/MacOS/Emacs
 VANILLA_FLAG = -q -no-site-file --no-unibyte
 FLAGS        = $(VANILLA_FLAG) -batch -l ./w3mhack.el $(ADDITIONAL_LOAD_PATH)
 
@@ -62,7 +62,7 @@ emacs-w3m-ja.info: version.texi emacs-w3m-ja.texi
 	      $(EMACSINFO) $$texi ;\
 	    else \
 	      echo "Formatting $$texi using $(MAKEINFO)..." ;\
-	      LC_ALL=C $(MAKEINFO) -o $@ $$texi ;\
+	      LC_ALL=C $(MAKEINFO) --no-split -o $@ $$texi ;\
 	      echo "Formatting $$texi using $(MAKEINFO)...done" ;\
 	    fi ;;\
 	esac

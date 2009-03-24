@@ -32,7 +32,7 @@ GNU Emacs Lisp
 * Emacs Lisp Intro: (eintr).		A simple introduction to Emacs Lisp
 					programming.
 * Elisp: (elisp).			The Emacs Lisp Reference Manual.
-* Emacs-w3m-ja: (emacs-w3m-ja). 	An Emacs interface to w3m (Japanese)
+* Emacs-w3m-ja: (emacs-w3m-ja).  An Emacs interface to w3m (Japanese)
 
 Emacs editing modes
 * Ada mode: (ada-mode). 		Emacs mode for editing and compiling
