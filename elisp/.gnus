@@ -227,3 +227,5 @@
 
 (require 'gnus-spec)
 (gnus-compile)
+(require 'gravatar)
+
