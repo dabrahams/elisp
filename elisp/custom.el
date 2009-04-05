@@ -80,12 +80,24 @@ Increased the number of stack frames displayed from 40")
  '(global-auto-revert-mode t nil nil "
 We want our file buffers to stay up-to-date with changes on disk")
  '(gnus-buttonized-mime-types (quote ("multipart/signed" "multipart/alternative" "application/msword")))
+ '(gnus-extra-headers (quote (To Newsgroups X-Spambayes-Classification Reply-To Message-ID Message-Id)))
+ '(gnus-ignored-from-addresses "^david.abrahams@rcn.com\\|dave@boost\\(-consulting\\|pro\\).com$")
+ '(gnus-picon-style (quote right))
+ '(gnus-registry-install t)
+ '(gnus-select-method (quote (nnimap "boostpro" (nnimap-address "www.boostpro.com") (nnimap-stream ssl) (nnimap-authenticator login) (nimap-nov-is-evil t))))
+ '(gnus-summary-ignore-duplicates t)
  '(gnus-treat-fill-long-lines (quote first) nil nil "
 Some people don't embed linebreaks in their paragraphs; this will force-add them.")
+ '(gnus-treat-from-picon (quote head))
+ '(gnus-treat-mail-picon (quote head))
+ '(gnus-treat-newsgroups-picon (quote head))
+ '(gravatar-icon-size 50)
+ '(gravatar-retrieval-program "wget -q -O '%s' '%s'" nil nil "
+Requires wget, which isn't on the Mac by default.  Someday should
+figure out how to use curl instead, but for now I just installed wget
+from macports.")
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
- '(mac-command-modifier (quote meta))
- '(mac-option-modifier (quote super))
  '(mail-user-agent (quote gnus-user-agent) nil nil "
 Gnus Message with full Gnus features")
  '(message-citation-line-function (quote my-message-insert-citation-line) nil nil "
