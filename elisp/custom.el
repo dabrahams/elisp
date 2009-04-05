@@ -78,6 +78,11 @@ emacs to pop up a separate frame for the `*Ediff Control Panel*' buffer")
 added -l so it would take things out of my .bash_profile, like (on boostpro.com) the prompt pattern.  Otherwise I get this abomination: ///bd5882fff11dd5c2900e1ce95b895e66")
  '(explicit-shell-file-name "bash" nil nil "
 Giving an explicit path like /bin/bash (the default from my Linux boxen) fails on FreeBSD where the file doesn't live there.")
+ '(ffap-machine-p-known (quote reject) nil nil "
+This hung emacs on my Mac once when pinging.")
+ '(ffap-require-prefix t nil nil "
+Invoking ffap without any prefix tends to do things I don't intend.")
+ '(g-user-email "boost.consulting@gmail.com")
  '(gdb-max-frames 100 nil nil "
 Increased the number of stack frames displayed from 40")
  '(global-auto-revert-mode t nil nil "
