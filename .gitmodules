@@ -22,3 +22,6 @@
 [submodule "elisp/package.d/worklog"]
 	path = elisp/package.d/worklog
 	url = git://github.com/credmp/worklog.git
+[submodule "elisp/package.d/org-mode"]
+	path = elisp/package.d/org-mode
+	url = git://repo.or.cz/org-mode.git

@@ -115,9 +115,8 @@ The documentation for this variable says it all")
  '(muse-project-alist (quote (("WikiPlanner" ("~/plans" :default "index" :major-mode planner-mode :visit-link planner-visit-link)))))
  '(ns-alternate-modifier (quote super) t)
  '(ns-command-modifier (quote meta) t)
- '(org-agenda-custom-commands (quote (("d" todo #("DELEGATED" 0 9 (face org-warning)) nil) ("c" todo #("DONE|DEFERRED|CANCELLED" 0 23 (face org-warning)) nil) ("w" todo #("WAITING" 0 7 (face org-warning)) nil) ("W" agenda "" ((org-agenda-ndays 21))) ("A" agenda "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))) (org-agenda-ndays 1) (org-agenda-overriding-header "Today's Priority #A tasks: "))) ("u" alltodo "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote scheduled) (quote deadline) (quote regexp) "<[^>
-]+>"))) (org-agenda-overriding-header "Unscheduled TODO entries: "))))) nil nil "
-As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-agenda-custom-commands (quote (("d" todo #("DELEGATED" 0 9 (face org-warning)) nil) ("c" todo #("DONE|DEFERRED|CANCELLED" 0 23 (face org-warning)) nil) ("w" todo #("WAITING" 0 7 (face org-warning)) nil) ("W" agenda "" ((org-agenda-ndays 21))) ("A" agenda "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))) (org-agenda-ndays 1) (org-agenda-overriding-header "Today's Priority #A tasks: "))) ("u" "Unscheduled TODO entries" alltodo "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote scheduled) (quote deadline) (quote regexp) "<[^>
+]+>"))))))))
  '(org-agenda-files (quote ("~/todo.org")) nil nil "
 As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
  '(org-agenda-skip-deadline-if-done t nil nil "
@@ -130,6 +129,8 @@ As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-plan
 As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
  '(org-fast-tag-selection-single-key (quote expert) nil nil "
 As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-mac-mail-account "BoostPro")
+ '(org-modules (quote (org-bbdb org-bibtex org-gnus org-info org-jsinfo org-irc org-mac-message org-mew org-mhe org-rmail org-vm org-wl org-w3m)))
  '(org-remember-templates (quote (("" 116 "* TODO %?
   %u" "~/todo.org" "Tasks" nil) ("" 110 "* %u %?" "~/notes.org" "Notes" nil))) nil nil "
 As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
@@ -157,6 +158,26 @@ Needed in order to enable tilde expansion, etc., in remote shells")
  '(vc-diff-switches "-du")
  '(w3m-confirm-leaving-secure-page t nil nil "
 I never like being nannied by regular browsers either.")
+ '(remember-annotation-functions (quote (org-remember-annotation)) nil nil "
+As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html.  Note: buffer-file-name was checked in the default.")
+ '(remember-handler-functions (quote (org-remember-handler)) nil nil "As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html.  Note: remember-append-to-file is checked in the default.")
+ '(rmail-dont-reply-to-names "dave@\\(boost-consulting\\|boostpro\\)\\.com\\|dave\\.abrahams@rcn\\.com\\|boost\\.consulting@gmail\\.com\\|dave\\.boostpro@gmail\\.com\\|Undisclosed-recipients[:;]*")
+ '(safe-local-variable-values (quote ((folded-file . t))))
+ '(remember-annotation-functions (quote (org-remember-annotation)) nil nil "
+As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html.  Note: buffer-file-name was checked in the default.")
+ '(remember-handler-functions (quote (org-remember-handler)) nil nil "As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html.  Note: remember-append-to-file is checked in the default.")
+ '(rmail-dont-reply-to-names "dave@\\(boost-consulting\\|boostpro\\)\\.com\\|dave\\.abrahams@rcn\\.com\\|boost\\.consulting@gmail\\.com\\|dave\\.boostpro@gmail\\.com\\|Undisclosed-recipients[:;]*")
+ '(safe-local-variable-values (quote ((folded-file . t))))
+ '(remember-annotation-functions (quote (org-remember-annotation)) nil nil "
+As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html.  Note: buffer-file-name was checked in the default.")
+ '(remember-handler-functions (quote (org-remember-handler)) nil nil "As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html.  Note: remember-append-to-file is checked in the default.")
+ '(rmail-dont-reply-to-names "dave@\\(boost-consulting\\|boostpro\\)\\.com\\|dave\\.abrahams@rcn\\.com\\|boost\\.consulting@gmail\\.com\\|dave\\.boostpro@gmail\\.com\\|Undisclosed-recipients[:;]*")
+ '(safe-local-variable-values (quote ((folded-file . t))))
+ '(remember-annotation-functions (quote (org-remember-annotation)) nil nil "
+As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html.  Note: buffer-file-name was checked in the default.")
+ '(remember-handler-functions (quote (org-remember-handler)) nil nil "As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html.  Note: remember-append-to-file is checked in the default.")
+ '(rmail-dont-reply-to-names "dave@\\(boost-consulting\\|boostpro\\)\\.com\\|dave\\.abrahams@rcn\\.com\\|boost\\.consulting@gmail\\.com\\|dave\\.boostpro@gmail\\.com\\|Undisclosed-recipients[:;]*")
+ '(safe-local-variable-values (quote ((folded-file . t))))
  '(w3m-default-display-inline-images t)
  '(w3m-display-ins-del nil)
  '(w3m-icon-directory "~/elisp/package.d/w3m-el/icons")
