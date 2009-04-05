@@ -52,34 +52,6 @@
 (add-hook 'gnus-article-mode-hook
           '(lambda () (set-fill-column 86)))
 
-(setq-default
-	gnus-select-method
-      '(nnimap "boostpro"
-               (nnimap-address "www.boostpro.com")
-               (nnimap-stream ssl)
-               (nnimap-authenticator login))
-
-       gnus-secondary-select-methods
-      '(; (nntp "news.rcn.com")
-        (nntp "news.gmane.org")
-	(nnimap "gmail"
-               (nnimap-address "imap.gmail.com")
-               (nnimap-stream ssl)
-               (nnimap-authenticator login))
-        (nnmbox "mbox")
-        )
-      
-      gnus-summary-ignore-duplicates t
-      gnus-extra-headers (quote (To Newsgroups X-Spambayes-Classification Reply-To))
-
-      gnus-picon-style 'right
-      gnus-treat-from-picon 'head
-      gnus-treat-mail-picon 'head
-      gnus-treat-newsgroups-picon 'head
-
-      gnus-ignored-from-addresses "^david.abrahams@rcn.com\\|dave@boost\\(-consulting\\|pro\\).com$"
-)
-
 (require 'gnus)
 
 (defvar my-gnus-group-faces
