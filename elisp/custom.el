@@ -95,7 +95,6 @@ Removed \"}\" from the allowable characters because I often type that when writi
  '(message-default-headers "Bcc: dave@boostpro.com
 " nil nil "
 Always Bcc: myself")
- '(message-dont-reply-to-names (quote ("dave@boost-consulting\\.com" "dave@boostpro\\.com" "david\\.abrahams@rcn\\.com" "boost\\.consulting@gmail\\.com" "dave\\.boostpro@gmail\\.com" "Undisclosed-recipients[:;]*")))
  '(message-forward-ignored-headers (quote ("^Content-Transfer-Encoding:" "^X-Gnus" "^X-" "^Received:" "^User-Agent:" "^References:")))
  '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) nil nil "
 Automatically wrap text during email composition")
