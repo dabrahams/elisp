@@ -99,8 +99,8 @@
     gnus-summary-low-read
     gnus-summary-normal-read))
 
-(defvar my-gnus-group-face-attributes '(:family "Dejavu Sans" :weight normal :width condensed))
-(defvar my-gnus-summary-face-attributes '(:family "Dejavu Sans" :weight normal :width condensed))
+(defvar my-gnus-group-face-attributes '(:family "Helvetica" :weight normal :width condensed))
+(defvar my-gnus-summary-face-attributes '(:family "Helvetica" :weight normal :width condensed))
 
 (dolist (facename my-gnus-group-faces)
   (apply 'set-face-attribute facename nil my-gnus-group-face-attributes))
@@ -198,6 +198,7 @@
       (set-face-background x "#F0F0F0"))
 
 (require 'gnus-spec)
-(gnus-compile)
 (require 'gravatar)
+
+(gnus-compile)
 
