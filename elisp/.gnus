@@ -193,6 +193,8 @@
                      (message 80 point))))
     ))
 
+;; Make sure cited text has a light gray background, in case people
+;; forget to add a blank line after their citations.
 (require 'gnus-cite)
 (loop for x in gnus-cite-face-list do 
       (set-face-background x "#F0F0F0"))
