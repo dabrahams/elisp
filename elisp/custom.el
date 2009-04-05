@@ -99,8 +99,7 @@ Always Bcc: myself")
  '(message-forward-ignored-headers (quote ("^Content-Transfer-Encoding:" "^X-Gnus" "^X-" "^Received:" "^User-Agent:" "^References:")))
  '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) nil nil "
 Automatically wrap text during email composition")
- '(message-send-mail-function (quote message-smtpmail-send-it) nil nil "
-If we ever go back to using a local exim MTA, we'll set this back to message-send-mail-with-sendmail")
+ '(message-send-mail-function (quote message-send-mail-with-sendmail))
  '(message-subject-re-regexp "^[ 	]*\\(\\([Rr][Ee]\\|[Aa][Ww]\\)\\(\\[[0-9]*\\]\\)*:[ 	]*\\)*[ 	]*" nil nil "
 Handle Germans' Aw: version of Re:")
  '(message-subject-trailing-was-query t nil nil "
