@@ -1675,6 +1675,8 @@ The results are used to build the `svn-status-info' variable."
       (goto-char (point-min))
       (while (< (point) (point-max))
         (cond
+         ((looking-at "exit\\( +[0-9]+\\)?\n$")     ;skip the final "exit" that may come from TRAMP
+          nil)
          ((= (svn-point-at-eol) (svn-point-at-bol)) ;skip blank lines
           nil)
          ((looking-at "Status against revision:[ ]+\\([0-9]+\\)")
