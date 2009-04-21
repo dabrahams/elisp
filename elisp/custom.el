@@ -16,11 +16,15 @@ always collected in a common directory")
 Blinking cursor just annoys me")
  '(browse-url-browser-function (quote w3m-browse-url))
  '(canlock-password "963afd5a40a33c7f59217100af5a7c1648af74a1")
- '(cursor-type (quote box))
- '(default-frame-alist (quote ((menu-bar-lines . 1) (font-backend . "xft") (font . "Bitstream Vera Sans Mono-10.5"))) nil nil "
-This is really just a way of hanging onto and documenting my
-settings for for default-frame-alist, which currently aren't
-needed since I have an .Xdefaults file containing:
+ '(cursor-type (quote box) t)
+ '(default-frame-alist (quote ((font . "Monaco-13"))) nil nil "
+On Linux this is really just a way of hanging onto and documenting my
+settings for for default-frame-alist
+
+  '(default-frame-alist (quote ((menu-bar-lines . 1) (font-backend . \"xft\") (font . \"Bitstream Vera Sans Mono-10.5\"))) nil nil \"
+
+which currently aren't needed
+since I have an .Xdefaults file containing:
 
   Emacs.FontBackend: xft
   Emacs.font: Bitstream Vera Sans Mono-10.5
@@ -125,6 +129,8 @@ Handle Germans' Aw: version of Re:")
 always strip the trailing old subject in (was: ...) subjects")
  '(message-syntax-checks (quote ((sender . disabled) (long-lines . disabled))) nil nil "
 Don't complain about long lines, please")
+ '(mf-offset-x 50 nil nil "
+This setting is specific to my Mac and its dock width as configured (I put it on the left side).")
  '(mm-attachment-override-types (quote ("text/x-vcard" "application/pkcs7-mime" "application/x-pkcs7-mime" "application/pkcs7-signature" "application/x-pkcs7-signature" "image/*")) nil nil "
 Added image/* to display attached images inline")
  '(mm-discouraged-alternatives (quote ("text/html" "text/richtext" "image/.*")) nil nil "
