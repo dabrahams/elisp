@@ -1,0 +1,10 @@
+MANIFEST
+Makefile
+autom4te.cache
+config.*
+configure
+info
+semantic.cache
+tmp
+tramp-*.tar.gz*
+*.diff
