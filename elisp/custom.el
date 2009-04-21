@@ -199,9 +199,14 @@ Always run a server so we can open files in existing emacs frames.")
  '(tool-bar-mode nil nil nil "
 Tool bars take up valuable screen real-estate for icons whose meaning I forget")
  '(tramp-backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
- '(tramp-default-proxies-alist (quote (("\\`localhost\\'" "\\`root\\'" "/sudo::") ("\\`127.0.0.1\\'" "\\`root\\'" "/sudo::") ("\\`\\'" "\\`root\\'" "/sudo::") ("\\`.+\\'" "\\`root\\'" "/ssh:%h:"))))
- '(tramp-encoding-shell "bash" nil nil "
-Needed in order to enable tilde expansion, etc., in remote shells")
+ '(tramp-default-host "localhost")
+ '(tramp-default-proxies-alist (quote (("\\`localhost\\'" nil nil) ("\\`.+\\'" "\\`root\\'" "/ssh:%h:"))) nil nil "
+Gets around the common setting that prohibits ssh login as root.
+
+Don't do any proxying for connections to localhost (depends
+on the customization of tramp-default-host to \"localhost\" for simple
+matching), and otherwise, if sudo'ing somewhere, ssh there first and
+then sudo on the remote host itself.")
  '(tramp-remote-path (quote (tramp-default-remote-path "/usr/sbin" "/usr/local/sbin" "/usr/local/bin" "/sbin" "/local/bin" "/local/freeware/bin" "/local/gnu/bin" "/usr/freeware/bin" "/usr/pkg/bin" "/usr/contrib/bin")))
  '(truncate-partial-width-windows nil)
  '(user-mail-address "dave@boostpro.com")
