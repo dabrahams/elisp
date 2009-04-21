@@ -38,7 +38,26 @@
 (global-set-key "\C-xr\C-w" 'my-save-rectangle)
 (global-set-key "\C-x\M-Q" 'my-force-writable)
 
+;; Move to other windows in the frame with meta+ arrow keys.
 (require 'windmove)
 (windmove-default-keybindings 'meta)
 
+;; This is set to mean the same as `C-h' and I'll probably want it for
+;; other things.  I never remember to get to help that way anyhow.
+(global-unset-key [f1])
+
+;;
+;; GTD-ish stuff
+;;
 (define-key global-map [(control meta ?r)] 'remember)
+(define-key mode-specific-map [?a] 'org-agenda)
+
+(global-set-key "\C-cl" 'org-store-link)
+(global-set-key "\C-ca" 'org-agenda)
+
+;; Compilation stuff
+(global-set-key [f7] 'my-recompile)
+(global-set-key [(control f7)] 'my-compile)
+(global-set-key [f4] 'next-error)
+(global-set-key [(shift f4)] 'previous-error)
+(global-set-key [(control f4)] 'first-error)
