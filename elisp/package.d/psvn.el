@@ -22,7 +22,7 @@
 ;;; Commentary
 
 ;; psvn.el is tested with GNU Emacs 21.3 on windows, debian linux,
-;; freebsd5, red hat el4, ubuntu edgy with svn 1.4.0
+;; freebsd5, red hat el4, ubuntu intrepid with svn 1.5.1
 
 ;; psvn.el needs at least svn 1.1.0
 ;; if you upgrade to a higher version, you need to do a fresh checkout
@@ -246,6 +246,7 @@
 (eval-when-compile (require 'dired))
 (eval-when-compile (require 'ediff-util))
 (eval-when-compile (require 'ediff-wind))
+(eval-when-compile (require 'vc-hooks))
 (eval-when-compile (require 'elp))
 (eval-when-compile (require 'pp))
 
@@ -1639,6 +1640,15 @@ the usual parsing functionality in `svn-parse-status-result'."
           (while (re-search-forward search-string (point-max) t)
             (replace-match (replace-regexp-in-string " " "-" (match-string 1)) nil nil nil 1)))))))
 
+(defun svn-status-parse-fixup-tramp-exit ()
+  "Helper function to handle tramp connections stopping with an exit output.
+Add this function to the `svn-pre-parse-status-hook'."
+  (goto-char (point-max))
+  (beginning-of-line)
+  (when (looking-at "exit")
+    (delete-region (point) (svn-point-at-eol))))
+;;(add-hook 'svn-pre-parse-status-hook 'svn-status-parse-fixup-tramp-exit)
+
 (defun svn-parse-status-result ()
   "Parse the `svn-process-buffer-name' buffer.
 The results are used to build the `svn-status-info' variable."
@@ -1675,8 +1685,6 @@ The results are used to build the `svn-status-info' variable."
       (goto-char (point-min))
       (while (< (point) (point-max))
         (cond
-         ((looking-at "exit\\( +[0-9]+\\)?\n$")     ;skip the final "exit" that may come from TRAMP
-          nil)
          ((= (svn-point-at-eol) (svn-point-at-bol)) ;skip blank lines
           nil)
          ((looking-at "Status against revision:[ ]+\\([0-9]+\\)")
@@ -2503,6 +2511,7 @@ When called with a prefix argument, toggle the hiding of all subdirectories for 
 (defun svn-status-apply-elide-list ()
   "Elide files/directories according to `svn-status-elided-list'."
   (interactive)
+(when svn-status-elided-list
   (let ((st-info svn-status-info)
         (fname)
         (len-fname)
@@ -2530,7 +2539,7 @@ When called with a prefix argument, toggle the hiding of all subdirectories for 
       ;;(message "fname: %s elide-mark: %S" fname elide-mark)
       (setcar (nthcdr 1 (svn-status-line-info->ui-status (car st-info))) elide-mark)
       (setq st-info (cdr st-info))))
-  (svn-status-update-buffer))
+  (svn-status-update-buffer)))
 
 (defun svn-status-update-with-command-list (cmd-list)
   (save-excursion
@@ -2795,11 +2804,7 @@ Symbolic links to directories count as directories (see `file-directory-p')."
 ;;Not convinced that this is the fastest way, but...
 (defun svn-status-count-/ (string)
   "Return number of \"/\"'s in STRING."
-  (let ((n 0)
-        (last 0))
-    (while (setq last (string-match "/" string (1+ last)))
-      (setq n (1+ n)))
-    n))
+  (count ?/ string))
 
 (defun svn-insert-line-in-status-buffer (line-info)
   "Format LINE-INFO and insert the result in the current buffer."
