@@ -51,11 +51,11 @@
 (defadvice compilation-find-file (before my-compilation-translate-cygwin-paths activate)
   (ad-set-arg 1 (my-translate-cygwin-paths (ad-get-arg 1)) t))
 
-(global-set-key [f5] 'gud-cont)
-(global-set-key [f11] 'gud-step)
-(global-set-key [f10] 'gud-next)
-(global-set-key [(shift f11)] 'gud-finish)
-(global-set-key [(control f10)] 'my-gud-run-to-cursor)
-(global-set-key [f9] 'gud-break)
-(global-set-key [(shift f9)] 'gud-remove)
+(global-set-key [(control f5)] 'gud-cont)
+(global-set-key [(control f11)] 'gud-step)
+(global-set-key [(control f10)] 'gud-next)
+(global-set-key [(shift control f11)] 'gud-finish)
+(global-set-key [(shift control f10)] 'my-gud-run-to-cursor)
+(global-set-key [(control f9)] 'gud-break)
+(global-set-key [(shift control f9)] 'gud-remove)
 
