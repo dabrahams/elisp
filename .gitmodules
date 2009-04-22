@@ -1,27 +1,30 @@
-[submodule "elisp/package.d/git-emacs"]
-	path = elisp/package.d/git-emacs
+[submodule "3rd-party/git-emacs"]
+	path = 3rd-party/git-emacs
 	url = git://github.com/tsgates/git-emacs.git
-[submodule "elisp/package.d/egg"]
-	path = elisp/package.d/egg
+[submodule "3rd-party/egg"]
+	path = 3rd-party/egg
 	url = git://github.com/bogolisk/egg.git
-[submodule "elisp/package.d/muse-el"]
-	path = elisp/package.d/muse-el
+[submodule "3rd-party/muse-el"]
+	path = 3rd-party/muse-el
 	url = git://repo.or.cz/muse-el.git
-[submodule "elisp/package.d/planner-el"]
-	path = elisp/package.d/planner-el
+[submodule "3rd-party/planner-el"]
+	path = 3rd-party/planner-el
 	url = git://repo.or.cz/planner-el.git
-[submodule "elisp/package.d/remember-el"]
-	path = elisp/package.d/remember-el
+[submodule "3rd-party/remember-el"]
+	path = 3rd-party/remember-el
 	url = git://repo.or.cz/remember-el.git
 [submodule ".git_externals/git"]
 	path = .git_externals/git
 	url = git://git.kernel.org/pub/scm/git/git.git
-[submodule "elisp/package.d/magit"]
-	path = elisp/package.d/magit
+[submodule "3rd-party/magit"]
+	path = 3rd-party/magit
 	url = git://gitorious.org/magit/mainline.git
-[submodule "elisp/package.d/worklog"]
-	path = elisp/package.d/worklog
+[submodule "3rd-party/worklog"]
+	path = 3rd-party/worklog
 	url = git://github.com/credmp/worklog.git
-[submodule "elisp/package.d/org-mode"]
-	path = elisp/package.d/org-mode
+[submodule "3rd-party/org-mode"]
+	path = 3rd-party/org-mode
 	url = git://repo.or.cz/org-mode.git
+[submodule "3rd-party/emacs-tiny-tools"]
+	path = 3rd-party/emacs-tiny-tools
+	url = git://git.savannah.nongnu.org/emacs-tiny-tools.git
