@@ -1,6 +1,9 @@
 ;; Make sure my locally-installed packages have available info in the tree
 (defun find-subdirs-containing-info (dir)
-  (find-subdirs-containing dir "\\.info\\'"))
+  ;; Note: looking for "dir" is really a hack to get around the fact
+  ;; that some packages don't install their info with a .info
+  ;; extension.  I'm not sure what the best non-hack would be.
+  (find-subdirs-containing dir "\\.info\\|\\`dir\\'"))
 
 (defun add-init-path-to-info-path ()
   "Add the subdirectories of init-path that contain info directory
