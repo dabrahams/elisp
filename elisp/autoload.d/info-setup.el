@@ -33,6 +33,7 @@ new directories are prepended to emacs's initial Info path."
 
 ;;; Create dir files for any info files in the init-path
 (add-info-dir-files-to-path init-path)
+(add-info-dir-files-to-path init-3rd-party-path)
 
 ;;; Add the init-path tree to the Info path
 (require 'info)
