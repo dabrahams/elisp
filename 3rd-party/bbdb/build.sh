@@ -1,6 +1,17 @@
 set -e
+if [ -e Makefile ] ; then 
+    make distclean
+fi
 autoconf
 ./configure --with-emacs=/Applications/Emacs.app/Contents/MacOS/Emacs
+
+# This necessary file seems to get killed by "make clean!"
+if [ ! -e loadpath.el ] ; then
+    cat > loadpath.el <<EOF
+(setq load-path (delete "" (append (list ".") load-path)))
+EOF
+fi
+
 make 
 
 PREFIX="$HOME/.emacs.d/3rd-party/package.d/bbdb"
