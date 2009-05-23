@@ -28,3 +28,6 @@
 [submodule "3rd-party/emacs-tiny-tools"]
 	path = 3rd-party/emacs-tiny-tools
 	url = git://git.savannah.nongnu.org/emacs-tiny-tools.git
+[submodule "3rd-party/markdown-mode"]
+	path = 3rd-party/markdown-mode
+	url = git://jblevins.org/git/markdown-mode.git
