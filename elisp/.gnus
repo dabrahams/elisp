@@ -205,3 +205,23 @@
 
 (gnus-compile)
 
+;; This is still a bit of a hack and doesn't work perfectly yet, but
+;; it really cleans up my *Group* buffer.
+(require 'cl-seq)
+(defvar gnus-user-format-previous-group-name nil)
+
+(defun gnus-user-format-function-A (arg)
+  (let* ((current-group gnus-tmp-qualified-group)
+         (common-prefix
+          (substring
+           current-group 0 
+           (mismatch gnus-user-format-previous-group-name current-group)))
+         (common-dot-count (count ?. common-prefix))
+         (prefix (mapconcat (lambda (x) x) (make-list common-dot-count "  .") ""))
+         (suffix 
+          (and (string-match
+                (format "\\([^.]*[.]\\)\\{%d\\}\\(.+\\)" common-dot-count)current-group)
+               (match-string 2 current-group)))
+         )
+    (setq gnus-user-format-previous-group-name current-group)
+    (concat prefix suffix)))
