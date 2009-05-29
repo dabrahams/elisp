@@ -96,7 +96,7 @@ We want our file buffers to stay up-to-date with changes on disk")
  '(gnus-ignored-from-addresses "^david.abrahams@rcn.com\\|dave@boost\\(-consulting\\|pro\\).com$")
  '(gnus-picon-style (quote right))
  '(gnus-registry-install t)
- '(gnus-select-method (quote (nnimap "boostpro" (nnimap-address "www.boostpro.com") (nnimap-stream ssl) (nnimap-authenticator login) (nimap-nov-is-evil t))))
+ '(gnus-select-method (quote (nnimap "boostpro" (nnimap-stream shell) (nnimap-nov-is-evil t))))
  '(gnus-summary-ignore-duplicates t)
  '(gnus-treat-fill-long-lines (quote first) nil nil "
 Some people don't embed linebreaks in their paragraphs; this will force-add them.")
