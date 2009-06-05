@@ -13,3 +13,14 @@
 	   '(("\\.cmake\\'" . cmake-mode))
 	   auto-mode-alist))
 
+(autoload 'jam-mode "jam-mode"
+  "no doc provided." t)
+
+(setq auto-mode-alist
+	  (append
+	   '(("`Jamfile\\(\\.v2\\)'" . jam-mode))
+	   '(("`Jamroot'" . jam-mode))
+	   '(("\\.jam\\'" . jam-mode))
+	   auto-mode-alist))
+
+
