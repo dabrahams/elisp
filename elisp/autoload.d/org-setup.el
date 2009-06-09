@@ -8,6 +8,7 @@
   '(progn
      (define-prefix-command 'org-todo-state-map)
      (define-key org-mode-map "\C-cx" 'org-todo-state-map)
+     (define-key org-mode-map "\M-/" 'org-complete)
 ))
 
 ;(require 'remember)
