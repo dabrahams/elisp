@@ -79,4 +79,28 @@ modified file"
         (my-first-non-nil (cdr seq) f)))
   )
 
+(defun my-mode-read ()
+  (let ((symb 'c++-mode)
+	(predicate 'commandp)
+	(enable-recursive-minibuffers t)
+	val)
+    (setq val (completing-read
+	       (concat "Mode "
+		       (if symb
+			   (format " (default %s)" symb))
+		       ": ")
+	       obarray predicate t nil))
+    (list (if (equal val "")
+	      symb
+	    (intern val)))))
+
+(defun my-clone-region-set-mode (&optional mode)
+  (interactive (my-mode-read))
+  (let ((pt (point))(mk (my-mark-or-point)))
+    (with-current-buffer (clone-indirect-buffer-other-window "*clone*" t)
+    (narrow-to-region pt mk)
+    (if mode
+	(funcall mode)
+      (lisp-mode)))))
+
 (provide 'dwa-util)
