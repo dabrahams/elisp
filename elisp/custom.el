@@ -160,6 +160,7 @@ As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-plan
  '(org-remember-templates (quote (("" 116 "* TODO %?
   %u" "~/todo.org" "Tasks" nil) ("" 110 "* %u %?" "~/notes.org" "Notes" nil))) nil nil "
 As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-return-follows-link t)
  '(org-reverse-note-order t nil nil "
 As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
  '(org-todo-keywords (quote ((sequence "TODO" "STARTED(s)
