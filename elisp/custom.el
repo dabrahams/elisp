@@ -236,4 +236,6 @@ where I don't expect it to be keeping undo history anyway")
   ;; If there is more than one, they won't work right.
  '(cursor ((default (:background "brown")) (nil nil)))
  '(diff-refine-change ((default nil) (nil (:background "#FFFFC0"))))
- '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:background "Beige" :foreground "DarkGreen" :slant italic)))))
+ '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:background "Beige" :foreground "DarkGreen" :slant italic))))
+ '(italic ((t (:slant italic :family "Monaco"))))
+ '(mode-line ((((class color) (min-colors 88)) (:inherit variable-pitch :background "lightblue" :foreground "black" :box (:line-width -1 :style released-button) :height 1.2)))))
