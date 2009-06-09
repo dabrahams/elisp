@@ -57,6 +57,7 @@ typing, the region is replaced")
  '(diff-default-read-only t nil nil "
 If you don't do this, all the nice navigation stuff is disabled by default.  Who wants to edit diffs by hand, anyway?")
  '(diff-jump-to-old-file t)
+ '(diff-switches "-du")
  '(dired-listing-switches "-alh" nil nil "
 Added -h so I can read file sizes")
  '(ediff-custom-diff-options "-u" nil nil "
