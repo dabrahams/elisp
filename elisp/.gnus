@@ -207,7 +207,6 @@
 
 ;; This is still a bit of a hack and doesn't work perfectly yet, but
 ;; it really cleans up my *Group* buffer.
-(require 'cl-seq)
 (defvar gnus-user-format-previous-group-name nil)
 
 (defun gnus-user-format-function-A (arg)
