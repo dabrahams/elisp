@@ -9,6 +9,9 @@
      (define-prefix-command 'org-todo-state-map)
      (define-key org-mode-map "\C-cx" 'org-todo-state-map)
      (define-key org-mode-map "\M-/" 'org-complete)
+; Targets include this file and any file contributing to the agenda - up to 5 levels deep
+     (setq org-refile-targets
+           (append org-refile-targets (quote ((org-agenda-files :maxlevel . 5) (nil :maxlevel . 5)))))
 ))
 
 ;(require 'remember)
