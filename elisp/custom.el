@@ -144,7 +144,7 @@ The documentation for this variable says it all")
  '(ns-command-modifier (quote meta))
  '(org-agenda-custom-commands (quote (("d" todo #("DELEGATED" 0 9 (face org-warning)) nil) ("c" todo #("DONE|DEFERRED|CANCELLED" 0 23 (face org-warning)) nil) ("w" todo #("WAITING" 0 7 (face org-warning)) nil) ("W" "Next 21 Days" agenda "" ((org-agenda-ndays 21))) ("A" "Today's Priority #A tasks:" agenda "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))) (org-agenda-ndays 1) (org-agenda-overriding-header "Today's Priority #A tasks: "))) ("u" "Unscheduled TODO entries" alltodo "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote scheduled) (quote deadline) (quote regexp) "<[^>
 ]+>"))))))))
- '(org-agenda-files (quote ("~/todo.org" "~/notes.org")))
+ '(org-agenda-files (quote ("~/work/boostcon.org" "~/work/osol.org" "~/work/blogging.org" "~/work/sysadmin-plan.org" "~/todo.org" "~/biz/clients.org" "~/biz/clients/searchme.org" "~/biz/clients/searchme.org" "~/notes.org")))
  '(org-agenda-skip-deadline-if-done t nil nil "
 As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
  '(org-agenda-skip-scheduled-if-done t nil nil "
