@@ -110,6 +110,7 @@ Some people don't embed linebreaks in their paragraphs; this will force-add them
 Requires wget, which isn't on the Mac by default.  Someday should
 figure out how to use curl instead, but for now I just installed wget
 from macports.")
+ '(imap-shell-program (quote ("dovecot --exec-mail imap")))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
  '(mail-user-agent (quote gnus-user-agent) nil nil "
