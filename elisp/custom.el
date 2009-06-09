@@ -14,7 +14,6 @@ always collected in a common directory")
  '(backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
  '(blink-cursor-mode nil nil nil "
 Blinking cursor just annoys me")
- '(browse-url-browser-function (quote w3m-browse-url))
  '(canlock-password "963afd5a40a33c7f59217100af5a7c1648af74a1")
  '(cursor-type (quote box) t)
  '(default-frame-alist (quote ((font . "Monaco-13"))) nil nil "
