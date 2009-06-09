@@ -153,6 +153,7 @@ As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-plan
 As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
  '(org-default-notes-file "~/notes.org" nil nil "
 As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-enforce-todo-dependencies t)
  '(org-fast-tag-selection-single-key (quote expert) nil nil "
 As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
  '(org-mac-mail-account "BoostPro")
