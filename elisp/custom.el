@@ -95,7 +95,7 @@ Increased the number of stack frames displayed from 40")
 We want our file buffers to stay up-to-date with changes on disk")
  '(gnus-buttonized-mime-types (quote ("multipart/signed" "multipart/alternative" "application/msword")))
  '(gnus-extra-headers (quote (To Newsgroups X-Spambayes-Classification Reply-To Message-ID Message-Id)))
- '(gnus-group-line-format "%M%S%p%P%5y%~(form my-align-gnus-group)@|%B%(%uA%)%O
+ '(gnus-group-line-format "%M%S%p%P%5y%~(form my-align-gnus-group)@|%B%(%G%)%O
 ")
  '(gnus-ignored-from-addresses "^david.abrahams@rcn.com\\|dave@boost\\(-consulting\\|pro\\).com$")
  '(gnus-picon-style (quote right))

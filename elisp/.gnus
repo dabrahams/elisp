@@ -205,22 +205,35 @@
 
 (gnus-compile)
 
-;; This is still a bit of a hack and doesn't work perfectly yet, but
-;; it really cleans up my *Group* buffer.
-(defvar gnus-user-format-previous-group-name nil)
+;; Thanks to David Engster
+;; [[gnus:nntp%2Bnews.gmane.org:gmane.emacs.gnus.general#87vdnimyxd.fsf@randomsample.de][Posting on ding@gnus.org]]
+(defun DE-collapse-group-names ()
+  (save-excursion
+    (let (previous-group current-group common-prefix
+			 common-dot-count prefix suffix)
+      (goto-char (point-min))
+      (while (not (eobp))
+	(when (setq current-group 
+		    (get-text-property (point) 'gnus-group))
+	  (setq current-group (symbol-name current-group))
+	  (when (string-match "\\(.+\\):\\(.+\\)" current-group)
+	    (setq current-group (match-string 2 current-group)))
+	  (setq common-prefix (substring current-group 0 
+					 (mismatch previous-group current-group))
+		common-dot-count (count ?. common-prefix)
+		prefix (mapconcat (lambda (x) x) 
+				  (make-list common-dot-count "  .") "")
+		suffix (and (string-match
+			     (format "\\([^.]*[.]\\)\\{%d\\}\\(.+\\)" common-dot-count) 
+			     current-group)
+			    (match-string 2 current-group))
+		previous-group current-group)
+	  (unless (zerop (length prefix))
+	    (when (search-forward current-group (point-at-eol) t)
+	      (let ((props (text-properties-at (1- (point)))))
+		(replace-match (apply 'propertize (concat prefix suffix)
+				      props))))))
+	(forward-line 1)))))
 
-(defun gnus-user-format-function-A (arg)
-  (let* ((current-group gnus-tmp-qualified-group)
-         (common-prefix
-          (substring
-           current-group 0 
-           (mismatch gnus-user-format-previous-group-name current-group)))
-         (common-dot-count (count ?. common-prefix))
-         (prefix (mapconcat (lambda (x) x) (make-list common-dot-count "  .") ""))
-         (suffix 
-          (and (string-match
-                (format "\\([^.]*[.]\\)\\{%d\\}\\(.+\\)" common-dot-count)current-group)
-               (match-string 2 current-group)))
-         )
-    (setq gnus-user-format-previous-group-name current-group)
-    (concat prefix suffix)))
+(add-hook 'gnus-group-prepare-hook 'DE-collapse-group-names)
+(add-hook 'gnus-group-update-group-hook 'DE-collapse-group-names)
