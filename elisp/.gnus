@@ -27,8 +27,6 @@
 
 (defvar my-align-gnus-group (propertize " " 'display '(space :align-to 8)))
 
-(setq gnus-group-line-format "%M%S%p%P%5y%~(form my-align-gnus-group)@|%B%(%g%)%O\n")
-
 (defun my-gnus-started-hook()
   (set-frame-name "Gnus")
   (ignore-errors
