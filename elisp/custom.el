@@ -135,8 +135,6 @@ Handle Germans' Aw: version of Re:")
 always strip the trailing old subject in (was: ...) subjects")
  '(message-syntax-checks (quote ((sender . disabled) (long-lines . disabled))) nil nil "
 Don't complain about long lines, please")
- '(mf-offset-x 50 nil nil "
-This setting is specific to my Mac and its dock width as configured (I put it on the left side).")
  '(mm-attachment-override-types (quote ("text/x-vcard" "application/pkcs7-mime" "application/x-pkcs7-mime" "application/pkcs7-signature" "application/x-pkcs7-signature" "image/*")) nil nil "
 Added image/* to display attached images inline")
  '(mm-discouraged-alternatives (quote ("text/html" "text/richtext" "image/.*")) nil nil "
