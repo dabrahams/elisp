@@ -227,9 +227,10 @@ I never like being nannied by regular browsers either.")
  '(warning-suppress-types (quote ((\(undo\ discard-info\)))) nil nil "
 Without this, emacs pops up annoying warnings in, e.g., *shell* buffers
 where I don't expect it to be keeping undo history anyway")
- '(weblogger-config-alist (quote (("cpp-next" ("user" . "dave") ("server-url" . "http://cpp-next.com/mt-xmlrpc.cgi") ("weblog" . "1")) ("techarcana" ("user" . "boostpro") ("server-url" . "http://techarcana.net/xmlrpc.php") ("weblog" . "4427765")))))
- '(weblogger-server-url "http://cpp-next.com/mt-xmlrpc.cgi")
+ '(weblogger-edit-entry-hook (quote ((lambda nil (switch-to-buffer "*weblogger-entry*")))))
+ '(weblogger-server-url "http://cpp-next.com/xmlrpc.php")
  '(weblogger-server-username "dave")
+ '(weblogger-start-edit-entry-hook (quote ((lambda nil (message-goto-body) (while (search-forward "" nil t) (replace-match "" nil t))))))
  '(x-select-enable-clipboard t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
