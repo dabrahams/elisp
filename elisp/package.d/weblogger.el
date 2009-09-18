@@ -1,13 +1,16 @@
-;;; weblogger.el - Weblog maintenance via XML-RPC APIs
+;;; weblogger.el --- Weblog maintenance via XML-RPC APIs
 
-;; Copyright (C) 2002-2007 Mark A. Hershberger.
+;; Copyright (C) 2002-2009 Mark A. Hershberger.
 ;; Inspired by code Copyright (C) 2001 by Simon Kittle.
 ;; Parts Copyright (C) 2007 Wickersheimer Jeremy.
 
 ;; Original Author: Mark A. Hershberger <mah@everybody.org>
 ;; Created: 2002 Oct 11
 ;; Keywords: weblog blogger cms movable type openweblog blog
-;; URL: http://elisp.info/package/weblogger/
+;; URL: http://emacswiki.org/emacs/weblogger.el
+;; Version: 1.4
+;; Last Modified: <2009-08-12 19:20:16 mah>
+;; Package-Requires: xml-rpc
 
 ;; This file is not yet part of GNU Emacs.
 
@@ -40,8 +43,11 @@
 ;; To set up your profile:
 ;;
 ;;    M-x weblogger-setup-weblog RET
-;; You will be prompted for some information.  You can save this setup
-;; using M-x customize-save-customized. *** FIXME: Make sure this works!
+
+;; You will be prompted for some information.  The URL should be the
+;; one that uses the API you're using, not the one you would use for
+;; typing an entry.  For instance, in wordpress, use
+;; <blog-url>/xmlrpc.php.
 
 ;; *** FIXME This section is complete fantasy at the moment.
 ;; ;; If you already have a weblog, and your weblog supports RSD
@@ -119,7 +125,6 @@
 ;; - Many other features.
 ;;
 ;;  TODO:
-;;  * Categories [done for metaWebBlog]
 ;;  * RSD
 ;;  * Weblog creation using OpenWeblog.com
 ;;  * Menus
@@ -161,8 +166,8 @@
   :group 'weblogger
   :type 'string)
 
-(defcustom weblogger-server-url "http://www.openweblog.com/xmlrpc/"
- "Server you want to use.  If this is an OpenWeblog.com site, leave this
+(defcustom weblogger-server-url "http://www.openweblog.com/interface/blogger/"
+  "Server you want to use.  If this is an OpenWeblog.com site, leave this
 at the default.  Otherwise, you will need to change it."
   :group 'weblogger
   :type 'string)
@@ -191,18 +196,27 @@ server.  There may be a server-side limitation to this number."
   :group 'weblogger
   :type 'boolean)
 
-(defcustom weblogger-config-alist ()
+(defcustom weblogger-config-alist nil
   "Alist of possible configurations."
   :group 'weblogger
-  :type '(alist :key-type 'string :value-type 'alist))
+  :type '(alist :tag "Name"
+                :key-type (string :tag "Configuration Name")
+                :value-type (list :tag "Weblog Config"
+                                  (string :tag "Server URL")
+                                  (string :tag "Username")
+                                  (string :tag "Password")
+                                  (string :tag "Weblog ID"))))
 
 (defcustom weblogger-blogger-firstline-title nil
-  "Look for the title in the first line surrounded by <title> tags when using the Blogger API."
+  "Look for the title in the first line surrounded by <title>
+tags when using the Blogger API."
   :group 'weblogger
   :type 'boolean)
 
-(defvar weblogger-config-name "default"
-  "Name of  the default configuration.")
+(defcustom weblogger-config-name "default"
+  "Name of the default configuration."
+  :group 'weblogger
+  :type 'string)
 
 (defvar weblogger-entry-list nil
   "List of weblog entries that we know about. Chronological
@@ -220,18 +234,30 @@ order, with newest first.")
 (defvar weblogger-entry-mode-hook nil
   "Hook to run after starting up weblogger mode.")
 
-(defvar weblogger-start-edit-entry-hook (lambda ()
-					  (message-goto-body)
-					  (replace-string "\r" "" nil (point) (point-max)))
-  "Hook to run after loading an entry in buffer for editting.")
+(defcustom weblogger-start-edit-entry-hook
+  (list (lambda ()
+          (message-goto-body)
+          (while (search-forward "\r" nil t)
+            (replace-match "" nil t))))
+  "Hook to run after loading an entry in buffer for editing."
+  :group 'weblogger
+  :type 'hook)
 
 (defvar weblogger-new-entry-hook '(weblogger-ping-weblogs)
   "Hook to run after sending a new entry.  Typically, this is
 where you would put weblogger-ping-weblogs to let weblog
 aggregators know that you have updated.")
 
-(defvar weblogger-edit-entry-hook nil
-  "Hook to run after updating an entry.")
+(defcustom weblogger-edit-entry-hook nil
+  "Hook to run after updating an entry."
+  :group 'weblogger
+  :type 'hook)
+
+(defcustom weblogger-pre-struct-hook nil
+  "Hook to run just before the buffer is converted to a struct to
+send to the server."
+  :group 'weblogger
+  :type 'hook)
 
 (defvar weblogger-entry-mode-map nil
   "Keymap for weblogger-entry-mode.")
@@ -248,36 +274,72 @@ aggregators know that you have updated.")
 (defvar weblogger-ring-index 0
   "Pointer to the index on the ring")
 
-(defconst weblogger-no-capabilities '(("blogger.newPost" . nil)
-				      ("blogger.getPost" . nil)
-				      ("blogger.editPost" . nil)
-				      ("blogger.getRecentPosts" . nil)
-				      ("blogger.getUsersBlogs" . nil)
-				      ("blogger.getUserInfo" . nil)
-				      ("blogger.deletePost" . nil)
-				      ("blogger.getTemplate" . nil)
-				      ("blogger.setTemplate" . nil)
-				      ("metaWeblog.getPost" . nil)
-				      ("metaWeblog.newPost" . nil)
-				      ("metaWeblog.editPost" . nil)	
-				      ("metaWeblog.newMediaObject" . nil)	
-				      ("metaWeblog.getRecentPosts" . nil)
-				      ("metaWeblog.getCategories" . nil)
-				      ("metaWeblog.newMediaObject" . nil)
-				      ("metaWeblog.deletePost" . nil)
-				      ("metaWeblog.getTemplate" . nil)
-				      ("metaWeblog.setTemplate" . nil)
-				      ("metaWeblog.getUsersBlogs" . nil)
-				      ("mt.getCategoryList" . nil)
-				      ("mt.getRecentPostTitles" . nil)
-				      ("mt.setPostCategories" . nil)
-				      ("mt.getPostCategories" . nil)
-				      ("mt.getTrackbackPings" . nil)
-				      ("mt.supportedMethods" . nil)
-				      ("mt.publishPost" . nil)
-				      ("mt.supportedTextFilters" . nil)))
+(defconst weblogger-no-capabilities '(("wp.getUsersBlogs" . nil)
+                                      ("wp.getPage" . nil)
+                                      ("wp.getPages" . nil)
+                                      ("wp.newPage" . nil)
+                                      ("wp.deletePage" . nil)
+                                      ("wp.editPage" . nil)
+                                      ("wp.getPageList" . nil)
+                                      ("wp.getAuthors" . nil)
+                                      ("wp.getCategories" . nil)
+                                      ("wp.getTags" . nil)
+                                      ("wp.newCategory" . nil)
+                                      ("wp.deleteCategory" . nil)
+                                      ("wp.suggestCategories" . nil)
+                                      ("wp.uploadFile" . nil)
+                                      ("wp.getCommentCount" . nil)
+                                      ("wp.getPostStatusList" . nil)
+                                      ("wp.getPageStatusList" . nil)
+                                      ("wp.getPageTemplates" . nil)
+                                      ("wp.getOptions" . nil)
+                                      ("wp.setOptions" . nil)
+                                      ("wp.getComment" . nil)
+                                      ("wp.getComments" . nil)
+                                      ("wp.deleteComment" . nil)
+                                      ("wp.editComment" . nil)
+                                      ("wp.newComment" . nil)
+                                      ("wp.getCommentStatusList" . nil)
+                                      ("blogger.getUsersBlogs" . nil)
+                                      ("blogger.getUserInfo" . nil)
+                                      ("blogger.getPost" . nil)
+                                      ("blogger.getRecentPosts" . nil)
+                                      ("blogger.getTemplate" . nil)
+                                      ("blogger.setTemplate" . nil)
+                                      ("blogger.newPost" . nil)
+                                      ("blogger.editPost" . nil)
+                                      ("blogger.deletePost" . nil)
+                                      ("metaWeblog.newPost" . nil)
+                                      ("metaWeblog.editPost" . nil)
+                                      ("metaWeblog.getPost" . nil)
+                                      ("metaWeblog.getRecentPosts" . nil)
+                                      ("metaWeblog.getCategories" . nil)
+                                      ("metaWeblog.newMediaObject" . nil)
+                                      ("metaWeblog.deletePost" . nil)
+                                      ("metaWeblog.getTemplate" . nil)
+                                      ("metaWeblog.setTemplate" . nil)
+                                      ("metaWeblog.getUsersBlogs" . nil)
+                                      ("mt.getCategoryList" . nil)
+                                      ("mt.getRecentPostTitles" . nil)
+                                      ("mt.getPostCategories" . nil)
+                                      ("mt.setPostCategories" . nil)
+                                      ("mt.supportedMethods" . nil)
+                                      ("mt.supportedTextFilters" . nil)
+                                      ("mt.getTrackbackPings" . nil)
+                                      ("mt.publishPost" . nil)
+                                      ("pingback.ping" . nil)
+                                      ("pingback.extensions.getPingbacks" . nil)
+                                      ("demo.sayHello" . nil)
+                                      ("demo.addTwoNumbers" . nil)
+                                      ("wpStats.check_key" . nil)
+                                      ("wpStats.get_blog_id" . nil)
+                                      ("wpStats.get_site_id" . nil)
+                                      ("wpStats.update_bloginfo" . nil)
+                                      ("wpStats.update_postinfo" . nil)
+                                      ("wpStats.ping_blog" . nil)
+                                      ("wpStats.flush_posts" . nil)))
 
-(defvar weblogger-capabilities weblogger-no-capabilities
+(defvar weblogger-capabilities nil
   "Known capabilities of the remote host")
 
 (defvar weblogger-default-title ""
@@ -286,7 +348,7 @@ if your weblog server supports titles on entries but you haven't
 set one.  Set to \"\" for no title.")
 
 (defvar weblogger-default-categories nil
-   "The default list of categories when making an entry.  This is
+  "The default list of categories when making an entry.  This is
 added if your weblog server supports categories on entries but you
 haven't set one.  Set to nil for no category.")
 
@@ -302,32 +364,32 @@ haven't set one.  Set to nil for no category.")
 
 (defvar menu-bar-weblogger-menu nil)
 
-(defconst weblogger-version "wiki"
+(defconst weblogger-version "1.4"
   "Current version of weblogger.el")
 
 (unless weblogger-entry-mode-map
   (setq weblogger-entry-mode-map
-    (let ((map (copy-keymap message-mode-map))
-	  (server-map (make-sparse-keymap))
-	  (template-map (make-sparse-keymap)))
-      (define-key map "\C-c\C-c" 'weblogger-send-entry)
-      (define-key map "\C-x\C-s" 'weblogger-publish-entry)
-      (when (fboundp 'unicode-smart-double-quote)
-	(define-key map "\"" 'unicode-smart-double-quote)
-	(define-key map "'" 'unicode-smart-single-quote)
-	(define-key map "-" 'unicode-smart-hyphen)
-	(define-key map "." 'unicode-smart-period))
-      (define-key map "\C-c\C-n" 'weblogger-next-entry)
-      (define-key map "\C-c\C-p" 'weblogger-prev-entry)
-      (define-key map "\C-c\C-k" 'weblogger-delete-entry)
-      (define-key map "\M-g"     'weblogger-fetch-entries)
-      (define-key template-map "m" 'weblogger-edit-main-template)
-      (define-key template-map "a" 'weblogger-edit-archive-template)
-      (define-key map "\C-c\C-t" template-map)
-      (define-key map "\C-c\C-o" 'weblogger-change-server)
-      (define-key map "\C-c\C-w" 'weblogger-change-weblog)
-      (define-key map "\C-c\C-u" 'weblogger-change-user)
-      map)))
+        (let ((map (copy-keymap message-mode-map))
+              (server-map (make-sparse-keymap))
+              (template-map (make-sparse-keymap)))
+          (define-key map "\C-c\C-c" 'weblogger-send-entry)
+          (define-key map "\C-x\C-s" 'weblogger-publish-entry)
+          (when (fboundp 'unicode-smart-double-quote)
+            (define-key map "\"" 'unicode-smart-double-quote)
+            (define-key map "'" 'unicode-smart-single-quote)
+            (define-key map "-" 'unicode-smart-hyphen)
+            (define-key map "." 'unicode-smart-period))
+          (define-key map "\C-c\C-n" 'weblogger-next-entry)
+          (define-key map "\C-c\C-p" 'weblogger-prev-entry)
+          (define-key map "\C-c\C-k" 'weblogger-delete-entry)
+          (define-key map "\M-g"     'weblogger-fetch-entries)
+          (define-key template-map "m" 'weblogger-edit-main-template)
+          (define-key template-map "a" 'weblogger-edit-archive-template)
+          (define-key map "\C-c\C-t" template-map)
+          (define-key map "\C-c\C-o" 'weblogger-change-server)
+          (define-key map "\C-c\C-w" 'weblogger-change-weblog)
+          (define-key map "\C-c\C-u" 'weblogger-change-user)
+          map)))
 
 (unless weblogger-template-mode-map
   (setq weblogger-template-mode-map (copy-keymap text-mode-map))
@@ -354,30 +416,18 @@ haven't set one.  Set to nil for no category.")
   "Select a previously saved configuration."
   (interactive)
   (let* ((completion-ignore-case t)
-	 (seq 0)
-	 (configs (mapcar
-		   (lambda (config)
-		     (cons (car config) (setq seq (1+ seq))))
-		   weblogger-config-alist))
-	 (conf (cdr (assoc
-		     (or config 
-			 (if (= 1 (length configs))
-			     (caar configs)
-			   (completing-read 
-			    "Config Name: " configs nil t)))
-		     weblogger-config-alist)))
-	 (username (cdr (assoc "user" conf)))
-	 (password (cdr (assoc "pass" conf)))
-	 (url      (cdr (assoc "server-url" conf)))
-	 (weblog   (cdr (assoc "weblog" conf))))
-    (when username
-      (setq weblogger-server-username username))
-    (when password
-      (setq weblogger-server-password password))
-    (when url
-      (setq weblogger-server-url url))
-    (when weblog
-      (setq weblogger-weblog-id weblog))
+         (name (or config 
+                   (if (= 1 (length weblogger-config-alist))
+                       (caar weblogger-config-alist)
+                     (completing-read 
+                      "Config Name: " weblogger-config-alist nil t))))
+
+	 (conf (cdr (assoc name weblogger-config-alist))))
+    (setq weblogger-config-name name)
+    (setq weblogger-server-url      (nth 0 conf))
+    (setq weblogger-server-username (nth 1 conf))
+    (setq weblogger-server-password (nth 2 conf))
+    (setq weblogger-weblog-id       (nth 3 conf))
     (weblogger-determine-capabilities)
     (weblogger-weblog-alist t)))
 
@@ -385,49 +435,40 @@ haven't set one.  Set to nil for no category.")
   "Create a profile for a weblog."
   (interactive)
   (weblogger-change-server)
+  (setq weblogger-config-name nil)
   (let ((user   (weblogger-server-username t))
-	(pass   (weblogger-server-password t))
-	(weblog (weblogger-weblog-id       t)))
+        (pass   (weblogger-server-password t))
+        (weblog (weblogger-weblog-id       t)))
     (setq weblogger-config-name
-	  (read-from-minibuffer
-	   (format "Name this configuration (\"%s\"): "
-		   weblogger-config-name)
-	   weblogger-config-name))
+	  (read-from-minibuffer "Name this configuration: " "default"))
+
     (let ((conf (assoc weblogger-config-name weblogger-config-alist))
-	  (settings (delq nil
-			  (list
-			   (cons "user"       user)
-			   (cons "server-url" weblogger-server-url)
-			   (when weblogger-save-password
-			     (cons "pass"     pass))
-			   (cons "weblog"     weblog)))))
-      (if conf
-	  (setcdr conf settings)
-	(setq weblogger-config-alist
-	      (append weblogger-config-alist 
-		      (list
+	  (settings (list weblogger-server-url user
+                          (if weblogger-save-password pass "") weblog)))
+      (if conf (setcdr conf settings)
+        (if (or (not weblogger-config-alist)
+                (not (listp weblogger-config-alist)))
+	    (setq weblogger-config-alist
+                  (list (cons weblogger-config-name settings)))
+	  (add-to-list 'weblogger-config-alist
 		       (cons weblogger-config-name
-			     settings)))))))
-  (weblogger-save-configuration))
+			     settings)))))
+    (weblogger-save-configuration)))
 
 (defun weblogger-save-configuration ()
   "Save the current configuration using the name from CONFIG in
 the filename in weblogger-config-file."
   (customize-save-variable 'weblogger-config-alist
 			   weblogger-config-alist))
-;;   (save-excursion
-;;     (set-buffer (find-file weblogger-config-file))
-;;     (erase-buffer)
-;;     (insert "(setq weblogger-config-alist")
-;;     (print weblogger-config-alist 'insert)
-;;     (insert ")\n")))
-
 
 (defun weblogger-change-server ()
   "Change the server-url."
   (interactive)
   (setq weblogger-server-url
-	(read-from-minibuffer "Server Endpoint (URL): " weblogger-server-url))
+	(read-from-minibuffer "Server Endpoint (URL): "
+                              (if (stringp weblogger-server-url)
+                                  weblogger-server-url
+                                "")))
   (weblogger-determine-capabilities))
 
 (defun weblogger-change-user ()
@@ -527,8 +568,10 @@ available."
   (interactive "P")
   (if prompt (weblogger-weblog-id prompt))
   (unless weblogger-entry-ring
-    (setq weblogger-entry-ring (make-ring weblogger-max-entries-in-ring)))
-  (ring-insert weblogger-entry-ring '(("content" "")))
+    (setq weblogger-entry-ring (make-ring weblogger-max-entries-in-ring))
+    (ring-insert weblogger-entry-ring (list (cons "content" ""))))
+  (when (assoc "entry-id" (ring-ref weblogger-entry-ring 0))
+    (ring-insert weblogger-entry-ring (list (cons "content" ""))))
   (setq weblogger-ring-index 0)
   (weblogger-edit-entry))
 
@@ -555,9 +598,12 @@ available."
 			    (format "<%s/%s@%s>"
 				    entry-id
 				    (weblogger-weblog-id)
-				    (url-host (url-generic-parse-url weblogger-server-url)))))
+				    (url-host (url-generic-parse-url
+                                               weblogger-server-url)))))
 		    (list "Date"
-			  (cdr (assoc "dateCreated" entry)))
+                          (format-time-string "%d %b %Y, %H:%M:%S"
+                                              (caddr (assoc "dateCreated"
+                                                            entry))))
 		    (list "In-Reply-To"
 			  (let ((hold nil))
 			    (mapcar
@@ -571,7 +617,7 @@ available."
 			  (cdr (assoc "texttype" entry)))
 		    (list "Subject" title)
 		    (list "Keywords"
-                          (let ((cats (cdr (assoc "categories"  entry))))
+                          (let ((cats (cdr (assoc "tags"  entry))))
                             (when (> (length cats) 0)
                               (mapconcat
                                (lambda (p) p)
@@ -592,7 +638,8 @@ available."
 for the weblog to use."
   (interactive)
   (weblogger-save-entry nil arg)
-  (bury-buffer))
+;  (bury-buffer)
+)
 
 (defun weblogger-publish-entry (&optional arg)
   "Publish the current entry.  With optional argument, prompts
@@ -600,10 +647,11 @@ for the weblog to use."
   (interactive)
   (set-buffer-modified-p t)
   (weblogger-save-entry t arg)
-  (bury-buffer))
+;  (bury-buffer)
+)
 
 
-(defun weblogger-save-entry (&optional publishp &optional arg)
+(defun weblogger-save-entry (&optional publishp arg)
   "Publish the current entry is publishp is set.  With optional
 argument, prompts for the weblog to use."
   (interactive)
@@ -639,25 +687,46 @@ argument, prompts for the weblog to use."
 (defun weblogger-server-username (&optional prompt)
   "Get the username.  If you've not yet logged in then prompt for
 it."
-  (setq weblogger-server-username
-	(progn (when (and
-		      (assoc weblogger-config-name weblogger-config-alist)
-		      (not weblogger-server-username))
-		 (weblogger-select-configuration weblogger-config-name))
-	       (if (or prompt (not weblogger-server-username))
-		   (read-from-minibuffer "Username: " weblogger-server-username)
-		 weblogger-server-username))))
+  (if (or prompt
+          (not weblogger-server-username)
+          (not (stringp weblogger-server-username)))
+      (let ((auth-user
+             (when (fboundp 'auth-source-user-or-password)
+               (auth-source-user-or-password "login"
+                                             (url-host (url-generic-parse-url
+                                                        weblogger-server-url))
+                                                       "http")))
+            (config-user (nth 1 (cdr (assoc weblogger-config-name
+                                            weblogger-config-alist)))))
+        (setq weblogger-server-username
+              (if auth-user auth-user
+                (if config-user config-user
+                  (if (and prompt weblogger-server-username)
+                      (read-from-minibuffer "Username: "
+                                            weblogger-server-username)
+                    (read-from-minibuffer "Username: "))))))
+    weblogger-server-username))
 
 (defun weblogger-server-password (&optional prompt)
   "Get the password.  If you've not yet logged in then prompt for
 it"
-  (setq weblogger-server-password
-	(if (or prompt (not weblogger-server-password))
-	    (if weblogger-server-password
-		(read-passwd "Password for weblog server: "
-			     nil weblogger-server-password)
-	      (read-passwd "Password for weblog server: " nil))
-	    weblogger-server-password)))
+  (when (not (stringp weblogger-server-password))
+    (setq weblogger-server-password ""))
+  (if (or prompt (string= weblogger-server-password ""))
+      (let ((auth-pass
+             (when (fboundp 'auth-source-user-or-password)
+               (auth-source-user-or-password "password"
+                                             (url-host (url-generic-parse-url
+                                                        weblogger-server-url))
+                                             "http")))
+             (get-pass (nth 2 (cdr (assoc weblogger-config-name
+                                          weblogger-config-alist)))))
+        (setq weblogger-server-password
+              (if auth-pass auth-pass
+                (if get-pass
+                    get-pass)
+                (or (read-passwd "Password for weblog server: ") ""))))
+    weblogger-server-password))
 
 (defun weblogger-weblog-id (&optional prompt)
   "Get the weblog ID."
@@ -680,7 +749,7 @@ set."
 	      (cdr (assoc "title" struct))
 	      "</title>\n"
 	      (cdr (assoc "content" struct)))
-      (cdr (assoc "content" struct))))
+    (cdr (assoc "content" struct))))
 
 (defun weblogger-api-blogger-send-edits (struct &optional publishp)
   "Blogger API method to post edits to an entry specified by
@@ -716,7 +785,7 @@ STRUCT.  If PUBLISHP is non-nil, publishes the entry as well."
    weblogger-entry-ring
    (add-to-list
     'struct 
-    (cons "entry-id" (eval `(,weblogger-api-new-entry struct publishp)))))
+    (cons "entry-id" (funcall weblogger-api-new-entry struct publishp))))
   (setq weblogger-ring-index 0)
   (ring-ref weblogger-entry-ring weblogger-ring-index))
 
@@ -725,19 +794,19 @@ STRUCT.  If PUBLISHP is non-nil, publishes the entry as well."
   (run-hooks 'weblogger-edit-entry-hook)
   (unless weblogger-api-send-edits
     (weblogger-determine-capabilities))
-  (eval `(,weblogger-api-send-edits struct publishp)))
+  (funcall weblogger-api-send-edits struct publishp))
 
-(defun weblogger-api-list-entries (count)
+(defun weblogger-api-list-entries (&optional count)
   "Get a list of entries."
   (unless weblogger-api-list-entries
     (weblogger-determine-capabilities))
-  (eval `(,weblogger-api-list-entries count)))
+  (funcall weblogger-api-list-entries count))
 
 (defun weblogger-api-list-categories ()
   "Get a list of categories."
   (unless weblogger-api-list-categories
     (weblogger-determine-capabilities))
-  (eval `(,weblogger-api-list-categories)))
+  (funcall weblogger-api-list-categories))
 
 (defun weblogger-api-blogger-new-entry (struct publishp)
   "Post a new entry from STRUCT.  If PUBLISHP is non-nil, publishes the
@@ -773,9 +842,9 @@ re-queried for a list of weblogs the user owns"
    (let* ((completion-ignore-case t)
 	  (seq 0)
 	  (webloglist (mapcar
-		     (lambda (weblog)
-		       (cons weblog (setq seq (1+ seq))))
-		     (weblogger-list-weblog-names fetch))))
+                       (lambda (weblog)
+                         (cons weblog (setq seq (1+ seq))))
+                       (weblogger-list-weblog-names fetch))))
      (if (= 1 (length webloglist))
 	 (caar webloglist)
        (completing-read 
@@ -784,38 +853,38 @@ re-queried for a list of weblogs the user owns"
 (defun weblogger-weblog-id-from-weblog-name (name)
   "Returns the weblog id given the name."
   (cdr (assoc name
-	 (mapcar 
-	  (lambda (weblog)
-	    (cons (cdr (assoc "blogName" weblog))
-		  (cdr (assoc "blogid" weblog))))
-	  (weblogger-weblog-alist)))))
+              (mapcar 
+               (lambda (weblog)
+                 (cons (cdr (assoc "blogName" weblog))
+                       (cdr (assoc "blogid" weblog))))
+               (weblogger-weblog-alist)))))
 
 (defun weblogger-weblog-name-from-id (id)
   "Returns the weblog name given the id."
   (cdr (assoc id
-	 (mapcar 
-	  (lambda (weblog)
-	    (cons (cdr (assoc "blogid" weblog))
-		  (cdr (assoc "blogName" weblog))))
-	  (weblogger-weblog-alist)))))
+              (mapcar 
+               (lambda (weblog)
+                 (cons (cdr (assoc "blogid" weblog))
+                       (cdr (assoc "blogName" weblog))))
+               (weblogger-weblog-alist)))))
 
 (defun weblogger-texttype-name-from-id (id)
   "Returns the texttype name given the id."
   (cdr (assoc id
-	 (mapcar 
-	  (lambda (texttype)
-	    (cons (cdr (assoc "key" texttype))
-		  (cdr (assoc "label" texttype))))
-	  (weblogger-texttype-alist)))))
+              (mapcar 
+               (lambda (texttype)
+                 (cons (cdr (assoc "key" texttype))
+                       (cdr (assoc "label" texttype))))
+               (weblogger-texttype-alist)))))
 
 (defun weblogger-texttype-id-from-name (name)
   "Returns the texttype id given the name."
   (cdr (assoc name
-	 (mapcar 
-	  (lambda (texttype)
-	    (cons (cdr (assoc "label" texttype))
-		  (cdr (assoc "key" texttype))))
-	  (weblogger-texttype-alist)))))
+              (mapcar 
+               (lambda (texttype)
+                 (cons (cdr (assoc "label" texttype))
+                       (cdr (assoc "key" texttype))))
+               (weblogger-texttype-alist)))))
 
 (defun weblogger-list-texttype-names (&optional fetch)
   "Returns a list of texttype names."
@@ -911,10 +980,10 @@ is set, then add it to the current index and go to that entry."
   (unless weblogger-entry-list
     (weblogger-api-list-entries weblogger-max-entries-in-ring))
   (let ((entry-id (if relativep
-		    (+ (if weblogger-ring-index weblogger-ring-index 
-			 -1)
-		       num)
-		  num)))
+                      (+ (if weblogger-ring-index weblogger-ring-index 
+                           -1)
+                         num)
+                    num)))
     (setq weblogger-ring-index entry-id))
   (if (ring-empty-p weblogger-entry-ring)
       (weblogger-api-list-entries weblogger-max-entries-in-ring))
@@ -1019,13 +1088,13 @@ Otherwise, open a new entry."
   (weblogger-entry-setup-headers entry t)
   (if (and entry (cdr (assoc "content" entry)))
       (insert (cdr (assoc "content" entry))))
-  (run-hooks 'weblogger-start-edit-entry-hook)
-  (set-buffer-modified-p nil)
-  (message-goto-keywords)   ;; Create Keywords field in new entries
-  (if (message-fetch-field "Subject")
-      (message-goto-body)   ;; If Subject exists, move cursor to message body
-    (message-goto-subject)) ;; Else, drop cursor on Subject header
   (message-fetch-field "Keywords")
+  (message-goto-keywords) ;; Create Keywords field in new entries
+  (set-buffer-modified-p nil)
+  (run-hooks 'weblogger-start-edit-entry-hook) ; Force hooks to clear the modified flag themselves if they want to.
+  (if (message-fetch-field "Subject")
+      (message-goto-body) ;; If Subject exists, move cursor to message body
+    (message-goto-subject)) ;; Else, drop cursor on Subject header
   (pop-to-buffer *weblogger-entry*))
 
 (defun weblogger-response-to-struct (response)
@@ -1043,7 +1112,8 @@ like."
 	(url         (cdr (assoc-ignore-case "link" response)))
 	(description      (assoc-ignore-case "description" response))
 	(extended         (assoc-ignore-case "mt_text_more" response))
-	(categories  (cdr (assoc-ignore-case "categories" response))))
+	(tags        (cdr (assoc-ignore-case "mt_keywords" response)))
+        (categories  (cdr (assoc-ignore-case "categories" response))))
     
     (cond (content
 	   (delq nil (list
@@ -1081,17 +1151,19 @@ like."
 			(cons "trackbacks"   trackbacks))
 		      (when description
 			(cond ((cdr extended)
-			  (cons "content"   (concat (cdr description)
-			    "<!--more-->"
-			    (cdr extended))))
-			  (t 
-			    (cons "content" (cdr description)))))
+                               (cons "content"   (concat (cdr description)
+                                                         "<!--more-->"
+                                                         (cdr extended))))
+                              (t 
+                               (cons "content" (cdr description)))))
 		      (when title
 			(cons "title"        title))
 		      (when url
 			(cons "url"          url))
 		      (when dateCreated
 			(cons "dateCreated"  dateCreated))
+		      (when tags
+			(cons "tags"   categories))
 		      (when categories
 			(cons "categories"   categories))
 		      (when textType
@@ -1107,12 +1179,19 @@ like."
 	 (assoc "authorName"   entry)
 	 (assoc "userid"       entry)
 	 (assoc "dateCreated"  entry)
-	 (cons "mt_tb_ping_urls"   (cdr (assoc "trackbacks"  entry)))
-	 (cons "mt_convert_breaks" (weblogger-texttype-id-from-name
-				    (cdr (assoc "texttype"    entry))))
-	 (cons "link"              (cdr (assoc "url"         entry)))
-	 (cons "description"       (cdr (assoc "content"     entry)))
-	 (cons "categories"        (cdr (assoc "categories"     entry))))))
+         (when (cdr (assoc "trackbacks"  entry))
+           (cons "mt_tb_ping_urls" (cdr (assoc "trackbacks"  entry))))
+         (when (cdr (assoc "texttype" entry))
+           (cons "mt_convert_breaks" (weblogger-texttype-id-from-name
+                                      (cdr (assoc "texttype" entry)))))
+         (when (cdr (assoc "url" entry))
+           (cons "link" (cdr (assoc "url" entry))))
+         (when (cdr (assoc "content" entry))
+           (cons "description" (cdr (assoc "content" entry))))
+         (when (cdr (assoc "tags" entry))
+           (cons "mt_keywords" (cdr (assoc "tags" entry))))
+         (when (cdr (assoc "categories" entry))
+           (cons "categories" (cdr (assoc "categories" entry)))))))
 
 (defun weblogger-server-userid ()
   "Get information on user."
@@ -1140,7 +1219,7 @@ like."
 
 (defun weblogger-determine-capabilities ()
   "Determine the capabilities of the remote weblog server."
-  (setq weblogger-capabilities weblogger-no-capabilities)
+  (setq weblogger-capabilities (copy-alist weblogger-no-capabilities))
   (let ((has-meta-api t)
 	(has-mt-api t)
 	(has-blogger-api t))
@@ -1179,39 +1258,42 @@ internally).  If BUFFER is not given, use the current buffer."
   (unless buffer
     (setq buffer (current-buffer)))
   (save-excursion
+    (run-hooks weblogger-pre-struct-hook)
     (set-buffer buffer)
     (delq nil 
 	  (list
 	   (cons "authorName"   (message-fetch-field "From"))
-	   (cons "dateCreated"  (message-fetch-field "Date"))
+	   (cons "dateCreated"  (list :datetime (date-to-time
+                                                 (message-fetch-field "Date"))))
 	   (cons "texttype"      (message-fetch-field "X-TextType"))
 	   (cons "url"           (message-fetch-field "X-Url"))
 	   (cons "title"     (or (message-fetch-field "Subject") 
 				 weblogger-default-title))
-	   (cons "categories"  (vconcat (or (message-tokenize-header 
-				 (message-fetch-field "Keywords") ", ")
-				weblogger-default-categories)))
+	   (cons "tags"  (or 
+                          (message-tokenize-header 
+                           (message-fetch-field "Keywords") ", ")
+                          weblogger-default-categories))
 	   (when (message-fetch-field "In-Reply-To")
-	       (cons "trackbacks" (or (message-tokenize-header 
-				   (message-fetch-field "Keywords") ", ")
-				  weblogger-default-categories)))
+             (cons "trackbacks" (or (message-tokenize-header 
+                                     (message-fetch-field "In-Reply-To") ", ")
+                                    weblogger-default-categories)))
 	   (when (and weblogger-ring-index
-		    (> (ring-length weblogger-entry-ring) 0))
-	       (cons "entry-id"
-		     (let ((msgid (message-fetch-field "Message-ID")))
-		       (if (and msgid (string-match "<\\([0-9]+\\)/" msgid))
-			   (match-string 1 msgid)
-			 (cdr (assoc "entry-id"
-				     (ring-ref
-				      weblogger-entry-ring
-				      weblogger-ring-index)))))))
+                      (> (ring-length weblogger-entry-ring) 0))
+             (cons "entry-id"
+                   (let ((msgid (message-fetch-field "Message-ID")))
+                     (if (and msgid (string-match "<\\([0-9]+\\)/" msgid))
+                         (match-string 1 msgid)
+                       (cdr (assoc "entry-id"
+                                   (ring-ref
+                                    weblogger-entry-ring
+                                    weblogger-ring-index)))))))
 	   (cons "content"
 		 (progn
 		   (message-goto-body)
 		   (if encode
 		       (url-insert-entities-in-string
 			(buffer-substring-no-properties (point) (point-max)))
-    	     (buffer-substring-no-properties (point) (point-max)))))))))
+                     (buffer-substring-no-properties (point) (point-max)))))))))
 
 ;; TODO -- Support for toolbar
 ;; (eval-when-compile (defvar tool-bar-map))
@@ -1240,3 +1322,8 @@ internally).  If BUFFER is not given, use the current buffer."
 
 (provide 'weblogger)
 
+;; Local Variables:
+;; time-stamp-pattern: "20/^;; Last Modified: <%%>$"
+;; End:
+
+;;; weblogger.el ends here
