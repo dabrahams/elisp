@@ -1,16 +1,14 @@
 *~
 *.elc
 autom4te.cache
+config.cache
+config.log
+config.status
 dir.old
 CVS
 .svn
 /3rd-party/bbdb/Makefile
 /3rd-party/bbdb/utils/Makefile
-/3rd-party/bbdb/autom4te.cache/output.0
-/3rd-party/bbdb/autom4te.cache/requests
-/3rd-party/bbdb/autom4te.cache/traces.0
-/3rd-party/bbdb/config.log
-/3rd-party/bbdb/config.status
 /3rd-party/bbdb/configure
 /3rd-party/bbdb/lisp/Makefile
 /3rd-party/bbdb/loadpath.el
@@ -19,3 +17,6 @@ CVS
 /3rd-party/bbdb/texinfo/Makefile
 /3rd-party/bbdb/texinfo/bbdb.info
 /3rd-party/bbdb/texinfo/dir
+/3rd-party/w3m-el/Makefile
+/3rd-party/w3m-el/configure
+/3rd-party/w3m-el/doc/Makefile
