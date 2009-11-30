@@ -74,6 +74,7 @@ Show diffs side-by-side")
  '(ediff-window-setup-function (quote ediff-setup-windows-plain) nil nil "
 Run Ediff all in one frame.  The default when there's a window manager is for
 emacs to pop up a separate frame for the `*Ediff Control Panel*' buffer")
+ '(epg-gpg-program "gpg2")
  '(erc-default-sound "~/erc.wav")
  '(erc-modules (quote (autoaway autojoin button completion fill irccontrols list log match menu move-to-prompt netsplit networks noncommands readonly ring smiley sound stamp track)))
  '(erc-nick "bewst")
