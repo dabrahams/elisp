@@ -1,609 +1,3 @@
-2007-06-18  Daiki Ueno  <ueno@unixuser.org>
-
-	* mime-edit.el (turn-on-mime-edit): Remove redundant comments and
-	newlines to make the amount of diff-lines minimal to the original.
-
-2007-06-08  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* mime-edit.el (turn-on-mime-edit): Don't use the default values
-	of paragraph-start and paragraph-separate.  Suggested by Ron
-	Isaacson <Ron.Isaacson@morganstanley.com>.  cf.
-	http://article.gmane.org/gmane.mail.wanderlust.general.japanese/5721
-
-2007-04-24  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* mime-edit.el (turn-on-mime-edit): Make paragraph-start and
-	paragraph-separate buffer-local.
-
-2006-12-20  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* README.ja, README.en (Required environment): Update required
-	version of APEL to 10.7 or later.
-
-	* SEMI-CFG (PACKAGEDIR): Use
-	`install-get-default-package-directory'.
-
-2006-12-13  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* SEMI-CFG (PACKAGEDIR): Avoid an error with Emacs.
-
-2006-12-12  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* SEMI-MK (compile-semi-package): Use
-	batch-update-directory-autoloads if it is available instead of
-	batch-update-directory.
-
-2006-12-11  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* SEMI-CFG (PACKAGEDIR): Check for
-	(early|late|last)-package-hierarchies and configure-package-path
-	as well as (early|late|last)-packages.
-
-2006-12-02  Hiroya Murata  <lapis-lazuli@pop06.odn.ne.jp>
-
-	* mime-edit.el (mime-edit-process-multipart-1): Don't insert a
-	text tag if a multipart end tag is followed.
-
-2006-06-23  Hiroya Murata  <lapis-lazuli@pop06.odn.ne.jp>
-
-	* mime-view.el (mime-calist::field-match-method-ignore-case):
-	New function; set up for `field-match-method' of calist.
-
-2006-03-28  Daiki Ueno  <ueno@unixuser.org>
-
-	* mime-edit.el (mime-edit-sign-pgp-mime): Set pgg-text-mode.
-	(mime-edit-encrypt-pgp-mime): Ditto.
-
-2006-02-18  TAKAHASHI Kaoru  <kaoru@kaisei.org>
-
-	* mime-edit.el (mime-edit-delete-trailing-whitespace): New
-	Function for RFC3156.
-	(mime-edit-sign-pgp-mime): Use it.
-
-2005-06-14  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* mime-view.el (mime-display-text/richtext): Withdraw the last
-	change.
-	(mime-display-text/enriched): Ditto.
-
-2005-06-09  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* mime-view.el (mime-display-text/richtext): Turn off
-	adaptive-fill-mode while executing richtext-decode.
-	(mime-display-text/enriched): Turn off adaptive-fill-mode while
-	executing enriched-decode.
-
-2005-03-29  Nakagawa, Makoto  <Makoto.Nakagawa@hp.com>
-
-	* pgg-pgp.el (pgg-scheme-sign-region): Manually convert line
-	endings to CRLF before signing.
-
-2001-09-24   Daiki Ueno  <ueno@unixuser.org>
-
-	* mime-view.el (mime-preview-toggle-display): When both "type" and
-	"*type" conditions are not specified, the entity should be regarded
-	as invisible.
-
-2004-09-27  Yoichi NAKAYAMA  <yoichi@geiin.org>
-
-	* mime-edit.el (mime-edit-temp-message-buffer): Define.
-	* mime-play.el (mime-view-temp-message-buffer): Ditto.
-	(mime-preview-quitting-method-for-mime-show-message-mode): Change
-	accordingly.
-
-2004-09-27  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* README.en, README.ja (CVS based development): Mention anonymous
-	CVS access; remove the description about developers' pserver access.
-
-2003-11-15  Simon Josefsson  <jas@extundo.com>
-
-	* pgg-gpg.el (pgg-scheme-lookup-key): Use regexp match instead of
-	split-string (split-string is different between emacs 21.2 and
-	21.4).  Reported by ultrasoul@ultrasoul.com (David D. Smith).
-
-2004-09-15  Yoichi NAKAYAMA  <yoichi@geiin.org>
-
-	* mime-view.el (mime-preview-follow-current-entity): Avoid error
-	on null entity.
-	(mime-preview-find-boundary-info): Ditto.
-	Avoid error at the beginning of buffer.
-
-2004-08-28  Yoichi NAKAYAMA  <yoichi@geiin.org>
-
-	* pgg-pgp5.el (pgg-scheme-verify-region): `let*' -> `let'.
-	* pgg-pgp.el (pgg-scheme-verify-region): Ditto.
-	* mime-edit.el (mime-edit-split-and-send): Ditto.
-	* mime-play.el (mime-store-message/partial-piece): Ditto.
-
-2004-08-03  Yoichi NAKAYAMA  <yoichi@geiin.org>
-
-	* mime-edit.el (mime-edit-mime-version-field-for-message/partial):
-	Fix usage of mime-encode-field-body.
-
-2004-07-24  Yoichi NAKAYAMA  <yoichi@geiin.org>
-
-	* mime-view.el (mime-display-multipart/related): Do nothing when
-	the part is not found.
-
-2004-04-18  TAKAHASHI Kaoru  <kaoru@kaisei.org>
-
-	* mime-edit.el (mime-file-types): Add application/pdf. Use base64
-	for application/postscript.
-	(mime-content-types): Add application/pdf.
-
-2004-04-04  Yoichi NAKAYAMA  <yoichi@geiin.org>
-
-	* mime-edit.el (mime-file-types): Add application/vnd.ms-excel.
-	(mime-content-types): Add application/vnd.ms-excel and
-	application/msword.
-
-2004-02-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* mime-image.el (mime-display-image): Ignore errors about image
-	decoding.
-
-2004-02-06  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* mime-image.el (mime-image-normalize-xbm-buffer): Add missing
-	format specifiers.
-
-	* mime-view.el (mime-view-insert-entity-button): Fix misplaced let
-	form.
-
-2004-01-15  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* mime-edit.el (mime-edit-normalize-body): Fix a comment that the
-	problem related to `replace-match' has been fixed at 2004-01-15,
-	thanks to Handa-san.
-
-
-2003-12-24  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* SEMI: Version 1.14.6 (Maruoka) released.
-
-2003-12-18  Daiki Ueno  <ueno@unixuser.org>
-
-	* pgg-gpg.el (pgg-gpg-process-region): Set environment variable
-	LANGUAGE as well.  GNU gettext gives precedence to LANGUAGE over
-	LC_ALL, when different language code is specified.  Thanks to
-	Tatsuya Kinoshita <tats@vega.ocn.ne.jp>.
-	[cf. <emacs-mime-ja:1599>]
-
-2003-12-17  Daiki Ueno  <ueno@unixuser.org>
-
-	* pgg-gpg.el (pgg-gpg-messages-locale): New user option.
-	(pgg-gpg-process-region): Set environment variable LC_ALL when
-	pgg-gpg-messages-locale is specified.
-
-	* pgg-def.el (pgg-messages-locale): New user option.
-
-	* mime-pgp.el (mime-verify-application/pgp-signature): Copy
-	messages from pgg-errors-buffer.
-	(mime-add-application/pgp-keys): Ditto.
-
-2003-12-16  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* mime-edit.el (mime-edit-normalize-body): Don't use the
-	`(replace-match "\\1\r\n")' form since it may convert the unibyte
-	string into multibyte in Emacs 21.4.
-
-2003-12-14  Yoichi NAKAYAMA <yoichi@geiin.org>
-
-	* mime-play.el (mime-mailcap-method-sentinel): Restore deleting
-	directory routine and protection of 1st arg of `message' dropped
-	in the last change.
-	(mime-mailcap-delete-played-files): Ditto.
-
-2003-12-12  ARISAWA Akihiro  <ari@mbf.sphere.ne.jp>
-
-	* mime-play.el (mime-play-delete-file-immediately): New user option.
-	(mime-mailcap-method-sentinel): Use it.
-	(mime-mailcap-delete-played-files): New function; set up for
-	`kill-emacs-hook'.
-
-2002-05-18  ARISAWA Akihiro  <ari@mbf.sphere.ne.jp>
-
-	* mime-play.el (mime-activate-mailcap-method): Don't use
-	`binary-to-text-funcall'. (Thanks to TANAKA Shingo)
-
-2003-12-14  Tatsuya Kinoshita  <tats@vega.ocn.ne.jp>
-
-	* mime-edit.el (mime-charset-type-list): Add entry for iso-8859-1[45].
-
-2003-12-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* mime-edit.el (mime-edit-user-agent-value): Add a setting for
-	XEmacs CHISE.
-
-2003-12-07  Yuuichi Teranishi  <teranisi@gohome.org>
-
-	* mime-play.el (mime-require-safe-directory): Check the owner of the
-	directory if it already exists.
-
-2003-12-06  Yuuichi Teranishi  <teranisi@gohome.org>
-
-	* mime-play.el (mime-require-safe-directory): New function.
-	(mime-store-message/partial-piece): Use it.
-
-2003-12-05  Katsumi Yamaoka  <yamaoka@jpl.org>
-
-	* mime-play.el (mime-store-message/partial-piece): Fix
-	mis-designed parenthesis in the `let' form.
-
-2001-11-27  Daiki Ueno  <ueno@unixuser.org>
-
-	* mime-w3.el: Don't use `url-register-protocol' if it is not
-	fboundp; announce `url-cid' feature instead.
-	[cf. <Wanderlust:8566>]
-
-	(url-cid): Change return value for the current URL package.
-
-2003-06-09  Yuuichi Teranishi  <teranisi@gohome.org>
-
-	* pgg-gpg.el (pgg-gpg-process-region): Undo the last change;
-	Add --yes option to overwrite existing output file;
-	Remove needless set-default-file-modes.
-
-2003-05-29  Yuuichi Teranishi  <teranisi@gohome.org>
-
-	* pgg-gpg.el (pgg-gpg-process-region): Undo the last change.
-
-2003-05-15  Yuuichi Teranishi  <teranisi@gohome.org>
-
-	* pgg-gpg.el (pgg-gpg-process-region): Use `make-temp-file' instead of
-	`make-temp-name'.
-
-	* pgg-pgp5.el (pgg-pgp5-process-region): Ditto.
-	(pgg-scheme-verify-region): Ditto.
-	(pgg-scheme-snarf-keys-region): Ditto.
-
-	* pgg-pgp.el (pgg-pgp-process-region): Ditto.
-	(pgg-scheme-verify-region): Ditto.
-	(pgg-scheme-snarf-keys-region): Ditto.
-
-	* smime.el (smime-process-region): Ditto.
-	(smime-verify-region): Ditto.
-
-	* mime-pgp.el (mime-verify-application/pgp-signature): Ditto.
-	(mime-verify-application/pkcs7-signature): Ditto.
-
-	* mime-play.el (mime-activate-mailcap-method): Make a temporary
-	directory of a temporary file for the mailcap application.
-	(mime-mailcap-method-sentinel): Follow the change above.
-	(mime-store-message/partial-piece): Set `default-file-modes' for
-	`make-directory'.
-
-	* mime-edit.el (mime-edit-split-and-send): Remove local variable
-	`mime-edit-draft-file-name'.
-
-2003-05-12  Yoichi NAKAYAMA  <yoichi@geiin.org>
-
-	* mime-edit.el (turn-on-mime-edit): Protect 1st arg of `message'.
-	* mime-view.el (mime-preview-follow-current-entity): Ditto.
-
-2003-05-11  Yoichi NAKAYAMA  <yoichi@geiin.org>
-
-	* mime-w3.el (mime-preview-text/html): Protect 1st arg of `message'.
-	* mime-play.el (mime-mailcap-method-sentinel): Ditto.
-	(mime-view-message/external-anon-ftp): Ditto.
-	(mime-view-message/external-url): Ditto.
-
-2003-04-05  Yoichi NAKAYAMA  <yoichi@geiin.org>
-
-	* mime-view.el (mime-preview-toggle-display): Use boundary with
-	children.
-
-2003-02-08  Yoichi NAKAYAMA  <yoichi@eken.phys.nagoya-u.ac.jp>
-
-	* semi-def.el (mime-should-use-popup-menu): New function.
-	(mime-select-menu-alist): Renamed from select-menu-alist, change
-	its behavior according to mime-should-use-popup-menu.
-	* mime-play.el (mime-play-entity): Change accordingly.
-
-2003-02-08  Yoichi NAKAYAMA  <yoichi@eken.phys.nagoya-u.ac.jp>
-
-	* mime-view.el (mime-save-situation-examples): Bind print-length
-	and print-level.
-
-2003-01-10  NAKAJI Hiroyuki  <nakaji@tutrp.tut.ac.jp>
-
-	* README.ja: new file, Japanese translation of README.en.
-	Spaces between ascii and Japanese characters are added.
-
-
-2002-11-15  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* SEMI: Version 1.14.5 (Awara-Onsen) released.
-
-2002-11-05  Yoichi NAKAYAMA  <yoichi@eken.phys.nagoya-u.ac.jp>
-
-	* mime-view.el (mime-preview-find-boundary-info): Change the name of
-	the argument from get-mother to with-children along its effect.
-
-2002-11-03  Yoichi NAKAYAMA  <yoichi@eken.phys.nagoya-u.ac.jp>
-
-	* mime-edit.el (mime-edit-decode-single-part-in-buffer): Decode text
-	part only.
-
-2002-04-16   Daiki Ueno  <ueno@unixuser.org>
-
-	* mime-edit.el (mime-file-types): Add setting of *.jpeg for image/jpeg.
-
-2002-10-26  Yoichi NAKAYAMA  <yoichi@eken.phys.nagoya-u.ac.jp>
-
-	* mime-view.el (mime-preview-find-boundary-info): Fix logic. Do not
-	refer next to next part before examining the next part.
-
-2002-08-28  Katsumi Yamaoka   <yamaoka@jpl.org>
-
-	* mime-edit.el (mime-edit-user-agent-value): Add
-	`xemacs-extra-name'.
-
-
-2002-07-08  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* SEMI: Version 1.14.4 (Hosorogi) released.
-
-	* Makefile (ARC_DIR_PREFIX): New variable.
-	(ARC_DIR): Use `ARC_DIR_PREFIX'.
-
-2001-08-10  Kenichi OKADA <okada@opaopa.org>
-
-	* semi-def.el (mime-browse-url-regexp): Allow nntps and ftps.
-
-2001-06-12  Yuuichi Teranishi <teranisi@gohome.org>
-
-	* mime-view.el (mime-display-multipart/related): When "start"
-	parameter specifies part, treat the part as root.
-
-2001-06-12  Akihiro Arisawa  <ari@mbf.sphere.ne.jp>
-
-	* mime-view.el (mime-display-multipart/related): New function; set up
-	for `mime-preview-condition'.
-
-2001-04-19  Katsumi Yamaoka   <yamaoka@jpl.org>
-
-	* mime-bbdb.el: Load "bbdb-hooks" when the symbol function
-	`bbdb-extract-field-value' is not bound or it is set up as an
-	autoloaded function. [cf. <emacs-mime-ja:799,842,843,844,845,846>]
-
-2001-04-17  YAMASHITA Junji   <ysjj@unixuser.org>
-
-	* semi-def.el (mime-browse-url-regexp): Allow https.
-
-2001-03-06  Hiroya Murata     <lapis-lazuli@pop06.odn.ne.jp>
-
-	* mime-edit.el (mime-edit-set-parameter): Get rid of the duplicated
-	optional fields.
-
-2000-12-28  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* mime-view.el: Revert to use `static'.
-
-
-2000-12-28  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* SEMI: Version 1.14.3 (Ushinoya) released.
-
-	* mime-view.el (mime-view-read-situation-examples-file): Don't try
-	to read situation-examples-file is it is nil.
-	(mime-situation-examples-file): Avoid to read
-	situation-examples-file at compile time.
-
-2000-12-28  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* mime-view.el (mime-view-read-situation-examples-file): Display
-	warning. [cf. <emacs-mime-ja:680>]
-
-2000-12-27  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* mime-view.el (mime-view-mailcap-files): New user option.
-	(mime-view-read-mailcap-files): Renamed from
-	`mime-view-read-mailcap'; read `mime-view-mailcap-files'.
-
-	* mime-view.el (mime-view-read-situation-examples-file): New
-	function; don't occur error.
-	(mime-view-read-mailcap): New function.
-
-2000-12-27  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* mime-play.el (mime-play-messages-coding-system): Renamed from
-	`mime-mailcap-method-messages-coding-system'.
-
-	* pgg-def.el (pgg-messages-coding-system): Change default value to
-	nil.
-
-2000-12-27  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* mime-play.el (mime-activate-mailcap-method): Fix typo.
-
-2000-12-26   Daiki Ueno  <ueno@unixuser.org>
-
-	* mime-play.el (mime-mailcap-method-messages-coding-system): New
-	variable.
-	(mime-activate-mailcap-method): Use it.
-
-2000-12-26   Daiki Ueno  <ueno@unixuser.org>
-
-	* pgg-def.el (pgg-messages-coding-system): Use `defvar' to define.
-
-	* pgg-pgp.el (pgg-pgp-messages-coding-system): Abolish.
-	(pgg-pgp-process-region): Use `binary-funcall' instead of
-	`binary-to-text-funcall'.
-
-	* pgg-pgp5.el (pgg-pgp5-messages-coding-system): Abolish.
-	(pgg-pgp5-process-region): Use `binary-funcall' instead of
-	`binary-to-text-funcall'.
-
-
-2000-12-25  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* SEMI: Version 1.14.2 (Daish.DŽòji) released.
-
-	* README.en (Required environment): Update to FLIM 1.14.2.
-
-	* mail-mime-setup.el (mail-setup-hook): Don't add
-	`eword-decode-header'.
-
-2000-12-23  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* mime-view.el (mime-view-define-keymap): Return
-	`mime-view-mode-map' instead of set up as local keymap; don't call
-	`mime-view-define-keymap-hook'.
-	(mime-display-message): Add new optional argument `keymap'.
-
-	* mime-play.el (mime-store-message/partial-piece): Use
-	`binary-insert-encoded-file' and `binary-write-decoded-region'
-	instead of `binary-insert-file-contents' and
-	`binary-write-region'.
-
-2000-12-23  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* smime.el (smime-process-region): Use `binary-funcall' instead of
-	`binary-start-process-shell-command'.
-	(smime-verify-region): Use `binary-write-decoded-region' and
-	`binary-insert-encoded-file' instead of `binary-write-region' and
-	`binary-insert-file-contents'.
-
-	* pgg-pgp5.el (pgg-pgp5-messages-coding-system): New variable.
-	(pgg-pgp5-process-region): Use `binary-to-text-funcall' instead of
-	`binary-start-process-shell-command'.
-	(pgg-scheme-verify-region): Use `binary-write-decoded-region'
-	instead of `binary-write-region'.
-
-	* pgg-pgp.el (pgg-pgp-messages-coding-system): New variable.
-	(pgg-pgp-process-region): Use `binary-to-text-funcall' instead of
-	`binary-start-process-shell-command'.
-	(pgg-scheme-verify-region): Use `binary-write-decoded-region'
-	instead of `binary-write-region'.
-
-	* pgg-gpg.el (pgg-gpg-process-region): Use
-	`binary-to-text-funcall' instead of `binary-start-process'.
-
-
-2000-12-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* SEMI: Version 1.14.1 (Kaga-Onsen) released.
-
-	* README.en (Required environment): Require FLIM 1.14.1 or later;
-	update required emacsen.
-
-2000-12-22  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* pgg-gpg.el (pgg-gpg-process-region): Use
-	`pgg-gpg-messages-coding-system'.
-
-2000-12-21  Tadashi Watanabe  <watanabe@sigmaitec.co.jp>
-
-	* pgg-gpg.el (pgg-scheme-verify-region): Use a "-" as the name for
-	the file with the signed material.
-
-2000-12-21   Daiki Ueno       <ueno@unixuser.org>
-
-	* pgg-def.el (pgg-messages-coding-system): New user option.
-
-2000-12-20  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* mime-view.el: Don't use `static-cond'.
-
-
-2000-12-20  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* SEMI: Version 1.14.0 (Iburihashi) released.
-
-2000-12-19  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* mime-edit.el (mime-edit-mime-version-field-for-message/partial):
-	Use `mime-encode-field-body' instead of `eword-encode-field-body'.
-
-2000-12-19  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* mime-edit.el (mime-edit-translate-header): Use
-	`mime-encode-header-in-buffer' instead of `eword-encode-header'.
-	(mime-edit-encrypt-pgp-mime): Likewise.
-	(mime-edit-translate-single-part-tag): Likewise.
-
-2000-12-17  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* postpet.el: Require `mime'.
-
-	* pgg-parse.el (pgg-format-key-identifier): Don't use
-	`string-to-int-list'.
-	(pgg-read-bytes): Likewise.
-	(pgg-read-body): Likewise.
-
-2000-12-16  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* smime.el: Require `raw-io'.
-	(smime-process-region): Use `binary-start-process-shell-command'.
-
-	* pgg-pgp5.el (pgg-pgp5-process-region): Use
-	`binary-start-process-shell-command'.
-
-	* pgg-pgp.el (pgg-pgp-process-region): Use
-	`binary-start-process-shell-command'.
-
-	* pgg-gpg.el (pgg-gpg-process-region): Use `binary-start-process'.
-
-2000-12-15  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* pgg-def.el: Require `custom' instead of `pcustom'.
-
-2000-12-15  TAKAHASHI Kaoru  <kaoru@kaisei.org>
-
-	* Makefile (tar): Use `cvs tag -R' instead of `cvs tag -RF'.
-
-2000-12-15  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* smime.el (smime-process-region): Don't use `as-binary-process'.
-	(smime-verify-region): Use `binary-write-region' instead of
-	`write-region-as-binary'; use `binary-insert-file-contents'
-	instead of `insert-file-contents-as-binary'.
-
-	* semi-def.el: Don't require `poe'.
-
-	* pgg-pgp5.el (pgg-pgp5-process-region): Don't use
-	`as-binary-process'.
-	(pgg-scheme-verify-region): Use `binary-write-region' instead of
-	`write-region-as-binary'.
-	(pgg-scheme-snarf-keys-region): Don't use
-	`write-region-as-raw-text-CRLF'.
-
-	* pgg-pgp.el (pgg-pgp-process-region): Don't use
-	`as-binary-process'.
-	(pgg-scheme-verify-region): Use `binary-write-region' instead of
-	`write-region-as-binary'.
-	(pgg-scheme-snarf-keys-region): Don't use
-	`write-region-as-raw-text-CRLF'.
-
-	* pgg-parse.el: Don't require `poem'; require `custom' instead of
-	`pcustom'.
-
-	* pgg-gpg.el (pgg-gpg-process-region): Don't use
-	`as-binary-output-file' and
-	`insert-file-contents-as-raw-text-CRLF'.
-
-	* mime-view.el: Don't require `emu'.
-	(mouse-button-3): New variable.
-
-	* mime-play.el (mime-store-message/partial-piece): Use
-	`binary-insert-file-contents' instead of
-	`insert-file-contents-as-binary'; don't use
-	`as-binary-input-file'; use `binary-write-region' instead of
-	`write-region-as-binary'.
-
-2000-12-07  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* mime-w3.el: Avoid error even if `w3' is not found.
-
-2000-11-26  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
-
-	* mime-view.el: Use `mime-conf' instead of `mailcap'.
-
-	* mime-play.el (mime-activate-mailcap-method): Use
-	`mime-format-mailcap-command' instead of `mailcap-format-command'.
-
 2000-10-19  Takanori Saneto  <sanewo@ba2.so-net.ne.jp>
 
 	* pgg-pgp.el (pgg-pgp-process-region): bind process-environment
@@ -674,7 +68,7 @@
 
 2000-07-12  MORIOKA Tomohiko  <tomo@kanji.zinbun.kyoto-u.ac.jp>
 
-	* REMI: Version 1.14.2 (Hokuhoku-ŽÒshima) released.
+	* REMI: Version 1.14.2 (Hokuhoku--DÒshima)-A released.
 
 	* README.en (Required environment): Modify for FLIM-Chao 1.14.1.
 
@@ -722,7 +116,7 @@
 
 2000-03-01  MORIOKA Tomohiko  <tomo@m17n.org>
 
-	* REMI: Version 1.14.1 (MushigawaŽòsugi) released.
+	* REMI: Version 1.14.1 (Mushigawa-Dòsugi)-A released.
 
 2000-03-01  MORIOKA Tomohiko  <tomo@m17n.org>
 
@@ -1806,7 +1200,7 @@
 
 1999-08-18  MORIOKA Tomohiko  <tomo@m17n.org>
 
-	* REMI: Version 1.13.2 (ŽÒike-Ikoinomori) released.
+	* REMI: Version 1.13.2 (-DÒike-Ikoinomori)-A released.
 
 1999-08-17  Katsumi Yamaoka   <yamaoka@jpl.org>
 
@@ -1877,7 +1271,7 @@
 
 1999-07-27  MORIOKA Tomohiko  <tomo@m17n.org>
 
-	* SEMI: Version 1.13.5 (MeihŽò) released.
+	* SEMI: Version 1.13.5 (Meih-Dò)-A released.
 
 1999-07-27  MORIOKA Tomohiko  <tomo@m17n.org>
 
@@ -2180,7 +1574,7 @@
 
 1999-01-21  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
-	* SEMI: Version 1.13.0 (MattŽò) released.
+	* SEMI: Version 1.13.0 (Matt-Dò)-A released.
 
 1999-01-21  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
@@ -2678,7 +2072,7 @@
 
 1998-07-08  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
-	* REMI: Version 1.8.3 (EcchŽþ-Nakagawa) released.
+	* REMI: Version 1.8.3 (Ecch-Dþ-Nakagawa)-A released.
 
 	* mime-play.el (mime-delq-null-situation): Add new optional
 	argument `ignored-value'.
@@ -2707,7 +2101,7 @@
 
 1998-07-08  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
-	* REMI: Version 1.8.2 (NŽòmachi) released.
+	* REMI: Version 1.8.2 (N-Dòmachi)-A released.
 
 1998-07-07  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
@@ -2826,7 +2220,7 @@
 
 1998-06-28  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
-	* REMI: Version 1.8.0 (EcchŽþ-Kokubu) released.
+	* REMI: Version 1.8.0 (Ecch-Dþ-Kokubu)-A released.
 
 1998-06-26  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
@@ -3662,7 +3056,7 @@
 
 1998-06-04  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
-	* SEMI: Version 1.5.0 (Nishi-NyŽþzen) released.
+	* SEMI: Version 1.5.0 (Nishi-Ny-Dþzen)-A released.
 
 	* README.en (Required environment): Modify for FLIM 1.3.0.
 
@@ -3714,7 +3108,7 @@
 
 1998-06-01  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
-	* SEMI: Version 1.4.6 (NyŽþzen) released.
+	* SEMI: Version 1.4.6 (Ny-Dþzen)-A released.
 
 1998-05-28  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
@@ -3927,7 +3321,7 @@
 
 1998-05-15  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
-	* SEMI: Version 1.4.4 (EcchŽþ-Miyazaki) released.
+	* SEMI: Version 1.4.4 (Ecch-Dþ-Miyazaki)-A released.
 
 	* mime-play.el (mime-mailcap-method-filename-alist): New variable.
 	(mime-mailcap-method-sentinel): New function.
@@ -4053,7 +3447,7 @@
 
 1998-05-06  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
-	* SEMI: Version 1.4.1 (ŽÒmi) released.
+	* SEMI: Version 1.4.1 (-DÒmi)-A released.
 
 	* README.en (Required environment): Modify for FLIM 1.2.0.
 
@@ -4213,7 +3607,7 @@
 
 1998-04-25  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
-	* SEMI: Version 1.3.2 (NŽò) was released.
+	* SEMI: Version 1.3.2 (N-Dò)-A was released.
 
 	* mime-edit.el (mime-edit-mode-entity-prefix): New variable.
 	(mime-edit-mode-entity-map): New variable.
@@ -4868,7 +4262,7 @@
 
 1998-03-13  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
-	* SEMI: Version 1.0.2 (Nonoichi-KŽòdaimae) was released.
+	* SEMI: Version 1.0.2 (Nonoichi-K-Dòdaimae)-A was released.
 
 1998-03-12  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
@@ -4951,7 +4345,7 @@
 	* mime-file.el: Rename `mime-article/extract-file' ->
 	`mime-extract-current-entity'.
 
-1998-03-03  Fran.AŽçois Pinard   <pinard@iro.umontreal.ca>
+1998-03-03  François Pinard   <pinard@iro.umontreal.ca>
 
 	* mime-edit.el (mime-edit-insert-signature): Function
  	`mime-edit-insert-tag' is sometimes called with more arguments
@@ -4980,7 +4374,7 @@
 
 1998-02-25  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
-	* SEMI: Version 1.0.0 (Nukaj.DŽþtaku-mae) was released.
+	* SEMI: Version 1.0.0 (Nukaj-Dþtaku-mae)-A was released.
 
 	* SEMI-ELS: Remove mime-tar.el.
 
@@ -5117,14 +4511,14 @@
 
 1997-11-16  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
-	* SEMI: Version 0.116 (DŽòhŽòji) was released.
+	* SEMI: Version 0.116 (D-Dòhòji)-A was released.
 
 1997-11-15  MORIOKA Tomohiko  <morioka@jaist.ac.jp>
 
 	* mime-view.el, mime-pgp.el, mime-partial.el: Rename
 	`mime::article/content-info' -> `mime-raw-content-info'.
 
-1997-11-11  Fran.AŽçois Pinard   <pinard@iro.umontreal.ca>
+1997-11-11  François Pinard   <pinard@iro.umontreal.ca>
 
 	* mime-edit.el: Modify space in prompt and removespurious trailing
 	spaces in the files. (cf. [tm-en:1507])

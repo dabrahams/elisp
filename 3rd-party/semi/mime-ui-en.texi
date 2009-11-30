@@ -1,13 +1,13 @@
 \input texinfo.tex
 @setfilename mime-ui-en.info
-@settitle{SEMI 1.14 Manual}
+@settitle{SEMI 1.8 Manual}
 @titlepage
-@title SEMI 1.14 Manual
+@title SEMI 1.8 Manual
 @author MORIOKA Tomohiko <morioka@@jaist.ac.jp>
 @subtitle 1998/07/03
 @end titlepage
 @node Top, Introduction, (dir), (dir)
-@top SEMI 1.14 Manual
+@top SEMI 1.8 Manual
 
 @ifinfo
 
@@ -32,7 +32,7 @@ user interface.@refill
 
 SEMI provides two user interfaces: MIME-View and MIME-Edit.@refill
 
-
+ 
 MIME-View is a kernel of user interface to display or operate MIME
 messages, STD 11 messages or ``localized RFC 822'' messages.@refill
 
@@ -44,12 +44,12 @@ Each MUA can use powerful MIME features to combine these features.
 @node MIME-View, MIME-Edit, Introduction, Top
 @chapter MIME message viewing
 
-MIME-View is a MIME viewer for wide use that runs on GNU Emacs.@refill
+MIME-View は GNU Emacs で動作する汎用的な MIME viewer です。@refill
 
-MIME-View is the kernel of the user interface for browsing MIME
-messages. You can start some presentation-method which is a program for
-creating some representation, or some acting-method which is a program
-for processing the entity. Then you can deal with a variety of entities.
+MIME-View は MIME message を閲覧するための利用者界面 (user interface) 
+の核であり、この上で presentation-method と呼ばれる表示を作るプログラム
+を動かしたり、acting-method と呼ばれる entity の処理プログラムを動かす
+ことが可能で、さまざまな種類の entity を扱う事ができるようになっています。
 
 
 @menu
@@ -61,52 +61,44 @@ for processing the entity. Then you can deal with a variety of entities.
 @node Overview of MIME-View, MIME-Preview, MIME-View, MIME-View
 @section Basic design
 
-The representation form of the internet messages in electric letters
-or in net news is based on STD 11. The STD 11 message body is a plain
-text which consists of lines as its only structure, and the character
-code is fixed as us-ascii. Actually, there are ``localized STD 11''
-messages that use some character code in their linguistic range
-instead of using us-ascii. Even in that case, the character code in
-the message is single. Therefore, Message User Agents have considered
-(byte row) = (us-ascii string), or (byte row) = (string in the
-character code in the linguistic range).@refill
+Internet の電子書簡・ネットニュースなどの書面 (message) の表現形式は STD
+11 に基づいています。STD 11 の書面本体 (message body) は行を唯一の構造と
+する簡易文面 (plain text) であり、文字符号も us-ascii と定められています。
+実際には、文字符号を us-ascii の代わりにその言語圏で用いられる文字符号と
+した『地域化された STD 11』書面も用いられてきましたが、この場合も書面の
+文字符号は１つです。このため、利用者界面 (Message User Agent) は、しばし
+ば、byte 列 = us-ascii 文字列、ないしは、byte 列 = その言語圏で用いる文
+字符号の文字列のように見倣してきました。@refill
 
-Although, the MIME message has the tree structure in entity unit.
-And one message can contain multiple character codes. The content of
-an entity can be not only a letter or an image that can be displayed
-simply, but also can be a voice or an animation that are played for
-some time interval, a data for some specific application, a source
-code of some program, or an external reference that consists of
-the usage of ftp or mail service, or some URL. Therefore the simple
-extension of STD 11 user interface, which only consider displaying
-the message, cannot treat all of the MIME functionalities.
-Then it is not sufficient to decode message along its MIME type, but
-it is also required to consider a playback processing through some
-dialogue with the user. The format of MIME messages is designed
-to easily be passed to automatic processing. But some contents in the
-MIME message should not be passed to automatic processing for security
-reasons. So it should be designed to ask user in such cases.
-After all, in order to deal with MIME message, it is required to
-distinguish the representation for information exchange which is
-written in STD 11 or MIME construction, and its result
-after some interpretation which is a display screen or a playback
-process. It is also needed to converse with user for playback
-processing.@refill
+しかしながら、MIME では書面は entity を単位とする木構造になり、また、１
+つの書面で複数の文字符号を用いることができます。また、entity の内容は文
+面や絵のような単純に表示可能なものだけでなく、音声や動画などの一定時間再
+生されるようなものや特定のアプリケーションのデータやプログラムのソース、
+あるいは、ftp や mail service の利用法や URL といった形で表された外部参
+照などのさまざまなものが考えらます。このため、表示だけを考えていた STD
+11 における利用者界面の単純な延長では MIME の全ての機能を扱うことはでき
+ません。つまり、MIME の形式に合わせて復号するだけでは不十分であり、利用
+者との対話的な再生処理を考慮する必要があります。MIME 書面の形式は自動処
+理がしやすく設計されていますが、MIME 書面に含まれる内容の中にはセキュリ
+ティー上の問題から自動処理をするべきでないものがあり、こういったものの再
+生に関しては利用者の判断を仰ぐように設計されるべきでしょう。結局、MIME 
+書面を扱うためには STD 11 および MIME の構文で記述されたメッセージの情報
+交換用表現とその解釈結果である表示画面や再生等の処理を区別して考える必要
+があります。また、利用者との対話的な再生処理が必要です。@refill
 
-Therefore, MIME-View uses two buffers for one document, one is the
-mime-raw-buffer that stores the representation for information exchange,
-and the other is the mime-preview-buffer that stores the representation
-for displaying.@refill
+このため、MIME-View は１つの書面に対して、情報交換用表現を格納する 
+mime-raw-buffer と表示用表現を格納する mime-preview-buffer の２つの 
+buffer を用います。@refill
 
-MIME-View provides a mode in the mime-preview-buffer for reading MIME
-message, which is called as mime-view-mode. User can manipulate each
-entity there.
+MIME-View は mime-preview-buffer に対して mime-view-mode という MIME
+message を閲覧するための mode を提供します。利用者はここで各 entity に
+対して操作を行うことができます。
 
 
 @node MIME-Preview, mime-view-mode, Overview of MIME-View, MIME-View
 @section Presentation of mime-preview-buffer
 
-mime-view-mode displays information about each entity as@refill
+mime-view-mode では各 entity に対して@refill
 
 @example
 	[entity-button]
@@ -117,15 +109,15 @@ mime-view-mode displays information about each entity as@refill
 @end example
 
 @noindent
-You can change their design or inhibit showing some of them, according
-to some condition.
+という情報を表示します。これらは条件に従って design を変更したり、表示
+を抑制することもできます。
 
-See following example
+以下に、表示例を示します。
 
 
 @example
-From: morioka@@jaist.ac.jp (MORIOKA Tomohiko)
-Subject: Re: question?
+From: morioka@@jaist.ac.jp (守岡 知彦 / MORIOKA Tomohiko)
+Subject: Re: 質問？
 Newsgroups: zxr.message.mime
 Date: 22 Oct 93 11:02:44
 Mime-Version: 1.0
@@ -133,9 +125,9 @@ Organization: Japan Advanced Institute of Science and Technology,
         Ishikawa, Japan
 
 [1  (text/plain)]
-  How to compose MIME message in MIME-Edit mode.
+  MIME-Edit mode における、MIME message の作り方。
 
-  C-c C-x ? shows its help.
+  C-c C-x ? を押すと help が出てくる。
 
 C-c C-x C-t	insert a text message.
 C-c C-x TAB	insert a (binary) file.
@@ -145,31 +137,30 @@ C-c C-x C-y	insert a mail or news message.
 C-c C-x RET	insert a mail message.
 C-c C-x C-s	insert a signature file at end.
 C-c C-x t	insert a new MIME tag.
-C-c C-m C-a	enclose as multipart/alternative.
-C-c C-m C-p	enclose as multipart/parallel.
-C-c C-m C-m	enclose as multipart/mixed.
-C-c C-m C-d	enclose as multipart/digest.
-C-c C-m C-s	enclose as PGP signed.
-C-c C-m C-e	enclose as PGP encrypted.
+C-c C-x a	enclose as multipart/alternative.
+C-c C-x p	enclose as multipart/parallel.
+C-c C-x m	enclose as multipart/mixed.
+C-c C-x d	enclose as multipart/digest.
+C-c C-x s	enclose as PGP signed.
+C-c C-x e	enclose as PGP encrypted.
 C-c C-x C-k	insert PGP public key.
-C-c C-x p	preview editing MIME message.
+C-c C-x C-p	preview editing MIME message.
 ...
 
-therefore, you should type C-c C-x C-i and specify the binary file
-which you want to insert.
+って訳で、C-c C-x C-i を押して、挿入したい binary file を指定します。
 
-  You should select Base64 as MIME encoding for binary file.
+  binary file の MIME encoding には、普通、Base64 を指定します。
 
 [2  (image/gif)]
 
 [3  (text/plain)]
 
-  Like above, you can compose the message with image.
+  こんな風に、絵入り message のでき上がり。
 
-==================== Take A Cup Of Russian Tea  ======================
-=========  ** Not With Jam Nor Marmalade But With Honey **  ==========
-=========                 MORIOKA TOMOHIKO                  ==========
-==============  Internet E-mail: <morioka@@jaist.ac.jp>  ==============
+〓〓〓〓〓〓〓〓〓〓〓 ロシアン・ティーを一杯。 〓〓〓〓〓〓〓〓〓〓〓
+〓〓〓〓〓  ☆ ジャムではなくマーマレードでもなく蜂蜜で ☆  〓〓〓〓〓
+〓〓〓〓〓         МОРいОКА  ТОМОХИКО         〓〓〓〓〓
+〓〓〓〓〓〓〓  Internet E-mail: <morioka@@jaist.ac.jp>  〓〓〓〓〓〓〓
 @end example
 
 
@@ -185,144 +176,141 @@ which you want to insert.
 @cindex entity-number
 @cindex entity-button
 
-@strong{entity-button} is a tag on the top of the entity
-which shows brief information of the part.@refill
+@strong{entity-button} は entity の先頭にあって、その entity に関する大
+まかな情報を表示する部分です。@refill
 
-Normally, it appears as
+標準では
 
 @example
         [1.3 test (text/plain)]
 @end example
 
 @noindent
+のような感じに表示されます。
 
-The number on the head describes the place of the entity in the
-message (like the section number) and it is called as
-@strong{entity-number}.@refill
+最初の数字は message 中のこの entity の位置を節番号のように表したもので、
+@strong{entity-number} と呼びます。@refill
 
-The string in the next describes its title. This information is
-taken from
+２番目の文字列は表題を表します。この情報は、
 
 @enumerate
 @item
-Title described in Content-Description field or Subject field
+Content-Description field もしくは Subject field に書かれた表題
 @item
-File name specified by filename parameter in Content-Disposition field
+Content-Disposition field の filename parameter に書かれた file 名
 @item
-File name specified by name parameter in Content-Type field
+Content-Type field の name parameter に書かれた file 名
 @item
-File name for uuencode'ing
+ uuencode の場合の file 名
 @end enumerate
 
 @noindent
-If none of them are specified, displays a blank.
+から作ります。どれも存在しない場合は空白が表示されます。
 
-The 3rd item in the parenthesis describes media-type/subtype of
-the entity. If it is is not MIME entity, it displays @code{nil}.
-@refill
+３番目の括弧の中の情報はその entity の media-type/subtype を表します。非 
+MIME entity の場合、@code{nil} が表示されます。@refill
 
-This entity-button plays a role like icon that symbolically
-shows the content of the entity. For example, push @kbd{v} on
+この entity-button は entity の内容を象徴する icon のような役割を果た
+します。例えば、
 
 @example
         [2  (image/gif)]
 @end example
 
 @noindent
-shows up the image contained there.
+の上で @kbd{v} を押せばここに入っている絵が表示されます。
 
-If the mouse operation is possible, you can display the image
-by pushing 2nd button (the middle button for 3 button mouse) too.
+また、mouse 操作が可能な場合、entity-button を第２ボタン（3 button
+mouse の場合、中央のボタン）で押せば、同様にその絵が表示されます。
 
 
 @node entity-header, entity-body, entity-button, MIME-Preview
 @subsection entity-header
 @cindex entity-header
 
-@strong{entity-header} is the header of the entity.
-(Don't blame me as ``You say nothing more than as it is'',
-It is no more than that.)
+@strong{entity-header} はある entity の header を表示する部
+分です（「そのままやんけ」って怒らないで。そういうもんなんです）。
+
 
 @node entity-body,  , entity-header, MIME-Preview
 @subsection entity-body
 @cindex entity-body
 
-@strong{entity-body} is the content of the part.@refill
+@strong{entity-body} は part の内容を表示する部分です。@refill
 
-Sophistication does not seem enough here also, but it is really such
-a thing.@refill
+これもひねりが足りないですが、まあ、そういうもんです。@refill
 
-Though, it actually be twisted a little.@refill
+とはいえ、実際には少しひねってます。@refill
 
-The text entity is passed to code conversion according to its charset,
-and the image entity should be converted on XEmacs.@refill
+text entity の場合は charset に応じて code 変換したりしますし、XEmacs で
+は image entity を変換しないといけないし。@refill
 
-Details will be described later.
+詳しくはまた後で。
 
 
 @node mime-view-mode,  , MIME-Preview, MIME-View
 @section Operation in mime-preview-buffer
 
-mime-preview-buffer posesses following functionalities.@refill
+mime-preview-buffer には以下の機能があります。@refill
 
 @table @kbd
 @item @key{u}
-go back to upper part (in the first part of the message,
-go back to the Summary mode (*1))
+上の part に戻る（message の一番上の part でこれを行なうと Summary
+mode に戻る (*1)）
 
 @item @key{p}
-go to previous part
+前の part に移動する
 
 @item @key{M-TAB}
-go to previous part
+前の part に移動する
 
 @item @key{n}
-go to next part
+次の part に移動する
 
 @item @key{TAB}
-go to next part
+次の part に移動する
 
 @item @key{SPC}
-scroll up
+scroll up する
 
 @item @key{M-SPC}
-scroll down
+scroll down する
 
 @item @key{DEL}
-scroll down
+scroll down する
 
 @item @key{RET}
-go to next line
+次の行に移動する
 
 @item @key{M-RET}
-go to previous line
+前の行に移動する
 
 @item @key{v}
-play current part (*2)
+part を再生する (*2)
 
 @item @key{e}
-extract file from current part (*2)
+part から file を取り出す (*2)
 
 @item @key{C-c C-p}
-print current part (*2)
+part を印刷する (*2)
 
 @item @key{mouse-button-2}
-start the mouse button in preview-buffer
+preview-buffer 中の mouse button を起動する
 
-on content-button, play current part (*2)@refill
+content-button を押せば、その part が再生される(*2)@refill
 
-on URL-button, start WWW browser@refill
+URL-button を押せば、その WWW browser が起動される@refill
 
 @end table
 
 @noindent
-@strong{[Notice]}
+@strong{[注意]}
 @quotation
 
-(*1) Do not go back to Summary mode unless appropriately
-configured for mime-view in the MUA.@refill
+(*1) MUA で mime-view の設定をしていない場合、Summary mode には戻りませ
+ん。@refill
 
-(*2) actual behavior depends on the associated method
+(*2) 実際の動作は対応する method に依ります。
 @end quotation
 
 
@@ -453,22 +441,22 @@ Operations to make enclosure are following:
 @item @key{C-c C-m C-a}
 Enclose specified region as multipart/alternative.
 
-@item @key{C-c C-m C-p}
+@item @key{C-c C-x C-p}
 Enclose specified region as multipart/parallel.
 
-@item @key{C-c C-m C-m}
+@item @key{C-c C-x C-m}
 Enclose specified region as multipart/mixed.
 
-@item @key{C-c C-m C-d}
+@item @key{C-c C-x C-d}
 Enclose specified region as multipart/digest.
 
-@item @key{C-c C-m C-s}
+@item @key{C-c C-x C-s}
 Digital-sign to specified region. (cf. @ref{PGP})
 
-@item @key{C-c C-m C-e}
+@item @key{C-c C-x C-e}
 Encrypt to specified region. (cf. @ref{PGP})
 
-@item @key{C-c C-m C-q}
+@item @key{C-c C-x C-q}
 avoid to encode tags in specified region.  In other words, tags is
 interpreted as such string.  (In current version, it may be
 incomplete.  Maybe PGP-signature does not work for this enclosure.)
@@ -679,7 +667,7 @@ Regular expression to match field-name to be ignored when split sending.
 
 
 @menu
-* PGP::                         Encryption, Sign
+* PGP::                         
 * Buttons::                     Mouse button
 * Acting-condition configuration::  Utility for configuration
 @end menu
@@ -708,17 +696,6 @@ The value should be a symbol.  Allowed versions are @code{gpg},
 Version of PGP or GnuPG command to be used for decryption or verification.
 The value should be a symbol.  Allowed versions are @code{gpg},
 @code{pgp} or @code{pgp5}.@refill
-@end defvar
-
-
-@defvar pgg-insert-url-function
-
-The function to fetch public key from the keyserver.
-Use Emacs/W3 by the default setting. To use emacs-w3m
-instead, set as follows:
-@lisp
-(setq pgg-insert-url-function #'w3m-retrieve)
-@end lisp
 @end defvar
 
 

@@ -20,12 +20,11 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 ;;; Code:
 
-(require 'mel) ; binary-to-text-funcall, binary-write-decoded-region
 (eval-when-compile (require 'pgg))
 
 (defgroup pgg-pgp5 ()
@@ -83,7 +82,9 @@ Bourne shell or its equivalent \(not tcsh) is needed for \"2>\"."
 	    (luna-make-entity 'pgg-scheme-pgp5))))
 
 (defun pgg-pgp5-process-region (start end passphrase program args)
-  (let* ((errors-file-name (make-temp-file "pgg-errors"))
+  (let* ((errors-file-name
+	  (concat temporary-file-directory
+		  (make-temp-name "pgg-errors")))
 	 (args
 	  (append args
 		  pgg-pgp5-extra-args
@@ -102,10 +103,10 @@ Bourne shell or its equivalent \(not tcsh) is needed for \"2>\"."
       (setenv "PGPPASSFD" "0"))
     (unwind-protect
 	(progn
-	  (setq process
-		(apply #'binary-funcall
-		       #'start-process-shell-command "*PGP*" output-buffer
-		       program args))
+	  (as-binary-process
+	   (setq process
+		 (apply #'start-process-shell-command "*PGP*" output-buffer
+			program args)))
 	  (set-process-sentinel process #'ignore)
 	  (when passphrase
 	    (process-send-string process (concat passphrase "\n")))
@@ -202,13 +203,14 @@ Bourne shell or its equivalent \(not tcsh) is needed for \"2>\"."
 
 (luna-define-method pgg-scheme-verify-region ((scheme pgg-scheme-pgp5)
 					      start end &optional signature)
-  (let ((orig-file (make-temp-file "pgg"))
-	(args '("+verbose=1" "+batchmode=1" "+language=us"))
-	(orig-mode (default-file-modes)))
+  (let* ((basename (expand-file-name "pgg" temporary-file-directory))
+	 (orig-file (make-temp-name basename))
+	 (args '("+verbose=1" "+batchmode=1" "+language=us"))
+	 (orig-mode (default-file-modes)))
     (unwind-protect
 	(progn
 	  (set-default-file-modes 448)
-	  (binary-write-decoded-region start end orig-file))
+	  (write-region-as-binary start end orig-file))
       (set-default-file-modes orig-mode))
     (when (stringp signature)
       (copy-file signature (setq signature (concat orig-file ".asc")))
@@ -236,12 +238,12 @@ Bourne shell or its equivalent \(not tcsh) is needed for \"2>\"."
 (luna-define-method pgg-scheme-snarf-keys-region ((scheme pgg-scheme-pgp5)
 						  start end)
   (let* ((pgg-pgp5-user-id (or pgg-pgp5-user-id pgg-default-user-id))
-	 (key-file (make-temp-file "pgg"))
+	 (basename (expand-file-name "pgg" temporary-file-directory))
+	 (key-file (make-temp-name basename))
 	 (args
 	  (list "+verbose=1" "+batchmode=1" "+language=us" "-a"
 		key-file)))
-    (let ((coding-system-for-write 'raw-text-dos))
-      (write-region start end key-file))
+    (write-region-as-raw-text-CRLF start end key-file)
     (pgg-pgp5-process-region start end nil pgg-pgp5-pgpk-program args)
     (delete-file key-file)
     (pgg-process-when-success nil)))

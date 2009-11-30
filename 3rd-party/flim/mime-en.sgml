@@ -1,6 +1,6 @@
 <!doctype sinfo system>
 <head>
-<title>FLIM 1.14 Reference Manual about MIME Features
+<title>FLIM 1.12 Reference Manual about MIME Features
 <author>MORIOKA Tomohiko <mail>morioka@jaist.ac.jp</mail>
 <date>1999-01-27
 
@@ -914,10 +914,10 @@ Encode header fields to network representation, such as MIME
 encoded-word.
 <p>
 Each field is encoded as corresponding method specified by variable
-<code>mime-field-encoding-method-alist</code>.
+<code>eword-field-encoding-method-alist</code>.
 </defun>
 
-<defvar name="mime-field-encoding-method-alist">
+<defvar name="eword-field-encoding-method-alist">
 <p>
 Association list to specify field encoding method.  Each element looks
 like (FIELD . METHOD).
@@ -941,10 +941,20 @@ network-code.
 <p>
 <define type="group" name="mime">
 <p>
-The group associated with functions related to MIME.
+MIME 関連機能に関する group.
 <p>
-It belongs to <code>mail</code> and <code>news</code>.
+<code>mail</code> と <code>news</code> に属する。
 </define>
+
+<defvar name="mime-temp-directory">
+<p>
+MIME 機能に関する実装が一時的に使用する file を作成する directory.
+<p>
+環境変数 <code>MIME_TMP_DIR</code>, <code>TM_TMP_DIR</code>,
+<code>TMPDIR</code>, <code>TMP</code> もしくは <code>TEMP</code> が設定
+されていた場合、それを初期値として用いる。何も設定されていない場合、
+<code>"/tmp/"</code> を用いる。
+</defvar>
 
 
 <h1> Appendix
@@ -1042,7 +1052,7 @@ translated by non-Internet gateways.
 <p>
 Any byte stream is called <concept>binary</concept>.
 <p>
-It does not require structureof lines.  It differs from from <a
+It does not require structure of lines.  It differs from from <a
 node="8bit">8bit</a>.
 <p>
 In addition, if line structured data contain too long line (more than
@@ -1317,8 +1327,8 @@ EMACS-MIME ML, send an empty e-mail to:
 <h2> CVS based development
 <node> CVS
 <p>
-Files in FLIM are managed under CVS. Therefore you can obtain the
-newest FLIM by the following method:
+FLIM の file は CVS を使って管理されています。このため、以下の方法で最
+新の FLIM を入手することができます：
 
 <verb>
 (0) cvs login
@@ -1334,15 +1344,19 @@ newest FLIM by the following method:
 </verb>
 
 <p>
-If you would like to join CVS based development, please send mail to
+CVS を用いた開発に参加したい方は
 
 <ul>
 <li> <mail>cvs@cvs.m17n.org</mail>
 </ul>
 
 <noindent>
-with your account name and your public key for ssh.
-cvsroot is :ext:cvs@@cvs.m17n.org:/cvs/root.
+まで、アカウント名と ssh の公開鍵を送ってください。ssh 経由では、
+cvsroot は :ext:cvs@cvs.m17n.org:/cvs/root となります。
+<p>
+どうしても ssh が使えない場合、pserver 経由でも開発に参加できます。
+この場合、UNIX の /etc/passwd 様式で暗号化されたパスワードを送って下さい。
+この場合 cvsroot は :pserver:<アカウント名>@cvs.m17n.org:/cvs/root となります。
 
 
 <h2> History of FLIM

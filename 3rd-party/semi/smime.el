@@ -20,8 +20,8 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 
 ;;; Commentary:
@@ -39,8 +39,6 @@
 ;;; Code:
 
 (require 'path-util)
-(require 'mel)
-;; binary-funcall, binary-write-decoded-region, binary-insert-encoded-file
 (eval-when-compile (require 'static))
 
 (defgroup smime ()
@@ -193,7 +191,9 @@
 	(pop files)))))
 
 (defun smime-process-region (start end program args)
-  (let* ((errors-file-name (make-temp-file "smime-errors"))
+  (let* ((errors-file-name
+	  (concat temporary-file-directory 
+		  (make-temp-name "smime-errors")))
 	 (args (append args (list (concat "2>" errors-file-name))))
 	 (shell-file-name smime-shell-file-name)
 	 (shell-command-switch smime-shell-command-switch)
@@ -202,10 +202,10 @@
     (with-current-buffer (get-buffer-create smime-output-buffer)
       (buffer-disable-undo)
       (erase-buffer))
-    (setq process
-	  (apply #'binary-funcall #'start-process-shell-command
-		 "*S/MIME*" smime-output-buffer
-		 program args))
+    (as-binary-process
+     (setq process
+	   (apply #'start-process-shell-command "*S/MIME*"
+		  smime-output-buffer program args)))
     (set-process-sentinel process 'ignore)
     (process-send-region process start end)
     (process-send-eof process)
@@ -295,17 +295,18 @@ a detached signature."
   "Verify the current region between START and END.
 If the optional 3rd argument SIGNATURE is non-nil, it is treated as
 the detached signature of the current region."
-  (let* ((orig-file (make-temp-file "smime"))
+  (let* ((basename (expand-file-name "smime" temporary-file-directory))
+	 (orig-file (make-temp-name basename))
 	 (orig-mode (default-file-modes)))
     (unwind-protect
 	(progn
 	  (set-default-file-modes 448)
-	  (binary-write-decoded-region start end orig-file))
+	  (write-region-as-binary start end orig-file))
       (set-default-file-modes orig-mode))
     (with-temp-buffer
-      (binary-insert-encoded-file signature)
+      (insert-file-contents-as-binary signature)
       (goto-char (point-max))
-      (binary-insert-encoded-file
+      (insert-file-contents-as-binary
        (or (smime-find-certificate 
 	    (smime-query-signer (point-min)(point-max)))
 	   (expand-file-name 

@@ -19,14 +19,12 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 ;;; Code:
 
-(condition-case nil
-    (require 'w3)
-  (error nil))
+(require 'w3)
 (require 'mime)
 
 (defmacro mime-put-keymap-region (start end keymap)
@@ -60,29 +58,22 @@
        (run-hooks 'mime-text-decode-hook)
        (condition-case err
 	   (w3-region p (point-max))
-	 (error (message "%s" err)))
+	 (error (message (format "%s" err))))
        (mime-put-keymap-region p (point-max) w3-mode-map)
        ))))
 
 (defun url-cid (url &optional proxy-info)
   (let ((entity
 	 (mime-find-entity-from-content-id (mime-uri-parse-cid url)
-					   mime-w3-message-structure))
-	buffer)
+					   mime-w3-message-structure)))
     (when entity
-      (setq buffer (generate-new-buffer (format " *cid %s" url)))
-      (save-excursion
-	(set-buffer buffer)
-	(mime-insert-entity-content entity)
-	(if (boundp 'url-current-mime-type)
-	    (setq url-current-mime-type (mime-entity-type/subtype entity)))))
-    buffer))
+      (mime-insert-entity-content entity)
+      (setq url-current-mime-type (mime-entity-type/subtype entity))
+      )))
 
-(if (fboundp 'url-register-protocol)
-    (url-register-protocol "cid"
-			   'url-cid
-			   'url-identity-expander)
-  (provide 'url-cid))
+(url-register-protocol "cid"
+		       'url-cid
+		       'url-identity-expander)
 
 
 ;;; @ end

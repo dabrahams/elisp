@@ -1,13 +1,13 @@
 \input texinfo.tex
 @setfilename mime-ui-ja.info
-@settitle{SEMI 1.14 説明書}
+@settitle{SEMI 1.8 説明書}
 @titlepage
-@title SEMI 1.14 説明書
+@title SEMI 1.8 説明書
 @author 守岡 知彦 <morioka@@jaist.ac.jp>
 @subtitle 1998/07/03
 @end titlepage
 @node Top, Introduction, (dir), (dir)
-@top SEMI 1.14 説明書
+@top SEMI 1.8 説明書
 
 @ifinfo
 
@@ -141,14 +141,14 @@ C-c C-x C-y	insert a mail or news message.
 C-c C-x RET	insert a mail message.
 C-c C-x C-s	insert a signature file at end.
 C-c C-x t	insert a new MIME tag.
-C-c C-m C-a	enclose as multipart/alternative.
-C-c C-m C-p	enclose as multipart/parallel.
-C-c C-m C-m	enclose as multipart/mixed.
-C-c C-m C-d	enclose as multipart/digest.
-C-c C-m C-s	enclose as PGP signed.
-C-c C-m C-e	enclose as PGP encrypted.
+C-c C-x a	enclose as multipart/alternative.
+C-c C-x p	enclose as multipart/parallel.
+C-c C-x m	enclose as multipart/mixed.
+C-c C-x d	enclose as multipart/digest.
+C-c C-x s	enclose as PGP signed.
+C-c C-x e	enclose as PGP encrypted.
 C-c C-x C-k	insert PGP public key.
-C-c C-x p	preview editing MIME message.
+C-c C-x C-p	preview editing MIME message.
 ...
 
 って訳で、C-c C-x C-i を押して、挿入したい binary file を指定します。
@@ -455,22 +455,22 @@ enclosure を作るための操作としては以下のようなものがあります。
 @item @key{C-c C-m C-a}
 指定した region を multipart/alternative として囲みます。
 
-@item @key{C-c C-m C-p}
+@item @key{C-c C-x C-p}
 指定した region を multipart/parallel として囲みます。
 
-@item @key{C-c C-m C-m}
+@item @key{C-c C-x C-m}
 指定した region を multipart/mixed として囲みます。
 
-@item @key{C-c C-m C-d}
+@item @key{C-c C-x C-d}
 指定した region を multipart/digest として囲みます。
 
-@item @key{C-c C-m C-s}
+@item @key{C-c C-x C-s}
 指定した region に電子署名を行います。(cf. @ref{PGP})
 
-@item @key{C-c C-m C-e}
+@item @key{C-c C-x C-e}
 指定した region を暗号化します。(cf. @ref{PGP})
 
-@item @key{C-c C-m C-q}
+@item @key{C-c C-x C-q}
 指定した region 内の tag を無効にし、その tag を文字列として利用できる
 ようにします。（現在の版ではうまく働かないことがあります。また、電子署
 名との併用に関しても不完全です）
@@ -653,28 +653,28 @@ body において、8bit の data を使えるように STD 11 (@ref{(mime-
 
 @defvar mime-edit-split-message
 
-Non-nil ならば大きなメッセージを分割して送信します。
+Split large message if it is non-nil.
 @end defvar
 
 
 @defvar mime-edit-message-default-max-lines
 
-メッセージの最大行数のデフォルト値です。
+Default maximum lines of a message.
 @end defvar
 
 
 @defvar mime-edit-message-max-lines-alist
 
-メジャーモード対メッセージの最大行数から成る連想リストです。@refill
+Alist of major-mode vs maximum lines of a message.@refill
 
-メジャーモードがここで指定されてない場合には
-@code{mime-edit-message-default-max-lines} を用います。
+If it is not specified for a major-mode,
+@code{mime-edit-message-default-max-lines} is used.
 @end defvar
 
 
 @defvar mime-edit-split-blind-field-regexp
 
-分割送信の際に無視されるフィールド名にマッチする正規表現です。
+Regular expression to match field-name to be ignored when split sending.
 @end defvar
 
 
@@ -684,7 +684,7 @@ Non-nil ならば大きなメッセージを分割して送信します。
 
 
 @menu
-* PGP::                         暗号化、署名
+* PGP::                         
 * Buttons::                     押釦
 * Acting-condition configuration::  実行条件の設定
 @end menu
@@ -702,28 +702,17 @@ mime-edit では @strong{PGP/MIME} (RFC 2015) および@strong{PGP-kazu}
 
 @defvar pgg-default-scheme
 
-暗号化もしくは署名に用いる PGP もしくは GnuPG コマンドのバージョンです。
-値は symbol を指定します。使えるバージョンは @code{gpg}、
-@code{pgp} もしくは @code{pgp5} です。@refill
+Version of PGP or GnuPG command to be used for encryption or sign.
+The value should be a symbol.  Allowed versions are @code{gpg},
+@code{pgp} or @code{pgp5}.@refill
 @end defvar
 
 
 @defvar pgg-scheme
 
-復号もしくは検証に用いる PGP もしくは GnuPG コマンドのバージョンです。
-値は symbol を指定します。使えるバージョンは @code{gpg}、
-@code{pgp} もしくは @code{pgp5} です。@refill
-@end defvar
-
-
-@defvar pgg-insert-url-function
-
-鍵サーバから公開鍵を取り寄せる際に使う関数です。デフォルトでは
-Emacs/W3 を使う設定になっています。emacs-w3m を使う場合には
-次のように設定します。
-@lisp
-(setq pgg-insert-url-function #'w3m-retrieve)
-@end lisp
+Version of PGP or GnuPG command to be used for decryption or verification.
+The value should be a symbol.  Allowed versions are @code{gpg},
+@code{pgp} or @code{pgp5}.@refill
 @end defvar
 
 
@@ -733,20 +722,19 @@ Emacs/W3 を使う設定になっています。emacs-w3m を使う場合には
 
 @defvar mime-button-face
 
-MIME-Preview バッファで  content-button もしくは URL-button  に用いる
-face です。
+Face used for content-button or URL-button of MIME-Preview buffer.
 @end defvar
 
 
 @defvar mime-button-mouse-face
 
-MIME-preview バッファでマウスをハイライトする際に用いる face です。
+Face used for MIME-preview buffer mouse highlighting.
 @end defvar
 
 
 @defvar mime-browse-url-function
 
-URL をブラウズする関数です。
+Function to browse URL.
 @end defvar
 
 

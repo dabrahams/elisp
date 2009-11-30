@@ -19,8 +19,8 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 ;;; Code:
 
@@ -130,7 +130,7 @@ Content-Transfer-Encoding: 7bit
     (if mc-pgp-comment
 	(setq args (cons (format "+comment=%s" mc-pgp-comment) args))
       )
-    (message "Signing as %s..." (car key))
+    (message "Signing as %s ..." (car key))
     (if (mime-mc-process-region
 	 start end passwd pgp-path args parser buffer boundary)
 	(progn
@@ -142,7 +142,7 @@ Content-Transfer-Encoding: 7bit
 --[[multipart/signed; protocol=\"application/pgp-signature\";
  boundary=\"%s\"; micalg=pgp-md5][7bit]]\n" boundary))
 		))
-	  (message "Signing as %s...done" (car key))
+	  (message "Signing as %s ... Done." (car key))
 	  t)
       nil)))
 

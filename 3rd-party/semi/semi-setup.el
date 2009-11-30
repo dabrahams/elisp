@@ -19,8 +19,8 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 ;;; Code:
 
@@ -79,8 +79,6 @@ it is used as hook to set."
 (if mime-setup-enable-pgp
     (eval-after-load "mime-view"
       '(progn
-	 (require 'mime-pgp)
-
 	 (mime-add-condition
 	  'preview '((type . application)(subtype . pgp)
 		     (message-button . visible)))
@@ -138,12 +136,6 @@ it is used as hook to set."
 	  '((type . application)(subtype . x-pkcs7-mime)
 	    (method . mime-view-application/pkcs7-mime))
 	  'strict "mime-pgp")
-
-	 (ctree-set-calist-strictly
-	  'mime-preview-condition
-	  '((type . multipart) (subtype . encrypted) ("protocol" . "application/pgp-encrypted")
-	    (body . visible)
-	    (body-presentation-method . mime-display-multipart/pgp-encrypted)))
 	 ))
   )
 

@@ -1,8 +1,8 @@
 ;;; pgg.el --- glue for the various PGP implementations.
 
-;; Copyright (C) 1999,2000 Free Software Foundation, Inc.
+;; Copyright (C) 1999,2000 Daiki Ueno
 
-;; Author: Daiki Ueno <ueno@unixuser.org>
+;; Author: Daiki Ueno <ueno@ueda.info.waseda.ac.jp>
 ;; Created: 1999/10/28
 ;; Keywords: PGP
 
@@ -20,8 +20,8 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 
 ;;; Commentary:

@@ -22,18 +22,17 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 ;;; Code:
 
+(require 'emu)
 (require 'mime)
 (require 'semi-def)
 (require 'calist)
 (require 'alist)
-(require 'mime-conf)
-
-(eval-when-compile (require 'static))
+(require 'mailcap)
 
 
 ;;; @ version
@@ -67,15 +66,6 @@ buttom. Nil means don't scroll at all."
   :type '(choice (const :tag "Off" nil)
 		 (const :tag "On" t)
 		 (sexp :tag "Situation" 1)))
-
-(defcustom mime-view-mailcap-files
-  (let ((files '("/etc/mailcap" "/usr/etc/mailcap" "~/.mailcap")))
-    (or (member mime-mailcap-file files)
-	(setq files (cons mime-mailcap-file files)))
-    files)
-  "List of mailcap files."
-  :group 'mime-view
-  :type '(repeat file))
 
 
 ;;; @ in raw-buffer (representation space)
@@ -371,58 +361,10 @@ mother-buffer."
 (defvar mime-acting-situation-example-list-max-size 16)
 (defvar mime-situation-examples-file-coding-system nil)
 
-(defun mime-view-read-situation-examples-file (&optional file)
-  (or file
-      (setq file mime-situation-examples-file))
-  (if (and file
-	   (file-readable-p file))
-      (with-temp-buffer
-	(insert-file-contents file)
-	(setq mime-situation-examples-file-coding-system
-              (static-cond
-	       ((boundp 'buffer-file-coding-system)
-		(symbol-value 'buffer-file-coding-system))
-	       ((boundp 'file-coding-system)
-		(symbol-value 'file-coding-system))
-	       (t nil))
-	      ;; (and (boundp 'buffer-file-coding-system)
-              ;;      buffer-file-coding-system)
-	      )
-	(condition-case error
-	    (eval-buffer)
-	  (error (message "%s is broken: %s" file (cdr error))))
-	;; format check
-	(condition-case nil
-	    (let ((i 0))
-	      (while (and (> (length mime-preview-situation-example-list)
-			     mime-preview-situation-example-list-max-size)
-			  (< i 16))
-		(setq mime-preview-situation-example-list
-		      (mime-reduce-situation-examples
-		       mime-preview-situation-example-list))
-		(setq i (1+ i))))
-	  (error (setq mime-preview-situation-example-list nil)))
-	;; (let ((rest mime-preview-situation-example-list))
-	;;   (while rest
-	;;     (ctree-set-calist-strictly 'mime-preview-condition
-	;;                                (caar rest))
-	;;     (setq rest (cdr rest))))
-	(condition-case nil
-	    (let ((i 0))
-	      (while (and (> (length mime-acting-situation-example-list)
-			     mime-acting-situation-example-list-max-size)
-			  (< i 16))
-		(setq mime-acting-situation-example-list
-		      (mime-reduce-situation-examples
-		       mime-acting-situation-example-list))
-		(setq i (1+ i))))
-	  (error (setq mime-acting-situation-example-list nil))))))
-
 (defun mime-save-situation-examples ()
   (if (or mime-preview-situation-example-list
 	  mime-acting-situation-example-list)
-      (let ((file mime-situation-examples-file)
-	    print-length print-level)
+      (let ((file mime-situation-examples-file))
 	(with-temp-buffer
 	  (insert ";;; " (file-name-nondirectory file) "\n")
 	  (insert "\n;; This file is generated automatically by "
@@ -446,8 +388,6 @@ mother-buffer."
 	   ((boundp 'file-coding-system)
 	    (setq file-coding-system
 		  mime-situation-examples-file-coding-system)))
-	  ;; (setq buffer-file-coding-system
-	  ;;       mime-situation-examples-file-coding-system)
 	  (setq buffer-file-name file)
 	  (save-buffer)))))
 
@@ -599,22 +539,24 @@ mother-buffer."
 		  )))
 	    )
 	   (t
-	    (let* ((charset (cdr (assoc "charset" params)))
-		   (encoding (mime-entity-encoding entity))
-		   (rest (format " <%s/%s%s%s>"
-				 (mime-entity-media-type entity)
-				 (mime-entity-media-subtype entity)
-				 (if charset
-				     (concat "; " charset)
-				   "")
-				 (if encoding
-				     (concat " (" encoding ")")
-				   ""))))
+	    (let ((media-type (mime-entity-media-type entity))
+		  (media-subtype (mime-entity-media-subtype entity))
+		  (charset (cdr (assoc "charset" params)))
+		  (encoding (mime-entity-encoding entity)))
 	      (concat
 	       num " " subject
-	       (if (>= (+ (current-column)(length rest))(window-width))
-		   "\n\t")
-	       rest))
+	       (let ((rest
+		      (format " <%s/%s%s%s>"
+			      media-type media-subtype
+			      (if charset
+				  (concat "; " charset)
+				"")
+			      (if encoding
+				  (concat " (" encoding ")")
+				""))))
+		 (if (>= (+ (current-column)(length rest))(window-width))
+		     "\n\t")
+		 rest)))
 	    )))
      (function mime-preview-play-current-entity))
     ))
@@ -664,19 +606,6 @@ Each elements are regexp of field-name.")
 
 (define-calist-field-match-method
   'body #'mime-calist::field-match-method-as-default-rule)
-
-(defun mime-calist::field-match-method-ignore-case (calist
-						    field-type field-value)
-  (let ((s-field (assoc field-type calist)))
-    (cond ((null s-field)
-	   (cons (cons field-type field-value) calist))
-	  ((eq field-value t)
-	   calist)
-	  ((string= (downcase (cdr s-field)) (downcase field-value))
-	   calist))))
-
-(define-calist-field-match-method
-  'access-type #'mime-calist::field-match-method-ignore-case)
 
 
 (defvar mime-preview-condition nil
@@ -757,12 +686,6 @@ Each elements are regexp of field-name.")
  '((type . multipart)(subtype . alternative)
    (body . visible)
    (body-presentation-method . mime-display-multipart/alternative)))
-
-(ctree-set-calist-strictly
- 'mime-preview-condition
- '((type . multipart)(subtype . related)
-   (body . visible)
-   (body-presentation-method . mime-display-multipart/related)))
 
 (ctree-set-calist-strictly
  'mime-preview-condition
@@ -940,23 +863,6 @@ MEDIA-TYPE must be (TYPE . SUBTYPE), TYPE or t.  t means default."
 	    situations (cdr situations)
 	    i (1+ i)))))
 
-(defun mime-display-multipart/related (entity situation)
-  (let* ((param-start (mime-parse-msg-id
-		       (std11-lexical-analyze
-			(cdr (assoc "start"
-				    (mime-content-type-parameters
-				     (mime-entity-content-type entity)))))))
-	 (start (or (and param-start (mime-find-entity-from-content-id
-				      param-start
-				      entity))
-		    (car (mime-entity-children entity))))
-	 (original-major-mode-cell (assq 'major-mode situation))
-	 (default-situation (cdr (assq 'childrens-situation situation))))
-    (when start
-      (if original-major-mode-cell
-	  (setq default-situation
-		(cons original-major-mode-cell default-situation)))
-      (mime-display-entity start nil default-situation))))
 
 ;;; @ acting-condition
 ;;;
@@ -964,39 +870,34 @@ MEDIA-TYPE must be (TYPE . SUBTYPE), TYPE or t.  t means default."
 (defvar mime-acting-condition nil
   "Condition-tree about how to process entity.")
 
-(defun mime-view-read-mailcap-files (&optional files)
-  (or files
-      (setq files mime-view-mailcap-files))
-  (let (entries file)
-    (while files
-      (setq file (car files))
-      (if (file-readable-p file)
-	  (setq entries (append entries (mime-parse-mailcap-file file))))
-      (setq files (cdr files)))
-    (while entries
-      (let ((entry (car entries))
-	    view print shared)
-	(while entry
-	  (let* ((field (car entry))
-		 (field-type (car field)))
-	    (cond ((eq field-type 'view)  (setq view field))
-		  ((eq field-type 'print) (setq print field))
-		  ((memq field-type '(compose composetyped edit)))
-		  (t (setq shared (cons field shared))))
+(if (file-readable-p mailcap-file)
+    (let ((entries (mailcap-parse-file)))
+      (while entries
+	(let ((entry (car entries))
+	      view print shared)
+	  (while entry
+	    (let* ((field (car entry))
+		   (field-type (car field)))
+	      (cond ((eq field-type 'view)  (setq view field))
+		    ((eq field-type 'print) (setq print field))
+		    ((memq field-type '(compose composetyped edit)))
+		    (t (setq shared (cons field shared))))
+	      )
+	    (setq entry (cdr entry))
 	    )
-	  (setq entry (cdr entry)))
-	(setq shared (nreverse shared))
-	(ctree-set-calist-with-default
-	 'mime-acting-condition
-	 (append shared (list '(mode . "play")(cons 'method (cdr view)))))
-	(if print
-	    (ctree-set-calist-with-default
-	     'mime-acting-condition
-	     (append shared
-		     (list '(mode . "print")(cons 'method (cdr view)))))))
-      (setq entries (cdr entries)))))
-
-(mime-view-read-mailcap-files)
+	  (setq shared (nreverse shared))
+	  (ctree-set-calist-with-default
+	   'mime-acting-condition
+	   (append shared (list '(mode . "play")(cons 'method (cdr view)))))
+	  (if print
+	      (ctree-set-calist-with-default
+	       'mime-acting-condition
+	       (append shared
+		       (list '(mode . "print")(cons 'method (cdr view))))
+	       ))
+	  )
+	(setq entries (cdr entries))
+	)))
 
 (ctree-set-calist-strictly
  'mime-acting-condition
@@ -1188,7 +1089,6 @@ MEDIA-TYPE must be (TYPE . SUBTYPE), TYPE or t.  t means default."
 	 (set-buffer (event-buffer event))
 	 (popup-menu 'mime-view-xemacs-popup-menu))
        (defvar mouse-button-2 'button2)
-       (defvar mouse-button-3 'button3)
        )
       (t
        (defvar mime-view-popup-menu 
@@ -1210,13 +1110,13 @@ MEDIA-TYPE must be (TYPE . SUBTYPE), TYPE or t.  t means default."
                 (commandp func)
                 (funcall func))))
        (defvar mouse-button-2 [mouse-2])
-       (defvar mouse-button-3 [mouse-3])
        ))
 
 (defun mime-view-define-keymap (&optional default)
   (let ((mime-view-mode-map (if (keymapp default)
 				(copy-keymap default)
-			      (make-sparse-keymap))))
+			      (make-sparse-keymap)
+			      )))
     (define-key mime-view-mode-map
       "u"        (function mime-preview-move-to-upper))
     (define-key mime-view-mode-map
@@ -1309,15 +1209,15 @@ MEDIA-TYPE must be (TYPE . SUBTYPE), TYPE or t.  t means default."
 		    (lambda (item)
 		      (define-key mime-view-mode-map
 			(vector 'menu-bar 'mime-view (car item))
-			(cons (nth 1 item)(nth 2 item)))
+			(cons (nth 1 item)(nth 2 item))
+			)
 		      ))
-		   (reverse mime-view-menu-list))
+		   (reverse mime-view-menu-list)
+		   )
 	   ))
-    ;; (run-hooks 'mime-view-define-keymap-hook)
-    mime-view-mode-map))
-
-(defvar mime-view-mode-default-map (mime-view-define-keymap))
-
+    (use-local-map mime-view-mode-map)
+    (run-hooks 'mime-view-define-keymap-hook)
+    ))
 
 (defsubst mime-maybe-hide-echo-buffer ()
   "Clear mime-echo buffer and delete window for it."
@@ -1338,7 +1238,7 @@ MEDIA-TYPE must be (TYPE . SUBTYPE), TYPE or t.  t means default."
 ;;;###autoload
 (defun mime-display-message (message &optional preview-buffer
 				     mother default-keymap-or-function
-				     original-major-mode keymap)
+				     original-major-mode)
   "View MESSAGE in MIME-View mode.
 
 Optional argument PREVIEW-BUFFER specifies the buffer of the
@@ -1349,14 +1249,7 @@ Optional argument MOTHER specifies mother-buffer of the preview-buffer.
 Optional argument DEFAULT-KEYMAP-OR-FUNCTION is nil, keymap or
 function.  If it is a keymap, keymap of MIME-View mode will be added
 to it.  If it is a function, it will be bound as default binding of
-keymap of MIME-View mode.
-
-Optional argument ORIGINAL-MAJOR-MODE is major-mode of representation
-buffer of MESSAGE.  If it is nil, current `major-mode' is used.
-
-Optional argument KEYMAP is keymap of MIME-View mode.  If it is
-non-nil, DEFAULT-KEYMAP-OR-FUNCTION is ignored.  If it is nil,
-`mime-view-mode-default-map' is used."
+keymap of MIME-View mode."
   (mime-maybe-hide-echo-buffer)
   (let ((win-conf (current-window-configuration)))
     (or preview-buffer
@@ -1369,7 +1262,8 @@ non-nil, DEFAULT-KEYMAP-OR-FUNCTION is ignored.  If it is nil,
       (widen)
       (erase-buffer)
       (if mother
-	  (setq mime-mother-buffer mother))
+	  (setq mime-mother-buffer mother)
+	)
       (setq mime-preview-original-window-configuration win-conf)
       (setq major-mode 'mime-view-mode)
       (setq mode-name "MIME-View")
@@ -1378,17 +1272,14 @@ non-nil, DEFAULT-KEYMAP-OR-FUNCTION is ignored.  If it is nil,
 			     (header . visible)
 			     (major-mode . ,original-major-mode))
 			   preview-buffer)
-      (use-local-map
-       (or keymap
-	   (if default-keymap-or-function
-	       (mime-view-define-keymap default-keymap-or-function)
-	     mime-view-mode-default-map)))
+      (mime-view-define-keymap default-keymap-or-function)
       (let ((point
 	     (next-single-property-change (point-min) 'mime-view-entity)))
 	(if point
 	    (goto-char point)
 	  (goto-char (point-min))
-	  (search-forward "\n\n" nil t)))
+	  (search-forward "\n\n" nil t)
+	  ))
       (run-hooks 'mime-view-mode-hook)
       (set-buffer-modified-p nil)
       (setq buffer-read-only t)
@@ -1485,19 +1376,15 @@ button-2	Move to point under the mouse cursor
 ;;; @@ utility
 ;;;
 
-(defun mime-preview-find-boundary-info (&optional with-children)
-  "Return boundary information of current part.
-If WITH-CHILDREN, refer boundary surrounding current part and its branches."
+(defun mime-preview-find-boundary-info (&optional get-mother)
   (let (entity
 	p-beg p-end
 	entity-node-id len)
-    (while (and
-	    (null (setq entity
-			(get-text-property (point) 'mime-view-entity)))
-	    (> (point) (point-min)))
+    (while (null (setq entity
+		       (get-text-property (point) 'mime-view-entity)))
       (backward-char))
     (setq p-beg (previous-single-property-change (point) 'mime-view-entity))
-    (setq entity-node-id (and entity (mime-entity-node-id entity)))
+    (setq entity-node-id (mime-entity-node-id entity))
     (setq len (length entity-node-id))
     (cond ((null p-beg)
 	   (setq p-beg
@@ -1518,8 +1405,9 @@ If WITH-CHILDREN, refer boundary surrounding current part and its branches."
 	  ((null entity-node-id)
 	   (setq p-end (point-max))
 	   )
-	  (with-children
+	  (get-mother
 	   (save-excursion
+	     (goto-char p-end)
 	     (catch 'tag
 	       (let (e i)
 		 (while (setq e
@@ -1527,14 +1415,12 @@ If WITH-CHILDREN, refer boundary surrounding current part and its branches."
 			       (point) 'mime-view-entity))
 		   (goto-char e)
 		   (let ((rc (mime-entity-node-id
-			      (get-text-property (point)
+			      (get-text-property (1- (point))
 						 'mime-view-entity))))
 		     (or (and (>= (setq i (- (length rc) len)) 0)
 			      (equal entity-node-id (nthcdr i rc)))
 			 (throw 'tag nil)))
-		   (setq p-end (or (next-single-property-change
-				    (point) 'mime-view-entity)
-				   (point-max)))))
+		   (setq p-end e)))
 	       (setq p-end (point-max))))
 	   ))
     (vector p-beg p-end entity)))
@@ -1573,13 +1459,13 @@ It decodes current entity to call internal or external method as
 It calls following-method selected from variable
 `mime-preview-following-method-alist'."
   (interactive)
-  (let* ((boundary-info (mime-preview-find-boundary-info t))
-	 (p-beg (aref boundary-info 0))
-	 (p-end (aref boundary-info 1))
-	 (entity (aref boundary-info 2))
-	 pb-beg)
-    (if (or (get-text-property p-beg 'mime-view-entity-body)
-	    (null entity))
+  (let ((entity (mime-preview-find-boundary-info t))
+	p-beg p-end
+	pb-beg)
+    (setq p-beg (aref entity 0)
+	  p-end (aref entity 1)
+	  entity (aref entity 2))
+    (if (get-text-property p-beg 'mime-view-entity-body)
 	(setq pb-beg p-beg)
       (setq pb-beg
 	    (next-single-property-change
@@ -1587,7 +1473,7 @@ It calls following-method selected from variable
 	     (or (next-single-property-change p-beg 'mime-view-entity)
 		 p-end))))
     (let* ((mode (mime-preview-original-major-mode 'recursive))
-	   (entity-node-id (and entity (mime-entity-node-id entity)))
+	   (entity-node-id (mime-entity-node-id entity))
 	   (new-name
 	    (format "%s-%s" (buffer-name) (reverse entity-node-id)))
 	   new-buf
@@ -1600,8 +1486,7 @@ It calls following-method selected from variable
 	(insert-buffer-substring the-buf pb-beg p-end)
 	(goto-char (point-min))
 	(let ((current-entity
-	       (if (and entity
-			(eq (mime-entity-media-type entity) 'message)
+	       (if (and (eq (mime-entity-media-type entity) 'message)
 			(eq (mime-entity-media-subtype entity) 'rfc822))
 		   (car (mime-entity-children entity))
 		 entity)))
@@ -1642,8 +1527,9 @@ It calls following-method selected from variable
 	(if (functionp f)
 	    (funcall f new-buf)
 	  (message
-	   "Sorry, following method for %s is not implemented yet."
-	   mode)
+	   (format
+	    "Sorry, following method for %s is not implemented yet."
+	    mode))
 	  ))
       )))
 
@@ -1820,7 +1706,7 @@ If LINES is negative, scroll up LINES lines."
 ;;;
 
 (defun mime-preview-toggle-display (type &optional display)
-  (let ((situation (mime-preview-find-boundary-info t))
+  (let ((situation (mime-preview-find-boundary-info))
 	(sym (intern (concat "*" (symbol-name type))))
 	entity p-beg p-end)
     (setq p-beg (aref situation 0)
@@ -1832,9 +1718,9 @@ If LINES is negative, scroll up LINES lines."
 	  (display)
 	  (t
 	   (setq display
-		 (memq (cdr (or (assq sym situation)
-				(assq type situation)))
-		       '(nil invisible)))))
+		 (eq (cdr (or (assq sym situation)
+			      (assq type situation)))
+		     'invisible))))
     (setq situation (put-alist sym (if display
 				       'visible
 				     'invisible)
@@ -1899,11 +1785,43 @@ It calls function registered in variable
 
 (provide 'mime-view)
 
-(eval-when-compile
-  (setq mime-situation-examples-file nil)
-  ;; to avoid to read situation-examples-file at compile time.
-  )
-
-(mime-view-read-situation-examples-file)
+(let ((file mime-situation-examples-file))
+  (if (file-readable-p file)
+      (with-temp-buffer
+	(insert-file-contents file)
+	(setq mime-situation-examples-file-coding-system
+	      (static-cond
+	       ((boundp 'buffer-file-coding-system)
+		(symbol-value 'buffer-file-coding-system))
+	       ((boundp 'file-coding-system)
+		(symbol-value 'file-coding-system))
+	       (t nil)))
+	(eval-buffer)
+	;; format check
+	(condition-case nil
+	    (let ((i 0))
+	      (while (and (> (length mime-preview-situation-example-list)
+			     mime-preview-situation-example-list-max-size)
+			  (< i 16))
+		(setq mime-preview-situation-example-list
+		      (mime-reduce-situation-examples
+		       mime-preview-situation-example-list))
+		(setq i (1+ i))))
+	  (error (setq mime-preview-situation-example-list nil)))
+	;; (let ((rest mime-preview-situation-example-list))
+	;;   (while rest
+	;;     (ctree-set-calist-strictly 'mime-preview-condition
+	;;                                (caar rest))
+	;;     (setq rest (cdr rest))))
+	(condition-case nil
+	    (let ((i 0))
+	      (while (and (> (length mime-acting-situation-example-list)
+			     mime-acting-situation-example-list-max-size)
+			  (< i 16))
+		(setq mime-acting-situation-example-list
+		      (mime-reduce-situation-examples
+		       mime-acting-situation-example-list))
+		(setq i (1+ i))))
+	  (error (setq mime-acting-situation-example-list nil))))))
 
 ;;; mime-view.el ends here

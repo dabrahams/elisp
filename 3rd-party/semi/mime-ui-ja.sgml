@@ -1,6 +1,6 @@
 <!doctype sinfo system>
 <head>
-<title>SEMI 1.14 説明書
+<title>SEMI 1.8 説明書
 <author>守岡 知彦 <mail>morioka@jaist.ac.jp</mail>
 <date>1998/07/03
 
@@ -125,14 +125,14 @@ C-c C-x C-y	insert a mail or news message.
 C-c C-x RET	insert a mail message.
 C-c C-x C-s	insert a signature file at end.
 C-c C-x t	insert a new MIME tag.
-C-c C-m C-a	enclose as multipart/alternative.
-C-c C-m C-p	enclose as multipart/parallel.
-C-c C-m C-m	enclose as multipart/mixed.
-C-c C-m C-d	enclose as multipart/digest.
-C-c C-m C-s	enclose as PGP signed.
-C-c C-m C-e	enclose as PGP encrypted.
+C-c C-x a	enclose as multipart/alternative.
+C-c C-x p	enclose as multipart/parallel.
+C-c C-x m	enclose as multipart/mixed.
+C-c C-x d	enclose as multipart/digest.
+C-c C-x s	enclose as PGP signed.
+C-c C-x e	enclose as PGP encrypted.
 C-c C-x C-k	insert PGP public key.
-C-c C-x p	preview editing MIME message.
+C-c C-x C-p	preview editing MIME message.
 ...
 
 って訳で、C-c C-x C-i を押して、挿入したい binary file を指定します。
@@ -401,26 +401,26 @@ enclosure を作るための操作としては以下のようなものがあります。
 <kd>
 指定した region を multipart/alternative として囲みます。
 </kd>
-<kt>C-c C-m C-p
+<kt>C-c C-x C-p
 <kd>
 指定した region を multipart/parallel として囲みます。
 </kd>
-<kt>C-c C-m C-m
+<kt>C-c C-x C-m
 <kd>
 指定した region を multipart/mixed として囲みます。
 </kd>
-<kt>C-c C-m C-d
+<kt>C-c C-x C-d
 <kd>
 指定した region を multipart/digest として囲みます。
 </kd>
-<kt>C-c C-m C-s
+<kt>C-c C-x C-s
 <kd>
 指定した region に電子署名を行います。<cf node="PGP">
 </kd>
-<kt>C-c C-m C-e
+<kt>C-c C-x C-e
 <kd>
 指定した region を暗号化します。<cf node="PGP">
-<kt>C-c C-m C-q
+<kt>C-c C-x C-q
 <kd>
 指定した region 内の tag を無効にし、その tag を文字列として利用できる
 ようにします。（現在の版ではうまく働かないことがあります。また、電子署
@@ -591,32 +591,33 @@ file="mime-ja">STD 11</dref> を拡張しているが、message header では
 <p>
 <defvar name="mime-edit-split-message">
 <p>
-Non-nil ならば大きなメッセージを分割して送信します。
+Split large message if it is non-nil.
 </defvar>
 
 <defvar name="mime-edit-message-default-max-lines">
 <p>
-メッセージの最大行数のデフォルト値です。
+Default maximum lines of a message.
 </defvar>
 
 <defvar name="mime-edit-message-max-lines-alist">
 <p>
-メジャーモード対メッセージの最大行数から成る連想リストです。
+Alist of major-mode vs maximum lines of a message.
 <p>
-メジャーモードがここで指定されてない場合には
-<code>mime-edit-message-default-max-lines</code> を用います。
+If it is not specified for a major-mode,
+<code>mime-edit-message-default-max-lines</code> is used.
 </defvar>
 
 <defvar name="mime-edit-split-blind-field-regexp">
 <p>
-分割送信の際に無視されるフィールド名にマッチする正規表現です。
+Regular expression to match field-name to be ignored when split
+sending.
 </defvar>
 
 
 <h1> その他
 <node> Various
 <p>
-<h2> 暗号化、署名
+<h2> PGP
 <node> PGP
 <p>
 mime-edit では <concept>PGP/MIME</concept> (RFC 2015) および
@@ -627,26 +628,16 @@ mime-edit では <concept>PGP/MIME</concept> (RFC 2015) および
 
 <defvar name="pgg-default-scheme">
 <p>
-暗号化もしくは署名に用いる PGP もしくは GnuPG コマンドのバージョンです。
-値は symbol を指定します。使えるバージョンは <code>gpg</code>、
-<code>pgp</code> もしくは <code>pgp5</code> です。
+Version of PGP or GnuPG command to be used for encryption or sign.
+The value should be a symbol.  Allowed versions are <code>gpg</code>,
+<code>pgp</code> or <code>pgp5</code>.
 </defvar>
 
 <defvar name="pgg-scheme">
 <p>
-復号もしくは検証に用いる PGP もしくは GnuPG コマンドのバージョンです。
-値は symbol を指定します。使えるバージョンは <code>gpg</code>、
-<code>pgp</code> もしくは <code>pgp5</code> です。
-</defvar>
-
-<defvar name="pgg-insert-url-function">
-<p>
-鍵サーバから公開鍵を取り寄せる際に使う関数です。デフォルトでは
-Emacs/W3 を使う設定になっています。emacs-w3m を使う場合には
-次のように設定します。
-<lisp>
-(setq pgg-insert-url-function #'w3m-retrieve)
-</lisp>
+Version of PGP or GnuPG command to be used for decryption or verification.
+The value should be a symbol.  Allowed versions are <code>gpg</code>,
+<code>pgp</code> or <code>pgp5</code>.
 </defvar>
 
 
@@ -655,18 +646,17 @@ Emacs/W3 を使う設定になっています。emacs-w3m を使う場合には
 <p>
 <defvar name="mime-button-face">
 <p>
-MIME-Preview バッファで  content-button もしくは URL-button  に用いる
-face です。
+Face used for content-button or URL-button of MIME-Preview buffer.
 </defvar>
 
 <defvar name="mime-button-mouse-face">
 <p>
-MIME-preview バッファでマウスをハイライトする際に用いる face です。
+Face used for MIME-preview buffer mouse highlighting.
 </defvar>
 
 <defvar name="mime-browse-url-function">
 <p>
-URL をブラウズする関数です。
+Function to browse URL.
 </defvar>
 
 

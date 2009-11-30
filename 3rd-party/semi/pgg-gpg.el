@@ -1,6 +1,6 @@
 ;;; pgg-gpg.el --- GnuPG support for PGG.
 
-;; Copyright (C) 1999,2000 Free Software Foundation, Inc.
+;; Copyright (C) 1999,2000 Daiki Ueno
 
 ;; Author: Daiki Ueno <ueno@unixuser.org>
 ;; Created: 1999/10/28
@@ -20,12 +20,11 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 ;;; Code:
 
-(require 'mel) ; binary-to-text-funcall
 (eval-when-compile (require 'pgg))
 
 (defgroup pgg-gpg ()
@@ -48,12 +47,6 @@
 (defvar pgg-gpg-user-id nil
   "GnuPG ID of your default identity.")
 
-(defvar pgg-gpg-messages-coding-system pgg-messages-coding-system
-  "Coding system used when reading from a GnuPG external process.")
-
-(defvar pgg-gpg-messages-locale pgg-messages-locale
-  "Locale set before running a GnuPG external process.")
-
 (defvar pgg-scheme-gpg-instance nil)
 
 ;;;###autoload
@@ -63,34 +56,27 @@
 	    (luna-make-entity 'pgg-scheme-gpg))))
 
 (defun pgg-gpg-process-region (start end passphrase program args)
-  (let* ((output-file-name (make-temp-file
-			    (expand-file-name "pgg-output"
-					      temporary-file-directory)))
+  (let* ((output-file-name
+	  (concat temporary-file-directory (make-temp-name "pgg-output")))
 	 (args
 	  `("--status-fd" "2"
 	    ,@(if passphrase '("--passphrase-fd" "0"))
-	    "--yes" ; overwrite
 	    "--output" ,output-file-name
 	    ,@pgg-gpg-extra-args ,@args))
 	 (output-buffer pgg-output-buffer)
 	 (errors-buffer pgg-errors-buffer)
+	 (orig-mode (default-file-modes))
 	 (process-connection-type nil)
-	 (process-environment process-environment)
 	 process status exit-status)
-    (when pgg-gpg-messages-locale
-      (setq process-environment (copy-sequence process-environment))
-      (setenv "LC_ALL" pgg-gpg-messages-locale)
-      (setenv "LANGUAGE" pgg-gpg-messages-locale))
     (with-current-buffer (get-buffer-create errors-buffer)
       (buffer-disable-undo)
       (erase-buffer))
     (unwind-protect
 	(progn
-	  (setq process
-		(apply #'binary-to-text-funcall
-		       pgg-gpg-messages-coding-system
-		       #'start-process "*GnuPG*" errors-buffer
-		       program args))
+	  (set-default-file-modes 448)
+	  (as-binary-output-file
+	   (setq process
+		 (apply #'start-process "*GnuPG*" errors-buffer program args)))
 	  (set-process-sentinel process #'ignore)
 	  (when passphrase
 	    (process-send-string process (concat passphrase "\n")))
@@ -105,8 +91,7 @@
 	    (buffer-disable-undo)
 	    (erase-buffer)
 	    (if (file-exists-p output-file-name)
-		(let ((coding-system-for-read 'raw-text-dos))
-		  (insert-file-contents output-file-name)))
+		(insert-file-contents-as-raw-text-CRLF output-file-name))
 	    (set-buffer errors-buffer)
 	    (if (memq status '(stop signal))
 		(error "%s exited abnormally: '%s'" program exit-status))
@@ -115,7 +100,8 @@
       (if (and process (eq 'run (process-status process)))
 	  (interrupt-process process))
       (if (file-exists-p output-file-name)
-	  (delete-file output-file-name)))))
+	  (delete-file output-file-name))
+      (set-default-file-modes orig-mode))))
 
 (defun pgg-gpg-possibly-cache-passphrase (passphrase)
   (if (and pgg-cache-passphrase
@@ -138,9 +124,12 @@
     (with-temp-buffer
       (apply #'call-process pgg-gpg-program nil t nil args)
       (goto-char (point-min))
-      (if (re-search-forward "^\\(sec\\|pub\\):[^:]*:[^:]*:[^:]*:\\([^:]*\\)"
-			     nil t)
-	  (substring (match-string 2) 8)))))
+      (if (re-search-forward "^\\(sec\\|pub\\):"  nil t)
+	  (substring
+	   (nth 3 (split-string
+		   (buffer-substring (match-end 0)
+				     (progn (end-of-line)(point)))
+		   ":")) 8)))))
 
 (luna-define-method pgg-scheme-encrypt-region ((scheme pgg-scheme-gpg)
 					       start end recipients)
@@ -196,7 +185,6 @@
   (let ((args '("--batch" "--verify")))
     (when (stringp signature)
       (setq args (append args (list signature))))
-    (setq args (append args '("-")))
     (pgg-gpg-process-region start end nil pgg-gpg-program args)
     (with-current-buffer pgg-errors-buffer
       (goto-char (point-min))
@@ -205,12 +193,9 @@
       (goto-char (point-min))
       (prog1 (re-search-forward "^\\[GNUPG:] GOODSIG\\>" nil t)
 	(goto-char (point-min))
-	(delete-matching-lines "^\\[GNUPG:] ")
-	;; XXX: copy contents of pgg-errors-buffer into
-	;; pgg-output-buffer for backward compatibility.
-	(with-current-buffer pgg-output-buffer
-	  (set-buffer-multibyte t)
-	  (insert-buffer-substring pgg-errors-buffer))))))
+	(delete-matching-lines "^warning\\|\\[GNUPG:]")
+	(set-buffer pgg-output-buffer)
+	(insert-buffer-substring pgg-errors-buffer)))))
 
 (luna-define-method pgg-scheme-insert-key ((scheme pgg-scheme-gpg))
   (let* ((pgg-gpg-user-id (or pgg-gpg-user-id pgg-default-user-id))
@@ -240,13 +225,9 @@
 			 (aref status 11)))
 	      (if (zerop (aref status 9))
 		  ""
-		"\tSecret keys are imported.\n"))
-      ;; XXX: copy contents of pgg-errors-buffer into
-      ;; pgg-output-buffer for backward compatibility.
-      (with-current-buffer pgg-output-buffer
-	(set-buffer-multibyte t)
-	(insert-buffer-substring pgg-errors-buffer))
-      t)))
+		"\tSecret keys are imported.\n")))
+    (append-to-buffer pgg-output-buffer (point-min)(point-max))
+    (pgg-process-when-success)))
 
 (provide 'pgg-gpg)
 

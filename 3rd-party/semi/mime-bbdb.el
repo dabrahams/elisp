@@ -21,8 +21,8 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 ;;; Code:
 
@@ -102,15 +102,10 @@ For framepop users: If empty, `framepop-banish' is used instead.")
     (progn
       ;; (require 'bbdb-hooks) ; not provided.
       ;; (or (fboundp 'bbdb-extract-field-value) ; defined as autoload
-
-      ;; almost BBDB functions are autoloaded.
-      ;; (or (fboundp 'bbdb-header-start)
-      (or (and (fboundp 'bbdb-extract-field-value)
-	       (not (eq 'autoload (car-safe (symbol-function
-					     'bbdb-extract-field-value)))))
-	  (load "bbdb-hooks"))
+      (or (fboundp 'bbdb-header-start)
+          (load "bbdb-hooks"))
       (fset 'tm:bbdb-extract-field-value
-	    (symbol-function 'bbdb-extract-field-value))
+            (symbol-function 'bbdb-extract-field-value))
       (defun bbdb-extract-field-value (field)
         (let ((value (tm:bbdb-extract-field-value field)))
           (and value

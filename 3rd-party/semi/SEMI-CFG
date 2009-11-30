@@ -54,9 +54,23 @@
 ;; Function `add-path' finds path under load-path directories. If a
 ;; package does not exist in load-path, please specify by absolutely
 ;; (`~/' is available), for example
-;;	(add-path "~/lib/elisp/bbdb")
+;;	(add-path "~/lib/elisp/mailcrypt-3.4")
 ;; or
-;;	(add-path "/opt/share/xmule/site-lisp/bbdb")
+;;	(add-path "/opt/share/xmule/site-lisp/mailcrypt-3.4")
+
+
+;;; @@ Please specify Mailcrypt path.
+;;;
+
+;; Use latest version installed in load-path.
+
+(let ((path (get-latest-path "mailcrypt" 'all-paths)))
+  (if path
+      (add-path path)
+    ))
+
+;; Or please specify path.
+;; (add-path "mailcrypt-3.4" 'all-paths)
 
 
 ;;; @@ Please specify BBDB path.
@@ -139,6 +153,18 @@
 	"tm-plain" "tm-ps"
 	"tmdecode"))
 
-(defvar PACKAGEDIR (install-get-default-package-directory))
+(defvar PACKAGEDIR
+  (if (boundp 'early-packages)
+      (let ((dirs (append (if early-package-load-path
+			      early-packages)
+			  (if late-package-load-path
+			      late-packages)
+			  (if last-package-load-path
+			      last-packages)))
+	    dir)
+	(while (not (file-exists-p
+		     (setq dir (car dirs))))
+	  (setq dirs (cdr dirs)))
+	dir)))
 
 ;;; SEMI-CFG ends here

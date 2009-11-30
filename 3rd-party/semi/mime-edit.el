@@ -1,7 +1,6 @@
 ;;; mime-edit.el --- Simple MIME Composer for GNU Emacs
 
-;; Copyright (C) 1993,94,95,96,97,98,99,2000,01,02,03
-;;   Free Software Foundation, Inc.
+;; Copyright (C) 1993,94,95,96,97,98,99,2000 Free Software Foundation, Inc.
 
 ;; Author: UMEDA Masanobu <umerin@mse.kyutech.ac.jp>
 ;;	MORIOKA Tomohiko <tomo@kanji.zinbun.kyoto-u.ac.jp>
@@ -24,8 +23,8 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 ;;; Commentary:
 
@@ -111,6 +110,7 @@
 (require 'sendmail)
 (require 'mail-utils)
 (require 'mel)
+(require 'eword-encode) ; eword-encode-field-body
 (require 'mime-view)
 (require 'signature)
 (require 'alist)
@@ -236,9 +236,6 @@ To insert a signature file automatically, call the function
     ("application"
      ("octet-stream" ("type" "" "tar" "shar"))
      ("postscript")
-     ("pdf")
-     ("msword")
-     ("vnd.ms-excel")
      ("vnd.ms-powerpoint")
      ("x-kiss" ("x-cnf")))
     ("image"
@@ -324,11 +321,6 @@ To insert a signature file automatically, call the function
      "base64"
      "attachment" (("filename" . file))
      )
-    ("\\.xls$"				; MS Excel
-     "application" "vnd.ms-excel" nil
-     "base64"
-     "attachment" (("filename" . file))
-     )
     ("\\.ppt$"				; MS Power Point
      "application" "vnd.ms-powerpoint" nil
      "base64"
@@ -342,18 +334,13 @@ To insert a signature file automatically, call the function
      )
     ("\\.ps$"
      "application" "postscript"	nil
-     "base64"
-     "attachment"	(("filename" . file))
-     )
-    ("\\.pdf$"
-     "application" "pdf"	nil
-     "base64"
+     "quoted-printable"
      "attachment"	(("filename" . file))
      )
 
     ;;  Pure binary
 
-    ("\\.jpg$\\|\\.jpeg$"
+    ("\\.jpg$"
      "image"	"jpeg"		nil
      "base64"
      "inline"		(("filename" . file))
@@ -511,8 +498,6 @@ If encoding is nil, it is determined from its contents."
     (iso-8859-7		8 "quoted-printable")
     (iso-8859-8		8 "quoted-printable")
     (iso-8859-9		8 "quoted-printable")
-    (iso-8859-14	8 "quoted-printable")
-    (iso-8859-15	8 "quoted-printable")
     (iso-2022-jp	7 "base64")
     (iso-2022-jp-3	7 "base64")
     (iso-2022-kr	7 "base64")
@@ -666,10 +651,7 @@ If it is not specified for a major-mode,
 	  (if (fboundp 'apel-version)
 	      (concat (apel-version) " "))
 	  (if (featurep 'xemacs)
-	      (concat (cond ((and (featurep 'chise)
-				  (boundp 'xemacs-chise-version))
-			     (concat "CHISE-MULE/" xemacs-chise-version))
-			    ((featurep 'utf-2000)
+	      (concat (cond ((featurep 'utf-2000)
 			     (concat "UTF-2000-MULE/" utf-2000-version))
 			    ((featurep 'mule) "MULE"))
 		      " XEmacs"
@@ -688,14 +670,7 @@ If it is not specified for a major-mode,
 				  ;; XEmacs versions earlier than 21.1.1.
 				  (format " (patch %d)" emacs-patch-level))
 				 (t ""))
-			   " (" xemacs-codename ")"
-			   ;; `xemacs-extra-name' has appeared in the
-			   ;; development version of XEmacs 21.5-b8.
-			   (if (and (boundp 'xemacs-extra-name)
-				    (symbol-value 'xemacs-extra-name))
-			       (concat " " (symbol-value 'xemacs-extra-name))
-			     "")
-			   " ("
+			   " (" xemacs-codename ") ("
 			   system-configuration ")")
 			" (" emacs-version ")"))
 	    (let ((ver (if (string-match "\\.[0-9]+$" emacs-version)
@@ -736,9 +711,9 @@ Tspecials means any character that matches with it in header must be quoted.")
 
 (defconst mime-edit-mime-version-field-for-message/partial
   (concat "MIME-Version:"
-	  (mime-encode-field-body
+	  (eword-encode-field-body
 	   (concat " 1.0 (split by " mime-edit-version ")\n")
-	   "MIME-Version"))
+	   "MIME-Version:"))
   "MIME version field for message/partial.")
 
 
@@ -823,9 +798,9 @@ Tspecials means any character that matches with it in header must be quoted.")
     (encrypted	"Enclose as encrypted"	mime-edit-enclose-pgp-encrypted-region)
     (quote	"Verbatim region"	mime-edit-enclose-quote-region)
     (key	"Insert Public Key"	mime-edit-insert-key)
-    (split	"Set splitting"		mime-edit-set-split)
-    (sign	"PGP sign"		mime-edit-set-sign)
-    (encrypt	"PGP encrypt"		mime-edit-set-encrypt)
+    (split	"About split"           mime-edit-set-split)
+    (sign	"About sign"		mime-edit-set-sign)
+    (encrypt	"About encryption"	mime-edit-set-encrypt)
     (preview	"Preview Message"	mime-edit-preview-message)
     (level	"Toggle transfer-level"	mime-edit-toggle-transfer-level)
     )
@@ -1067,17 +1042,15 @@ User customizable variables (not documented all of them):
 
     (enable-invisible)
 
-    (make-local-variable 'paragraph-start)
+    ;; I don't care about saving these.
     (setq paragraph-start
 	  (regexp-or mime-edit-single-part-tag-regexp
 		     paragraph-start))
-    (make-local-variable 'paragraph-separate)
     (setq paragraph-separate
 	  (regexp-or mime-edit-single-part-tag-regexp
 		     paragraph-separate))
     (run-hooks 'mime-edit-mode-hook)
     (message
-     "%s"
      (substitute-command-keys
       "Type \\[mime-edit-exit] to exit MIME mode, and type \\[mime-edit-help] to get help."))
     ))
@@ -1523,7 +1496,7 @@ Nil if no such parameter."
 	;; Change value
 	(concat (substring ctype 0 (match-beginning 1))
 		parameter "=" value
-		(substring ctype (match-end 1))
+		(substring contype (match-end 1))
 		opt-fields)
       (concat ctype "; " parameter "=" value opt-fields)
       )))
@@ -1621,7 +1594,7 @@ Optional DELIMITER specifies parameter delimiter (';' by default)."
 
 (defun mime-prompt-for-parameter (parameter)
   "Ask for PARAMETER.
-Parameter must be '(PROMPT CHOICE1 (CHOICE2...))."
+Parameter must be '(PROMPT CHOICE1 (CHOISE2 ...))."
   (let* ((prompt (car parameter))
 	 (choices (mapcar (function
 			   (lambda (e)
@@ -1675,8 +1648,9 @@ Parameter must be '(PROMPT CHOICE1 (CHOICE2...))."
 
 (defun mime-edit-translate-header ()
   "Encode the message header into network representation."
-  (mime-encode-header-in-buffer 'code-conversion)
-  (run-hooks 'mime-edit-translate-header-hook))
+  (eword-encode-header 'code-conversion)
+  (run-hooks 'mime-edit-translate-header-hook)
+  )
 
 (defun mime-edit-translate-buffer ()
   "Encode the tagged MIME message in current buffer in MIME compliant message."
@@ -1734,7 +1708,6 @@ Parameter must be '(PROMPT CHOICE1 (CHOICE2...))."
 		    )
 		(delete-region beg end)
 		(or (looking-at mime-edit-beginning-tag-regexp)
-		    (looking-at mime-edit-multipart-end-regexp)
 		    (eobp)
 		    (insert (concat (mime-make-text-tag) "\n"))
 		    )))
@@ -1794,13 +1767,6 @@ Parameter must be '(PROMPT CHOICE1 (CHOICE2...))."
 
 (defvar mime-edit-pgp-user-id nil)
 
-(defun mime-edit-delete-trailing-whitespace ()
-  (save-match-data
-    (save-excursion
-      (goto-char (point-min))
-      (while (re-search-forward "[ \t]+$" nil t)
-	(delete-region (match-beginning 0) (match-end 0))))))
-
 (defun mime-edit-sign-pgp-mime (beg end boundary)
   (save-excursion
     (save-restriction
@@ -1812,7 +1778,6 @@ Parameter must be '(PROMPT CHOICE1 (CHOICE2...))."
 	     (encoding (nth 1 ret))
 	     (pgp-boundary (concat "pgp-sign-" boundary))
 	     micalg)
-	(mime-edit-delete-trailing-whitespace) ; RFC3156
 	(goto-char beg)
 	(insert (format "Content-Type: %s\n" ctype))
 	(if encoding
@@ -1823,8 +1788,7 @@ Parameter must be '(PROMPT CHOICE1 (CHOICE2...))."
 		   (or mime-edit-pgp-user-id
 		       (if from 
 			   (nth 1 (std11-extract-address-components from))
-			 pgg-default-user-id)))
-		  (pgg-text-mode t))
+			 pgg-default-user-id))))
 	      (pgg-sign-region (point-min)(point-max)))
 	    (throw 'mime-edit-error 'pgp-error)
 	    )
@@ -1910,13 +1874,12 @@ Content-Transfer-Encoding: 7bit
               (insert (format "Content-Transfer-Encoding: %s\n" encoding))
             )
           (insert "\n")
-	  (mime-encode-header-in-buffer)
+	  (eword-encode-header)
 	  (or (let ((pgg-default-user-id 
 		     (or mime-edit-pgp-user-id
 			 (if from 
 			     (nth 1 (std11-extract-address-components from))
-			   pgg-default-user-id)))
-		    (pgg-text-mode t))
+			   pgg-default-user-id))))		     
 		(pgg-encrypt-region 
 		 (point-min) (point-max) 
 		 (mapcar (lambda (recipient)
@@ -2159,7 +2122,8 @@ Content-Description: S/MIME Encrypted Message][base64]]\n")
 	    (insert "Content-Type: " contype "\n")
 	    (if encoding
 		(insert "Content-Transfer-Encoding: " encoding "\n"))
-	    (mime-encode-header-in-buffer))
+	    (eword-encode-header)
+	    )
 	  (cons (and contype
 		     (downcase contype))
 		(and encoding
@@ -2327,13 +2291,7 @@ Content-Description: S/MIME Encrypted Message][base64]]\n")
 		    (narrow-to-region beg (mime-edit-content-end))
 		    (goto-char beg)
 		    (while (re-search-forward "\\(\\=\\|[^\r]\\)\n" nil t)
-		      ;; In a certain period, `replace-match' with "\\N"
-		      ;; converted 8-bit characters into multibyte string,
-		      ;; but it has been fixed at 2004-01-15.
-		      ;;(replace-match "\\1\r\n"))))
-		      (backward-char 1)
-		      (insert "\r")
-		      (forward-char 1))))
+		      (replace-match "\\1\r\n"))))
 	      (goto-char beg)
 	      (mime-encode-region beg (mime-edit-content-end)
 				  (or encoding "7bit"))
@@ -2643,10 +2601,14 @@ Content-Type: message/partial; id=%s; number=%d; total=%d\n%s\n"
 	    (or (cdr (assq major-mode mime-edit-message-max-lines-alist))
 		mime-edit-message-default-max-lines))
       )
-  (let ((separator mail-header-separator)
-	(id (concat "\""
-		    (replace-space-with-underline (current-time-string))
-		    "@" (system-name) "\"")))
+  (let* ((mime-edit-draft-file-name
+	  (or (buffer-file-name)
+	      (make-temp-name
+	       (expand-file-name "mime-draft" temporary-file-directory))))
+	 (separator mail-header-separator)
+	 (id (concat "\""
+		     (replace-space-with-underline (current-time-string))
+		     "@" (system-name) "\"")))
     (run-hooks 'mime-edit-before-split-hook)
     (let ((the-buf (current-buffer))
 	  (copy-buf (get-buffer-create " *Original Message*"))
@@ -2704,7 +2666,7 @@ Content-Type: message/partial; id=%s; number=%d; total=%d\n%s\n"
 	  (message (format "Sending %d/%d..."
 			   mime-edit-partial-number total))
 	  (call-interactively command)
-	  (message (format "Sending %d/%d...done"
+	  (message (format "Sending %d/%d... done"
 			   mime-edit-partial-number total))
 	  )
 	(setq mime-edit-partial-number
@@ -2722,7 +2684,7 @@ Content-Type: message/partial; id=%s; number=%d; total=%d\n%s\n"
       (save-excursion
 	(message (format "Sending %d/%d..."
 			 mime-edit-partial-number total))
-	(message (format "Sending %d/%d...done"
+	(message (format "Sending %d/%d... done"
 			 mime-edit-partial-number total))
 	)
       )))
@@ -2745,7 +2707,6 @@ Content-Type: message/partial; id=%s; number=%d; total=%d\n%s\n"
 ;;;
 
 (defvar mime-edit-buffer nil) ; buffer local variable
-(defvar mime-edit-temp-message-buffer nil) ; buffer local variable
 
 (defun mime-edit-preview-message ()
   "preview editing MIME message."
@@ -2972,8 +2933,7 @@ Content-Type: message/partial; id=%s; number=%d; total=%d\n%s\n"
 			(setq encoded t
 			      encoding nil)
 			)))))))
-    (if (and (eq type 'text)
-	     (or encoded (not not-decode-text)))
+    (if (or encoded (not not-decode-text))
  	(progn
  	  (save-excursion
  	    (goto-char (point-min))

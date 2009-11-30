@@ -20,8 +20,8 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 ;;; Commentary:
 
@@ -39,8 +39,9 @@
 
 (eval-when-compile (require 'static))
 
+(require 'poem)
 (require 'pccl)
-(require 'custom)
+(require 'pcustom)
 (require 'mel)
 
 (defgroup pgg-parse ()
@@ -104,11 +105,8 @@
   "Armor headers.")
 
 (defmacro pgg-format-key-identifier (string)
-  `(mapconcat (lambda (c) (format "%02X" (char-int c)))
-	      ,string "")
-  ;; `(upcase (apply #'format "%02x%02x%02x%02x%02x%02x%02x%02x"
-  ;;                 (string-to-int-list ,string)))
-  )
+  `(upcase (apply #'format "%02x%02x%02x%02x%02x%02x%02x%02x"
+		  (string-to-int-list ,string))))
 
 (defmacro pgg-parse-time-field (bytes)
   `(list (logior (lsh (car ,bytes) 8)
@@ -129,9 +127,7 @@
 	      (forward-char ,nbytes))))
 
 (defmacro pgg-read-bytes (nbytes)
-  `(mapcar #'char-int (pgg-read-bytes-string ,nbytes))
-  ;; `(string-to-int-list (pgg-read-bytes-string ,nbytes))
-  )
+  `(string-to-int-list (pgg-read-bytes-string ,nbytes)))
 
 (defmacro pgg-read-body-string (ptag)
   `(if (nth 1 ,ptag)
@@ -139,9 +135,7 @@
      (pgg-read-bytes-string (- (point-max) (point)))))
 
 (defmacro pgg-read-body (ptag)
-  `(mapcar #'char-int (pgg-read-body-string ,ptag))
-  ;; `(string-to-int-list (pgg-read-body-string ,ptag))
-  )
+  `(string-to-int-list (pgg-read-body-string ,ptag)))
 
 (defalias 'pgg-skip-bytes 'forward-char)
 

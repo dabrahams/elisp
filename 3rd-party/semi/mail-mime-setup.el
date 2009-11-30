@@ -1,6 +1,6 @@
 ;;; mail-mime-setup.el --- setup file for mail-mode.
 
-;; Copyright (C) 1994,1995,1996,1997,1998,2000 Free Software Foundation, Inc.
+;; Copyright (C) 1994,1995,1996,1997,1998 Free Software Foundation, Inc.
 
 ;; Author: MORIOKA Tomohiko <morioka@jaist.ac.jp>
 ;; Keywords: mail-mode, MIME, multimedia, multilingual, encoded-word
@@ -19,8 +19,8 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 ;;; Code:
 
@@ -31,14 +31,14 @@
 (autoload 'turn-on-mime-edit "mime-edit"
   "Unconditionally turn on MIME-Edit minor mode." t)
 
-;; (autoload 'eword-decode-header "eword-decode"
-;;   "Decode MIME encoded-words in header fields." t)
+(autoload 'eword-decode-header "eword-decode"
+  "Decode MIME encoded-words in header fields." t)
 
 
 ;;; @ for mail-mode, RMAIL and VM
 ;;;
 
-;; (add-hook 'mail-setup-hook 'eword-decode-header)
+(add-hook 'mail-setup-hook 'eword-decode-header)
 (add-hook 'mail-setup-hook 'turn-on-mime-edit 'append)
 (add-hook 'mail-send-hook  'mime-edit-maybe-translate)
 (set-alist 'mime-edit-split-message-sender-alist

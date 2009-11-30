@@ -34,16 +34,13 @@ What's SEMI?
 Required environment
 ====================
 
-  SEMI supports XEmacs 21.1 or later, and GNU Emacs 20.4 or later.
+  SEMI supports XEmacs 20.2 or later with mule, and Emacs 20.
 
-  SEMI does not support anything older than GNU Emacs 19.28 or XEmacs
-  19.14.  In addition, SEMI does not word with byte-indexing Mule
-  implementations, such as Mule 1, Mule 2 and GNU Emacs 20.1/20.2.
+  SEMI does not support anything older than Emacs 19.28 or XEmacs
+  19.14.  SEMI also does not support Emacs 19.29 to 19.34, XEmacs
+  19.15 or XEmacs 20.2 without mule, but SEMI may work with them.
 
-  SEMI also does not support Emacs 19.29 to 19.34, XEmacs 19.15 or
-  XEmacs 20.2, but SEMI may work with them.
-
-  SEMI requires APEL (10.7 or later) and FLIM (1.14.2 or later)
+  SEMI requires APEL (9.22 or later) and FLIM (Chao 1.14.1 or later)
   package.  Please install them before installing it.  APEL package is
   available at:
 
@@ -53,6 +50,9 @@ Required environment
 
 	http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/comp/emacsen/lisp/
 							flim/flim-1.14/
+
+  PGP/MIME and application/pgp require mailcrypt or tiny-pgp package.
+
 
 Installation
 ============
@@ -187,16 +187,10 @@ Mailing lists
 
   Via the EMACS-MIME ML, you can report SEMI bugs, obtain the latest
   release of SEMI, and discuss future enhancements to SEMI.  To join
-  the EMACS-MIME ML, send an e-mail to
+  the EMACS-MIME ML, send an empty e-mail to
 
 	emacs-mime-en-ctl@m17n.org	(English)
 	emacs-mime-ja-ctl@m17n.org	(Japanese)
-
-  containing
-
-	subscribe YOUR NAME
-
-  in its contents.
 
   Notice that you should not send mail to author(s), such as
   morioka@jaist.ac.jp, directly.  Because your problem may occur in
@@ -209,23 +203,16 @@ Mailing lists
 CVS based development
 =====================
 
-  The SEMI development sources can be accessed via CVS pserver.  To
-  check out the SEMI sources, what you should do for the first time
-  is:
-
-  % cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/root login
-  CVS password: [CR] # NULL string
-
-  Then you can get the latest SEMI sources by the following:
-
-  % cvs -d :pserver:anonymous@cvs.m17n.org:/cvs/root checkout -r semi-1_14 semi
-
   If you would like to join CVS based development, please send mail to
 
 	cvs@cvs.m17n.org
 
   with your account name and your public key for ssh.  cvsroot is
   :ext:cvs@cvs.m17n.org:/cvs/root.
+
+  If you cannot use ssh, please send UNIX /etc/passwd style crypted
+  password.  you can commit with the cvsroot
+  :pserver:<accountname>@cvs.m17n.org:/cvs/root.
 
   We hope you will join the open development.
 

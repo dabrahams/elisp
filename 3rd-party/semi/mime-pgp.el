@@ -22,8 +22,8 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 ;;; Commentary:
 
@@ -141,7 +141,9 @@
 		   (1- knum)
 		 (1+ knum)))
 	 (orig-entity (nth onum (mime-entity-children mother)))
-	 (sig-file (make-temp-file "tm" nil ".asc")))
+	 (basename (expand-file-name "tm" temporary-file-directory))
+	 (sig-file (concat (make-temp-name basename) ".asc"))
+	 status)
     (save-excursion 
       (mime-show-echo-buffer)
       (set-buffer mime-echo-buffer-name)
@@ -156,11 +158,12 @@
 	  (while (progn (end-of-line) (not (eobp)))
 	    (insert "\r")
 	    (forward-line 1))
-	  (pgg-verify-region (point-min)(point-max) 
-			     sig-file 'fetch)
+	  (setq status (pgg-verify-region (point-min)(point-max) 
+					  sig-file 'fetch))
 	  (save-excursion 
 	    (set-buffer mime-echo-buffer-name)
-	    (insert-buffer-substring pgg-errors-buffer)))
+	    (insert-buffer-substring (if status pgg-output-buffer
+				       pgg-errors-buffer))))
       (delete-file sig-file))))
 
 
@@ -196,10 +199,11 @@
     (mime-insert-entity-content entity)
     (mime-decode-region (point-min) (point-max)
                         (cdr (assq 'encoding situation)))
-    (pgg-snarf-keys-region (point-min)(point-max))
-    (save-excursion 
-      (set-buffer mime-echo-buffer-name)
-      (insert-buffer-substring pgg-errors-buffer))))
+    (let ((status (pgg-snarf-keys-region (point-min)(point-max))))
+      (save-excursion 
+	(set-buffer mime-echo-buffer-name)
+	(insert-buffer-substring (if status pgg-output-buffer
+				   pgg-errors-buffer))))))
 
 
 ;;; @ Internal method for application/pkcs7-signature
@@ -215,7 +219,8 @@
 		   (1- knum)
 		 (1+ knum)))
 	 (orig-entity (nth onum (mime-entity-children mother)))
-	 (sig-file (make-temp-file "tm" nil ".asc"))
+	 (basename (expand-file-name "tm" temporary-file-directory))
+	 (sig-file (concat (make-temp-name basename) ".asc"))
 	 status)
     (save-excursion 
       (mime-show-echo-buffer)
@@ -270,17 +275,6 @@
 	(setq mime-view-temp-message-buffer message-buf))
       (set-window-buffer p-win preview-buffer))))
 
-(defun mime-display-multipart/pgp-encrypted (entity situation)
-   (if pgg-decrypt-automatically
-       (let ((pgp-begin (point)))
-	 (mime-insert-entity entity)
-	 (goto-char pgp-begin)
-	 (when (re-search-forward "^-+BEGIN PGP MESSAGE-+$" nil t)
-	   (pgg-decrypt-region pgp-begin (point-max))
-	   (delete-region pgp-begin (point-max))
-	   (mime-display-entity
-	    (mime-parse-buffer pgg-output-buffer))))
-     (mime-display-multipart/mixed entity situation)))
 
 ;;; @ end
 ;;;

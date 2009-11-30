@@ -1,8 +1,8 @@
 ;;; pgg-def.el --- functions/macros for defining PGG functions
 
-;; Copyright (C) 1999 Free Software Foundation, Inc.
+;; Copyright (C) 1999 Daiki Ueno
 
-;; Author: Daiki Ueno <ueno@unixuser.org>
+;; Author: Daiki Ueno <ueno@ueda.info.waseda.ac.jp>
 ;; Created: 1999/11/02
 ;; Keywords: PGP, OpenPGP, GnuPG
 
@@ -20,12 +20,12 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 ;;; Code:
 
-(require 'custom)
+(require 'pcustom)
 
 (defgroup pgg ()
   "Glue for the various PGP implementations."
@@ -57,17 +57,6 @@
   "If t, cache passphrase."
   :group 'pgg
   :type 'boolean)
-
-(defcustom pgg-decrypt-automatically nil
-  "*If t, decrypt messages automatically."
-  :group 'pgg
-  :type 'boolean)
-
-(defvar pgg-messages-coding-system nil
-  "Coding system used when reading from a PGP external process.")
-
-(defvar pgg-messages-locale nil
-  "Locale set before running a PGP external process.")
 
 (defvar pgg-status-buffer " *PGG status*")
 (defvar pgg-errors-buffer " *PGG errors*")

@@ -7,6 +7,7 @@
 ;;	Dan Rich <drich@morpheus.corp.sgi.com>
 ;;	Daiki Ueno <ueno@ueda.info.waseda.ac.jp>
 ;;	Katsumi Yamaoka  <yamaoka@jpl.org>
+;; Maintainer: MORIOKA Tomohiko <morioka@jaist.ac.jp>
 ;; Created: 1995/12/15
 ;;	Renamed: 1997/2/21 from tm-image.el
 
@@ -26,8 +27,8 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with GNU XEmacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
-;; Boston, MA 02110-1301, USA.
+;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
+;; Boston, MA 02111-1307, USA.
 
 ;;; Commentary:
 ;;	If you use this program with MULE, please install
@@ -49,14 +50,12 @@
     (let ((case-fold-search t) width height xbytes right margin)
       (goto-char (point-min))
       (or (re-search-forward "_width[\t ]+\\([0-9]+\\)" nil t)
-	  (error "!! Illegal xbm file format in the buffer: %s"
-		 (current-buffer)))
+	  (error "!! Illegal xbm file format" (current-buffer)))
       (setq width (string-to-int (match-string 1))
 	    xbytes (/ (+ width 7) 8))
       (goto-char (point-min))
       (or (re-search-forward "_height[\t ]+\\([0-9]+\\)" nil t)
-	  (error "!! Illegal xbm file format in the buffer: %s"
-		 (current-buffer)))
+	  (error "!! Illegal xbm file format" (current-buffer)))
       (setq height (string-to-int (match-string 1)))
       (goto-char (point-min))
       (re-search-forward "0x[0-9a-f][0-9a-f],")
@@ -189,20 +188,15 @@
 
 (defun mime-display-image (entity situation)
   (message "Decoding image...")
-  (condition-case err
-      (let ((format (cdr (assq 'image-format situation)))
-	    image)
-	(setq image
-	      (mime-image-create (mime-entity-content entity)
-				 format 'data))
-	(if (null image)
-	    (message "Invalid glyph!")
-	  (save-excursion
-	    (mime-image-insert image)
-	    (insert "\n")
-	    (message "Decoding image...done"))))
-    (error nil err)))
-
+  (let ((format (cdr (assq 'image-format situation)))
+	image)
+    (setq image (mime-image-create (mime-entity-content entity) format 'data))
+    (if (null image)
+	(message "Invalid glyph!")
+      (save-excursion
+	(mime-image-insert image)
+	(insert "\n")
+	(message "Decoding image... done")))))
 
 ;;; @ end
 ;;;
