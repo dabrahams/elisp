@@ -31,3 +31,6 @@
 [submodule "3rd-party/markdown-mode"]
 	path = 3rd-party/markdown-mode
 	url = git://jblevins.org/git/markdown-mode.git
+[submodule "3rd-party/more-wl"]
+	path = 3rd-party/more-wl
+	url = git://repo.or.cz/more-wl.git
