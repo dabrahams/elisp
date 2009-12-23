@@ -37,3 +37,5 @@
 ;; customization of variable: auto-save-file-name-transforms
 (make-directory "~/.emacs.d/auto-saves" t)
 
+;; What the heck, I like it.
+(ido-mode)
