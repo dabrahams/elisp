@@ -8,34 +8,46 @@
 ;; Created: 2002 Oct 11
 ;; Keywords: weblog blogger cms movable type openweblog blog
 ;; URL: http://emacswiki.org/emacs/weblogger.el
-;; Version: 1.4
-;; Last Modified: <2009-08-12 19:20:16 mah>
-;; Package-Requires: xml-rpc
+;; Maintained-at: http://savannah.nongnu.org/bzr/?group=emacsweblogs
+;; Version: 1.4.4
+;; Last Modified: <2009-12-07 17:21:57 mah>
+;; Package-Requires: ((xml-rpc "1.6.7"))
 
-;; This file is not yet part of GNU Emacs.
+(defconst weblogger-version "1.4.4"
+  "Current version of weblogger.el")
 
-;; weblogger.el free software; you can redistribute it and/or modify
+;; This file is NOT (yet) part of GNU Emacs.
+
+;; This program is free software: you can redistribute it and/or modify
 ;; it under the terms of the GNU General Public License as published by
-;; the Free Software Foundation; either version 2, or (at your option)
-;; any later version.
+;; the Free Software Foundation, either version 3 of the License, or
+;; (at your option) any later version.
 
-;; weblogger.el is distributed in the hope that it will be useful,
+;; This program is distributed in the hope that it will be useful,
 ;; but WITHOUT ANY WARRANTY; without even the implied warranty of
 ;; MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
 ;; GNU General Public License for more details.
 
 ;; You should have received a copy of the GNU General Public License
-;; along with GNU Emacs; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-;; Boston, MA 02111-1307, USA.
+;; along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 ;;; Commentary:
 
 ;; weblogger.el implements the Blogger, MetaWeblog, Movable Type, and
 ;; LiveJournal APIs to talk to server-side weblog software.
-;;
+
+;;; Installation:
+
+;; If you use ELPA (http://tromey.com/elpa), you can install via the
+;; M-x package-list-packages interface. This is preferrable as you
+;; will have access to updates automatically.
+
+;; Otherwise, just make sure this file and xml-rpc.el are in your
+;; load-path (usually ~/.emacs.d is included) and put
+;; (require 'weblogger) in your ~/.emacs or ~/.emacs.d/init.el file.
+
 ;;; Starting Out:
-;;
+
 ;; If you don't yet have a weblog, you can set one up for free on
 ;; various services.  (I suggest OpenWeblog.com, but then I run that
 ;; site :) )
@@ -124,15 +136,19 @@
 ;; - Can "scroll" through entries on the weblog server and edit them.
 ;; - Many other features.
 ;;
-;;  TODO:
+;;  TODO: (low hanging fruit first?)
+;;  * Move APIs to their own file
 ;;  * RSD
-;;  * Weblog creation using OpenWeblog.com
 ;;  * Menus
 ;;  * Toolbar
-;;  * Comments
 ;;  * More robust support for metaWebBlog API
-;;  * Support more than just the metaWebBlog API
-;;  * WordPress "Page" selection and "Tag" support
+;;  * Support more than just the metaWebBlog API -- ATOM especially
+;;  ** WordPress "Page" selection and "Category" support
+;;  * Weblog creation using OpenWeblog.com
+;;  * Comments
+;;  * Develop a minor mode that will allow posting buffer contents
+;;    to a weblog.  This way, you can work using nxml/sgml modes on a
+;;    buffer and then post the results directly.
 ;;
 ;; Bugs/Features:
 ;;
@@ -144,17 +160,20 @@
 ;;  * Changed titles aren't put in the weblogger post ring.
 ;;  * Dependency issues: Use GnuTLS (gnutls-cli) for SSL encryption
 ;;  ** Otherwise, you may get /a lot/ of terminal beeps and errors
+;;  ** (This is a dependency of url.el, but is listed here for clarity.)
 
 (require 'xml-rpc)
 (require 'message)
 (require 'ring)
+(eval-when-compile
+  (require 'cl))
+
+(defconst weblogger-maintainer-address "mah@everybody.org"
+  "The address where bug reports should be sent.")
 
 (defgroup weblogger nil
   "Edit Weblogs with Emacs."
   :group 'emacs)
-
-(defvar weblogger-blogger-app-key "07C72E6970E0FBA5DE21BA9F4800C44534C19870"
-  "The appkey to send to weblog server.  Generally this shouldn't be changed.")
 
 (defcustom weblogger-server-username nil
   "Your weblog server username.  You will be prompted if this is left nil."
@@ -166,7 +185,8 @@
   :group 'weblogger
   :type 'string)
 
-(defcustom weblogger-server-url "http://www.openweblog.com/interface/blogger/"
+(defcustom weblogger-server-url
+  "http://www.openweblog.com/interface/blogger/"
   "Server you want to use.  If this is an OpenWeblog.com site, leave this
 at the default.  Otherwise, you will need to change it."
   :group 'weblogger
@@ -218,6 +238,41 @@ tags when using the Blogger API."
   :group 'weblogger
   :type 'string)
 
+(defcustom weblogger-start-edit-entry-hook
+  (list (lambda ()
+          (message-goto-body)
+          (while (search-forward "\r" nil t)
+            (replace-match "" nil t))))
+  "Hook to run after loading an entry in buffer for editing."
+  :group 'weblogger
+  :type 'hook)
+
+(defcustom weblogger-edit-entry-hook nil
+  "Hook to run after updating an entry."
+  :group 'weblogger
+  :type 'hook)
+
+(defcustom weblogger-pre-struct-hook nil
+  "Hook to run just before the buffer is converted to a struct to
+send to the server."
+  :group 'weblogger
+  :type 'hook)
+
+(defcustom weblogger-edit-mode 'nxml-mode
+  "Major mode to use for editing weblog entries"
+  :group 'weblogger
+  :type 'function)
+
+(defcustom weblogger-edit-mode-toggle-hook nil
+  "Hook to call when switching to edit mode"
+  :group 'weblogger
+  :type 'hook)
+
+(defcustom weblogger-weblogger-mode-toggle-hook nil
+  "Hook to call when switching back to weblogger mode"
+  :group 'weblogger
+  :type 'hook)
+
 (defvar weblogger-entry-list nil
   "List of weblog entries that we know about. Chronological
 order, with newest first.")
@@ -234,34 +289,15 @@ order, with newest first.")
 (defvar weblogger-entry-mode-hook nil
   "Hook to run after starting up weblogger mode.")
 
-(defcustom weblogger-start-edit-entry-hook
-  (list (lambda ()
-          (message-goto-body)
-          (while (search-forward "\r" nil t)
-            (replace-match "" nil t))))
-  "Hook to run after loading an entry in buffer for editing."
-  :group 'weblogger
-  :type 'hook)
-
 (defvar weblogger-new-entry-hook '(weblogger-ping-weblogs)
   "Hook to run after sending a new entry.  Typically, this is
 where you would put weblogger-ping-weblogs to let weblog
 aggregators know that you have updated.")
 
-(defcustom weblogger-edit-entry-hook nil
-  "Hook to run after updating an entry."
-  :group 'weblogger
-  :type 'hook)
-
-(defcustom weblogger-pre-struct-hook nil
-  "Hook to run just before the buffer is converted to a struct to
-send to the server."
-  :group 'weblogger
-  :type 'hook)
-
 (defvar weblogger-entry-mode-map nil
   "Keymap for weblogger-entry-mode.")
 
+(defvar weblogger-template-type)
 (defvar weblogger-template-mode-map nil
   "Keymap for weblogger-template-mode.")
 
@@ -273,6 +309,40 @@ send to the server."
 
 (defvar weblogger-ring-index 0
   "Pointer to the index on the ring")
+
+(defvar weblogger-capabilities nil
+  "Known capabilities of the remote host")
+
+(defvar weblogger-default-title ""
+  "The Default title to use when making an entry.  This is added
+if your weblog server supports titles on entries but you haven't
+set one.  Set to \"\" for no title.")
+
+(defvar weblogger-default-categories nil
+  "The default list of categories when making an entry.  This is
+added if your weblog server supports categories on entries but you
+haven't set one.  Set to nil for no category.")
+
+(defvar weblogger-api-new-entry nil)
+(defvar weblogger-api-send-edits nil)
+(defvar weblogger-api-list-entries nil)
+(defvar weblogger-api-list-categories nil)
+(defvar weblogger-api-delete-entry 'weblogger-api-blogger-delete-entry)
+
+(defvar weblogger-weblog-alist nil
+  "Weblogs the user can use on the server.")
+(defvar weblogger-texttype-alist nil
+  "Texttypes supported by the server.")
+
+(defvar menu-bar-weblogger-menu nil)
+
+(defvar weblogger-header nil
+  "Holds the weblog header")
+
+(defconst weblogger-blogger-app-key
+  "07C72E6970E0FBA5DE21BA9F4800C44534C19870"
+  "OBSOLETE. The appkey to send to weblog server.  Generally this
+shouldn't be changed.")
 
 (defconst weblogger-no-capabilities '(("wp.getUsersBlogs" . nil)
                                       ("wp.getPage" . nil)
@@ -339,34 +409,6 @@ send to the server."
                                       ("wpStats.ping_blog" . nil)
                                       ("wpStats.flush_posts" . nil)))
 
-(defvar weblogger-capabilities nil
-  "Known capabilities of the remote host")
-
-(defvar weblogger-default-title ""
-  "The Default title to use when making an entry.  This is added
-if your weblog server supports titles on entries but you haven't
-set one.  Set to \"\" for no title.")
-
-(defvar weblogger-default-categories nil
-  "The default list of categories when making an entry.  This is
-added if your weblog server supports categories on entries but you
-haven't set one.  Set to nil for no category.")
-
-(defvar weblogger-api-new-entry nil)
-(defvar weblogger-api-send-edits nil)
-(defvar weblogger-api-list-entries nil)
-(defvar weblogger-api-list-categories nil)
-
-(defvar weblogger-weblog-alist nil
-  "Weblogs the user can use on the server.")
-(defvar weblogger-texttype-alist nil
-  "Texttypes supported by the server.")
-
-(defvar menu-bar-weblogger-menu nil)
-
-(defconst weblogger-version "1.4"
-  "Current version of weblogger.el")
-
 (unless weblogger-entry-mode-map
   (setq weblogger-entry-mode-map
         (let ((map (copy-keymap message-mode-map))
@@ -389,29 +431,76 @@ haven't set one.  Set to nil for no category.")
           (define-key map "\C-c\C-o" 'weblogger-change-server)
           (define-key map "\C-c\C-w" 'weblogger-change-weblog)
           (define-key map "\C-c\C-u" 'weblogger-change-user)
+          (define-key map "\C-c\C-e" 'weblogger-toggle-edit-body)
           map)))
 
 (unless weblogger-template-mode-map
   (setq weblogger-template-mode-map (copy-keymap text-mode-map))
-  (define-key weblogger-template-mode-map "\C-x\C-s" 'weblogger-save-template))
+  (define-key weblogger-template-mode-map "\C-x\C-s"
+    'weblogger-save-template))
 
 (unless menu-bar-weblogger-menu 
   (easy-menu-define
     menu-bar-weblogger-menu weblogger-entry-mode-map ""
     '("Weblogger"
-      ["Send weblog entry" weblogger-send-entry t]
-      ["Save weblog entry" weblogger-save-entry nil t]
+      ["Start a new Weblog Entry"     weblogger-start-entry t]
+      ["Save weblog entry as draft"   weblogger-save-entry t]
+      ["Publish weblog entry"         weblogger-send-entry t :active (buffer-modified-p)]
       ["--" nil nil]
-      ["Delete entry"      weblogger-delete-entry t]
+      ["Switch to edit mode"          weblogger-toggle-edit-body t]
       ["--" nil nil]
-      ["Previous entry"    weblogger-prev-entry t]
-      ["Next entry"        weblogger-next-entry t]
+      ["Delete entry"                 weblogger-delete-entry t]
       ["--" nil nil]
-      ["Edit Main Template" weblogger-edit-main-template t]
-      ["Edit Archive Template" weblogger-edit-main-template t]
+      ["Previous entry"               weblogger-prev-entry t]
+      ["Next entry"                   weblogger-next-entry t]
       ["--" nil nil]
-      ["Change Weblog"    weblogger-change-weblog t])))
+      ["Edit Main Template"           weblogger-edit-main-template t]
+      ["Edit Archive Template"        weblogger-edit-main-template t]
+      ["--" nil t]
+      ["Set edit mode"                (lambda () (interactive) (customize-variable 'weblogger-edit-mode)) t]
+      ["Change Weblog"                weblogger-change-weblog t]
+      ["Setup Weblog"                 weblogger-setup-weblog t]))
+  (define-key-after menu-bar-tools-menu [separator-weblogger]
+    '("--") 'simple-calculator)
+  (define-key-after menu-bar-tools-menu [start-weblog]
+    '(menu-item "Start a new Weblog Entry" weblogger-start-entry :enable
+      (or weblogger-config-alist weblogger-server-url))
+      'separator-weblogger)
+  (define-key-after menu-bar-tools-menu [setup-weblog]
+    '(menu-item "Setup your Weblog" weblogger-setup-weblog) 'start-weblog))
 
+(defun weblogger-submit-bug-report ()
+ "Submit a bug report on weblogger."
+ (interactive)
+ (require 'reporter)
+ (let ((xml-rpc-tz-pd-defined-in
+        (if (fboundp 'find-lisp-object-file-name)
+            (find-lisp-object-file-name
+             'timezone-parse-date (symbol-function 'timezone-parse-date))
+          (symbol-file 'timezone-parse-date))))
+   (reporter-submit-bug-report
+    weblogger-maintainer-address
+    (concat "weblogger.el " weblogger-version)
+    (list 'xml-rpc-tz-pd-defined-in
+          'xml-rpc-load-hook
+          'xml-rpc-use-coding-system
+          'xml-rpc-allow-unicode-string
+          'xml-rpc-base64-encode-unicode
+          'xml-rpc-base64-decode-unicode
+          'weblogger-config-alist
+          'weblogger-config-name
+          'weblogger-start-edit-entry-hook
+          'weblogger-edit-entry-hook
+          'weblogger-pre-struct-hook
+          'weblogger-edit-mode
+          'weblogger-edit-mode-toggle-hook
+          'weblogger-weblogger-mode-toggle-hook
+          'weblogger-server-url
+          'weblogger-entry-mode-hook
+          'weblogger-new-entry-hook
+          'weblogger-capabilities))))
+
+;;;###autoload
 (defun weblogger-select-configuration (&optional config)
   "Select a previously saved configuration."
   (interactive)
@@ -429,8 +518,10 @@ haven't set one.  Set to nil for no category.")
     (setq weblogger-server-password (nth 2 conf))
     (setq weblogger-weblog-id       (nth 3 conf))
     (weblogger-determine-capabilities)
-    (weblogger-weblog-alist t)))
+    (weblogger-api-blogger-weblog-alist t)
+    (weblogger-fetch-entries)))
 
+;;;###autoload
 (defun weblogger-setup-weblog ()
   "Create a profile for a weblog."
   (interactive)
@@ -453,7 +544,8 @@ haven't set one.  Set to nil for no category.")
 	  (add-to-list 'weblogger-config-alist
 		       (cons weblogger-config-name
 			     settings)))))
-    (weblogger-save-configuration)))
+    (weblogger-save-configuration)
+    (weblogger-fetch-entries)))
 
 (defun weblogger-save-configuration ()
   "Save the current configuration using the name from CONFIG in
@@ -498,17 +590,14 @@ the filename in weblogger-config-file."
 				 (weblogger-select-texttype))))
     (goto-char point-save)))
 
-(defun weblogger-entry-mode ()
+(define-derived-mode weblogger-entry-mode message-mode "Weblog"
   "Major mode for editing text for Weblogger.  Based on message-mode."
-  (interactive)
-  (message-mode)
-  (message-disassociate-draft)
-  (use-local-map weblogger-entry-mode-map)
-  (setq mode-name "weblogger-entry")
-  (setq major-mode 'weblogger-entry-mode)
+  ;; (interactive)
+  ;; (message-mode)
+  ;; (message-disassociate-draft)
+  ;; (use-local-map weblogger-entry-mode-map)
   (unless weblogger-entry-ring
-    (setq weblogger-entry-ring (make-ring weblogger-max-entries-in-ring)))
-  (run-hooks 'weblogger-entry-mode-hook))
+    (setq weblogger-entry-ring (make-ring weblogger-max-entries-in-ring))))
 
 (defun weblogger-template-mode ()
   "Major mode for editing templates for Weblogger. Based on text-mode."
@@ -518,48 +607,17 @@ the filename in weblogger-config-file."
   (setq mode-name "weblogger-template")
   (setq major-mode 'weblogger-template-mode))
 
-(defun weblogger-edit-template (type)
-  "Edit a Template. TYPE indicates which one."
-  (setq *weblogger-template* (switch-to-buffer "*weblogger-template*"))
-  (weblogger-template-mode)
-  (erase-buffer)
-  (insert (xml-rpc-method-call
-	   weblogger-server-url
-	   'blogger.getTemplate 
-	   weblogger-blogger-app-key
-	   (weblogger-weblog-id)
-	   (weblogger-server-username)
-	   (weblogger-server-password)
-	   type))
-  (set-buffer-modified-p nil)
-  (goto-char (point-min))
-  (setq weblogger-template-type type))
-
-(defun weblogger-save-template ()
-  "Save a Template. TYPE indicates which one."
-  (interactive)
-  (if (buffer-modified-p)
-      (progn (xml-rpc-method-call
-	      weblogger-server-url
-	      'blogger.setTemplate 
-	      weblogger-blogger-app-key
-	      (weblogger-weblog-id)
-	      (weblogger-server-username)
-	      (weblogger-server-password)
-	      (buffer-substring-no-properties (point-min) (point-max))
-	      weblogger-template-type)
-	     (set-buffer-modified-p nil))))
-
 (defun weblogger-edit-main-template ()
   "Edit the main template"
   (interactive)
-  (weblogger-edit-template "main"))
+  (weblogger-api-blogger-edit-template "main"))
 
 (defun weblogger-edit-archive-template ()
   "Edit the template for archive listings"
   (interactive)
-  (weblogger-edit-template "archive"))
+  (weblogger-api-blogger-edit-template "archive"))
 
+;;;###autoload
 (defun weblogger-start-entry (&optional prompt)
   "Start creating a weblog entry in the *weblogger-entry* buffer.
 With a prefix, it will check the available weblogs on the server
@@ -585,7 +643,7 @@ available."
 		      ""))
 	(title    (cdr (assoc "title"       entry))))
 
-    (mapcar 'message-add-header
+    (mapc 'message-add-header
 	    (delq nil
 		  (mapcar
 		   (lambda (bit)
@@ -601,12 +659,12 @@ available."
 				    (url-host (url-generic-parse-url
                                                weblogger-server-url)))))
 		    (list "Date"
-                          (format-time-string "%d %b %Y, %H:%M:%S"
+                          (format-time-string "%d %b %Y %H:%M:%S %z"
                                               (caddr (assoc "dateCreated"
                                                             entry))))
 		    (list "In-Reply-To"
 			  (let ((hold nil))
-			    (mapcar
+			    (mapc
 			     (lambda (p)
 			       (setq hold (concat hold p ", ")))
 			     (cdr (assoc "trackbacks"  entry)))
@@ -616,12 +674,10 @@ available."
 		    (list "X-TextType"
 			  (cdr (assoc "texttype" entry)))
 		    (list "Subject" title)
-		    (list "Keywords"
-                          (let ((cats (cdr (assoc "tags"  entry))))
-                            (when (> (length cats) 0)
-                              (mapconcat
-                               (lambda (p) p)
-                               cats ", "))))
+		    (list "Keywords" (cdr (assoc "tags" entry)))
+                                        ; Note that the blogger API on
+                                        ; blogger.com is depcrated and
+                                        ; broken on this element.
 		    (list "From"
 			  (or (cdr (assoc "authorName"  entry))
 			      weblogger-server-username))
@@ -634,22 +690,18 @@ available."
       (insert mail-header-separator "\n"))))
 
 (defun weblogger-send-entry (&optional arg)
-  "Send but not publish the current entry.  With optional argument, prompts
-for the weblog to use."
+  "Send but not publish the current entry.  With optional
+argument, prompts for the weblog to use."
   (interactive)
   (weblogger-save-entry nil arg)
-;  (bury-buffer)
-)
+  (bury-buffer))
 
 (defun weblogger-publish-entry (&optional arg)
   "Publish the current entry.  With optional argument, prompts
 for the weblog to use."
   (interactive)
   (set-buffer-modified-p t)
-  (weblogger-save-entry t arg)
-;  (bury-buffer)
-)
-
+  (weblogger-save-entry t arg))
 
 (defun weblogger-save-entry (&optional publishp arg)
   "Publish the current entry is publishp is set.  With optional
@@ -692,10 +744,10 @@ it."
           (not (stringp weblogger-server-username)))
       (let ((auth-user
              (when (fboundp 'auth-source-user-or-password)
-               (auth-source-user-or-password "login"
-                                             (url-host (url-generic-parse-url
-                                                        weblogger-server-url))
-                                                       "http")))
+               (auth-source-user-or-password
+                "login" (url-host (url-generic-parse-url
+                                   weblogger-server-url))
+                "http")))
             (config-user (nth 1 (cdr (assoc weblogger-config-name
                                             weblogger-config-alist)))))
         (setq weblogger-server-username
@@ -715,10 +767,10 @@ it"
   (if (or prompt (string= weblogger-server-password ""))
       (let ((auth-pass
              (when (fboundp 'auth-source-user-or-password)
-               (auth-source-user-or-password "password"
-                                             (url-host (url-generic-parse-url
-                                                        weblogger-server-url))
-                                             "http")))
+               (auth-source-user-or-password
+                "password" (url-host (url-generic-parse-url
+                                      weblogger-server-url))
+                "http")))
              (get-pass (nth 2 (cdr (assoc weblogger-config-name
                                           weblogger-config-alist)))))
         (setq weblogger-server-password
@@ -739,99 +791,6 @@ it"
 		       (not weblogger-weblog-id))
 		   (weblogger-select-weblog prompt)
 		 weblogger-weblog-id))))
-
-(defun weblogger-api-blogger-get-content (struct)
-  "Return the content for this post, optionally inserting the
-title in the first row if weblogger-blogger-firstline-title is
-set."
-  (if weblogger-blogger-firstline-title
-      (concat "<title>"
-	      (cdr (assoc "title" struct))
-	      "</title>\n"
-	      (cdr (assoc "content" struct)))
-    (cdr (assoc "content" struct))))
-
-(defun weblogger-api-blogger-send-edits (struct &optional publishp)
-  "Blogger API method to post edits to an entry specified by
-STRUCT.  If PUBLISHP is non-nil, publishes the entry as well."
-  (xml-rpc-method-call
-   weblogger-server-url
-   'blogger.editPost
-   weblogger-blogger-app-key
-   (cdr (assoc "entry-id" struct))
-   (weblogger-server-username)
-   (weblogger-server-password)
-   (weblogger-api-blogger-get-content struct)
-   publishp))
-
-(defun weblogger-api-meta-send-edits (struct &optional publishp)
-  "MetaWeblog API method to post edits to a entry specified by
-STRUCT.  If PUBLISHP is non-nil, publishes the entry as well."
-  (xml-rpc-method-call
-   weblogger-server-url
-   'metaWeblog.editPost
-   (cdr (assoc "entry-id" struct))
-   (weblogger-server-username)
-   (weblogger-server-password)
-   (weblogger-struct-to-request struct)
-   publishp))
-
-(defun weblogger-api-new-entry (struct publishp)
-  "Publish a new entry (STRUCT) using the best method available."
-  (run-hooks 'weblogger-new-entry-hook)
-  (unless weblogger-api-new-entry
-    (weblogger-determine-capabilities))
-  (ring-insert
-   weblogger-entry-ring
-   (add-to-list
-    'struct 
-    (cons "entry-id" (funcall weblogger-api-new-entry struct publishp))))
-  (setq weblogger-ring-index 0)
-  (ring-ref weblogger-entry-ring weblogger-ring-index))
-
-(defun weblogger-api-send-edits (struct publishp)
-  "Update an entry (in STRUCT) using the best method available."
-  (run-hooks 'weblogger-edit-entry-hook)
-  (unless weblogger-api-send-edits
-    (weblogger-determine-capabilities))
-  (funcall weblogger-api-send-edits struct publishp))
-
-(defun weblogger-api-list-entries (&optional count)
-  "Get a list of entries."
-  (unless weblogger-api-list-entries
-    (weblogger-determine-capabilities))
-  (funcall weblogger-api-list-entries count))
-
-(defun weblogger-api-list-categories ()
-  "Get a list of categories."
-  (unless weblogger-api-list-categories
-    (weblogger-determine-capabilities))
-  (funcall weblogger-api-list-categories))
-
-(defun weblogger-api-blogger-new-entry (struct publishp)
-  "Post a new entry from STRUCT.  If PUBLISHP is non-nil, publishes the
-entry as well."
-  (xml-rpc-method-call
-   weblogger-server-url
-   'blogger.newPost
-   weblogger-blogger-app-key
-   (weblogger-weblog-id)
-   (weblogger-server-username)
-   (weblogger-server-password)
-   (weblogger-api-blogger-get-content struct)
-   publishp))
-
-(defun weblogger-api-meta-new-entry (struct publishp)
-  "Post a new entry (STRUCT).  If PUBLISHP is non-nil, publishes
-the entry as well."
-  (xml-rpc-method-call
-   weblogger-server-url
-   'metaWeblog.newPost
-   (weblogger-weblog-id)
-   (weblogger-server-username)
-   (weblogger-server-password)
-   (weblogger-struct-to-request struct)
-   publishp))
 
 (defun weblogger-select-weblog (&optional fetch)
   "Allows the user to select a weblog and returns the weblog ID.
@@ -857,7 +816,7 @@ re-queried for a list of weblogs the user owns"
                (lambda (weblog)
                  (cons (cdr (assoc "blogName" weblog))
                        (cdr (assoc "blogid" weblog))))
-               (weblogger-weblog-alist)))))
+               (weblogger-api-blogger-weblog-alist)))))
 
 (defun weblogger-weblog-name-from-id (id)
   "Returns the weblog name given the id."
@@ -866,7 +825,7 @@ re-queried for a list of weblogs the user owns"
                (lambda (weblog)
                  (cons (cdr (assoc "blogid" weblog))
                        (cdr (assoc "blogName" weblog))))
-               (weblogger-weblog-alist)))))
+               (weblogger-api-blogger-weblog-alist)))))
 
 (defun weblogger-texttype-name-from-id (id)
   "Returns the texttype name given the id."
@@ -924,26 +883,14 @@ re-queried for a list of weblogs the user owns"
 	       (lambda (weblog)
 		 (cons (cdr (assoc "blogid" weblog))
 		       (cdr (assoc "url" weblog))))
-	       (weblogger-weblog-alist)))))
+	       (weblogger-api-blogger-weblog-alist)))))
 
 (defun weblogger-list-weblog-names (&optional fetch)
   "Returns a list of weblog names."
   (mapcar 
    (lambda (blog)
      (cdr (assoc "blogName" blog)))
-   (weblogger-weblog-alist fetch)))
-
-(defun weblogger-weblog-alist (&optional fetch)
-  "Returns the alist of weblogs owned by a user on the server."
-  (setq weblogger-weblog-alist
-	(if (or fetch (not weblogger-weblog-alist))
-	    (xml-rpc-method-call 
-	     weblogger-server-url
-	     'blogger.getUsersBlogs
-	     weblogger-blogger-app-key
-	     (weblogger-server-username)
-	     (weblogger-server-password))
-	  weblogger-weblog-alist)))
+   (weblogger-api-blogger-weblog-alist fetch)))
 
 (defun weblogger-ping-weblogs (&optional id)
   "Ping the weblog aggregators listed in weblogger-ping-urls."
@@ -966,11 +913,12 @@ For old w3.el, resp is expected.  Otherwise current-buffer is expected to
 contain the http result."
   (if resp
       (message (cdr (assoc "message" (cdr resp))))
-    (message (cdr 
-	      (assoc "message" 
-		     (cdr 
-		      (xml-rpc-xml-to-response
-		       (xml-rpc-request-process-buffer (current-buffer)))))))))
+    (message
+     (cdr 
+      (assoc "message" 
+             (cdr 
+              (xml-rpc-xml-to-response
+               (xml-rpc-request-process-buffer (current-buffer)))))))))
 
 (defun weblogger-goto-entry (num &optional relativep)
   "Move to the entry identified by NUM in the ring.  If RELATIVE
@@ -1005,44 +953,47 @@ is set, then add it to the current index and go to that entry."
   (interactive)
   (unless weblogger-ring-index
     (message "You must have an entry loaded first."))
-  (if (y-or-n-p "Do you really want to delete this entry? ")
-      (let* ((msgid (cdr 
-		     (assoc "entry-id" 
+  (when (y-or-n-p "Do you really want to delete this entry? ")
+    (let* ((msgid (cdr 
+                   (assoc "entry-id" 
 			    (ring-ref weblogger-entry-ring 
 				      weblogger-ring-index)))))
-	(xml-rpc-method-call
-	 weblogger-server-url
-	 'blogger.deletePost
-	 weblogger-blogger-app-key
-	 msgid
-	 (weblogger-server-username)
-	 (weblogger-server-password)
-	 t))
-    (ring-remove weblogger-entry-ring weblogger-ring-index)
-    (weblogger-edit-entry
-     (ring-ref weblogger-entry-ring weblogger-ring-index))))
+      (funcall weblogger-api-delete-entry msgid)
+      (ring-remove weblogger-entry-ring weblogger-ring-index)
+      (weblogger-edit-entry
+       (ring-ref weblogger-entry-ring weblogger-ring-index)))))
 
-(defun weblogger-api-blogger-list-categories ()
-  "Return a list of categories that the weblog server has. (Not supported yet)"
-  (setq weblogger-category-list nil))
+(defun weblogger-api-new-entry (struct publishp)
+  "Publish a new entry (STRUCT) using the best method available."
+  (run-hooks 'weblogger-new-entry-hook)
+  (unless weblogger-api-new-entry
+    (weblogger-determine-capabilities))
+  (ring-insert
+   weblogger-entry-ring
+   (add-to-list
+    'struct 
+    (cons "entry-id" (funcall weblogger-api-new-entry struct publishp))))
+  (setq weblogger-ring-index 0)
+  (ring-ref weblogger-entry-ring weblogger-ring-index))
 
-(defun weblogger-api-blogger-list-entries (&optional count)
-  "Return a list of entries that the weblog server has.  COUNT specifies
-how many of the most recent entries to get.  If COUNT is not
-specified, then the default is weblogger-max-entries-in-ring."
-  (setq weblogger-entry-list 
-	(mapcar 
-	 (lambda (entry)
-	   (ring-insert-at-beginning weblogger-entry-ring
-				     (weblogger-response-to-struct entry)))
-	 (xml-rpc-method-call
-	  weblogger-server-url
-	  'blogger.getRecentPosts
-	  weblogger-blogger-app-key
-	  (weblogger-weblog-id)
-	  (weblogger-server-username)
-	  (weblogger-server-password)
-	  (or count weblogger-max-entries-in-ring)))))
+(defun weblogger-api-send-edits (struct publishp)
+  "Update an entry (in STRUCT) using the best method available."
+  (run-hooks 'weblogger-edit-entry-hook)
+  (unless weblogger-api-send-edits
+    (weblogger-determine-capabilities))
+  (funcall weblogger-api-send-edits struct publishp))
+
+(defun weblogger-api-list-entries (&optional count)
+  "Get a list of entries."
+  (unless weblogger-api-list-entries
+    (weblogger-determine-capabilities))
+  (funcall weblogger-api-list-entries count))
+
+(defun weblogger-api-list-categories ()
+  "Get a list of categories."
+  (unless weblogger-api-list-categories
+    (weblogger-determine-capabilities))
+  (funcall weblogger-api-list-categories))
 
 (defun weblogger-api-meta-list-categories ()
   "Return a list of entries that the weblog server has."
@@ -1068,8 +1019,9 @@ specified, then the default is weblogger-max-entries-in-ring."
   (setq weblogger-entry-list 
 	(mapcar 
 	 (lambda (entry)
-	   (ring-insert-at-beginning  weblogger-entry-ring
-				      (weblogger-response-to-struct entry)))
+	   (ring-insert-at-beginning
+            weblogger-entry-ring
+            (weblogger-response-to-struct entry)))
 	 (xml-rpc-method-call
 	  weblogger-server-url
 	  'metaWeblog.getRecentPosts
@@ -1077,6 +1029,144 @@ specified, then the default is weblogger-max-entries-in-ring."
 	  (weblogger-server-username)
 	  (weblogger-server-password)
 	  (or count weblogger-max-entries-in-ring)))))
+
+(defun weblogger-api-meta-send-edits (struct &optional publishp)
+  "MetaWeblog API method to post edits to a entry specified by
+STRUCT.  If PUBLISHP is non-nil, publishes the entry as well."
+  (xml-rpc-method-call
+   weblogger-server-url
+   'metaWeblog.editPost
+   (cdr (assoc "entry-id" struct))
+   (weblogger-server-username)
+   (weblogger-server-password)
+   (weblogger-struct-to-request struct)
+   publishp))
+
+(defun weblogger-api-meta-new-entry (struct publishp)
+  "Post a new entry (STRUCT).  If PUBLISHP is non-nil, publishes
+the entry as well."
+  (xml-rpc-method-call
+   weblogger-server-url
+   'metaWeblog.newPost
+   (weblogger-weblog-id)
+   (weblogger-server-username)
+   (weblogger-server-password)
+   (weblogger-struct-to-request struct)
+   publishp))
+
+(defun weblogger-api-blogger-edit-template (type)
+  "Edit a Template. TYPE indicates which one."
+  (switch-to-buffer "*weblogger-template*")
+  (weblogger-template-mode)
+  (erase-buffer)
+  (insert (xml-rpc-method-call
+	   weblogger-server-url
+	   'blogger.getTemplate 
+	   weblogger-blogger-app-key
+	   (weblogger-weblog-id)
+	   (weblogger-server-username)
+	   (weblogger-server-password)
+	   type))
+  (set-buffer-modified-p nil)
+  (goto-char (point-min))
+  (setq weblogger-template-type type))
+
+(defun weblogger-api-blogger-save-template ()
+  "Save a Template. TYPE indicates which one."
+  (interactive)
+  (if (buffer-modified-p)
+      (progn (xml-rpc-method-call
+	      weblogger-server-url
+	      'blogger.setTemplate 
+	      weblogger-blogger-app-key
+	      (weblogger-weblog-id)
+	      (weblogger-server-username)
+	      (weblogger-server-password)
+	      (buffer-substring-no-properties (point-min) (point-max))
+	      weblogger-template-type)
+	     (set-buffer-modified-p nil))))
+
+(defun weblogger-api-blogger-weblog-alist (&optional fetch)
+  "Returns the alist of weblogs owned by a user on the server."
+  (setq weblogger-weblog-alist
+	(if (or fetch (not weblogger-weblog-alist))
+	    (xml-rpc-method-call 
+	     weblogger-server-url
+	     'blogger.getUsersBlogs
+	     weblogger-blogger-app-key
+	     (weblogger-server-username)
+	     (weblogger-server-password))
+	  weblogger-weblog-alist)))
+
+(defun weblogger-api-blogger-new-entry (struct publishp)
+  "Post a new entry from STRUCT.  If PUBLISHP is non-nil, publishes the
+entry as well."
+  (xml-rpc-method-call
+   weblogger-server-url
+   'blogger.newPost
+   weblogger-blogger-app-key
+   (weblogger-weblog-id)
+   (weblogger-server-username)
+   (weblogger-server-password)
+   (weblogger-api-blogger-get-content struct)
+   publishp))
+
+(defun weblogger-api-blogger-get-content (struct)
+  "Return the content for this post, optionally inserting the
+title in the first row if weblogger-blogger-firstline-title is
+set."
+  (if weblogger-blogger-firstline-title
+      (concat "<title>"
+	      (cdr (assoc "title" struct))
+	      "</title>\n"
+	      (cdr (assoc "content" struct)))
+    (cdr (assoc "content" struct))))
+
+(defun weblogger-api-blogger-send-edits (struct &optional publishp)
+  "Blogger API method to post edits to an entry specified by
+STRUCT.  If PUBLISHP is non-nil, publishes the entry as well."
+  (xml-rpc-method-call
+   weblogger-server-url
+   'blogger.editPost
+   weblogger-blogger-app-key
+   (cdr (assoc "entry-id" struct))
+   (weblogger-server-username)
+   (weblogger-server-password)
+   (weblogger-api-blogger-get-content struct)
+   publishp))
+
+(defun weblogger-api-blogger-list-categories ()
+  "Return a list of categories that the weblog server has. (Not
+supported yet)"
+  (setq weblogger-category-list nil))
+
+(defun weblogger-api-blogger-list-entries (&optional count)
+  "Return a list of entries that the weblog server has.  COUNT specifies
+how many of the most recent entries to get.  If COUNT is not
+specified, then the default is weblogger-max-entries-in-ring."
+  (setq weblogger-entry-list 
+	(mapcar 
+	 (lambda (entry)
+	   (ring-insert-at-beginning weblogger-entry-ring
+				     (weblogger-response-to-struct entry)))
+	 (xml-rpc-method-call
+	  weblogger-server-url
+	  'blogger.getRecentPosts
+	  weblogger-blogger-app-key
+	  (weblogger-weblog-id)
+	  (weblogger-server-username)
+	  (weblogger-server-password)
+	  (or count weblogger-max-entries-in-ring)))))
+
+(defun weblogger-api-blogger-delete-entry (msgid)
+  (xml-rpc-method-call
+   weblogger-server-url
+   'blogger.deletePost
+   weblogger-blogger-app-key
+   msgid
+   (weblogger-server-username)
+   (weblogger-server-password)
+   t))
 
 (defun weblogger-edit-entry (&optional entry)
   "Edit a entry.  If ENTRY is specified, then use that entry.
@@ -1091,29 +1181,34 @@ Otherwise, open a new entry."
   (message-fetch-field "Keywords")
   (message-goto-keywords) ;; Create Keywords field in new entries
   (set-buffer-modified-p nil)
-  (run-hooks 'weblogger-start-edit-entry-hook) ; Force hooks to clear the modified flag themselves if they want to.
+  (run-hooks 'weblogger-start-edit-entry-hook) ; Force hooks to clear
+                                               ; the modified flag
+                                               ; themselves if they
+                                               ; want to.
   (if (message-fetch-field "Subject")
-      (message-goto-body) ;; If Subject exists, move cursor to message body
+      (message-goto-body) ;; If Subject exists, move cursor to message
+                          ;; body
     (message-goto-subject)) ;; Else, drop cursor on Subject header
   (pop-to-buffer *weblogger-entry*))
 
 (defun weblogger-response-to-struct (response)
   "Convert the result of the xml-rpc call to a structure we
 like."
-  (let ((postid      (cdr (assoc-ignore-case "postid" response)))
-	(authorName  (cdr (assoc-ignore-case "authorname" response)))
-	(authorID    (cdr (assoc-ignore-case "authorid" response)))
-	(userid      (cdr (assoc-ignore-case "userid" response)))
-	(title       (cdr (assoc-ignore-case "title" response)))
-	(dateCreated (cdr (assoc-ignore-case "datecreated" response)))
-	(content          (assoc-ignore-case "content" response))
-	(trackbacks  (cdr (assoc-ignore-case "mt_tb_ping_urls" response)))
-	(textType    (cdr (assoc-ignore-case "mt_convert_breaks" response)))
-	(url         (cdr (assoc-ignore-case "link" response)))
-	(description      (assoc-ignore-case "description" response))
-	(extended         (assoc-ignore-case "mt_text_more" response))
-	(tags        (cdr (assoc-ignore-case "mt_keywords" response)))
-        (categories  (cdr (assoc-ignore-case "categories" response))))
+  (let ((postid      (cdr (assoc-string "postid" response t)))
+	(authorName  (cdr (assoc-string "authorname" response t)))
+	(authorID    (cdr (assoc-string "authorid" response t)))
+	(userid      (cdr (assoc-string "userid" response t)))
+	(title       (cdr (assoc-string "title" response t)))
+	(dateCreated (cdr (assoc-string "datecreated" response t)))
+	(content          (assoc-string "content" response))
+	(trackbacks  (cdr (assoc-string "mt_tb_ping_urls" response t)))
+	(textType
+         (cdr (assoc-string "mt_convert_breaks" response t)))
+	(url         (cdr (assoc-string "link" response t)))
+	(description      (assoc-string "description" response))
+	(extended         (assoc-string "mt_text_more" response))
+	(tags        (cdr (assoc-string "mt_tags" response t)))
+        (categories  (cdr (assoc-string "categories" response t))))
     
     (cond (content
 	   (delq nil (list
@@ -1121,16 +1216,21 @@ like."
 			(cons "entry-id"     postid))
 		      (if title
 			  (cons "title"        title)
-			;; See if we can extract the title from the first line of the
-			;; message body if it wasn't in a header.
-			(when (and weblogger-blogger-firstline-title
-				   (string-match "^<title>\\(.*\\)</title>.*\n" (cdr content)))
+			;; See if we can extract the title from the
+			;; first line of the message body if it wasn't
+			;; in a header.
+			(when (and
+                               weblogger-blogger-firstline-title
+                               (string-match "^<title>\\(.*\\)</title>.*\n"
+                                             (cdr content)))
 			  (setq title (match-string 1 (cdr content)))
 			  (setcdr content
 				  (with-temp-buffer
 				    (insert (cdr content))
 				    (goto-char (point-min))
-				    (replace-string (match-string 0 (cdr content)) "")
+                                    (while (and (not (string= "" (match-string 0 (cdr content))))
+                                                (search-forward (match-string 0 (cdr content)) nil t))
+                                      (replace-match "" nil t))
 				    (buffer-string)))
 			  (cons "title" title)))
 		      (when authorName
@@ -1163,7 +1263,7 @@ like."
 		      (when dateCreated
 			(cons "dateCreated"  dateCreated))
 		      (when tags
-			(cons "tags"   categories))
+			(cons "tags"   tags))
 		      (when categories
 			(cons "categories"   categories))
 		      (when textType
@@ -1172,13 +1272,14 @@ like."
 	   (error "bogosity!")))))
 
 (defun weblogger-struct-to-request (entry)
-  "Convert the struct to something that can be used in an xml-rpc request."
+  "Convert the struct to something that can be used in an xml-rpc
+request."
   (delq nil
 	(list
 	 (assoc "title"        entry)
 	 (assoc "authorName"   entry)
 	 (assoc "userid"       entry)
-	 (assoc "dateCreated"  entry)
+         (assoc "dateCreated" entry)
          (when (cdr (assoc "trackbacks"  entry))
            (cons "mt_tb_ping_urls" (cdr (assoc "trackbacks"  entry))))
          (when (cdr (assoc "texttype" entry))
@@ -1189,7 +1290,7 @@ like."
          (when (cdr (assoc "content" entry))
            (cons "description" (cdr (assoc "content" entry))))
          (when (cdr (assoc "tags" entry))
-           (cons "mt_keywords" (cdr (assoc "tags" entry))))
+           (cons "mt_tags" (cdr (assoc "tags" entry))))
          (when (cdr (assoc "categories" entry))
            (cons "categories" (cdr (assoc "categories" entry)))))))
 
@@ -1224,7 +1325,7 @@ like."
 	(has-mt-api t)
 	(has-blogger-api t))
     (condition-case nil
-	(progn (mapcar
+	(progn (mapc
 		(lambda (method)
 		  (and (assoc method weblogger-capabilities) 
 		       (setcdr (assoc method weblogger-capabilities) t)))
@@ -1235,7 +1336,8 @@ like."
   (cond ((cdr (assoc "metaWeblog.editPost" weblogger-capabilities))
 	 (setq weblogger-api-send-edits 'weblogger-api-meta-send-edits))
 	(t
-	 (setq weblogger-api-send-edits 'weblogger-api-blogger-send-edits)))
+	 (setq weblogger-api-send-edits
+               'weblogger-api-blogger-send-edits)))
   (cond ((cdr (assoc "metaWeblog.newPost" weblogger-capabilities))
 	 (setq weblogger-api-new-entry 'weblogger-api-meta-new-entry))
 	(t
@@ -1246,8 +1348,10 @@ like."
 	(t
 	 (setq weblogger-api-list-categories
                'weblogger-api-blogger-list-categories)))
-  (cond ((cdr (assoc "metaWeblog.getRecentPosts" weblogger-capabilities))
-	 (setq weblogger-api-list-entries 'weblogger-api-meta-list-entries))
+  (cond ((cdr (assoc "metaWeblog.getRecentPosts"
+                     weblogger-capabilities))
+	 (setq weblogger-api-list-entries
+               'weblogger-api-meta-list-entries))
 	(t
 	 (setq weblogger-api-list-entries
                'weblogger-api-blogger-list-entries))))
@@ -1260,23 +1364,22 @@ internally).  If BUFFER is not given, use the current buffer."
   (save-excursion
     (run-hooks weblogger-pre-struct-hook)
     (set-buffer buffer)
-    (delq nil 
+    (delq nil
 	  (list
 	   (cons "authorName"   (message-fetch-field "From"))
-	   (cons "dateCreated"  (list :datetime (date-to-time
-                                                 (message-fetch-field "Date"))))
+	   (cons "dateCreated"
+                 (list :datetime (date-to-time
+                                  (message-fetch-field "Date"))))
 	   (cons "texttype"      (message-fetch-field "X-TextType"))
 	   (cons "url"           (message-fetch-field "X-Url"))
 	   (cons "title"     (or (message-fetch-field "Subject") 
 				 weblogger-default-title))
-	   (cons "tags"  (or 
-                          (message-tokenize-header 
-                           (message-fetch-field "Keywords") ", ")
-                          weblogger-default-categories))
+	   (cons "tags" (message-fetch-field "Keywords"))
 	   (when (message-fetch-field "In-Reply-To")
-             (cons "trackbacks" (or (message-tokenize-header 
-                                     (message-fetch-field "In-Reply-To") ", ")
-                                    weblogger-default-categories)))
+             (cons "trackbacks"
+                   (or (message-tokenize-header 
+                        (message-fetch-field "In-Reply-To") ", ")
+                       weblogger-default-categories)))
 	   (when (and weblogger-ring-index
                       (> (ring-length weblogger-entry-ring) 0))
              (cons "entry-id"
@@ -1292,8 +1395,29 @@ internally).  If BUFFER is not given, use the current buffer."
 		   (message-goto-body)
 		   (if encode
 		       (url-insert-entities-in-string
-			(buffer-substring-no-properties (point) (point-max)))
-                     (buffer-substring-no-properties (point) (point-max)))))))))
+			(buffer-substring-no-properties
+                         (point) (point-max)))
+                     (buffer-substring-no-properties
+                      (point) (point-max)))))))))
+
+(defun weblogger-toggle-edit-body ()
+  "Toggle between editing the body and editing the headers"
+  (interactive)
+  (if (string= mode-name "Weblog")
+      (progn
+        (message-goto-body)
+        (setq weblogger-header (buffer-substring (point-min) (point)))
+        (delete-region (point-min) (point))
+        (run-hooks 'weblogger-edit-mode-toggle-hook)
+        (funcall weblogger-edit-mode)
+        (make-local-variable 'weblogger-header))
+    (if (not (assoc 'weblogger-header (buffer-local-variables)))
+        (error "You didn't come here from a weblogger buffer, so we can switch back")
+      (goto-char (point-min))
+      (run-hooks 'weblogger-weblogger-mode-toggle-hook)
+      (goto-char (point-min))
+      (insert weblogger-header)
+      (weblogger-entry-mode))))
 
 ;; TODO -- Support for toolbar
 ;; (eval-when-compile (defvar tool-bar-map))
