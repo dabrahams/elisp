@@ -1,4 +1,5 @@
 (require 'cl)
+(require 'nnmairix)
 
 ;;
 ;; Support proportional fonts in the summary and group buffers by inserting a forced alignment
