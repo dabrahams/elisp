@@ -74,6 +74,18 @@ Show diffs side-by-side")
  '(ediff-window-setup-function (quote ediff-setup-windows-plain) nil nil "
 Run Ediff all in one frame.  The default when there's a window manager is for
 emacs to pop up a separate frame for the `*Ediff Control Panel*' buffer")
+ '(elmo-imap4-default-authenticate-type (quote clear))
+ '(elmo-imap4-default-port 993)
+ '(elmo-imap4-default-server "www.boostpro.com")
+ '(elmo-imap4-default-stream-type (quote ssl))
+ '(elmo-imap4-default-user "dave")
+ '(elmo-lang "en")
+ '(elmo-localdir-folder-path "~/Maildir")
+ '(elmo-message-fetch-confirm nil)
+ '(elmo-message-fetch-threshold 250000 nil nil "
+The default limit is so low that it always asks about messages that would fetch quickly.")
+ '(elmo-nntp-default-server "news.gmane.org")
+ '(elmo-search-namazu-default-index-path "~/Maildir")
  '(epg-gpg-program "gpg2")
  '(erc-default-sound "~/erc.wav")
  '(erc-modules (quote (autoaway autojoin button completion fill irccontrols list log match menu move-to-prompt netsplit networks noncommands readonly ring smiley sound stamp track)))
@@ -115,11 +127,20 @@ Some people don't embed linebreaks in their paragraphs; this will force-add them
 Requires wget, which isn't on the Mac by default.  Someday should
 figure out how to use curl instead, but for now I just installed wget
 from macports.")
+ '(ido-use-filename-at-point (quote guess))
+ '(ido-use-url-at-point t)
  '(imap-shell-program (quote ("dovecot --exec-mail imap")))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(ispell-program-name "aspell")
+ '(mail-signature t)
  '(mail-user-agent (quote gnus-user-agent) nil nil "
 Gnus Message with full Gnus features")
+ '(mairix-command "ssh boostpro.com mairix")
+ '(mairix-file-path "/home/dave/Maildir/")
+ '(mairix-mail-program (quote wl))
+ '(mairix-search-file ".zz_mairix-results")
+ '(markdown-command "markdown-extra")
  '(message-citation-line-function (quote my-message-insert-citation-line) nil nil "
 Make sure peoples' email addresses are (trivially) obscured")
  '(message-cite-prefix-regexp "\\([ 	]*[_.[:word:]]+>+\\|[ 	]*[]>|]\\)+" nil nil "
@@ -137,6 +158,10 @@ Handle Germans' Aw: version of Re:")
 always strip the trailing old subject in (was: ...) subjects")
  '(message-syntax-checks (quote ((sender . disabled) (long-lines . disabled))) nil nil "
 Don't complain about long lines, please")
+ '(mime-edit-split-message nil nil nil "
+This should really be the default.  Most MUAs can't decode the split messages!")
+ '(mime-play-delete-file-immediately nil)
+ '(mime-save-directory "/tmp")
  '(mm-attachment-override-types (quote ("text/x-vcard" "application/pkcs7-mime" "application/x-pkcs7-mime" "application/pkcs7-signature" "application/x-pkcs7-signature" "image/*")) nil nil "
 Added image/* to display attached images inline")
  '(mm-discouraged-alternatives (quote ("text/html" "text/richtext" "image/.*")) nil nil "
@@ -233,6 +258,44 @@ where I don't expect it to be keeping undo history anyway")
  '(weblogger-server-url "http://cpp-next.com/xmlrpc.php")
  '(weblogger-server-username "dave")
  '(weblogger-start-edit-entry-hook (quote ((lambda nil (message-goto-body) (while (search-forward "" nil t) (replace-match "" nil t))))))
+ '(wl-ask-range nil nil nil "
+The range thing slows me down.  However, I'd still like to know how to force the question.")
+ '(wl-auto-check-folder-list (quote ("Inbox")))
+ '(wl-auto-check-folder-name "Inbox")
+ '(wl-auto-select-next (quote skip-no-unread))
+ '(wl-auto-uncheck-folder-list (quote ("\\$.*" "%zz_mairix.*" "%zz_archive.*" "%.*")))
+ '(wl-draft-config-alist (quote (("" ("Bcc" . "Dave Abrahams <dave@boostpro.com>") (signature . "~/.signature")))))
+ '(wl-draft-reply-buffer-style (quote keep))
+ '(wl-fldmgr-add-complete-with-current-folder-list t)
+ '(wl-folder-desktop-name #("Messages" 0 8 (wl-folder-entity-id 0 wl-folder-is-group is-group)))
+ '(wl-folder-notify-deleted t)
+ '(wl-folder-petname-alist (quote (("%INBOX" . "Inbox") ("+drafts" . "Drafts") (#("%INBOX" 0 6 (wl-folder-entity-id 2 wl-folder-is-group nil)) . "Inbox") (#("+draft" 0 6 (wl-folder-entity-id 58 wl-folder-is-group nil)) . "Drafts") ("%Trash" . "Trash"))))
+ '(wl-folder-process-duplicates-alist (quote (("^.*" . hide))) nil nil "
+Don't show me any duplicate messages")
+ '(wl-folder-window-width 60)
+ '(wl-highlight-folder-by-numbers 1)
+ '(wl-icon-directory "~/.emacs.d/3rd-party/package.d/wanderlust/icons/")
+ '(wl-interactive-exit nil)
+ '(wl-interactive-save-folders nil)
+ '(wl-interactive-send nil)
+ '(wl-message-ignored-field-list (quote ("^.*:")))
+ '(wl-message-sort-field-list (quote ("^From" "^Organization:" "^X-Attribution:" "^Subject" "^Date" "^To" "^Cc")))
+ '(wl-message-visible-field-list (quote ("^\\(To\\|Cc\\):" "^Subject:" "^\\(From\\|Reply-To\\):" "^Organization:" "^Message-Id:" "^\\(Posted\\|Date\\):" "^\\(Mailer\\|User-Agent\\):" "^\\(List-Post\\):" "^\\(Xref\\):")))
+ '(wl-organization "BoostPro Computing")
+ '(wl-smtp-authenticate-type nil)
+ '(wl-smtp-connection-type nil)
+ '(wl-smtp-posting-port nil)
+ '(wl-smtp-posting-server "localhost")
+ '(wl-smtp-posting-user nil)
+ '(wl-summary-auto-sync-marks nil nil nil "
+Trying this setting to see if it improves usability vastly and if I
+can tolerate being out-of-sync occasionally.")
+ '(wl-summary-line-format "%T%P%M/%D(%W)%h:%m %[ %17f %]%[%1@%] %t%C%s")
+ '(wl-summary-showto-folder-regexp "^%" nil nil "Show recipient in place of sender in IMAP folders when I'm the sender")
+ '(wl-summary-width nil)
+ '(wl-thread-insert-opened t)
+ '(wl-trash-folder "%Trash")
+ '(wl-user-mail-address-list (quote ("dave@boostpro.com" "dave.abrahams@gmail.com" "daveabrahams@gmail.com" "boost.consulting@gmail.com" "david.abrahams@rcn.com" "dave@luannocracy.com")))
  '(x-select-enable-clipboard t))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
