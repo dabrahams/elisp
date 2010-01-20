@@ -48,6 +48,7 @@
 (require 'elmo-net)
 (require 'utf7)
 (require 'elmo-mime)
+(require 'time-stamp)
 
 (eval-when-compile (require 'cl))
 
@@ -273,13 +274,13 @@ Debug information is inserted in the buffer \"*IMAP4 DEBUG*\"")
 
 ;;; Session commands.
 
-; (defun elmo-imap4-send-command-wait (session command)
-;   "Send COMMAND to the SESSION and wait for response.
-; Returns RESPONSE (parsed lisp object) of IMAP session."
-;   (elmo-imap4-read-response session
-;			    (elmo-imap4-send-command
-;			     session
-;			     command)))
+;;;(defun elmo-imap4-send-command-wait (session command)
+;;;  "Send COMMAND to the SESSION and wait for response.
+;;;Returns RESPONSE (parsed lisp object) of IMAP session."
+;;;  (elmo-imap4-read-response session
+;;;			    (elmo-imap4-send-command
+;;;			     session
+;;;			     command)))
 
 (defun elmo-imap4-send-command-wait (session command)
   "Send COMMAND to the SESSION.
@@ -303,7 +304,8 @@ Returns a TAG string which is assigned to the COMMAND."
 			(number-to-string
 			 (setq elmo-imap4-seqno (+ 1 elmo-imap4-seqno)))))
       (setq cmdstr (concat tag " "))
-      ;; (erase-buffer) No need.
+;;; No need.
+;;;      (erase-buffer)
       (goto-char (point-min))
       (when (elmo-imap4-response-bye-p elmo-imap4-current-response)
 	(elmo-imap4-process-bye session))
@@ -314,7 +316,6 @@ Returns a TAG string which is assigned to the COMMAND."
 				session))
 	(message "Waiting for IMAP response...done"))
       (setq elmo-imap4-parsing t)
-      (elmo-imap4-debug "<-(%s)- %s" tag command)
       (while (setq token (car command-args))
 	(cond ((stringp token)   ; formatted
 	       (setq cmdstr (concat cmdstr token)))
@@ -356,6 +357,7 @@ Returns a TAG string which is assigned to the COMMAND."
 	      (t
 	       (error "Invalid argument")))
 	(setq command-args (cdr command-args)))
+      (elmo-imap4-debug "[%s] <- %s" (time-stamp-hh:mm:ss) cmdstr)
       (process-send-string process (concat cmdstr "\r\n"))
       tag)))
 
@@ -365,7 +367,7 @@ Returns a TAG string which is assigned to the COMMAND."
 			(elmo-network-session-process-internal session))
     (setq elmo-imap4-current-response nil)
     (goto-char (point-min))
-    (elmo-imap4-debug "<-- %s" string)
+    (elmo-imap4-debug "[%s] <-- %s" (time-stamp-hh:mm:ss) string)
     (process-send-string (elmo-network-session-process-internal session)
 			 string)
     (process-send-string (elmo-network-session-process-internal session)
@@ -390,7 +392,7 @@ TAG is the tag of the command"
 		  '(open run))
 	(accept-process-output (elmo-network-session-process-internal session)
 			       1)))
-    (elmo-imap4-debug "=>%s" (prin1-to-string elmo-imap4-current-response))
+    (elmo-imap4-debug "[%s] =>%s" (time-stamp-hh:mm:ss) (prin1-to-string elmo-imap4-current-response))
     (setq elmo-imap4-parsing nil)
     elmo-imap4-current-response))
 
@@ -398,7 +400,7 @@ TAG is the tag of the command"
   (with-current-buffer (process-buffer process)
     (while (not elmo-imap4-current-response)
       (accept-process-output process 1))
-    (elmo-imap4-debug "=>%s" (prin1-to-string elmo-imap4-current-response))
+    (elmo-imap4-debug "[%s] =>%s" (time-stamp-hh:mm:ss) (prin1-to-string elmo-imap4-current-response))
     elmo-imap4-current-response))
 
 (defun elmo-imap4-read-continue-req (session)
@@ -736,26 +738,61 @@ Returns response value if selecting folder succeed. "
 ;;;(elmo-imap4-send-command-wait
 ;;;(elmo-imap4-get-session spec)
 ;;;(list "status "
-;;;	 (elmo-imap4-mailbox
-;;;	  (elmo-imap4-spec-mailbox spec))
-;;;	 " (uidvalidity)")))
+;;;      (elmo-imap4-mailbox
+;;;       (elmo-imap4-spec-mailbox spec))
+;;;      " (uidvalidity)")))
   )
 
 (defun elmo-imap4-sync-validity  (spec validity-file)
   ;; Not used.
   )
 
+(defun elmo-imap4-elist (folder query tags)
+  (let ((session (elmo-imap4-get-session folder)))
+    (elmo-imap4-session-select-mailbox
+     session
+     (elmo-imap4-folder-mailbox-internal folder))
+    (let ((answer (elmo-imap4-response-value
+		   (elmo-imap4-send-command-wait
+		    session query) 'esearch))
+	  tag result)
+      (while answer
+	(setq tag (intern (downcase (car answer))))
+	(cond ((eq tag 'uid)
+	       nil)
+	      ((memq tag tags)
+	       (setq result
+		     (append result
+			     (if (eq tag 'all)
+				 (sort
+				  (elmo-number-set-to-number-list
+				   (mapcar #'(lambda (x)
+					       (let ((y (split-string x ":")))
+						 (if (null (cdr y))
+						     (string-to-number (car y))
+						   (cons (string-to-number (car y))
+							 (string-to-number (cadr y))))))
+					   (split-string (cadr answer) "\,"))) '<)
+			       (string-to-number (cadr answer))))))
+	      (t nil))
+	(setq answer (cdr answer)))
+      result)))
+
 (defun elmo-imap4-list (folder flag)
   (let ((session (elmo-imap4-get-session folder)))
     (elmo-imap4-session-select-mailbox
      session
      (elmo-imap4-folder-mailbox-internal folder))
-    (elmo-imap4-response-value
-     (elmo-imap4-send-command-wait
-      session
-      (format (if elmo-imap4-use-uid "uid search %s"
-		"search %s") flag))
-     'search)))
+    (if (elmo-imap4-session-capable-p session 'esearch)
+	(elmo-imap4-elist folder
+			  (concat (if elmo-imap4-use-uid "uid " "")
+				  "search return (all) " flag) '(all))
+      (elmo-imap4-response-value
+       (elmo-imap4-send-command-wait
+	session
+	(format (if elmo-imap4-use-uid "uid search %s"
+		  "search %s") flag))
+       'search))))
 
 (defun elmo-imap4-session-flag-available-p (session flag)
   (case flag
@@ -860,7 +897,7 @@ If CHOP-LENGTH is not specified, message set is not chopped."
 		 (cond ((consp x)
 			(format "%s:%s" (car x) (cdr x)))
 		       ((integerp x)
-			(int-to-string x))))
+			(number-to-string x))))
 	       cont-list
 	       ","))
 	     set-list)))
@@ -875,8 +912,8 @@ If CHOP-LENGTH is not specified, message set is not chopped."
 	(flag-table (car app-data))
 	(msg-id (elmo-message-entity-field entity 'message-id))
 	saved-flags flag-list)
-;;    (when (elmo-string-member-ignore-case "\\Flagged" flags)
-;;      (elmo-msgdb-global-mark-set msg-id elmo-msgdb-important-mark))
+;;;    (when (elmo-string-member-ignore-case "\\Flagged" flags)
+;;;      (elmo-msgdb-global-mark-set msg-id elmo-msgdb-important-mark))
     (setq saved-flags (elmo-flag-table-get flag-table msg-id)
 	  flag-list
 	  (if use-flag
@@ -963,7 +1000,7 @@ If CHOP-LENGTH is not specified, message set is not chopped."
   elmo-network-initialize-session-buffer :after ((session
 						  elmo-imap4-session) buffer)
   (with-current-buffer buffer
-    (mapcar 'make-variable-buffer-local elmo-imap4-local-variables)
+    (mapc 'make-variable-buffer-local elmo-imap4-local-variables)
     (setq elmo-imap4-seqno 0)
     (setq elmo-imap4-status 'initial)))
 
@@ -980,11 +1017,11 @@ If CHOP-LENGTH is not specified, message set is not chopped."
       (erase-buffer)
       (set-process-filter process 'elmo-imap4-arrival-filter)
       (set-process-sentinel process 'elmo-imap4-sentinel)
-;;;   (while (and (memq (process-status process) '(open run))
+;;;      (while (and (memq (process-status process) '(open run))
 ;;;		  (eq elmo-imap4-status 'initial))
 ;;;	(message "Waiting for server response...")
 ;;;	(accept-process-output process 1))
-;;;   (message "")
+;;;      (message "")
       (unless (memq elmo-imap4-status '(nonauth auth))
 	(signal 'elmo-open-error
 		(list 'elmo-network-initialize-session)))
@@ -1025,15 +1062,15 @@ If CHOP-LENGTH is not specified, message set is not chopped."
 		 (sasl-mechanisms
 		  (delq nil
 			(mapcar
-			 '(lambda (cap)
-			    (if (string-match "^auth=\\(.*\\)$"
-					      (symbol-name cap))
-				(match-string 1 (upcase (symbol-name cap)))))
+			 (lambda (cap)
+			   (if (string-match "^auth=\\(.*\\)$"
+					     (symbol-name cap))
+			       (match-string 1 (upcase (symbol-name cap)))))
 			 (elmo-imap4-session-capability-internal session))))
 		 (mechanism
 		  (sasl-find-mechanism
 		   (delq nil
-			 (mapcar '(lambda (cap) (upcase (symbol-name cap)))
+			 (mapcar (lambda (cap) (upcase (symbol-name cap)))
 				 (if (listp auth)
 				     auth
 				   (list auth)))))) ;)
@@ -1064,10 +1101,9 @@ If CHOP-LENGTH is not specified, message set is not chopped."
 	     session
 	     (intern (downcase name)))
 	    (setq sasl-read-passphrase
-		  (function
-		   (lambda (prompt)
-		     (elmo-get-passwd
-		      (elmo-network-session-password-key session)))))
+		  (lambda (prompt)
+		    (elmo-get-passwd
+		     (elmo-network-session-password-key session))))
 	    (setq tag
 		  (elmo-imap4-send-command
 		   session
@@ -1204,8 +1240,8 @@ If CHOP-LENGTH is not specified, message set is not chopped."
 
 (luna-define-method elmo-server-diff-async ((folder elmo-imap4-folder))
   (let ((session (elmo-imap4-get-session folder)))
-    ;; commit.
-    ;; (elmo-imap4-commit spec)
+;;;    ;; commit.
+;;;    (elmo-imap4-commit spec)
     (with-current-buffer (elmo-network-session-buffer session)
       (setq elmo-imap4-status-callback
 	    'elmo-imap4-server-diff-async-callback-1)
@@ -1254,7 +1290,6 @@ Return nil if no complete line has arrived."
   "IMAP process filter."
   (when (buffer-live-p (process-buffer proc))
   (with-current-buffer (process-buffer proc)
-    (elmo-imap4-debug "-> %s" string)
     (goto-char (point-max))
     (insert string)
     (let (end)
@@ -1354,7 +1389,8 @@ Return nil if no complete line has arrived."
 	(elmo-imap4-forward)
 	(while (and (not (eq (char-after (point)) ?\)))
 		    ;; next line for MS Exchange bug
-		    (progn (and (eq (char-after (point)) ? ) (elmo-imap4-forward)) t)
+		    (progn (and (eq (char-after (point)) (string-to-char " "))
+				(elmo-imap4-forward)) t)
 		    (setq address (elmo-imap4-parse-address)))
 	  (setq addresses (cons address addresses)))
 	(when (eq (char-after (point)) ?\))
@@ -1379,6 +1415,7 @@ Return nil if no complete line has arrived."
 
 (defun elmo-imap4-parse-response ()
   "Parse a IMAP command response."
+  (elmo-imap4-debug "[%s] -> %s" (time-stamp-hh:mm:ss) (buffer-substring (point) (point-max)))
   (let (token)
     (case (setq token (read (current-buffer)))
       (+ (progn
@@ -1399,6 +1436,9 @@ Return nil if no complete line has arrived."
 			(read (concat "("
 				      (buffer-substring (point) (point-max))
 				      ")"))))
+	   (ESEARCH     (list
+			 'esearch
+			 (cddr (split-string (buffer-substring (point) (point-max)) " " "\,"))))
 	   (STATUS     (elmo-imap4-parse-status))
 	   ;; Added
 	   (NAMESPACE  (elmo-imap4-parse-namespace))
@@ -1530,7 +1570,7 @@ Return nil if no complete line has arrived."
 			   (1-
 			    (progn (re-search-forward "[] ]" nil t)
 				   (point))))))
-    (if (eq (char-before) ? )
+    (if (eq (char-before) (string-to-char " "))
 	(prog1
 	    (mapconcat 'identity
 		       (cons section (elmo-imap4-parse-header-list)) " ")
@@ -1673,7 +1713,7 @@ Return nil if no complete line has arrived."
 (defun elmo-imap4-parse-acl ()
   (let ((mailbox (elmo-imap4-parse-mailbox))
 	identifier rights acl)
-    (while (eq (char-after (point)) ?\ )
+    (while (eq (char-after (point)) (string-to-char " "))
       (elmo-imap4-forward)
       (setq identifier (elmo-imap4-parse-astring))
       (elmo-imap4-forward)
@@ -1728,7 +1768,7 @@ Return nil if no complete line has arrived."
       (let (b-e)
 	(elmo-imap4-forward)
 	(push (elmo-imap4-parse-body-extension) b-e)
-	(while (eq (char-after (point)) ?\ )
+	(while (eq (char-after (point)) (string-to-char " "))
 	  (elmo-imap4-forward)
 	  (push (elmo-imap4-parse-body-extension) b-e))
 	(assert (eq (char-after (point)) ?\)))
@@ -1739,7 +1779,7 @@ Return nil if no complete line has arrived."
 
 (defsubst elmo-imap4-parse-body-ext ()
   (let (ext)
-    (when (eq (char-after (point)) ?\ );; body-fld-dsp
+    (when (eq (char-after (point)) (string-to-char " ")) ; body-fld-dsp
       (elmo-imap4-forward)
       (let (dsp)
 	(if (eq (char-after (point)) ?\()
@@ -1751,12 +1791,12 @@ Return nil if no complete line has arrived."
 	      (elmo-imap4-forward))
 	  (assert (elmo-imap4-parse-nil)))
 	(push (nreverse dsp) ext))
-      (when (eq (char-after (point)) ?\ );; body-fld-lang
+      (when (eq (char-after (point)) (string-to-char " ")) ; body-fld-lang
 	(elmo-imap4-forward)
 	(if (eq (char-after (point)) ?\()
 	    (push (elmo-imap4-parse-string-list) ext)
 	  (push (elmo-imap4-parse-nstring) ext))
-	(while (eq (char-after (point)) ?\ );; body-extension
+	(while (eq (char-after (point)) (string-to-char " "));; body-extension
 	  (elmo-imap4-forward)
 	  (setq ext (append (elmo-imap4-parse-body-extension) ext)))))
     ext))
@@ -1772,7 +1812,7 @@ Return nil if no complete line has arrived."
 	      (push subbody body))
 	    (elmo-imap4-forward)
 	    (push (elmo-imap4-parse-string) body);; media-subtype
-	    (when (eq (char-after (point)) ?\ );; body-ext-mpart:
+	    (when (eq (char-after (point)) (string-to-char " ")) ; body-ext-mpart:
 	      (elmo-imap4-forward)
 	      (if (eq (char-after (point)) ?\();; body-fld-param
 		  (push (elmo-imap4-parse-string-list) body)
@@ -1788,7 +1828,8 @@ Return nil if no complete line has arrived."
 	(push (elmo-imap4-parse-string) body);; media-subtype
 	(elmo-imap4-forward)
 	;; next line for Sun SIMS bug
-	(and (eq (char-after (point)) ? ) (elmo-imap4-forward))
+	(and (eq (char-after (point)) (string-to-char " "))
+	     (elmo-imap4-forward))
 	(if (eq (char-after (point)) ?\();; body-fld-param
 	    (push (elmo-imap4-parse-string-list) body)
 	  (push (and (elmo-imap4-parse-nil) nil) body))
@@ -1811,7 +1852,7 @@ Return nil if no complete line has arrived."
 	;; the problem is that the two first are in turn optionally followed
 	;; by the third.  So we parse the first two here (if there are any)...
 
-	(when (eq (char-after (point)) ?\ )
+	(when (eq (char-after (point)) (string-to-char " "))
 	  (elmo-imap4-forward)
 	  (let (lines)
 	    (cond ((eq (char-after (point)) ?\();; body-type-msg:
@@ -1827,7 +1868,7 @@ Return nil if no complete line has arrived."
 
 	;; ...and then parse the third one here...
 
-	(when (eq (char-after (point)) ?\ );; body-ext-1part:
+	(when (eq (char-after (point)) (string-to-char " ")) ; body-ext-1part:
 	  (elmo-imap4-forward)
 	  (push (elmo-imap4-parse-nstring) body);; body-fld-md5
 	  (setq body
@@ -1928,22 +1969,37 @@ Return nil if no complete line has arrived."
 	  (elmo-msgdb-killed-list-length killed))
        (elmo-imap4-response-value status 'messages)))))
 
+(defun elmo-imap4-folder-list-range (folder min max)
+  (elmo-imap4-list
+   folder
+   (concat
+    (let ((killed
+          (elmo-folder-killed-list-internal
+           folder)))
+      (if (and killed
+              (eq (length killed) 1)
+              (consp (car killed))
+              (eq (car (car killed)) 1))
+;; What about elmo-imap4-use-uid?
+         (format "uid %d:%s" (cdr (car killed)) max)
+       (format "uid %s:%s" min max)))
+    " undeleted")))
+
 (luna-define-method elmo-folder-list-messages-plugged ((folder
-							elmo-imap4-folder)
-						       &optional
-						       enable-killed)
-  (elmo-imap4-list folder
-		   (concat
-		    (let ((killed
-			   (elmo-folder-killed-list-internal
-			    folder)))
-		      (if (and killed
-			       (eq (length killed) 1)
-			       (consp (car killed))
-			       (eq (car (car killed)) 1))
-			  (format "uid %d:*" (cdr (car killed)))
-			"all"))
-		    " undeleted")))
+                                                        elmo-imap4-folder)
+                                                       &optional
+                                                       enable-killed)
+
+  (let* ((old (elmo-msgdb-list-messages (elmo-folder-msgdb folder)))
+         (new (elmo-imap4-folder-list-range folder
+               (1+ (or (elmo-folder-get-info-max folder) 0)) "*"))
+         (united-old-new (elmo-union old new)))
+    (if (= (length united-old-new) (or (elmo-folder-get-info-length folder) 0))
+        united-old-new
+      (elmo-union new
+		  (elmo-imap4-folder-list-range
+		   folder
+		   1 (1+ (or (elmo-folder-get-info-max folder) 0)))))))
 
 (luna-define-method elmo-folder-list-flagged-plugged
   ((folder elmo-imap4-folder) flag)
@@ -2006,7 +2062,7 @@ Return nil if no complete line has arrived."
 				(elmo-net-folder-server-internal folder))))
     (unless (eq (elmo-net-folder-port-internal folder) elmo-imap4-default-port)
       (setq append-serv (concat append-serv ":"
-				(int-to-string
+				(number-to-string
 				 (elmo-net-folder-port-internal folder)))))
     (setq type (elmo-net-folder-stream-type-internal folder))
     (unless (eq (elmo-network-stream-type-symbol type)
@@ -2199,10 +2255,10 @@ If optional argument REMOVE is non-nil, remove FLAG."
       (elmo-imap4-send-command session "expunge"))
     t))
 
-(defmacro elmo-imap4-detect-search-charset (string)
-  `(with-temp-buffer
-     (insert ,string)
-     (detect-mime-charset-region (point-min) (point-max))))
+(defun elmo-imap4-detect-search-charset (string)
+  (with-temp-buffer
+    (insert string)
+    (detect-mime-charset-region (point-min) (point-max))))
 
 (defun elmo-imap4-search-internal-primitive (folder session filter from-msgs)
   (let ((search-key (elmo-filter-key filter))
@@ -2222,7 +2278,7 @@ If optional argument REMOVE is non-nil, remove FLAG."
       (let* ((numbers (or from-msgs (elmo-folder-list-messages folder)))
 	     (rest (nthcdr (string-to-number (elmo-filter-value filter) )
 			   numbers)))
-	(mapcar '(lambda (x) (delete x numbers)) rest)
+	(mapc (lambda (x) (delete x numbers)) rest)
 	numbers))
      ((string= "flag" search-key)
       (elmo-imap4-folder-list-flagged
@@ -2438,7 +2494,7 @@ If optional argument REMOVE is non-nil, remove FLAG."
 (defsubst elmo-imap4-folder-diff-plugged (folder)
   (let ((session (elmo-imap4-get-session folder))
 	messages new unread response killed uidnext)
-;;; (elmo-imap4-commit spec)
+;;;    (elmo-imap4-commit spec)
     (with-current-buffer (elmo-network-session-buffer session)
       (setq elmo-imap4-status-callback nil)
       (setq elmo-imap4-status-callback-data nil))
@@ -2503,6 +2559,9 @@ If optional argument REMOVE is non-nil, remove FLAG."
 				(setq response
 				      (elmo-imap4-read-response session tag))))
 		  (progn
+		    (let ((exists (assq 'exists response))) ; update message count,
+		      (when exists			    ; so merge update can go
+			(elmo-folder-set-info-hashtb folder nil (cadr exists))))
 		    (elmo-imap4-session-set-current-mailbox-internal
 		     session mailbox)
 		    (elmo-imap4-session-set-read-only-internal
@@ -2678,12 +2737,12 @@ If optional argument REMOVE is non-nil, remove FLAG."
 	    (elmo-imap4-get-session folder)))
     elmo-enable-disconnected-operation)) ; offline refile.
 
-;(luna-define-method elmo-message-fetch-unplugged
-;  ((folder elmo-imap4-folder)
-;   number strategy  &optional section outbuf unseen)
-;  (error "%d%s is not cached." number (if section
-;					  (format "(%s)" section)
-;					"")))
+;;;(luna-define-method elmo-message-fetch-unplugged
+;;;  ((folder elmo-imap4-folder)
+;;;   number strategy  &optional section outbuf unseen)
+;;;  (error "%d%s is not cached." number (if section
+;;;					  (format "(%s)" section)
+;;;					"")))
 
 (defsubst elmo-imap4-message-fetch (folder number strategy
 					   section outbuf unseen)

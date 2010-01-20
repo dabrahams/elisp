@@ -20,8 +20,8 @@
 
 ;; You should have received a copy of the GNU General Public License
 ;; along with this program; see the file COPYING.  If not, write to the
-;; Free Software Foundation, Inc., 59 Temple Place - Suite 330,
-;; Boston, MA 02111-1307, USA.
+;; Free Software Foundation, Inc., 51 Franklin Street, Fifth Floor,
+;; Boston, MA 02110-1301, USA.
 
 ;;; Code:
 
@@ -898,8 +898,13 @@ abcdefghijklmnopqrstuvwxyz\
   (defun quoted-printable-ccl-insert-encoded-file (filename)
     "Encode contents of the file named as FILENAME, and insert it."
     (interactive "*fInsert encoded file: ")
-    (insert-file-contents-as-coding-system
-     'mel-ccl-quoted-printable-lf-lf-rev filename))
+    (insert
+     (decode-coding-string
+      (with-temp-buffer
+	(set-buffer-multibyte nil)
+	(insert-file-contents-as-binary filename)
+	(buffer-string))
+      'mel-ccl-quoted-printable-lf-lf-rev)))
 
   (mel-define-method-function
    (mime-encode-string string (nil "quoted-printable"))
@@ -927,8 +932,9 @@ encoding."
 (defun quoted-printable-ccl-write-decoded-region (start end filename)
   "Decode quoted-printable encoded current region and write out to FILENAME."
   (interactive "*r\nFWrite decoded region to file: ")
-  (write-region-as-coding-system 'mel-ccl-quoted-printable-lf-lf-rev
-				 start end filename))
+  (let ((coding-system-for-write 'mel-ccl-quoted-printable-lf-lf-rev)
+	jka-compr-compression-info-list jam-zcat-filename-list)
+    (write-region start end filename)))
 
 (mel-define-method-function
  (mime-decode-string string (nil "quoted-printable"))
