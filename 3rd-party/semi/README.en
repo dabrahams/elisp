@@ -34,13 +34,16 @@ What's SEMI?
 Required environment
 ====================
 
-  SEMI supports XEmacs 20.2 or later with mule, and Emacs 20.
+  SEMI supports XEmacs 21.1 or later, and GNU Emacs 20.4 or later.
 
-  SEMI does not support anything older than Emacs 19.28 or XEmacs
-  19.14.  SEMI also does not support Emacs 19.29 to 19.34, XEmacs
-  19.15 or XEmacs 20.2 without mule, but SEMI may work with them.
+  SEMI does not support anything older than GNU Emacs 19.28 or XEmacs
+  19.14.  In addition, SEMI does not word with byte-indexing Mule
+  implementations, such as Mule 1, Mule 2 and GNU Emacs 20.1/20.2.
 
-  SEMI requires APEL (9.22 or later) and FLIM (Chao 1.14.1 or later)
+  SEMI also does not support Emacs 19.29 to 19.34, XEmacs 19.15 or
+  XEmacs 20.2, but SEMI may work with them.
+
+  SEMI requires APEL (9.22 or later) and FLIM (1.14.2 or later)
   package.  Please install them before installing it.  APEL package is
   available at:
 
@@ -50,9 +53,6 @@ Required environment
 
 	http://www.kanji.zinbun.kyoto-u.ac.jp/~tomo/comp/emacsen/lisp/
 							flim/flim-1.14/
-
-  PGP/MIME and application/pgp require mailcrypt or tiny-pgp package.
-
 
 Installation
 ============
@@ -187,10 +187,16 @@ Mailing lists
 
   Via the EMACS-MIME ML, you can report SEMI bugs, obtain the latest
   release of SEMI, and discuss future enhancements to SEMI.  To join
-  the EMACS-MIME ML, send an empty e-mail to
+  the EMACS-MIME ML, send an e-mail to
 
 	emacs-mime-en-ctl@m17n.org	(English)
 	emacs-mime-ja-ctl@m17n.org	(Japanese)
+
+  containing
+
+	subscribe YOUR NAME
+
+  in its contents.
 
   Notice that you should not send mail to author(s), such as
   morioka@jaist.ac.jp, directly.  Because your problem may occur in

@@ -1,6 +1,6 @@
 ;;; semi-def.el --- definition module for SEMI -*- coding: iso-8859-4; -*-
 
-;; Copyright (C) 1995,96,97,98,99,2000 Free Software Foundation, Inc.
+;; Copyright (C) 1995,96,97,98,99,2000,01,03 Free Software Foundation, Inc.
 
 ;; Author: MORIOKA Tomohiko <tomo@m17n.org>
 ;; Keywords: definition, MIME, multimedia, mail, news
@@ -24,13 +24,11 @@
 
 ;;; Code:
 
-(require 'poe)
-
 (eval-when-compile (require 'cl))
 
 (require 'custom)
 
-(defconst mime-user-interface-product ["REMI" (1 14 3) "Matsudai"]
+(defconst mime-user-interface-product ["SEMI" (1 14 6) "Maruoka"]
   "Product name, version number and code name of MIME-kernel package.")
 
 (autoload 'mule-caesar-region "mule-caesar"
@@ -105,7 +103,7 @@
 ;;;
 
 (defcustom mime-browse-url-regexp
-  (concat "\\(http\\|ftp\\|file\\|gopher\\|news\\|telnet\\|wais\\|mailto\\):"
+  (concat "\\(https?\\|ftps?\\|file\\|gopher\\|news\\|nntps?\\|telnets?\\|wais\\|mailto\\):"
 	  "\\(//[-a-zA-Z0-9_.]+:[0-9]*\\)?"
 	  "[-a-zA-Z0-9_=?#$@~`%&*+|\\/.,]*[-a-zA-Z0-9_=#$@~`%&*+|\\/]")
   "*Regexp to match URL in text body."
@@ -130,39 +128,42 @@
 ;;; @ menu
 ;;;
 
-(if window-system
-    (if (featurep 'xemacs)
-	(defun select-menu-alist (title menu-alist)
-	  (let (ret)
-	    (popup-menu
-	     (list* title
-		    "---"
-		    (mapcar (function
-			     (lambda (cell)
-			       (vector (car cell)
-				       `(progn
-					  (setq ret ',(cdr cell))
-					  (throw 'exit nil)
-					  )
-				       t)
-			       ))
-			    menu-alist)
-		    ))
-	    (recursive-edit)
-	    ret))
-      (defun select-menu-alist (title menu-alist)
-	(x-popup-menu
-	 (list '(1 1) (selected-window))
-	 (list title (cons title menu-alist))
-	 ))
-      )
-  (defun select-menu-alist (title menu-alist)
-    (cdr
-     (assoc (completing-read (concat title " : ") menu-alist)
-	    menu-alist)
-     ))
-  )
-
+(static-cond ((featurep 'xemacs)
+	      (defun mime-should-use-popup-menu ()
+		(and window-system
+		     (mouse-event-p last-command-event)))
+	      (defun mime-select-menu-alist (title menu-alist)
+		(if (mime-should-use-popup-menu)
+		    (let (ret)
+		      (popup-menu
+		       (list* title
+			      "---"
+			      (mapcar (function
+				       (lambda (cell)
+					 (vector (car cell)
+						 `(progn
+						    (setq ret ',(cdr cell))
+						    (throw 'exit nil))
+						 t)))
+				      menu-alist)))
+		      (recursive-edit)
+		      ret)
+		  (cdr
+		   (assoc (completing-read (concat title " : ") menu-alist)
+			  menu-alist)))))
+	     (t
+	      (defun mime-should-use-popup-menu ()
+		(and window-system
+		     (memq (event-basic-type last-command-event)
+			   '(mouse-1 mouse-2 mouse-3))))
+	      (defun mime-select-menu-alist (title menu-alist)
+		(if (mime-should-use-popup-menu)
+		    (x-popup-menu
+		     (list '(1 1) (selected-window))
+		     (list title (cons title menu-alist)))
+		  (cdr
+		   (assoc (completing-read (concat title " : ") menu-alist)
+			  menu-alist))))))
 
 ;;; @ Other Utility
 ;;;

@@ -1,6 +1,6 @@
 <!doctype sinfo system>
 <head>
-<title>SEMI 1.8 Manual
+<title>SEMI 1.14 Manual
 <author>MORIOKA Tomohiko <mail>morioka@jaist.ac.jp</mail>
 <date>1998/07/03
 
@@ -34,56 +34,63 @@ Each MUA can use powerful MIME features to combine these features.
 <h1> MIME message viewing
 <node> MIME-View
 <p>
-MIME-View は GNU Emacs で動作する汎用的な MIME viewer です。
+MIME-View is a MIME viewer for wide use that runs on GNU Emacs.
 <p>
-MIME-View は MIME message を閲覧するための利用者界面 (user interface) 
-の核であり、この上で presentation-method と呼ばれる表示を作るプログラム
-を動かしたり、acting-method と呼ばれる entity の処理プログラムを動かす
-ことが可能で、さまざまな種類の entity を扱う事ができるようになっています。
+MIME-View is the kernel of the user interface for browsing MIME
+messages. You can start some presentation-method which is a program for
+creating some representation, or some acting-method which is a program
+for processing the entity. Then you can deal with a variety of entities.
 
 
 <h2> Basic design
 <node> Overview of MIME-View
 <p>
-Internet の電子書簡・ネットニュースなどの書面 (message) の表現形式は 
-STD 11 に基づいています。STD 11 の書面本体 (message body) は行を唯一の
-構造とする簡易文面 (plain text) であり、文字符号も us-ascii と定められ
-ています。実際には、文字符号を us-ascii の代わりにその言語圏で用いられ
-る文字符号とした『地域化された STD 11』書面も用いられてきましたが、こ
-の場合も書面の文字符号は１つです。このため、利用者界面 (Message User
-Agent) は、しばしば、byte 列 = us-ascii 文字列、ないしは、byte 列 = そ
-の言語圏で用いる文字符号の文字列のように見倣してきました。
+The representation form of the internet messages in electric letters
+or in net news is based on STD 11. The STD 11 message body is a plain
+text which consists of lines as its only structure, and the character
+code is fixed as us-ascii. Actually, there are ``localized STD 11''
+messages that use some character code in their linguistic range
+instead of using us-ascii. Even in that case, the character code in
+the message is single. Therefore, Message User Agents have considered
+(byte row) = (us-ascii string), or (byte row) = (string in the
+character code in the linguistic range).
 <p>
-しかしながら、MIME では書面は entity を単位とする木構造になり、また、
-１つの書面で複数の文字符号を用いることができます。また、entity の内容
-は文面や絵のような単純に表示可能なものだけでなく、音声や動画などの一定
-時間再生されるようなものや特定のアプリケーションのデータやプログラムの
-ソース、あるいは、ftp や mail service の利用法や URL といった形で表さ
-れた外部参照などのさまざまなものが考えらます。このため、表示だけを考え
-ていた STD 11 における利用者界面の単純な延長では MIME の全ての機能を扱
-うことはできません。つまり、MIME の形式に合わせて復号するだけでは不十
-分であり、利用者との対話的な再生処理を考慮する必要があります。MIME 書
-面の形式は自動処理がしやすく設計されていますが、MIME 書面に含まれる内
-容の中にはセキュリティー上の問題から自動処理をするべきでないものがあり、
-こういったものの再生に関しては利用者の判断を仰ぐように設計されるべきで
-しょう。結局、MIME 書面を扱うためには STD 11 および MIME の構文で記述
-されたメッセージの情報交換用表現とその解釈結果である表示画面や再生等の
-処理を区別して考える必要があります。また、利用者との対話的な再生処理が
-必要です。
+Although, the MIME message has the tree structure in entity unit.
+And one message can contain multiple character codes. The content of
+an entity can be not only a letter or an image that can be displayed
+simply, but also can be a voice or an animation that are played for
+some time interval, a data for some specific application, a source
+code of some program, or an external reference that consists of
+the usage of ftp or mail service, or some URL. Therefore the simple
+extension of STD 11 user interface, which only consider displaying
+the message, cannot treat all of the MIME functionalities.
+Then it is not sufficient to decode message along its MIME type, but
+it is also required to consider a playback processing through some
+dialogue with the user. The format of MIME messages is designed
+to easily be passed to automatic processing. But some contents in the
+MIME message should not be passed to automatic processing for security
+reasons. So it should be designed to ask user in such cases.
+After all, in order to deal with MIME message, it is required to
+distinguish the representation for information exchange which is
+written in STD 11 or MIME construction, and its result
+after some interpretation which is a display screen or a playback
+process. It is also needed to converse with user for playback
+processing.
 <p>
-このため、MIME-View は１つの書面に対して、情報交換用表現を格納する 
-mime-raw-buffer と表示用表現を格納する mime-preview-buffer の２つの 
-buffer を用います。
+Therefore, MIME-View uses two buffers for one document, one is the
+mime-raw-buffer that stores the representation for information exchange,
+and the other is the mime-preview-buffer that stores the representation
+for displaying.
 <p>
-MIME-View は mime-preview-buffer に対して mime-view-mode という MIME
-message を閲覧するための mode を提供します。利用者はここで各 entity に
-対して操作を行うことができます。
+MIME-View provides a mode in the mime-preview-buffer for reading MIME
+message, which is called as mime-view-mode. User can manipulate each
+entity there.
 
 
 <h2> Presentation of mime-preview-buffer
 <node> MIME-Preview
 <p>
-mime-view-mode では各 entity に対して
+mime-view-mode displays information about each entity as
 <p>
 <verb>
 	[entity-button]
@@ -94,15 +101,15 @@ mime-view-mode では各 entity に対して
 </verb>
 <p>
 <noindent>
-という情報を表示します。これらは条件に従って design を変更したり、表示
-を抑制することもできます。
+You can change their design or inhibit showing some of them, according
+to some condition
 <p>
-以下に、表示例を示します。
+See following example
 
 
 <verb>
-From: morioka@jaist.ac.jp (守岡 知彦 / MORIOKA Tomohiko)
-Subject: Re: 質問？
+From: morioka@jaist.ac.jp (MORIOKA Tomohiko)
+Subject: Re: question?
 Newsgroups: zxr.message.mime
 Date: 22 Oct 93 11:02:44
 Mime-Version: 1.0
@@ -110,9 +117,9 @@ Organization: Japan Advanced Institute of Science and Technology,
         Ishikawa, Japan
 
 [1  (text/plain)]
-  MIME-Edit mode における、MIME message の作り方。
+  How to compose MIME message in MIME-Edit mode.
 
-  C-c C-x ? を押すと help が出てくる。
+  C-c C-x ? shows its help.
 
 C-c C-x C-t	insert a text message.
 C-c C-x TAB	insert a (binary) file.
@@ -132,143 +139,145 @@ C-c C-x C-k	insert PGP public key.
 C-c C-x C-p	preview editing MIME message.
 ...
 
-って訳で、C-c C-x C-i を押して、挿入したい binary file を指定します。
+therefore, you should type C-c C-x C-i and specify the binary file
+which you want to insert.
 
-  binary file の MIME encoding には、普通、Base64 を指定します。
+  You should select Base64 as MIME encoding for binary file.
 
 [2  (image/gif)]
 
 [3  (text/plain)]
 
-  こんな風に、絵入り message のでき上がり。
+  Like above, you can compose the message with image.
 
-〓〓〓〓〓〓〓〓〓〓〓 ロシアン・ティーを一杯。 〓〓〓〓〓〓〓〓〓〓〓
-〓〓〓〓〓  ☆ ジャムではなくマーマレードでもなく蜂蜜で ☆  〓〓〓〓〓
-〓〓〓〓〓         МОРいОКА  ТОМОХИКО         〓〓〓〓〓
-〓〓〓〓〓〓〓  Internet E-mail: &lt;morioka@jaist.ac.jp&gt;  〓〓〓〓〓〓〓
+==================== Take A Cup Of Russian Tea  ======================
+=========  ** Not With Jam Nor Marmalade But With Honey **  ==========
+=========                 MORIOKA TOMOHIKO                  ==========
+==============  Internet E-mail: &lt;morioka@@jaist.ac.jp&gt;  ==============
 </verb>
 
 
 <h3> entity-button
 <node> entity-button
 <p>
-<concept>entity-button</concept> は entity の先頭にあって、その entity 
-に関する大まかな情報を表示する部分です。
+<concept>entity-button</concept> is a tag on the top of the entity
+which shows brief information of the part.
 <p>
-標準では
+Normally, it appears as
 
 <verb>
         [1.3 test (text/plain)]
 </verb>
 
-<noindent>
-のような感じに表示されます。
 <p>
-最初の数字は message 中のこの entity の位置を節番号のように表したもの
-で、<concept>entity-number</concept> と呼びます。
+The number on the head describes the place of the entity in the
+message (like the section number) and it is called as
+<concept>entity-number</concept>.
 <p>
-２番目の文字列は表題を表します。この情報は、
+The string in the next describes its title. This information is
+taken from
 
 <ol>
-<li>Content-Description field もしくは Subject field に書かれた表題
-<li>Content-Disposition field の filename parameter に書かれた file 名
-<li>Content-Type field の name parameter に書かれた file 名
-<li> uuencode の場合の file 名
+<li>Title described in Content-Description field or Subject field
+<li>File name specified by filename parameter in Content-Disposition field
+<li>File name specified by name parameter in Content-Type field
+<li>File name for uuencode'ing
 </ol>
 
 <noindent>
-から作ります。どれも存在しない場合は空白が表示されます。
+If none of them are specified, displays a blank.
 <p>
-３番目の括弧の中の情報はその entity の media-type/subtype を表します。
-非 MIME entity の場合、<code>nil</code> が表示されます。
+The 3rd item in the parenthesis describes media-type/subtype of
+the entity. If it is is not MIME entity, it displays <code>nil</code>.
 <p>
-この entity-button は entity の内容を象徴する icon のような役割を果た
-します。例えば、
+This entity-button plays a role like icon that symbolically
+shows the content of the entity. For example, push <kbd>v</kbd> on
 
 <verb>
         [2  (image/gif)]
 </verb>
 
 <noindent>
-の上で <kbd>v</kbd> を押せばここに入っている絵が表示されます。
+shows up the image contained there.
 <p>
-また、mouse 操作が可能な場合、entity-button を第２ボタン（3 button
-mouse の場合、中央のボタン）で押せば、同様にその絵が表示されます。
+If the mouse operation is possible, you can display the image
+by pushing 2nd button (the middle button for 3 button mouse) too.
 
 
 <h3> entity-header
 <node> entity-header
 <p>
-<concept>entity-header</concept> はある entity の header を表示する部
-分です（「そのままやんけ」って怒らないで。そういうもんなんです）。
-
+<concept>entity-header</concept> is the header of the entity.
+(Don't blame me as ``You say nothing more than as it is'',
+It is no more than that.)
 
 <h3> entity-body
 <node> entity-body
 <p>
-<concept>entity-body</concept> は part の内容を表示する部分です。
+<concept>entity-body</concept> is the content of the part.
 <p>
-これもひねりが足りないですが、まあ、そういうもんです。
+Sophistication does not seem enough here also, but it is really such
+a thing.
 <p>
-とはいえ、実際には少しひねってます。
+Though, it actually be twisted a little.
 <p>
-text entity の場合は charset に応じて code 変換したりしますし、XEmacs 
-では image entity を変換しないといけないし。
+The text entity is passed to code conversion according to its charset,
+and the image entity should be converted on XEmacs.
 <p>
-詳しくはまた後で。
+Details will be described later.
 
 
 <h2> Operation in mime-preview-buffer
 <node> mime-view-mode
 <p>
-mime-preview-buffer には以下の機能があります。
+mime-preview-buffer posesses following functionalities.
 <p>
 <kl>
 <kt>u
 <kd>
-上の part に戻る（message の一番上の part でこれを行なうと Summary
-mode に戻る (*1)）
+go back to upper part (in the first part of the message,
+go back to the Summary mode (*1))
 </kd>
-<kt>p<kd>前の part に移動する
+<kt>p<kd>go to previous part
 </kd>
-<kt>M-TAB<kd>前の part に移動する
+<kt>M-TAB<kd>go to previous part
 </kd>
-<kt>n<kd>次の part に移動する
+<kt>n<kd>go to next part
 </kd>
-<kt>TAB<kd>次の part に移動する
+<kt>TAB<kd>go to next part
 </kd>
-<kt>SPC<kd>scroll up する
+<kt>SPC<kd>scroll up
 </kd>
-<kt>M-SPC<kd>scroll down する
+<kt>M-SPC<kd>scroll down
 </kd>
-<kt>DEL<kd>scroll down する
+<kt>DEL<kd>scroll down
 </kd>
-<kt>RET<kd>次の行に移動する
+<kt>RET<kd>go to next line
 </kd>
-<kt>M-RET<kd>前の行に移動する
+<kt>M-RET<kd>go to previous line
 </kd>
-<kt>v<kd>part を再生する (*2)
+<kt>v<kd>play current part (*2)
 </kd>
-<kt>e<kd>part から file を取り出す (*2)
+<kt>e<kd>extract file from current part (*2)
 </kd>
-<kt>C-c C-p<kd>part を印刷する (*2)
+<kt>C-c C-p<kd>print current part (*2)
 </kd>
 <kt>mouse-button-2
 <kd>
-preview-buffer 中の mouse button を起動する
+start the mouse button in preview-buffer
 <p>
-content-button を押せば、その part が再生される(*2)
+on content-button, play current part (*2)
 <p>
-URL-button を押せば、その WWW browser が起動される
+on URL-button, start WWW browser
 </kd>
 </kl>
 <p>
-<memo title="注意">
+<memo title="Notice">
 <p>
-(*1) MUA で mime-view の設定をしていない場合、Summary mode には戻りま
-せん。
+(*1) Do not go back to Summary mode unless appropriately
+configured for mime-view in the MUA.
 <p>
-(*2) 実際の動作は対応する method に依ります。
+(*2) actual behavior depends on the associated method
 </memo>
 
 
@@ -623,6 +632,16 @@ The value should be a symbol.  Allowed versions are <code>gpg</code>,
 Version of PGP or GnuPG command to be used for decryption or verification.
 The value should be a symbol.  Allowed versions are <code>gpg</code>,
 <code>pgp</code> or <code>pgp5</code>.
+</defvar>
+
+<defvar name="pgg-insert-url-function">
+<p>
+The function to fetch public key from the keyserver.
+Use Emacs/W3 by the default setting. To use emacs-w3m
+instead, set as follows:
+<lisp>
+(setq pgg-insert-url-function #'w3m-retrieve)
+</lisp>
 </defvar>
 
 

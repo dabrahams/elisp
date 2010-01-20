@@ -39,6 +39,8 @@
 ;;; Code:
 
 (require 'path-util)
+(require 'mel)
+;; binary-funcall, binary-write-decoded-region, binary-insert-encoded-file
 (eval-when-compile (require 'static))
 
 (defgroup smime ()
@@ -191,9 +193,7 @@
 	(pop files)))))
 
 (defun smime-process-region (start end program args)
-  (let* ((errors-file-name
-	  (concat temporary-file-directory 
-		  (make-temp-name "smime-errors")))
+  (let* ((errors-file-name (make-temp-file "smime-errors"))
 	 (args (append args (list (concat "2>" errors-file-name))))
 	 (shell-file-name smime-shell-file-name)
 	 (shell-command-switch smime-shell-command-switch)
@@ -202,10 +202,10 @@
     (with-current-buffer (get-buffer-create smime-output-buffer)
       (buffer-disable-undo)
       (erase-buffer))
-    (as-binary-process
-     (setq process
-	   (apply #'start-process-shell-command "*S/MIME*"
-		  smime-output-buffer program args)))
+    (setq process
+	  (apply #'binary-funcall #'start-process-shell-command
+		 "*S/MIME*" smime-output-buffer
+		 program args))
     (set-process-sentinel process 'ignore)
     (process-send-region process start end)
     (process-send-eof process)
@@ -295,18 +295,17 @@ a detached signature."
   "Verify the current region between START and END.
 If the optional 3rd argument SIGNATURE is non-nil, it is treated as
 the detached signature of the current region."
-  (let* ((basename (expand-file-name "smime" temporary-file-directory))
-	 (orig-file (make-temp-name basename))
+  (let* ((orig-file (make-temp-file "smime"))
 	 (orig-mode (default-file-modes)))
     (unwind-protect
 	(progn
 	  (set-default-file-modes 448)
-	  (write-region-as-binary start end orig-file))
+	  (binary-write-decoded-region start end orig-file))
       (set-default-file-modes orig-mode))
     (with-temp-buffer
-      (insert-file-contents-as-binary signature)
+      (binary-insert-encoded-file signature)
       (goto-char (point-max))
-      (insert-file-contents-as-binary
+      (binary-insert-encoded-file
        (or (smime-find-certificate 
 	    (smime-query-signer (point-min)(point-max)))
 	   (expand-file-name 

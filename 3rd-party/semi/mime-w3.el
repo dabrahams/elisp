@@ -24,7 +24,9 @@
 
 ;;; Code:
 
-(require 'w3)
+(condition-case nil
+    (require 'w3)
+  (error nil))
 (require 'mime)
 
 (defmacro mime-put-keymap-region (start end keymap)
@@ -58,22 +60,29 @@
        (run-hooks 'mime-text-decode-hook)
        (condition-case err
 	   (w3-region p (point-max))
-	 (error (message (format "%s" err))))
+	 (error (message "%s" err)))
        (mime-put-keymap-region p (point-max) w3-mode-map)
        ))))
 
 (defun url-cid (url &optional proxy-info)
   (let ((entity
 	 (mime-find-entity-from-content-id (mime-uri-parse-cid url)
-					   mime-w3-message-structure)))
+					   mime-w3-message-structure))
+	buffer)
     (when entity
-      (mime-insert-entity-content entity)
-      (setq url-current-mime-type (mime-entity-type/subtype entity))
-      )))
+      (setq buffer (generate-new-buffer (format " *cid %s" url)))
+      (save-excursion
+	(set-buffer buffer)
+	(mime-insert-entity-content entity)
+	(if (boundp 'url-current-mime-type)
+	    (setq url-current-mime-type (mime-entity-type/subtype entity)))))
+    buffer))
 
-(url-register-protocol "cid"
-		       'url-cid
-		       'url-identity-expander)
+(if (fboundp 'url-register-protocol)
+    (url-register-protocol "cid"
+			   'url-cid
+			   'url-identity-expander)
+  (provide 'url-cid))
 
 
 ;;; @ end

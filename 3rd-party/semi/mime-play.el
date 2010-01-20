@@ -43,8 +43,16 @@ If t, it means current directory."
   :type '(choice (const :tag "Current directory" t)
 		 (directory)))
 
+(defcustom mime-play-delete-file-immediately t
+  "If non-nil, delete played file immediately."
+  :group 'mime-view
+  :type 'boolean)
+
 (defvar mime-play-find-every-situations t
   "*Find every available situations if non-nil.")
+
+(defvar mime-play-messages-coding-system nil
+  "Coding system to be used for external MIME playback method.")
 
 
 ;;; @ content decoder
@@ -93,7 +101,7 @@ specified, play as it.  Default MODE is \"play\"."
     (setq mime-acting-situation-example-list (cdr ret)
 	  ret (car ret))
     (cond ((cdr ret)
-	   (setq ret (select-menu-alist
+	   (setq ret (mime-select-menu-alist
 		      "Methods"
 		      (mapcar (function
 			       (lambda (situation)
@@ -138,34 +146,41 @@ specified, play as it.  Default MODE is \"play\"."
 (defun mime-activate-mailcap-method (entity situation)
   (let ((method (cdr (assoc 'method situation)))
 	(name (mime-entity-safe-filename entity)))
-    (setq name
-	  (if (and name (not (string= name "")))
-	      (expand-file-name name temporary-file-directory)
-	    (make-temp-name
-	     (expand-file-name "EMI" temporary-file-directory))
-	    ))
+    (setq name (expand-file-name (if (and name (not (string= name "")))
+				     name
+				   (make-temp-name "EMI"))
+				 (make-temp-file "EMI" 'directory)))
     (mime-write-entity-content entity name)
     (message "External method is starting...")
     (let ((process
 	   (let ((command
-		  (mailcap-format-command
+		  (mime-format-mailcap-command
 		   method
-		   (cons (cons 'filename name) situation))))
+		   (cons (cons 'filename name) situation)))
+		 (coding-system-for-read mime-play-messages-coding-system))
 	     (start-process command mime-echo-buffer-name
-			    shell-file-name shell-command-switch command)
-	     )))
+	      shell-file-name shell-command-switch command))))
       (set-alist 'mime-mailcap-method-filename-alist process name)
-      (set-process-sentinel process 'mime-mailcap-method-sentinel)
-      )
-    ))
+      (set-process-sentinel process 'mime-mailcap-method-sentinel))))
 
 (defun mime-mailcap-method-sentinel (process event)
-  (let ((file (cdr (assq process mime-mailcap-method-filename-alist))))
-    (if (file-exists-p file)
-	(delete-file file)
-      ))
-  (remove-alist 'mime-mailcap-method-filename-alist process)
-  (message (format "%s %s" process event)))
+  (when mime-play-delete-file-immediately
+    (let ((file (cdr (assq process mime-mailcap-method-filename-alist))))
+      (when (file-exists-p file)
+	(ignore-errors
+	  (delete-file file)
+	  (delete-directory (file-name-directory file)))))
+    (remove-alist 'mime-mailcap-method-filename-alist process))
+  (message "%s %s" process event))
+
+(defun mime-mailcap-delete-played-files ()
+  (dolist (elem mime-mailcap-method-filename-alist)
+    (when (file-exists-p (cdr elem))
+      (ignore-errors
+	(delete-file (cdr elem))
+	(delete-directory (file-name-directory (cdr elem)))))))
+
+(add-hook 'kill-emacs-hook 'mime-mailcap-delete-played-files)
 
 (defvar mime-echo-window-is-shared-with-bbdb
   (module-installed-p 'bbdb)
@@ -345,6 +360,24 @@ It is registered to variable `mime-preview-quitting-method-alist'."
 ;;; @ message/partial
 ;;;
 
+(defun mime-require-safe-directory (dir)
+  "Create a directory DIR safely.
+The permission of the created directory becomes `700' (for the owner only).
+If the directory already exists and is writable by other users, an error
+occurs."
+  (let ((attr (file-attributes dir))
+	(orig-modes (default-file-modes)))
+    (if (and attr (eq (car attr) t)) ; directory already exists.
+	(unless (or (memq system-type '(windows-nt ms-dos OS/2 emx))
+		    (and (eq (nth 2 attr) (user-real-uid))
+			 (eq (file-modes dir) 448)))
+	  (error "Invalid owner or permission for %s" dir))
+      (unwind-protect
+	  (progn
+	    (set-default-file-modes 448)
+	    (make-directory dir))
+	(set-default-file-modes orig-modes)))))
+
 (defun mime-store-message/partial-piece (entity cal)
   (let* ((root-dir
 	  (expand-file-name
@@ -353,13 +386,25 @@ It is registered to variable `mime-preview-quitting-method-alist'."
 	 (number (cdr (assoc "number" cal)))
 	 (total (cdr (assoc "total" cal)))
 	 file
-	 (mother (current-buffer)))
+	 (mother (current-buffer))
+	 (orig-modes (default-file-modes)))
+    (mime-require-safe-directory root-dir)
     (or (file-exists-p root-dir)
-	(make-directory root-dir))
+	(unwind-protect
+	    (progn
+	      (set-default-file-modes 448)
+	      (make-directory root-dir))
+	  (set-default-file-modes orig-modes)))
     (setq id (replace-as-filename id))
     (setq root-dir (concat root-dir "/" id))
+
     (or (file-exists-p root-dir)
-	(make-directory root-dir))
+	(unwind-protect
+	    (progn
+	      (set-default-file-modes 448)
+	      (make-directory root-dir))
+	  (set-default-file-modes orig-modes)))
+
     (setq file (concat root-dir "/FULL"))
     (if (file-exists-p file)
 	(let ((full-buf (get-buffer-create "FULL"))
@@ -369,7 +414,7 @@ It is registered to variable `mime-preview-quitting-method-alist'."
 	  (save-window-excursion
 	    (set-buffer full-buf)
 	    (erase-buffer)
-	    (insert-file-contents-as-binary file)
+	    (binary-insert-encoded-file file)
 	    (setq major-mode 'mime-show-message-mode)
 	    (mime-view-buffer (current-buffer) nil mother)
 	    (setq pbuf (current-buffer))
@@ -420,24 +465,21 @@ It is registered to variable `mime-preview-quitting-method-alist'."
 		    (or (file-exists-p file)
 			(throw 'tag nil)
 			)
-		    (as-binary-input-file (insert-file-contents file))
+		    (binary-insert-encoded-file file)
 		    (goto-char (point-max))
-		    (setq i (1+ i))
-		    ))
-		(write-region-as-binary (point-min)(point-max)
-					(expand-file-name "FULL" root-dir))
+		    (setq i (1+ i))))
+		(binary-write-decoded-region
+		 (point-min)(point-max)
+		 (expand-file-name "FULL" root-dir))
 		(let ((i 1))
 		  (while (<= i total)
 		    (let ((file (format "%s/%d" root-dir i)))
 		      (and (file-exists-p file)
-			   (delete-file file)
-			   ))
-		    (setq i (1+ i))
-		    ))
+			   (delete-file file)))
+		    (setq i (1+ i))))
 		(let ((file (expand-file-name "CT" root-dir)))
 		  (and (file-exists-p file)
-		       (delete-file file)
-		       ))
+		       (delete-file file)))
 		(let ((buf (current-buffer))
 		      (pwin (or (get-buffer-window mother)
 				(get-largest-window)))
@@ -474,7 +516,7 @@ It is registered to variable `mime-preview-quitting-method-alist'."
 	 (directory (cdr (assoc "directory" cal)))
 	 (name (cdr (assoc "name" cal)))
 	 (pathname (concat "/anonymous@" site ":" directory)))
-    (message (concat "Accessing " (expand-file-name name pathname) " ..."))
+    (message "%s" (concat "Accessing " (expand-file-name name pathname) "..."))
     (funcall mime-raw-dired-function pathname)
     (goto-char (point-min))
     (search-forward name)
@@ -484,7 +526,7 @@ It is registered to variable `mime-preview-quitting-method-alist'."
 
 (defun mime-view-message/external-url (entity cal)
   (let ((url (cdr (assoc "url" cal))))
-    (message (concat "Accessing " url " ..."))
+    (message "%s" (concat "Accessing " url "..."))
     (funcall mime-raw-browse-url-function url)))
 
 
