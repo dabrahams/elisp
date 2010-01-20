@@ -228,6 +228,7 @@ Always run a server so we can open files in existing emacs frames.")
  '(smtpmail-smtp-service 587)
  '(smtpmail-starttls-credentials (quote (("www.boostpro.com" 587 "" ""))))
  '(tab-stop-list (quote (4 8 12 16 20 24 28 32 36 40 44 48 52 56 60 64 68 72 76 80 84 88 92 96 100 104 108 112 116 120)))
+ '(split-height-threshold nil)
  '(tool-bar-mode nil nil nil "
 Tool bars take up valuable screen real-estate for icons whose meaning I forget")
  '(tramp-backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
