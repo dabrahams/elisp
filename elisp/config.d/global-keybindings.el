@@ -61,3 +61,5 @@
 (global-set-key [f4] 'next-error)
 (global-set-key [(shift f4)] 'previous-error)
 (global-set-key [(control f4)] 'first-error)
+
+(global-set-key [(control shift u)] 'unicode-character-shortcut-insert)
