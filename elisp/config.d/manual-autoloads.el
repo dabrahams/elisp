@@ -44,3 +44,10 @@
 (autoload 'unicode-character-shortcut-insert "my-xmlunicode" "Read
 a (two-character) keyboard shortcut and insert the corresponding
 character." t)
+
+;; This is probably not needed, but I forgot how to get 3rd-party
+;; packages to generate autoloads for me.
+(autoload 'wl "wl" "Wanderlust" t)
+(autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
+(autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
+(autoload 'wl-user-agent-compose "wl-draft" nil t)
