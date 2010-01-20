@@ -23,7 +23,8 @@
 	   '(("\\.jam\\'" . jam-mode))
 	   auto-mode-alist))
 
-
+(autoload 'markdown-mode "markdown-mode"
+        "Major mode for editing Markdown files" t)
 
 (autoload 'unicode-character-insert "my-xmlunicode"
 "Insert a Unicode character by character name. If a prefix is given, the character will be inserted regardless of whether or not it has a displayable glyph; otherwise, a numeric character reference is inserted if the codepoint is not in the unicode-glyph-list. If argname is given, it is used for the prompt. If argname uniquely identifies a character, that character is inserted without the prompt." t)
