@@ -234,7 +234,7 @@ Always run a server so we can open files in existing emacs frames.")
 Tool bars take up valuable screen real-estate for icons whose meaning I forget")
  '(tramp-backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
  '(tramp-default-host "localhost")
- '(tramp-default-proxies-alist (quote (("\\`localhost\\'" nil nil) ("\\`.+\\'" "\\`root\\'" "/ssh:%h:"))) nil nil "
+ '(tramp-default-proxies-alist (quote (("\\`localhost\\'" nil nil) ("\\`206.217.198.21\\'" nil nil) ("\\`.+\\'" "\\`root\\'" "/ssh:%h:"))) nil nil "
 Gets around the common setting that prohibits ssh login as root.
 
 Don't do any proxying for connections to localhost (depends
