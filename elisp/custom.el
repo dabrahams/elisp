@@ -190,6 +190,7 @@ As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-plan
  '(org-return-follows-link t)
  '(org-reverse-note-order t nil nil "
 As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-special-ctrl-a/e t)
  '(org-todo-keywords (quote ((sequence "TODO" "STARTED(s)
             INS DEL Keyword: WAITING(w@)
             INS DEL Keyword: DELEGATED(l@)
