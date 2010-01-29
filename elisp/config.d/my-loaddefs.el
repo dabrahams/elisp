@@ -57,6 +57,55 @@ Recalculate all blame information in the current buffer
 
 ;;;***
 
+;;;### (autoloads (kill-buffer-and-its-windows read-shell-file-command
+;;;;;;  region-to-file region-to-buffer forward-char-same-line) "misc-cmds"
+;;;;;;  "../../../../elisp/package.d/misc-cmds.el" (19271 40288))
+;;; Generated autoloads from ../../../../elisp/package.d/misc-cmds.el
+
+(autoload 'forward-char-same-line "misc-cmds" "\
+Move forward a max of ARG chars on the same line, or backward if ARG < 0.
+Returns the signed number of chars moved if /= ARG, else returns nil.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'region-to-buffer "misc-cmds" "\
+Copy region to BUFFER: At beginning (prefix >= 0), end (< 0), or replace.
+START and END are the region boundaries.
+BUFFER is a buffer or its name (a string).
+With prefix ARG >= 0: `append-to-buffer':
+  Append contents of region to end of BUFFER.
+  (Point is moved to end of BUFFER first.)
+With prefix ARG < 0:  `prepend-to-buffer':
+  Prepend contents of region to beginning of BUFFER.
+  (Point is moved to beginning of BUFFER first.)
+With no prefix ARG (nil): `copy-to-buffer'.
+  Write region to BUFFER, replacing any previous contents.
+
+\(fn START END BUFFER ARG)" t nil)
+
+(autoload 'region-to-file "misc-cmds" "\
+With prefix arg, this is `append-to-file'.  Without, it is `write-region'.
+START and END are the region boundaries.
+Prefix ARG non-nil means append region to end of file FILENAME.
+Prefix ARG nil means write region to FILENAME, replacing contents.
+
+\(fn START END FILENAME ARG)" t nil)
+
+(autoload 'read-shell-file-command "misc-cmds" "\
+Prompt for shell COMMAND, using current buffer's file as default arg.
+If buffer is not associated with a file, you are prompted for a file.
+COMMAND is a symbol.
+
+\(fn COMMAND)" nil nil)
+
+(autoload 'kill-buffer-and-its-windows "misc-cmds" "\
+Kill BUFFER and delete its windows.  Default is `current-buffer'.
+BUFFER may be either a buffer or its name (a string).
+
+\(fn BUFFER)" t nil)
+
+;;;***
+
 ;;;### (autoloads (svn-status svn-checkout) "psvn" "../../../../elisp/package.d/psvn.el"
 ;;;;;;  (18928 54753))
 ;;; Generated autoloads from ../../../../elisp/package.d/psvn.el
@@ -82,9 +131,9 @@ If there is no .svn directory, examine if there is CVS and run
 
 ;;;***
 
-;;;### (autoloads (weblogger-start-entry weblogger-setup-weblog weblogger-select-configuration)
-;;;;;;  "weblogger" "../../../../elisp/package.d/weblogger.el" (19233
-;;;;;;  10624))
+;;;### (autoloads (weblogger-fetch-entries weblogger-start-entry
+;;;;;;  weblogger-setup-weblog weblogger-select-configuration) "weblogger"
+;;;;;;  "../../../../elisp/package.d/weblogger.el" (19299 19606))
 ;;; Generated autoloads from ../../../../elisp/package.d/weblogger.el
 
 (autoload 'weblogger-select-configuration "weblogger" "\
@@ -105,21 +154,36 @@ available.
 
 \(fn &optional PROMPT)" t nil)
 
+(autoload 'weblogger-fetch-entries "weblogger" "\
+Sync the entry ring with what is on the weblog server.
+
+\(fn)" t nil)
+
 ;;;***
 
 ;;;### (autoloads nil nil ("../../../../elisp/package.d/any-ini-mode.el"
-;;;;;;  "../../../../elisp/package.d/cmake-mode.el" "../../../../elisp/package.d/dwa-c++.el"
-;;;;;;  "../../../../elisp/package.d/dwa-compile.el" "../../../../elisp/package.d/dwa-rectangle.el"
-;;;;;;  "../../../../elisp/package.d/dwa-util.el" "../../../../elisp/package.d/git-contrib/git-blame.el"
-;;;;;;  "../../../../elisp/package.d/git-contrib/git.el" "../../../../elisp/package.d/gravatar.el"
-;;;;;;  "../../../../elisp/package.d/initsplit.el" "../../../../elisp/package.d/jam-mode.el"
-;;;;;;  "../../../../elisp/package.d/markdown-mode.el" "../../../../elisp/package.d/maxframe.el"
-;;;;;;  "../../../../elisp/package.d/muse-markdown.el" "../../../../elisp/package.d/osx-plist.el"
-;;;;;;  "../../../../elisp/package.d/psvn.el" "../../../../elisp/package.d/smartquotes.el"
-;;;;;;  "../../../../elisp/package.d/timeclock-x.el" "../../../../elisp/package.d/unichars.el"
+;;;;;;  "../../../../elisp/package.d/cmake-mode.el" "../../../../elisp/package.d/cmake-mode.el"
+;;;;;;  "../../../../elisp/package.d/completion-selection.el" "../../../../elisp/package.d/dwa-c++.el"
+;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-compile.el"
+;;;;;;  "../../../../elisp/package.d/dwa-rectangle.el" "../../../../elisp/package.d/dwa-rectangle.el"
+;;;;;;  "../../../../elisp/package.d/dwa-util.el" "../../../../elisp/package.d/dwa-util.el"
+;;;;;;  "../../../../elisp/package.d/git-contrib/git-blame.el" "../../../../elisp/package.d/git-contrib/git.el"
+;;;;;;  "../../../../elisp/package.d/gravatar.el" "../../../../elisp/package.d/gravatar.el"
+;;;;;;  "../../../../elisp/package.d/initsplit.el" "../../../../elisp/package.d/initsplit.el"
+;;;;;;  "../../../../elisp/package.d/jam-mode.el" "../../../../elisp/package.d/jam-mode.el"
+;;;;;;  "../../../../elisp/package.d/markdown-mode.el" "../../../../elisp/package.d/markdown-mode.el"
+;;;;;;  "../../../../elisp/package.d/maxframe.el" "../../../../elisp/package.d/maxframe.el"
+;;;;;;  "../../../../elisp/package.d/misc-cmds.el" "../../../../elisp/package.d/muse-markdown.el"
+;;;;;;  "../../../../elisp/package.d/muse-markdown.el" "../../../../elisp/package.d/my-xmlunicode.el"
+;;;;;;  "../../../../elisp/package.d/osx-plist.el" "../../../../elisp/package.d/osx-plist.el"
+;;;;;;  "../../../../elisp/package.d/policy-switch.el" "../../../../elisp/package.d/psvn.el"
+;;;;;;  "../../../../elisp/package.d/smartquotes.el" "../../../../elisp/package.d/smartquotes.el"
+;;;;;;  "../../../../elisp/package.d/timeclock-x.el" "../../../../elisp/package.d/timeclock-x.el"
+;;;;;;  "../../../../elisp/package.d/unichars.el" "../../../../elisp/package.d/unichars.el"
 ;;;;;;  "../../../../elisp/package.d/weblogger.el" "../../../../elisp/package.d/xml-rpc.el"
-;;;;;;  "../../../../elisp/package.d/xmlunicode.el") (19233 10686
-;;;;;;  673138))
+;;;;;;  "../../../../elisp/package.d/xmlunicode.el" "../../../../elisp/package.d/xmlunicode.el"
+;;;;;;  "../../../../elisp/package.d/yaoddmuse.el") (19299 19832
+;;;;;;  157229))
 
 ;;;***
 

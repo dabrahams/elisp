@@ -8,12 +8,15 @@
 
 ;; Author: Mark A. Hershberger <mah@everybody.org>
 ;; Original Author: Daniel Lundin <daniel@codefactory.se>
-;; Version: 1.6.7
+;; Version: 1.6.8
 ;; Created: May 13 2001
 ;; Keywords: xml rpc network
 ;; URL: http://emacswiki.org/emacs/xml-rpc.el
 ;; Maintained-at: http://savannah.nongnu.org/bzr/?group=emacsweblogs
-;; Last Modified: <2009-12-07 17:21:47 mah>
+;; Last Modified: <2010-01-11 20:19:23 mah>
+
+(defconst xml-rpc-version "1.6.8"
+  "Current version of xml-rpc.el")
 
 ;; This file is NOT (yet) part of GNU Emacs.
 
@@ -62,6 +65,9 @@
 ;; xml.el is a part of GNU Emacs 21, but can also be downloaded from
 ;; here: <URL:ftp://ftp.codefactory.se/pub/people/daniel/elisp/xml.el>
 
+;;; Bug reports
+
+;; Please use M-x xml-rpc-submit-bug-report to report bugs.
 
 ;;; XML-RPC datatypes are represented as follows
 
@@ -119,7 +125,9 @@
 
 ;;; History:
 
-;; 1.6.7   - Add a report-xml-rpc-bug function
+;; 1.6.8   - Add a report-xml-rpc-bug function
+
+;; 1.6.7   - Skipped version
 
 ;; 1.6.6   - Use the correct dateTime elements.  Fix bug in parsing null int.
 
@@ -179,9 +187,6 @@
 (require 'timezone)
 (eval-when-compile
   (require 'cl))
-
-(defconst xml-rpc-version "1.6.7"
-  "Current Version of xml-rpc.el")
 
 (defconst xml-rpc-maintainer-address "mah@everybody.org"
   "The address where bug reports should be sent.")
@@ -269,11 +274,13 @@ Set it higher to get some info in the *Messages* buffer"
         (if (fboundp 'find-lisp-object-file-name)
             (find-lisp-object-file-name
              'timezone-parse-date (symbol-function 'timezone-parse-date))
-          (symbol-file 'timezone-parse-date))))
+          (symbol-file 'timezone-parse-date)))
+       (date-parses-as (timezone-parse-date "20091130T00:52:53")))
    (reporter-submit-bug-report
     xml-rpc-maintainer-address
     (concat "xml-rpc.el " xml-rpc-version)
     (list 'xml-rpc-tz-pd-defined-in
+          'date-parses-as
           'xml-rpc-load-hook
           'xml-rpc-use-coding-system
           'xml-rpc-allow-unicode-string
@@ -482,7 +489,7 @@ and empty it"
     (while (progn (setq name (format " *XML-RPC-%d*" num)
 			buf (get-buffer name))
 		  (and buf (or (get-buffer-process buf)
-			       (save-excursion (set-buffer buf)
+			       (with-current-buffer buf
 					       (> (point-max) 1)))))
       (setq num (1+ num)))
     name))
@@ -535,7 +542,7 @@ or nil if called with ASYNC-CALLBACK-FUNCTION."
 		     (setq url-be-asynchronous t
 			   url-current-callback-data (list
 						      async-callback-function
-						      (current-buffer))	
+						      (current-buffer))
 			   url-current-callback-func
                            'xml-rpc-request-callback-handler)
 		   (setq url-be-asynchronous nil))
@@ -544,9 +551,8 @@ or nil if called with ASYNC-CALLBACK-FUNCTION."
 		 (when (not url-be-asynchronous)
 		   (let ((result (xml-rpc-request-process-buffer
 				  (current-buffer))))
-		     (when (> xml-rpc-debug 1) 
-                       (save-excursion
-                         (set-buffer (create-file-buffer "result-data"))
+		     (when (> xml-rpc-debug 1)
+                       (with-current-buffer (create-file-buffer "result-data")
                          (insert result)))
 		     result)))
 		(t			; Post emacs20 w3-el
@@ -609,8 +615,7 @@ or nil if called with ASYNC-CALLBACK-FUNCTION."
 (defun xml-rpc-request-process-buffer (xml-buffer)
   "Process buffer XML-BUFFER."
   (unwind-protect
-      (save-excursion
-	(set-buffer xml-buffer)
+      (with-current-buffer xml-buffer
 	(when (fboundp 'url-uncompress)
           (let ((url-working-buffer xml-buffer))
             (url-uncompress)))
@@ -626,7 +631,7 @@ or nil if called with ASYNC-CALLBACK-FUNCTION."
 			((looking-at "<\\?xml ")
 			 (xml-rpc-clean (xml-parse-region (point-min)
                                                           (point-max))))
-			  
+
 			;; No HTTP status returned
 			((not status)
 			 (let ((errstart
@@ -654,7 +659,7 @@ handled from XML-BUFFER."
     (when (< xml-rpc-debug 1)
       (kill-buffer xml-buffer))
     (funcall callback-fun (xml-rpc-xml-to-response xml-response))))
-  
+
 
 (defun xml-rpc-method-call-async (async-callback-func server-url method
 						      &rest params)

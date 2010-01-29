@@ -51,3 +51,6 @@ character." t)
 (autoload 'wl-other-frame "wl" "Wanderlust on new frame." t)
 (autoload 'wl-draft "wl-draft" "Write draft with Wanderlust." t)
 (autoload 'wl-user-agent-compose "wl-draft" nil t)
+
+(autoload 'weblogger "weblogger-fetch-entries" "Sync the entry ring with what is on the weblog server." t)
+(autoload 'markdown-mode "markdown-mode" "Major mode for editing Markdown files." t)
