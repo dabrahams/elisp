@@ -34,3 +34,15 @@
 [submodule "3rd-party/more-wl"]
 	path = 3rd-party/more-wl
 	url = git://repo.or.cz/more-wl.git
+[submodule "3rd-party/apel"]
+	path = 3rd-party/apel
+	url = git://github.com/techarcana/apel.git
+[submodule "3rd-party/flim"]
+	path = 3rd-party/flim
+	url = git://github.com/techarcana/flim.git
+[submodule "3rd-party/semi"]
+	path = 3rd-party/semi
+	url = git://github.com/techarcana/semi.git
+[submodule "3rd-party/wanderlust"]
+	path = 3rd-party/wanderlust
+	url = git://github.com/techarcana/wanderlust.git
