@@ -45,6 +45,8 @@
 a (two-character) keyboard shortcut and insert the corresponding
 character." t)
 
+(autoload 'unicode-smart-period "my-xmlunicode" "Insert an hellipsis for three dots." t)
+
 ;; This is probably not needed, but I forgot how to get 3rd-party
 ;; packages to generate autoloads for me.
 (autoload 'wl "wl" "Wanderlust" t)

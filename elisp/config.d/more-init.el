@@ -39,3 +39,14 @@
 
 ;; What the heck, I like it.
 (ido-mode)
+
+(defun my-text-mode-smart-keys ()
+  (when (fboundp 'unicode-smart-double-quote)
+    (unless (or (equal (char-syntax ?\") ?\") (equal (char-syntax ?\') ?\"))
+      (require 'my-xmlunicode) ; This helps avoid an annoying delay at the first quote key
+      (local-set-key [?\-] 'unicode-smart-hyphen)
+      (local-set-key [?\.] 'unicode-smart-period)
+      (local-set-key [?\"] 'unicode-smart-double-quote)
+      (local-set-key [?\'] 'unicode-smart-single-quote))))
+
+(add-hook 'after-change-major-mode-hook 'my-text-mode-smart-keys)
