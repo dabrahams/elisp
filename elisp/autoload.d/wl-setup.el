@@ -142,7 +142,10 @@ when we need it."
 
 (defun wl-draft-config-sub-signature (content)
   "Insert the signature at the end of the MIME message."
-  (let (;(signature-insert-at-eof nil)
+  (let ((signature-insert-at-eof nil) ; believe it or not, having this
+                                      ; set to t interferes with
+                                      ; wl-draft putting the signature
+                                      ; at the real end of the buffer.
         (signature-file-name content))
     (goto-char (mime-edit-content-end))
     (insert-signature)))

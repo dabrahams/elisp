@@ -265,7 +265,8 @@ The range thing slows me down.  However, I'd still like to know how to force the
  '(wl-auto-check-folder-name "Inbox")
  '(wl-auto-select-next (quote skip-no-unread))
  '(wl-auto-uncheck-folder-list (quote ("\\$.*" "%zz_mairix.*" "%zz_archive.*" "%.*")))
- '(wl-draft-config-alist (quote (("" ("Bcc" . "Dave Abrahams <dave@boostpro.com>") (signature . "~/.signature")))))
+ '(wl-draft-config-alist (quote (("" (part-bottom . "
+") ("Bcc" . "Dave Abrahams <dave@boostpro.com>") (signature . "~/.signature")))))
  '(wl-draft-reply-buffer-style (quote keep))
  '(wl-fldmgr-add-complete-with-current-folder-list t)
  '(wl-folder-desktop-name #("Messages" 0 8 (wl-folder-entity-id 0 wl-folder-is-group is-group)))
