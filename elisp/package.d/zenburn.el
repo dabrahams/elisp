@@ -220,6 +220,7 @@ static char *gnus-pointer[] = {
      '(underline ((t (:underline t))))
      ;; '(variable-pitch ((t (:font "-*-utopia-regular-r-*-*-12-*-*-*-*-*-*-*"))))
 
+     `(zenburn-foreground ((t (:background ,zenburn-fg))))
      `(zenburn-background-1 ((t (:background ,zenburn-bg+1))))
      `(zenburn-background-2 ((t (:background ,zenburn-bg+2))))
 
@@ -238,6 +239,9 @@ static char *gnus-pointer[] = {
 
      '(zenburn-lowlight-1 ((t (:foreground "#606060"))))
      '(zenburn-lowlight-2 ((t (:foreground "#708070"))))
+
+     '(zenburn-highlight-bluish 
+       ((t (:foreground "#dcdccc" :background "#506070"))))
 
      `(zenburn-yellow ((t (:foreground ,zenburn-yellow))))
      `(zenburn-orange ((t (:foreground ,zenburn-orange))))
@@ -447,6 +451,8 @@ static char *gnus-pointer[] = {
 
      '(custom-button
        ((t (:inherit fancy-widget-button))))
+     '(custom-face-tag
+       ((t (:inherit zenburn-primary-2))))
      '(custom-button-pressed
        ((t (:inherit fancy-widget-button-pressed))))
      '(custom-changed
