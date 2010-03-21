@@ -245,7 +245,7 @@ static char *gnus-pointer[] = {
      '(zenburn-lowlight-2 ((t (:foreground "#708070"))))
 
      '(zenburn-highlight-bluish 
-       ((t (:foreground "#dcdccc" :background "#506070"))))
+       ((t (:foreground nil :background "#506070"))))
 
      `(zenburn-yellow ((t (:foreground ,zenburn-yellow))))
      `(zenburn-orange ((t (:foreground ,zenburn-orange))))
@@ -386,8 +386,8 @@ static char *gnus-pointer[] = {
      `(minibuffer-prompt ((t (:foreground ,zenburn-yellow))))
      `(Buffer-menu-buffer ((t (:inherit zenburn-primary-1))))
 
-     '(region ((t (:foreground "#71d3b4" :background "#233323"))))
-     `(secondary-selection ((t (:foreground ,zenburn-fg :background "#506070"))))
+     '(region ((t (:foreground nil :background "#233323"))))
+     `(secondary-selection ((t (:foreground nil :background "#506070"))))
 
      '(trailing-whitespace ((t (:inherit font-lock-warning))))
      '(highlight ((t (:underline t))))
