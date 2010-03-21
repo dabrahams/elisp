@@ -6,6 +6,10 @@
 ;; URL: http://www.brockman.se/software/zenburn/zenburn.el
 ;; Updated: 2010-03-21 17:50
 
+;; Changes (2010-03) Dirk-Jan C. Binnema <djcb.bulk-AT-gmail.com>
+;;  - add Wanderlust faces, based on the work by <click-AT-gmx.net>
+;;  - don't change foreground in visible regions (selections)
+
 ;; Changes (2010-03) Dave Abrahams <dave@boostpro.com>
 ;;  - Minimal fixes to missing dependencies so this works with
 ;;    color-theme-select
@@ -890,7 +894,51 @@ static char *gnus-pointer[] = {
      '(w3m-image
        ((t (:inherit zenburn-primary-4))))
      '(w3m-form
-       ((t (:inherit widget-field)))))
+       ((t (:inherit widget-field))))
+
+     '(flyspell-duplicate ((t (:inherit zenburn-primary-1))))
+     '(flyspell-incorrect ((t (:inherit zenburn-primary-2))))
+
+     `(elscreen-tab-current-screen ((t (:inherit zenburn-primary-1))))
+     `(elscreen-tab-other-screen ((t (:foreground ,zenburn-yellow
+				   :background ,zenburn-green))))
+     
+     '(wl-highlight-message-headers ((t (:inherit zenburn-red+1))))
+     '(wl-highlight-message-header-contents ((t (:inherit zenburn-green))))
+     '(wl-highlight-message-important-header-contents
+	((t (:inherit zenburn-yellow))))
+     '(wl-highlight-message-important-header-contents2
+	((t (:inherit zenburn-blue))))
+     '(wl-highlight-message-unimportant-header-contents
+	((t (:inherit zenburn-term-dark-gray))))   ;; reuse term
+     '(wl-highlight-message-citation-header ((t (:inherit zenburn-red))))
+
+     '(wl-highlight-message-cited-text-1 ((t (:inherit zenburn-green))))
+     '(wl-highlight-message-cited-text-2 ((t (:inherit zenburn-blue))))
+     '(wl-highlight-message-cited-text-3 ((t (:foreground "#8f8f8f")))) 
+     '(wl-highlight-message-cited-text-4 ((t (:inherit zenburn-green))))
+
+     '(wl-highlight-message-signature ((t (:inherit zenburn-yellow))))
+
+     '(wl-highlight-summary-answered ((t (:inherit zenburn-fg))))
+     '(wl-highlight-summary-new ((t (:foreground "#e89393"))))
+      
+     '(wl-highlight-summary-displaying ((t (:inherit zenburn-red+1
+						   :background "#262626"))))
+      
+     '(wl-highlight-thread-indent ((t (:foreground "#ecbcec"))))
+     '(wl-highlight-summary-thread-top ((t (:foreground "#efdcbc"))))
+
+     '(wl-highlight-summary-normal ((t (:inherit zenburn-fg))))
+
+     '(wl-highlight-folder-zero ((t (:inherit zenburn-fg))))
+     '(wl-highlight-folder-few ((t (:inherit zenburn-red+1))))
+     '(wl-highlight-folder-many ((t (:inherit zenburn-red+1))))
+     '(wl-highlight-folder-unread ((t (:foreground "#e89393"))))
+
+     '(wl-highlight-folder-path ((t (:inherit zenburn-orange))))
+
+      )
 
     (zenburn-make-face-alias-clauses
      '(Buffer-menu-buffer-face
@@ -1173,7 +1221,36 @@ static char *gnus-pointer[] = {
        widget-documentation-face
        widget-field-face
        widget-inactive-face
-       widget-single-line-field-face))
+       widget-single-line-field-face
+       flyspell-duplicate-face
+       flyspell-incorrect-face
+       wl-highlight-message-headers-face
+       wl-highlight-message-header-contents-face
+       wl-highlight-message-important-header-contents-face
+       wl-highlight-message-important-header-contents2-face
+       wl-highlight-message-unimportant-header-contents-face
+       wl-highlight-message-citation-header-face
+       wl-highlight-message-cited-text-1-face
+       wl-highlight-message-cited-text-2-face
+       wl-highlight-message-cited-text-3-face
+       wl-highlight-message-cited-text-4-face
+       wl-highlight-message-signature-face
+       wl-highlight-summary-answered-face
+       wl-highlight-summary-new-face
+       wl-highlight-summary-displaying-face
+       wl-highlight-thread-indent-face
+       wl-highlight-summary-thread-top-face
+       wl-highlight-summary-normal-face
+       wl-highlight-folder-zero-face
+       wl-highlight-folder-few-face
+       wl-highlight-folder-many-face
+       wl-highlight-folder-unread-face
+       wl-highlight-folder-path-face
+       elscreen-tab-background-face
+       elscreen-tab-control-face
+       elscreen-tab-current-screen-face
+       elscreen-tab-other-screen-face
+	))
     )))
 
 (add-to-list 'color-themes '(color-theme-zenburn "Zenburn" "Daniel Brockman"))
