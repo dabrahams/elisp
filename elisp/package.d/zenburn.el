@@ -4,7 +4,11 @@
 
 ;; Author: Daniel Brockman <daniel@brockman.se>
 ;; URL: http://www.brockman.se/software/zenburn/zenburn.el
-;; Updated: 2009-07-08 05:27
+;; Updated: 2010-03-21 17:50
+
+;; Changes (2010-03) Dave Abrahams <dave@boostpro.com>
+;;  - Minimal fixes to missing dependencies so this works with
+;;    color-theme-select
 
 ;; Adrian C. and Bastien Guerry added org-mode faces.
 
@@ -220,7 +224,7 @@ static char *gnus-pointer[] = {
      '(underline ((t (:underline t))))
      ;; '(variable-pitch ((t (:font "-*-utopia-regular-r-*-*-12-*-*-*-*-*-*-*"))))
 
-     `(zenburn-foreground ((t (:background ,zenburn-fg))))
+     `(zenburn-foreground ((t (:foreground ,zenburn-fg))))
      `(zenburn-background-1 ((t (:background ,zenburn-bg+1))))
      `(zenburn-background-2 ((t (:background ,zenburn-bg+2))))
 
@@ -1171,6 +1175,8 @@ static char *gnus-pointer[] = {
        widget-inactive-face
        widget-single-line-field-face))
     )))
+
+(add-to-list 'color-themes '(color-theme-zenburn "Zenburn" "Daniel Brockman"))
 
 (defalias 'zenburn #'color-theme-zenburn)
 
