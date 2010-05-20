@@ -1,3 +1,124 @@
+;; Fill messages, thanks to Ron Isaacson <Ron.Isaacson-AT-morganstanley.com>
+;;
+(require 'mime-conf)
+(require 'wl-summary)
+
+(require 'filladapt)
+
+(defun wl-summary-fill-message (all)
+  (interactive "P")
+  (if (and wl-message-buffer (get-buffer-window wl-message-buffer))
+      (progn
+        (wl-summary-toggle-disp-msg 'on)
+        (save-excursion
+          (set-buffer wl-message-buffer)
+          (goto-char (point-min))
+          (re-search-forward "^$")
+          (while (or (looking-at "^\\[[1-9]") (looking-at "^$"))
+            (forward-line 1))
+          (let* ((buffer-read-only nil)
+                 (find (lambda (regexp)
+                         (save-excursion
+                           (if (re-search-forward regexp nil t)
+                               (match-beginning 0)
+                             (point-max)))))
+                 (start (point))
+                 (end (if all
+                          (point-max)
+                        (min (funcall find "^[^>\n]* wrote:[ \n]+")
+                             (funcall find "^>>>>>")
+                             (funcall find "^ *>.*\n *>")
+                             (funcall find "^-----Original Message-----")))))
+            (save-restriction
+              (narrow-to-region start end)
+              (filladapt-mode 1)
+              (fill-region (point-min) (point-max)))))
+        (message "Message re-filled"))
+    (message "No message to re-fill")))
+
+(define-key wl-summary-mode-map "\M-q" 'wl-summary-fill-message)
+
+;;
+;; Send HTML email, From David Maus David Maus <dmaus-AT-ictsoc.de>
+;; (http://article.gmane.org/gmane.mail.wanderlust.general.japanese/7460)
+;;
+
+(defun dmj/wl-send-html-message ()
+  "Send message as html message.
+  Convert body of message to html using
+  `org-export-region-as-html'."
+  (require 'org)
+  (save-excursion
+    (let (beg end html text)
+      (goto-char (point-min))
+      (re-search-forward "^--text follows this line--$")
+      ;; move to beginning of next line
+      (beginning-of-line 2)
+      (setq beg (point))
+      (if (not (re-search-forward "^--\\[\\[" nil t))
+          (setq end (point-max))
+        ;; line up
+        (end-of-line 0)
+        (setq end (point)))
+      ;; grab body
+      (setq text (buffer-substring-no-properties beg end))
+      ;; convert to html
+      (with-temp-buffer
+        (org-mode)
+        (insert text)
+        ;; handle signature
+        (when (re-search-backward "^-- \n" nil t)
+          ;; preserve link breaks in signature
+          (insert "\n#+BEGIN_VERSE\n")
+          (goto-char (point-max))
+          (insert "\n#+END_VERSE\n")
+          ;; grab html
+          (setq html (org-export-region-as-html
+                      (point-min) (point-max) t 'string))))
+      (delete-region beg end)
+      (insert
+       (concat
+	"--" "<<alternative>>-{\n"
+	"--" "[[text/plain]]\n" text
+        "--" "[[text/html]]\n"  html
+	"--" "}-<<alternative>>\n")))))
+
+(defun dmj/wl-send-html-message-toggle ()
+  "Toggle sending of html message."
+  (interactive)
+  (setq dmj/wl-send-html-message-toggled-p
+        (if dmj/wl-send-html-message-toggled-p
+            nil "HTML"))
+  (message "Sending html message toggled %s"
+           (if dmj/wl-send-html-message-toggled-p
+               "on" "off")))
+
+(defun dmj/wl-send-html-message-draft-init ()
+  "Create buffer local settings for maybe sending html message."
+  (unless (boundp 'dmj/wl-send-html-message-toggled-p)
+    (setq dmj/wl-send-html-message-toggled-p nil))
+  (make-variable-buffer-local 'dmj/wl-send-html-message-toggled-p)
+  (add-to-list 'global-mode-string
+               '(:eval (if (eq major-mode 'wl-draft-mode)
+                           dmj/wl-send-html-message-toggled-p))))
+
+(defun dmj/wl-send-html-message-maybe ()
+  "Maybe send this message as html message.
+
+If buffer local variable `dmj/wl-send-html-message-toggled-p' is
+non-nil, add `dmj/wl-send-html-message' to
+`mime-edit-translate-hook'."
+  (if dmj/wl-send-html-message-toggled-p
+      (add-hook 'mime-edit-translate-hook 'dmj/wl-send-html-message)
+    (remove-hook 'mime-edit-translate-hook 'dmj/wl-send-html-message)))
+
+(add-hook 'wl-draft-reedit-hook 'dmj/wl-send-html-message-draft-init)
+(add-hook 'wl-mail-setup-hook 'dmj/wl-send-html-message-draft-init)
+(add-hook 'wl-draft-send-hook 'dmj/wl-send-html-message-maybe)
+
+;; --------
+
+
 (defun my-wl-highlight-hook (beg end len);   )(and nil
   (let ((beginning (save-excursion
 		    (goto-char beg)
@@ -98,8 +219,6 @@ when we need it."
            (intern (downcase field)))))
       (if (listp raw-field) (car raw-field) raw-field))))
 
-(require 'mime-conf)
-(require 'wl-summary)
 (defvar my-mairix-map
   (let ((map (make-sparse-keymap)))
     (define-key wl-summary-mode-map "\M-m" map)

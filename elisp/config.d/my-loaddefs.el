@@ -106,6 +106,24 @@ BUFFER may be either a buffer or its name (a string).
 
 ;;;***
 
+;;;### (autoloads (php-mode php-file-patterns) "php-mode" "../../../../elisp/package.d/php-mode.el"
+;;;;;;  (19328 36945))
+;;; Generated autoloads from ../../../../elisp/package.d/php-mode.el
+
+(defvar php-file-patterns '("\\.php[s34]?\\'" "\\.phtml\\'" "\\.inc\\'") "\
+List of file patterns for which to automatically invoke `php-mode'.")
+
+(custom-autoload 'php-file-patterns "php-mode" nil)
+
+(autoload 'php-mode "php-mode" "\
+Major mode for editing PHP code.
+
+\\{php-mode-map}
+
+\(fn)" t nil)
+
+;;;***
+
 ;;;### (autoloads (svn-status svn-checkout) "psvn" "../../../../elisp/package.d/psvn.el"
 ;;;;;;  (18928 54753))
 ;;; Generated autoloads from ../../../../elisp/package.d/psvn.el
@@ -161,12 +179,35 @@ Sync the entry ring with what is on the weblog server.
 
 ;;;***
 
-;;;### (autoloads nil nil ("../../../../elisp/package.d/any-ini-mode.el"
+;;;### (autoloads (color-theme-zenburn) "zenburn" "../../../../elisp/package.d/zenburn.el"
+;;;;;;  (19366 38890))
+;;; Generated autoloads from ../../../../elisp/package.d/zenburn.el
+
+(autoload 'color-theme-zenburn "zenburn" "\
+Just some alien fruit salad to keep you in the zone.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil nil ("../../../../elisp/package.d/ac-anything.el"
+;;;;;;  "../../../../elisp/package.d/any-ini-mode.el" "../../../../elisp/package.d/anything.el"
 ;;;;;;  "../../../../elisp/package.d/cmake-mode.el" "../../../../elisp/package.d/cmake-mode.el"
 ;;;;;;  "../../../../elisp/package.d/completion-selection.el" "../../../../elisp/package.d/dwa-c++.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-compile.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-rectangle.el" "../../../../elisp/package.d/dwa-rectangle.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-util.el" "../../../../elisp/package.d/dwa-util.el"
+;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-1.4.6/elscreen.el"
+;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-color-theme-0.0.0/elscreen-color-theme.el"
+;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-dired-0.1.0/elscreen-dired.el"
+;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-dnd-0.0.0/elscreen-dnd.el"
+;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-gf-1.5.3/elscreen-gf.el"
+;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-goby-0.0.0/elscreen-goby.el"
+;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-howm-0.1.3/elscreen-howm.el"
+;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-server-0.2.0/elscreen-server.el"
+;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-speedbar-0.0.0/elscreen-speedbar.el"
+;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-w3m-0.2.2/elscreen-w3m.el"
+;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-wl-0.8.0/elscreen-wl.el"
 ;;;;;;  "../../../../elisp/package.d/git-contrib/git-blame.el" "../../../../elisp/package.d/git-contrib/git.el"
 ;;;;;;  "../../../../elisp/package.d/gravatar.el" "../../../../elisp/package.d/gravatar.el"
 ;;;;;;  "../../../../elisp/package.d/initsplit.el" "../../../../elisp/package.d/initsplit.el"
@@ -176,14 +217,15 @@ Sync the entry ring with what is on the weblog server.
 ;;;;;;  "../../../../elisp/package.d/misc-cmds.el" "../../../../elisp/package.d/muse-markdown.el"
 ;;;;;;  "../../../../elisp/package.d/muse-markdown.el" "../../../../elisp/package.d/my-xmlunicode.el"
 ;;;;;;  "../../../../elisp/package.d/osx-plist.el" "../../../../elisp/package.d/osx-plist.el"
-;;;;;;  "../../../../elisp/package.d/policy-switch.el" "../../../../elisp/package.d/psvn.el"
-;;;;;;  "../../../../elisp/package.d/smartquotes.el" "../../../../elisp/package.d/smartquotes.el"
-;;;;;;  "../../../../elisp/package.d/timeclock-x.el" "../../../../elisp/package.d/timeclock-x.el"
-;;;;;;  "../../../../elisp/package.d/unichars.el" "../../../../elisp/package.d/unichars.el"
-;;;;;;  "../../../../elisp/package.d/weblogger.el" "../../../../elisp/package.d/xml-rpc.el"
-;;;;;;  "../../../../elisp/package.d/xmlunicode.el" "../../../../elisp/package.d/xmlunicode.el"
-;;;;;;  "../../../../elisp/package.d/yaoddmuse.el") (19299 19832
-;;;;;;  157229))
+;;;;;;  "../../../../elisp/package.d/php-mode.el" "../../../../elisp/package.d/policy-switch.el"
+;;;;;;  "../../../../elisp/package.d/psvn.el" "../../../../elisp/package.d/smartquotes.el"
+;;;;;;  "../../../../elisp/package.d/smartquotes.el" "../../../../elisp/package.d/timeclock-x.el"
+;;;;;;  "../../../../elisp/package.d/timeclock-x.el" "../../../../elisp/package.d/unichars.el"
+;;;;;;  "../../../../elisp/package.d/unichars.el" "../../../../elisp/package.d/weblogger.el"
+;;;;;;  "../../../../elisp/package.d/xml-rpc.el" "../../../../elisp/package.d/xmlunicode.el"
+;;;;;;  "../../../../elisp/package.d/xmlunicode.el" "../../../../elisp/package.d/yaoddmuse.el"
+;;;;;;  "../../../../elisp/package.d/zenburn-wl.el" "../../../../elisp/package.d/zenburn.el")
+;;;;;;  (19367 17492 905903))
 
 ;;;***
 
