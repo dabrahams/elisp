@@ -14,7 +14,7 @@ always collected in a common directory")
 Blinking cursor just annoys me")
  '(canlock-password "963afd5a40a33c7f59217100af5a7c1648af74a1")
  '(cursor-type (quote box) t)
- '(default-frame-alist (quote ((menu-bar-lines . 1) (font . "Dejavu Sans Mono-9") (tool-bar-lines . 0))) nil nil "
+ '(default-frame-alist (quote ((font . "Monaco-13"))) nil nil "
 On Linux this is really just a way of hanging onto and documenting my
 settings for for default-frame-alist
 
@@ -130,7 +130,9 @@ from macports.")
  '(imap-shell-program (quote ("dovecot --exec-mail imap")))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
- '(ispell-program-name "aspell" t)
+ '(ispell-program-name "aspell")
+ '(magit-git-executable "/opt/local/bin/git")
+ '(magit-repo-dirs (quote ("/Users/dave/src" "/Users/dave/work/pipsync")))
  '(mail-signature t)
  '(mail-user-agent (quote gnus-user-agent) nil nil "
 Gnus Message with full Gnus features")
@@ -166,7 +168,10 @@ Added image/* to display attached images inline")
 The documentation for this variable says it all")
  '(mm-inline-text-html-with-images t)
  '(muse-project-alist (quote (("WikiPlanner" ("~/plans" :default "index" :major-mode planner-mode :visit-link planner-visit-link)))))
- '(ns-alternate-modifier (quote super))
+ '(ns-alternate-modifier (quote control) nil nil "
+I'm continually pressing option when I mean control.  So, I get no
+Command key.  Oh, well!  I wish I could make right-command work as
+command.")
  '(ns-command-modifier (quote meta))
  '(org-agenda-custom-commands (quote (("d" todo #("DELEGATED" 0 9 (face org-warning)) nil) ("c" todo #("DONE|DEFERRED|CANCELLED" 0 23 (face org-warning)) nil) ("w" todo #("WAITING" 0 7 (face org-warning)) nil) ("W" "Next 21 Days" agenda "" ((org-agenda-ndays 21))) ("A" "Today's Priority #A tasks:" agenda "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))) (org-agenda-ndays 1) (org-agenda-overriding-header "Today's Priority #A tasks: "))) ("u" "Unscheduled TODO entries" alltodo "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote scheduled) (quote deadline) (quote regexp) "<[^>
 ]+>"))))))))
@@ -220,7 +225,7 @@ As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-plan
 As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html.  Note: buffer-file-name was checked in the default.")
  '(remember-handler-functions (quote (org-remember-handler)) nil nil "As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html.  Note: remember-append-to-file is checked in the default.")
  '(rmail-dont-reply-to-names "dave@\\(boost-consulting\\|boostpro\\)\\.com\\|dave\\.abrahams@rcn\\.com\\|boost\\.consulting@gmail\\.com\\|dave\\.boostpro@gmail\\.com\\|Undisclosed-recipients[:;]*")
- '(safe-local-variable-values (quote ((folded-file . t))))
+ '(safe-local-variable-values (quote ((encoding . utf8) (folded-file . t))))
  '(server-mode t nil nil "
 Always run a server so we can open files in existing emacs frames.")
  '(show-paren-mode t)
@@ -254,8 +259,9 @@ I never like being nannied by regular browsers either.")
  '(warning-suppress-types (quote ((\(undo\ discard-info\)))) nil nil "
 Without this, emacs pops up annoying warnings in, e.g., *shell* buffers
 where I don't expect it to be keeping undo history anyway")
+ '(weblogger-config-alist (quote (("homepage" "http://techarcana.net/xmlrpc.php" "dave" "" "2"))))
  '(weblogger-edit-entry-hook (quote ((lambda nil (switch-to-buffer "*weblogger-entry*")))))
- '(weblogger-edit-mode (quote markdown-mode))
+ '(weblogger-edit-mode (quote my-weblogger-markdown-mode))
  '(weblogger-server-url "http://cpp-next.com/xmlrpc.php")
  '(weblogger-server-username "dave")
  '(weblogger-start-edit-entry-hook (quote ((lambda nil (message-goto-body) (while (search-forward "" nil t) (replace-match "" nil t))))))
@@ -265,13 +271,14 @@ The range thing slows me down.  However, I'd still like to know how to force the
  '(wl-auto-check-folder-name "Inbox")
  '(wl-auto-select-next (quote skip-no-unread))
  '(wl-auto-uncheck-folder-list (quote ("\\$.*" "%zz_mairix.*" "%zz_archive.*" "%.*")))
+ '(wl-draft-always-delete-myself t)
  '(wl-draft-config-alist (quote (("" (part-bottom . "
 ") ("Bcc" . "Dave Abrahams <dave@boostpro.com>") (signature . "~/.signature")))))
- '(wl-draft-reply-buffer-style (quote keep))
+ '(wl-draft-reply-buffer-style (quote full))
  '(wl-fldmgr-add-complete-with-current-folder-list t)
  '(wl-folder-desktop-name #("Messages" 0 8 (wl-folder-is-group is-group wl-folder-entity-id 0)))
  '(wl-folder-notify-deleted t)
- '(wl-folder-petname-alist (quote (("%INBOX" . "Inbox") ("+drafts" . "Drafts") (#("%INBOX" 0 6 (wl-folder-is-group nil wl-folder-entity-id 2)) . "Inbox") (#("+draft" 0 6 (wl-folder-is-group nil wl-folder-entity-id 58)) . "Drafts") ("%Trash" . "Trash"))))
+ '(wl-folder-petname-alist (quote (("%INBOX" . "Inbox") ("+drafts" . "Drafts") (#("%INBOX" 0 6 (wl-folder-entity-id 1 wl-folder-is-group nil)) . "Inbox") (#("+draft" 0 6 (wl-folder-entity-id 60 wl-folder-is-group nil)) . "Drafts") (#("%inbox:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 58 (wl-folder-entity-id 65 wl-folder-is-group nil)) . "Inbox") (#("%[Gmail]/Trash:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 66 (wl-folder-entity-id 67 wl-folder-is-group nil)) . "Trash") (#("%[Gmail]/Star:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 65 (wl-folder-entity-id 68 wl-folder-is-group nil)) . "With a Star") (#("%[Gmail]/Sent:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 65 (wl-folder-entity-id 69 wl-folder-is-group nil)) . "Sent") (#("%[Gmail]/Draft:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 66 (wl-folder-entity-id 70 wl-folder-is-group nil)) . "Draft") (#("%[Gmail]/All E-Mails:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 72 (wl-folder-entity-id 71 wl-folder-is-group nil)) . "All E-Mails") (#("%Org-Mode:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 61 (wl-folder-entity-id 72 wl-folder-is-group nil)) . "Org-Mode") ("%Trash" . "Trash"))))
  '(wl-folder-process-duplicates-alist (quote (("^.*" . hide))) nil nil "
 Don't show me any duplicate messages")
  '(wl-folder-window-width 60)
@@ -309,4 +316,10 @@ can tolerate being out-of-sync occasionally.")
  '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:background "Beige" :foreground "DarkGreen" :slant italic))))
  '(italic ((t (:slant italic :family "Monaco"))))
  '(mode-line ((((class color) (min-colors 88)) (:inherit variable-pitch :background "lightblue" :foreground "black" :box (:line-width -1 :style released-button) :height 1.2))))
- '(org-mode-line-clock ((t (:inherit variable-pitch :background "green" :foreground "black" :box (:line-width -1 :style released-button) :height 1.2))) t))
+ '(org-mode-line-clock ((t (:inherit variable-pitch :background "green" :foreground "black" :box (:line-width -1 :style released-button) :height 1.2))) t)
+ '(rst-level-1-face ((t (:background "grey85" :foreground "black"))) t)
+ '(rst-level-2-face ((t (:inherit nil :background "grey78" :foreground "black"))) t)
+ '(rst-level-3-face ((t (:background "grey71" :foreground "black"))) t)
+ '(rst-level-4-face ((t (:background "grey64" :foreground "black"))) t)
+ '(rst-level-5-face ((t (:background "grey57" :foreground "black"))) t)
+ '(rst-level-6-face ((t (:background "grey50" :foreground "black"))) t))

@@ -150,6 +150,10 @@ to values."
   '(unless (zenburn-format-spec-works-p)
      (zenburn-define-format-spec)))
 
+
+;;; This section of the original zenburn.el seems to make inappropriate "global" changes
+(unless nil
+
 (setq-default mode-line-buffer-identification
               (list (propertize "%12b" 'face
                                 (list :weight 'bold
@@ -182,6 +186,7 @@ static char *gnus-pointer[] = {
 \"######..###.######\",
 \"###....####.######\",
 \"###..######.######\"};"))
+)
 
 (defun zenburn-make-face-alias-clauses (alias-symbols)
   (let (clauses)
@@ -397,7 +402,7 @@ static char *gnus-pointer[] = {
      '(highlight ((t (:underline t))))
      '(paren ((t (:inherit zenburn-lowlight-1))))
      '(show-paren-mismatch ((t (:inherit font-lock-warning))))
-     '(show-paren-match ((t (:inherit font-lock-keyword))))
+     '(show-paren-match ((t (:inherit zenburn-highlight-damp))))
      '(match ((t (:weight bold))))
 
      `(cursor ((t (:background ,zenburn-fg :foreground ,zenburn-bg))))
