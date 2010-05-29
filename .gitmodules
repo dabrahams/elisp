@@ -31,18 +31,15 @@
 [submodule "3rd-party/markdown-mode"]
 	path = 3rd-party/markdown-mode
 	url = git://jblevins.org/git/markdown-mode.git
-[submodule "3rd-party/more-wl"]
-	path = 3rd-party/more-wl
-	url = git://repo.or.cz/more-wl.git
 [submodule "3rd-party/apel"]
 	path = 3rd-party/apel
-	url = git://github.com/techarcana/apel.git
+	url = git@github.com:dabrahams/apel.git
 [submodule "3rd-party/flim"]
 	path = 3rd-party/flim
-	url = git://github.com/techarcana/flim.git
+	url = git@github.com:dabrahams/flim.git
 [submodule "3rd-party/semi"]
 	path = 3rd-party/semi
-	url = git://github.com/techarcana/semi.git
+	url = git@github.com:dabrahams/semi.git
 [submodule "3rd-party/wanderlust"]
 	path = 3rd-party/wanderlust
-	url = git://github.com/techarcana/wanderlust.git
+	url = git@github.com:dabrahams/wanderlust.git
