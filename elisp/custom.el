@@ -14,7 +14,7 @@ always collected in a common directory")
 Blinking cursor just annoys me")
  '(canlock-password "963afd5a40a33c7f59217100af5a7c1648af74a1")
  '(cursor-type (quote box) t)
- '(default-frame-alist (quote ((font . "Monaco-13"))) nil nil "
+ '(default-frame-alist (quote ((menu-bar-lines . 1) (font . "Dejavu Sans Mono-9") (tool-bar-lines . 0))) nil nil "
 On Linux this is really just a way of hanging onto and documenting my
 settings for for default-frame-alist
 
@@ -130,7 +130,7 @@ from macports.")
  '(imap-shell-program (quote ("dovecot --exec-mail imap")))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
- '(ispell-program-name "aspell")
+ '(ispell-program-name "aspell" t)
  '(mail-signature t)
  '(mail-user-agent (quote gnus-user-agent) nil nil "
 Gnus Message with full Gnus features")
@@ -147,7 +147,7 @@ Removed \"}\" from the allowable characters because I often type that when writi
 " nil nil "
 Always Bcc: myself")
  '(message-forward-ignored-headers (quote ("^Content-Transfer-Encoding:" "^X-Gnus" "^X-" "^Received:" "^User-Agent:" "^References:")))
- '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) nil nil "
+ '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) t nil "
 Automatically wrap text during email composition")
  '(message-send-mail-function (quote message-send-mail-with-sendmail))
  '(message-subject-re-regexp "^[ 	]*\\(\\([Rr][Ee]\\|[Aa][Ww]\\)\\(\\[[0-9]*\\]\\)*:[ 	]*\\)*[ 	]*" nil nil "
@@ -269,9 +269,9 @@ The range thing slows me down.  However, I'd still like to know how to force the
 ") ("Bcc" . "Dave Abrahams <dave@boostpro.com>") (signature . "~/.signature")))))
  '(wl-draft-reply-buffer-style (quote keep))
  '(wl-fldmgr-add-complete-with-current-folder-list t)
- '(wl-folder-desktop-name #("Messages" 0 8 (wl-folder-entity-id 0 wl-folder-is-group is-group)))
+ '(wl-folder-desktop-name #("Messages" 0 8 (wl-folder-is-group is-group wl-folder-entity-id 0)))
  '(wl-folder-notify-deleted t)
- '(wl-folder-petname-alist (quote (("%INBOX" . "Inbox") ("+drafts" . "Drafts") (#("%INBOX" 0 6 (wl-folder-entity-id 2 wl-folder-is-group nil)) . "Inbox") (#("+draft" 0 6 (wl-folder-entity-id 58 wl-folder-is-group nil)) . "Drafts") ("%Trash" . "Trash"))))
+ '(wl-folder-petname-alist (quote (("%INBOX" . "Inbox") ("+drafts" . "Drafts") (#("%INBOX" 0 6 (wl-folder-is-group nil wl-folder-entity-id 2)) . "Inbox") (#("+draft" 0 6 (wl-folder-is-group nil wl-folder-entity-id 58)) . "Drafts") ("%Trash" . "Trash"))))
  '(wl-folder-process-duplicates-alist (quote (("^.*" . hide))) nil nil "
 Don't show me any duplicate messages")
  '(wl-folder-window-width 60)
