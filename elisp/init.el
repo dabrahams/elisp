@@ -75,9 +75,6 @@ representation."
   "Load a compiled version of the file or library if possible; else load a source version"
   (load (strip-lisp-suffix file-or-library-name)))
 
-(setq custom-file (expand-file-name "custom.el" init-path))
-(load-optimized custom-file)
-
 (setq init-package-path (expand-file-name "package.d" init-path)
       init-3rd-party-package-path (expand-file-name "package.d" init-3rd-party-path)
       init-config-path (expand-file-name "config.d" init-path)
@@ -167,6 +164,16 @@ initial load-path."
 ;;; Add the init-path tree to the load-path
 (setq initial-load-path load-path)
 (add-init-path-to-load-path)
+
+(add-hook 'after-save-hook 'initsplit-byte-compile-files t)
+(setq custom-file (expand-file-name "custom.el" init-path))
+(load-optimized custom-file)
+
+(load "initsplit")
+;; Attempt to load up everything in the list of split initialization files
+(mapc (lambda (init-file-spec) (load (cadr init-file-spec) nil))
+      initsplit-customizations-alist)
+
 
 ; So you can tell the difference between GNU Emacs and XEmacs in your
 ; settings files
