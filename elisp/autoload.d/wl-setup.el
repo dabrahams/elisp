@@ -4,6 +4,7 @@
 (require 'wl-summary)
 
 (require 'filladapt)
+(require 'org-wl)
 
 (defun wl-summary-fill-message (all)
   (interactive "P")
@@ -120,20 +121,22 @@ non-nil, add `dmj/wl-send-html-message' to
 
 
 (defun my-wl-highlight-hook (beg end len);   )(and nil
-  (let ((beginning (save-excursion
-		    (goto-char beg)
-		    (re-search-backward "^" nil t)))
-	(ending (save-excursion
-		  (goto-char end)
-		  (re-search-forward "$" nil t))))
-    (put-text-property beginning ending 'face nil)
-    (wl-highlight-message beginning ending t nil)
-    (wl-highlight-message beginning ending t t)
-    ))
+  (save-match-data
+    (let ((beginning (save-excursion
+                       (goto-char beg)
+                       (re-search-backward "^" nil t)))
+          (ending (save-excursion
+                    (goto-char end)
+                    (re-search-forward "$" nil t))))
+      (put-text-property beginning ending 'face nil)
+      (wl-highlight-message beginning ending t nil)
+      (wl-highlight-message beginning ending t t)
+      )))
 
 (defun my-wl-draft-install-change-hooks ()
   (make-local-variable 'after-change-functions)
-  (add-hook 'after-change-functions 'my-wl-highlight-hook))
+  (add-hook 'after-change-functions 'my-wl-highlight-hook)
+)
 
 (add-hook 'wl-draft-mode-hook 'my-wl-draft-install-change-hooks)
 
@@ -336,6 +339,7 @@ when we need it."
 
     ;; Key bindings
     (local-set-key "D" 'wl-thread-delete)
+    (local-set-key "d" 'wl-summary-delete)
     (local-set-key "b" 'wl-summary-resend-bounced-mail)
     (local-set-key "\C-d" 'my-wl-summary-delete-and-move-prev)
     (local-set-key "\C-cQ" 'my-wl-delete-whole-folder)
@@ -637,3 +641,312 @@ so that the appropriate emacs mode is selected according to the file extension."
 
 ;; -----------
 (require 'mime-w3m)
+
+
+;; ------------
+
+(require 'wl-gravatar)
+(setq wl-highlight-x-face-function 'wl-gravatar-insert)
+(setq gravatar-directory "~/.cache/emacs-gravatar/")
+(setq gravatar-unregistered-icon 'identicon)
+(setq wl-gravatar-retrieve-once t)
+
+
+;; ------------------------------------------------
+
+(luna-define-method elmo-folder-synchronize ((folder elmo-folder)
+					     &optional
+					     disable-killed
+					     ignore-msgdb
+					     no-check
+					     mask)
+  (let ((old-msgdb (elmo-folder-msgdb folder))
+	(killed-list (elmo-folder-killed-list-internal folder))
+	(flag-table (elmo-flag-table-load (elmo-folder-msgdb-path folder)))
+	(before-append t))
+    (when ignore-msgdb
+      (elmo-msgdb-flag-table (elmo-folder-msgdb folder) flag-table)
+      (elmo-folder-clear folder (not disable-killed)))
+    (unless no-check (elmo-folder-check folder))
+    (condition-case nil
+	(let ((killed-list (elmo-folder-killed-list-internal folder))
+	      diff-new diff-del
+	      delete-list new-list new-msgdb crossed)
+	  (message "Checking folder diff...")
+          (if (and mask
+                   (eq 'elmo-imap4-folder (luna-class-name folder)))
+              (elmo-set-list
+               '(diff-new diff-del)
+               (elmo-list-diff
+                (elmo-imap4-list 
+                 folder
+                 (concat "UID "
+                         (mapconcat (lambda (uid)
+                                      (format "%d" uid))
+                                    mask ",")))
+                (elmo-list-filter
+                 mask 
+                 (elmo-folder-list-messages folder nil 'in-msgdb))))
+            (elmo-set-list
+             '(diff-new diff-del)
+             (elmo-list-diff (elmo-folder-list-messages folder)
+                             (elmo-folder-list-messages folder nil 'in-msgdb))))
+	  (when diff-new
+	    (setq diff-new (sort diff-new #'<))
+	    (unless disable-killed
+	      (setq diff-new (elmo-living-messages diff-new killed-list)))
+	    (when (and mask (not ignore-msgdb))
+	      (setq diff-new (elmo-list-filter mask diff-new))))
+	  (message "Checking folder diff...done")
+	  (setq new-list (elmo-folder-confirm-appends folder diff-new))
+	  ;; Append to killed list as (MIN-OF-DISAPPEARED . MAX-OF-DISAPPEARED)
+	  (when (not (eq (length diff-new)
+			 (length new-list)))
+	    (let* ((diff (elmo-list-diff diff-new new-list))
+		   (disappeared (sort (car diff) #'<)))
+	      (when disappeared
+		(elmo-folder-kill-messages-range folder
+						 (car disappeared)
+						 (elmo-last disappeared)))))
+	  (setq delete-list diff-del)
+	  (if (and (null diff-new) (null diff-del))
+	      (progn
+		(elmo-folder-update-number folder)
+		(elmo-folder-process-crosspost folder)
+		0)			; `0' means no updates.
+	    (when delete-list
+	      (elmo-folder-detach-messages folder delete-list))
+	    (when new-list
+	      (elmo-msgdb-out-of-date-messages (elmo-folder-msgdb folder))
+	      (setq new-msgdb (elmo-folder-msgdb-create
+			       folder new-list flag-table))
+	      ;; Clear flag-table
+	      (if (elmo-folder-persistent-p folder)
+		  (elmo-flag-table-save (elmo-folder-msgdb-path folder)
+					nil))
+	      (setq before-append nil)
+	      (setq crossed (elmo-folder-append-msgdb folder new-msgdb))
+	      ;; process crosspost.
+	      ;; Return a cons cell of (NUMBER-CROSSPOSTS . NEW-FLAG-ALIST).
+	      (elmo-folder-process-crosspost folder))
+	    ;; return value.
+	    (or crossed 0)))
+      (quit
+       ;; Resume to the original status.
+       (if before-append (elmo-folder-set-msgdb-internal folder old-msgdb))
+       (elmo-folder-set-killed-list-internal folder killed-list)
+       nil))))
+
+(defun egh:wl-all-folder () "%[Gmail]/All Mail")
+
+(defvar egh:wl-summary-prev-folder-name nil)
+(defvar dwa:wl-summary-prev-message-id nil)
+
+(defun dwa:wl-current-thread-location ()
+  "Return a pair consisting of the message-id of the current
+message and of the root of its thread (both surrounded by <...>)"
+  (save-excursion
+    (wl-summary-set-message-buffer-or-redisplay)
+    (set-buffer (wl-message-get-original-buffer))
+
+    (let ((message-id (std11-field-body "Message-Id")))
+     ;; The thread root is the first UID in References, if any, or
+     ;; else is the current message
+      (cons message-id
+            (car (split-string (or (std11-field-body "References") message-id)))))
+    ))
+
+(defun dwa:wl-thread-root-folder (thread-root)
+  (let ((root-uid (substring thread-root 1 -1)))
+         (concat "/message-id:\"" thread-root
+                 "\"|references:\"" thread-root
+                 "\"/" (egh:wl-all-folder))))
+
+(defun egh:wl-summary-visit-conversation (&optional close)
+ (interactive "P")
+ (if close
+     (if egh:wl-summary-prev-folder-name
+         (progn
+           (wl-summary-goto-folder-subr egh:wl-summary-prev-folder-name
+                                        'no-sync nil nil t)
+           (wl-summary-jump-to-msg-by-message-id dwa:wl-summary-prev-message-id))
+       (message "No previous folder to visit."))
+
+   (let* ((thread-location (dwa:wl-current-thread-location))
+          (cur-message-id (car thread-location))
+          (thread-folder (dwa:wl-thread-root-folder (cdr thread-location)))
+          (prev-folder-name wl-summary-buffer-folder-name)
+         )
+     (wl-summary-goto-folder-subr thread-folder 'update nil nil t)
+     (wl-summary-jump-to-msg-by-message-id cur-message-id)
+     (setq egh:wl-summary-prev-folder-name prev-folder-name
+           dwa:wl-summary-prev-message-id cur-message-id)
+     (make-local-variable 'egh:wl-summary-prev-folder-name)
+     (make-local-variable 'dwa:wl-summary-prev-message-id)
+     )))
+
+
+
+(defadvice org-wl-store-link-message (after dwa:org-wl-store-link activate protect)
+  (if (string= (substring ad-return-value 0 3) "wl:")
+      (let* ((thread-location (dwa:wl-current-thread-location))
+             (message-id (car thread-location))
+             (folder-name (dwa:wl-thread-root-folder (cdr thread-location)))
+             (message-id-no-brackets (org-remove-angle-brackets message-id))
+             (link (org-make-link "wl:" folder-name "#" message-id-no-brackets))
+             )
+        (org-add-link-props :link link)
+        (setq ad-return-value link)
+    )))
+
+;; [[wl:/message-id:"<4C9F8638.702@gmail.com>"|references:"<4C9F8638.702@gmail.com>"/%%5BGmail%5D/All%20Mail#4CA6FDCB.7050703@michi7x7.de][Email from michi7x7: Re: {Boost-users} Users! Who'd]]
+(defun dwa:org-wl-capture ())
+  
+
+(define-key wl-summary-mode-map "X" 'egh:wl-summary-visit-conversation)
+
+(when nil
+
+(defun elmo-imap4-search2-build-full-command (search)
+  "Process charset at beginning of SEARCH and build a full IMAP
+search command."
+  (let ((charset (car search)))
+    (append '("uid search ")
+            (if (not (null charset))
+                (list "CHARSET " charset))
+            '(" ")
+            (cdr search))))
+
+(defun elmo-imap4-search2-perform (session search-or-msg-ids)
+  "Perform a search in an IMAP session."
+  (if (numberp (car search-or-msg-ids))
+      search-or-msg-ids
+    (elmo-imap4-response-value
+     (elmo-imap4-send-command-wait
+      session
+      (elmo-imap4-search2-build-full-command search-or-msg-ids))
+     'search)))
+
+(defun elmo-imap4-search2-generate-vector (folder filter from-msgs)
+  "Generate an IMAP search or a list of message ids from a search
+condition vector."
+  (let ((search-key (elmo-filter-key filter))
+	(imap-search-keys '("bcc" "body" "cc" "from" "subject" "to"
+			    "larger" "smaller" "flag")))
+    (cond
+     ((string= "last" search-key)
+      (let ((numbers (or from-msgs (elmo-folder-list-messages folder)))
+            (length (length from-msgs)))
+	(nthcdr (max (- (length numbers)
+			(string-to-number (elmo-filter-value filter)))
+		     0)
+		numbers)))
+     ((string= "first" search-key)
+      (let* ((numbers (or from-msgs (elmo-folder-list-messages folder)))
+	     (rest (nthcdr (string-to-number (elmo-filter-value filter) )
+			   numbers)))
+	(mapcar '(lambda (x) (delete x numbers)) rest)
+	numbers))
+     ((string= "flag" search-key)
+      (elmo-imap4-folder-list-flagged
+       folder (intern (elmo-filter-value filter))))
+     ((or (string= "since" search-key)
+	  (string= "before" search-key))
+      (list
+       nil
+       (if (eq (elmo-filter-type filter)
+               'unmatch)
+           "not " "")
+       (concat "sent" search-key)
+       " "
+       (elmo-date-get-description
+        (elmo-date-get-datevec
+         (elmo-filter-value filter)))))
+     (t
+      (let ((charset (elmo-imap4-detect-search-charset
+                      (elmo-filter-value filter))))
+        (list
+         (elmo-imap4-astring
+          (symbol-name charset))
+         (if (eq (elmo-filter-type filter)
+                 'unmatch)
+             "not " "")
+         (format "%s%s "
+                 (if (member (elmo-filter-key filter) imap-search-keys)
+                     ""
+                   "header ")
+                 (elmo-filter-key filter))
+         (elmo-imap4-astring
+          (encode-mime-charset-string
+           (elmo-filter-value filter) charset))))))))
+
+(defun elmo-imap4-search2-mergeable? (a b)
+  "Return t if A and B are two mergeable IMAP searches."
+  (let ((cara (car a))
+        (carb (car b)))
+    (and (not (numberp cara))
+         (not (numberp carb))
+         (or (null cara)
+             (null carb)
+             (equal cara carb)))))
+
+(defun elmo-imap4-search2-mergeable-charset (a b)
+  "Return the charset of two searches."
+  (or (car a)
+      (car b)))
+
+(defun elmo-imap4-search2-generate-uid (msgs)
+  "Return a search for a set of msgs."
+  (list nil 
+        (concat "uid " 
+                (cdr (car
+                      (elmo-imap4-make-number-set-list msgs))))))
+  
+(defun elmo-imap4-search2-generate-and (a b)
+  "AND two searches."
+  (if (elmo-imap4-search2-mergeable? a b)
+      (append (list (elmo-imap4-search2-mergeable-charset a b))
+              (cdr a) '(" ") (cdr b))
+    (elmo-list-filter (elmo-imap4-search2-perform session a) 
+                      (elmo-imap4-search2-perform session b))))
+
+(defun elmo-imap4-search2-generate-or (a b)
+  "OR two searches."
+  (if (elmo-imap4-search2-mergeable? a b)
+      (append (list (elmo-imap4-search2-mergeable-charset a b))
+              '("OR " "(") (cdr a) '(")" " " "(") (cdr b) '(")"))
+    (elmo-uniq-list (append (elmo-imap4-search2-perform session a)
+                            (elmo-imap4-search2-perform session b)))))
+  
+(defun elmo-imap4-search2-generate (folder condition from-msgs)
+  (if (vectorp condition)
+      (elmo-imap4-search2-generate-vector folder condition from-msgs)
+    (let ((a (elmo-imap4-search2-generate folder (nth 1 condition)
+                                          from-msgs))
+          (b (elmo-imap4-search2-generate folder (nth 2 condition)
+                                          from-msgs)))
+      (cond
+       ((eq (car condition) 'and)
+        (elmo-imap4-search2-generate-and a b))
+       ((eq (car condition) 'or)
+        (elmo-imap4-search2-generate-or a b))))))
+
+(if (not (boundp 'elmo-imap4-search-internal-orig))
+    (fset 'elmo-imap4-search-internal-orig
+          (symbol-function 'elmo-imap4-search-internal)))
+
+(defun elmo-imap4-search2-internal (folder session condition from-msgs)
+  (let* ((imap-search
+          (if from-msgs
+              (elmo-imap4-search2-generate-and
+               (elmo-imap4-search2-generate-uid from-msgs)
+               (elmo-imap4-search2-generate folder condition from-msgs))
+            (elmo-imap4-search2-generate folder condition from-msgs))))
+    (elmo-imap4-search2-perform session imap-search)))
+
+(defun elmo-imap4-search-internal (folder session condition from-msgs)
+  (elmo-imap4-search2-internal folder session condition from-msgs))
+
+;; (fset 'elmo-imap4-search-internal
+;;   (symbol-function 'elmo-imap4-search-internal-orig))
+)
