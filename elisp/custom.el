@@ -12,9 +12,14 @@ always collected in a common directory")
  '(backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
  '(blink-cursor-mode nil nil nil "
 Blinking cursor just annoys me")
+ '(c-basic-offset 4)
+ '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "bsd"))))
+ '(calendar-latitude 40.845112)
+ '(calendar-longitude -74.287672)
+ '(calendar-mark-holidays-flag t)
  '(canlock-password "963afd5a40a33c7f59217100af5a7c1648af74a1")
  '(cursor-type (quote box) t)
- '(default-frame-alist (quote ((font . "Monaco-13"))) nil nil "
+ '(default-frame-alist (quote ((font . "Monaco-15"))) nil nil "
 On Linux this is really just a way of hanging onto and documenting my
 settings for for default-frame-alist
 
@@ -74,9 +79,9 @@ Run Ediff all in one frame.  The default when there's a window manager is for
 emacs to pop up a separate frame for the `*Ediff Control Panel*' buffer")
  '(elmo-imap4-default-authenticate-type (quote clear))
  '(elmo-imap4-default-port 993)
- '(elmo-imap4-default-server "www.boostpro.com")
+ '(elmo-imap4-default-server "imap.gmail.com")
  '(elmo-imap4-default-stream-type (quote ssl))
- '(elmo-imap4-default-user "dave")
+ '(elmo-imap4-default-user "dave@boostpro.com")
  '(elmo-lang "en")
  '(elmo-localdir-folder-path "~/Maildir")
  '(elmo-message-fetch-confirm nil)
@@ -84,7 +89,6 @@ emacs to pop up a separate frame for the `*Ediff Control Panel*' buffer")
 The default limit is so low that it always asks about messages that would fetch quickly.")
  '(elmo-nntp-default-server "news.gmane.org")
  '(elmo-search-namazu-default-index-path "~/Maildir")
- '(epg-gpg-program "gpg2")
  '(erc-default-sound "~/erc.wav")
  '(erc-modules (quote (autoaway autojoin button completion fill irccontrols list log match menu move-to-prompt netsplit networks noncommands readonly ring smiley sound stamp track)))
  '(erc-nick "bewst")
@@ -99,7 +103,7 @@ Giving an explicit path like /bin/bash (the default from my Linux boxen) fails o
 This hung emacs on my Mac once when pinging.")
  '(ffap-require-prefix t nil nil "
 Invoking ffap without any prefix tends to do things I don't intend.")
- '(g-user-email "boost.consulting@gmail.com")
+ '(g-user-email "dave@boostpro.com")
  '(gdb-max-frames 100 nil nil "
 Increased the number of stack frames displayed from 40")
  '(global-auto-revert-mode t nil nil "
@@ -112,8 +116,8 @@ We want our file buffers to stay up-to-date with changes on disk")
  '(gnus-ignored-from-addresses "^david.abrahams@rcn.com\\|dave@boost\\(-consulting\\|pro\\).com$")
  '(gnus-picon-style (quote right))
  '(gnus-registry-install t)
- '(gnus-secondary-select-methods (quote ((nnimap "imap.gmail.com" (nnimap-server-port 993) (nnimap-stream ssl)))))
- '(gnus-select-method (quote (nnimap "boostpro" (nnimap-address "www.boostpro.com") (nnimap-stream ssl) (nnimap-authenticator login) (nimap-nov-is-evil t))))
+ '(gnus-secondary-select-methods (quote ((nnimap "Personal GMail" (nnimap-address "imap.gmail.com") (nnimap-server-port 993) (nnimap-stream ssl)))))
+ '(gnus-select-method (quote (nnimap "BoostPro GMail" (nnimap-address "imap.gmail.com") (nnimap-stream ssl) (nnimap-authenticator login) (nnimap-nov-is-evil t))))
  '(gnus-summary-ignore-duplicates t)
  '(gnus-treat-fill-long-lines (quote first) nil nil "
 Some people don't embed linebreaks in their paragraphs; this will force-add them.")
@@ -130,9 +134,11 @@ from macports.")
  '(imap-shell-program (quote ("dovecot --exec-mail imap")))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
+ '(initsplit-customizations-alist (quote (("\\`\\(org\\|calendar\\|diary\\)-" "~/Dropbox/.org.el" t))))
  '(ispell-program-name "aspell")
  '(magit-git-executable "/opt/local/bin/git")
  '(magit-repo-dirs (quote ("/Users/dave/src" "/Users/dave/work/pipsync")))
+ '(magit-repo-dirs-depth 1)
  '(mail-signature t)
  '(mail-user-agent (quote gnus-user-agent) nil nil "
 Gnus Message with full Gnus features")
@@ -173,51 +179,91 @@ I'm continually pressing option when I mean control.  So, I get no
 Command key.  Oh, well!  I wish I could make right-command work as
 command.")
  '(ns-command-modifier (quote meta))
- '(org-agenda-custom-commands (quote (("d" todo #("DELEGATED" 0 9 (face org-warning)) nil) ("c" todo #("DONE|DEFERRED|CANCELLED" 0 23 (face org-warning)) nil) ("w" todo #("WAITING" 0 7 (face org-warning)) nil) ("W" "Next 21 Days" agenda "" ((org-agenda-ndays 21))) ("A" "Today's Priority #A tasks:" agenda "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))) (org-agenda-ndays 1) (org-agenda-overriding-header "Today's Priority #A tasks: "))) ("u" "Unscheduled TODO entries" alltodo "" ((org-agenda-skip-function (lambda nil (org-agenda-skip-entry-if (quote scheduled) (quote deadline) (quote regexp) "<[^>
-]+>"))))))))
- '(org-agenda-files (quote ("~/work/boostcon.org" "~/work/osol.org" "~/work/blogging.org" "~/work/sysadmin-plan.org" "~/todo.org" "~/biz/clients.org" "~/biz/clients/searchme.org" "~/biz/clients/searchme.org" "~/notes.org")))
- '(org-agenda-skip-deadline-if-done t nil nil "
-As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
- '(org-agenda-skip-scheduled-if-done t nil nil "
-As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
- '(org-agenda-start-on-weekday nil nil nil "
-As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
- '(org-default-notes-file "~/notes.org" nil nil "
-As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
+ '(org-M-RET-may-split-line (quote ((headline) (default . t))))
+ '(org-agenda-auto-exclude-function (quote org-my-auto-exclude-function))
+ '(org-agenda-cmp-user-defined (quote org-cmp-ceg-bugs))
+ '(org-agenda-custom-commands (quote (("E" "Errands (next 3 days)" tags "Errand&TODO<>\"DONE\"&TODO<>\"CANCELLED\"&STYLE<>\"habit\"&SCHEDULED<\"<+3d>\"" ((org-agenda-overriding-header "Errands (next 3 days)"))) ("A" "Priority #A tasks" agenda "" ((org-agenda-ndays 1) (org-agenda-overriding-header "Today's priority #A tasks: ") (org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote notregexp) "\\=.*\\[#A\\]"))))) ("B" "Priority #A and #B tasks" agenda "" ((org-agenda-ndays 1) (org-agenda-overriding-header "Today's priority #A and #B tasks: ") (org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote regexp) "\\=.*\\[#C\\]"))))) ("w" "Waiting/delegated tasks" tags "TODO=\"WAITING\"|TODO=\"DELEGATED\"" ((org-agenda-overriding-header "Waiting/delegated tasks:") (org-agenda-sorting-strategy (quote (todo-state-up priority-down category-up))))) ("u" "Unscheduled tasks" tags "TODO<>\"\"&TODO<>\"DONE\"&TODO<>\"CANCELLED\"&TODO<>\"NOTE\"&CATEGORY<>{CEG\\|ABC\\|Bizcard\\|Adagio\\|EVAprint\\|\\<IT\\>}" ((org-agenda-overriding-header "Unscheduled tasks: ") (org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline) (quote timestamp) (quote regexp) "\\* \\(DEFERRED\\|SOMEDAY\\)"))) (org-agenda-files (quote ("~/Dropbox/todo.txt"))) (org-agenda-sorting-strategy (quote (todo-state-up priority-down category-up))))) ("U" "Deferred tasks" tags "TODO=\"DEFERRED\"&CATEGORY<>{CEG\\|ABC\\|Bizcard\\|Adagio\\|EVAprint\\|\\<IT\\>}" ((org-agenda-overriding-header "Deferred tasks:"))) ("S" "Someday tasks" tags "TODO=\"SOMEDAY\"&CATEGORY<>{CEG\\|ABC\\|Bizcard\\|Adagio\\|EVAprint\\|\\<IT\\>}" ((org-agenda-overriding-header "Someday tasks:"))) ("G" "Ledger tasks (all)" tags-todo "TODO<>{SOMEDAY}" ((org-agenda-files (quote ("~/src/ledger/plan/TODO"))) (org-agenda-overriding-header "Ledger tasks:") (org-agenda-sorting-strategy (quote (todo-state-up priority-down category-up))))) ("l" "Ledger tasks" tags-todo "TODO<>{SOMEDAY\\|DEFERRED}" ((org-agenda-files (quote ("~/src/ledger/plan/TODO"))) (org-agenda-overriding-header "Ledger tasks:") (org-agenda-sorting-strategy (quote (todo-state-up priority-down category-up))) (org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote regexp) "\\=.*\\[#C\\]"))))) ("L" "Ledger tasks not in Bugzilla" alltodo "" ((org-agenda-files (quote ("~/src/ledger/plan/TODO"))) (org-agenda-overriding-header "Ledger tasks:") (org-agenda-sorting-strategy (quote (todo-state-up priority-down category-up))) (org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote regexp) "\\(bug:\\)"))))) ("r" "Uncategorized items" tags "CATEGORY=\"Inbox\"&LEVEL=2" ((org-agenda-overriding-header "Uncategorized items"))) ("W" "Unscheduled work tasks" tags "CATEGORY={CEG\\|ABC\\|Bizcard\\|Adagio\\|IT\\|EVAprint}&CATEGORY<>\"Website\"&TODO<>\"DONE\"&TODO<>\"CANCELLED\"&TODO<>\"NOTE\"&TODO<>\"\"&LEVEL>1" ((org-agenda-overriding-header "Unscheduled work tasks") (org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote scheduled) (quote deadline)))) (org-agenda-sorting-strategy (quote (todo-state-up priority-down))))) ("z" "CEG tasks not in Bugzilla" tags "CATEGORY={CEG\\|ABC\\|Bizcard\\|Adagio\\|IT\\|EVAprint}&CATEGORY<>{Website\\|Admin}&TODO<>\"DONE\"&TODO<>\"CANCELLED\"&TODO<>\"NOTE\"&TODO<>\"\"&LEVEL>1&SCOPE<>\"local\"" ((org-agenda-overriding-header "CEG tasks not in Bugzilla") (org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote regexp) "\\(cegbug:\\)"))))) ("Z" "CEG tasks in Bugzilla" tags "CATEGORY={CEG\\|ABC\\|Bizcard\\|Adagio\\|IT\\|EVAprint}&TODO<>\"DONE\"&TODO<>\"CANCELLED\"&TODO<>\"DELEGATED\"&TODO<>\"NOTE\"&LEVEL>1" ((org-agenda-overriding-header "CEG tasks in Bugzilla") (org-agenda-skip-function (quote (org-agenda-skip-entry-if (quote notregexp) "cegbug:"))) (org-agenda-sorting-strategy (quote (todo-state-up category-down priority-down user-defined-up))))))))
+ '(org-agenda-deadline-leaders (quote ("D: " "D%d: ")))
+ '(org-agenda-deadline-relative-text "D%d: ")
+ '(org-agenda-deadline-text "D: ")
+ '(org-agenda-default-appointment-duration 60)
+ '(org-agenda-files (quote ("~/Dropbox/todo.txt" "~/Dropbox/Projects")))
+ '(org-agenda-fontify-priorities t)
+ '(org-agenda-include-diary t)
+ '(org-agenda-menu-show-matcher nil nil nil "
+Wiegleymacs has some pretty long matcher strings
+")
+ '(org-agenda-menu-two-column t nil nil "
+Wiegleymacs has some pretty long matchers
+")
+ '(org-agenda-ndays 1)
+ '(org-agenda-persistent-filter t)
+ '(org-agenda-prefix-format (quote ((agenda . "  %-11:c%?-12t% s") (timeline . "  % s") (todo . "  %-11:c") (tags . "  %-11:c"))))
+ '(org-agenda-scheduled-leaders (quote ("" "S%d: ")))
+ '(org-agenda-scheduled-relative-text "S%d: ")
+ '(org-agenda-scheduled-text "")
+ '(org-agenda-show-all-dates t)
+ '(org-agenda-skip-deadline-if-done t)
+ '(org-agenda-skip-scheduled-if-deadline-is-shown t)
+ '(org-agenda-skip-scheduled-if-done t)
+ '(org-agenda-skip-unavailable-files t)
+ '(org-agenda-sorting-strategy (quote ((agenda habit-down time-up todo-state-up priority-down category-keep) (todo priority-down category-keep) (tags priority-down category-keep) (search category-keep))))
+ '(org-agenda-start-on-weekday nil)
+ '(org-agenda-tags-column -100)
+ '(org-agenda-text-search-extra-files (quote (agenda-archives)))
+ '(org-archive-location "TODO-archive::")
+ '(org-archive-save-context-info (quote (time category itags)))
+ '(org-attach-method (quote mv))
+ '(org-capture-templates (quote (("t" "Task" entry (file+headline "~/Dropbox/todo.txt" "Inbox") "* TODO %?
+  SCHEDULED: %t
+  :PROPERTIES:
+  :ID:       %(shell-command-to-string \"uuidgen\")  :END:
+  %U" :prepend t))))
+ '(org-clock-idle-time 10)
+ '(org-clock-in-resume t)
+ '(org-clock-in-switch-to-state "STARTED")
+ '(org-clock-into-drawer "LOGBOOK")
+ '(org-clock-modeline-total (quote current))
+ '(org-clock-out-remove-zero-time-clocks t)
+ '(org-clock-out-switch-to-state nil)
+ '(org-clock-persist (quote history))
+ '(org-completion-use-ido t)
+ '(org-confirm-elisp-link-function nil)
+ '(org-confirm-shell-link-function nil)
+ '(org-cycle-global-at-bob t)
+ '(org-deadline-warning-days 14)
+ '(org-default-notes-file "~/Dropbox/todo.txt")
+ '(org-directory "~/Dropbox/Projects")
+ '(org-ellipsis (quote org-habit-alert-face))
  '(org-enforce-todo-dependencies t)
- '(org-fast-tag-selection-single-key (quote expert) nil nil "
-As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
- '(org-mac-mail-account "BoostPro")
- '(org-modules (quote (org-bbdb org-bibtex org-gnus org-info org-jsinfo org-irc org-mac-message org-mew org-mhe org-rmail org-vm org-wl org-w3m)))
- '(org-remember-templates (quote (("" 116 "* TODO %?
-  %u" "~/todo.org" "Tasks" nil) ("" 110 "* %u %?" "~/notes.org" "Notes" nil))) nil nil "
-As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
- '(org-return-follows-link t)
- '(org-reverse-note-order t nil nil "
-As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html")
- '(org-special-ctrl-a/e t)
- '(org-todo-keywords (quote ((sequence "TODO" "STARTED(s)
-            INS DEL Keyword: WAITING(w@)
-            INS DEL Keyword: DELEGATED(l@)
-            INS DEL Keyword: |
-            INS DEL Keyword: DONE
-            INS DEL Keyword: DEFERRED
-            INS DEL Keyword: CANCELLED(c@)" "WAITING(w@)
-            INS DEL Keyword: DELEGATED(l@)
-            INS DEL Keyword: |
-            INS DEL Keyword: DONE
-            INS DEL Keyword: DEFERRED
-            INS DEL Keyword: CANCELLED(c@)" "DELEGATED(l@)
-            INS DEL Keyword: |
-            INS DEL Keyword: DONE
-            INS DEL Keyword: DEFERRED
-            INS DEL Keyword: CANCELLED(c@)" "|
-            INS DEL Keyword: DONE
-            INS DEL Keyword: DEFERRED
-            INS DEL Keyword: CANCELLED(c@)" "DONE
-            INS DEL Keyword: DEFERRED
-            INS DEL Keyword: CANCELLED(c@)" "DEFERRED
-            INS DEL Keyword: CANCELLED(c@)" "CANCELLED(c@)") (type "APPT(a@)"))))
+ '(org-extend-today-until 8)
+ '(org-fast-tag-selection-single-key (quote expert))
+ '(org-footnote-section nil)
+ '(org-habit-preceding-days 42)
+ '(org-hide-leading-stars t)
+ '(org-mac-mail-account "GMail: BoostPro")
+ '(org-mobile-directory "~/Dropbox/MobileOrg")
+ '(org-mobile-files (quote (org-agenda-files org-agenda-text-search-extra-files "~/Dropbox/Projects")))
+ '(org-mobile-inbox-for-pull "~/Dropbox/from-mobile.org")
+ '(org-modules (quote (org-crypt org-id org-habit org-mac-message org-bookmark org-eval)))
+ '(org-refile-targets (quote ((org-agenda-files :level . 1) (org-agenda-files :todo . "PROJECT"))))
+ '(org-remember-store-without-prompt t)
+ '(org-remember-templates (quote (("Task" 116 "* TODO %?
+  SCHEDULED: %t
+  :PROPERTIES:
+  :ID:       %(shell-command-to-string \"uuidgen\")  :END:
+  %U" nil "Inbox" nil))))
+ '(org-reverse-note-order t)
+ '(org-speed-commands-user nil)
+ '(org-stuck-projects (quote ("+LEVEL=1/-DONE" ("TODO" "STARTED" "NEXT" "NEXTACTION") nil "\\(Appointments\\|Notes\\|Anniversaries\\)")))
+ '(org-tag-alist (quote ((#("NASIM" 0 5 (face nil)) . 110) (#("WORK" 0 4 (face nil)) . 119))))
+ '(org-tags-column -97)
+ '(org-time-clocksum-use-fractional t)
+ '(org-todo-keyword-faces (quote (("TODO" :foreground "medium blue" :weight bold) ("APPT" :foreground "medium blue" :weight bold) ("NOTE" :foreground "brown" :weight bold) ("STARTED" :foreground "dark orange" :weight bold) ("WAITING" :foreground "red" :weight bold) ("DELEGATED" :foreground "dark violet" :weight bold) ("DEFERRED" :foreground "dark blue" :weight bold) ("SOMEDAY" :foreground "dark blue" :weight bold) ("PROJECT" :height 1.5 :weight bold :foreground "black"))))
+ '(org-todo-keywords (quote ((sequence "TODO" "APPT" "|" "DONE" "NOTE"))))
+ '(org-todo-repeat-to-state "TODO")
+ '(org-use-speed-commands t)
+ '(org-use-tag-inheritance nil)
  '(ps-font-family (quote Helvetica))
  '(ps-font-info-database (quote ((Courier (fonts (normal . "Courier") (bold . "Courier-Bold") (italic . "Courier-Oblique") (bold-italic . "Courier-BoldOblique")) (size . 10.0) (line-height . 10.55) (space-width . 6.0) (avg-char-width . 6.0)) (Helvetica (fonts (normal . "Helvetica") (bold . "Helvetica-Bold") (italic . "Helvetica-Oblique") (bold-italic . "Helvetica-BoldOblique")) (size . 10.0) (line-height . 11.56) (space-width . 2.78) (avg-char-width . 5.09243)) (Times (fonts (normal . "Times-Roman") (bold . "Times-Bold") (italic . "Times-Italic") (bold-italic . "Times-BoldItalic")) (size . 10.0) (line-height . 11.0) (space-width . 2.5) (avg-char-width . 4.71432)) (Palatino (fonts (normal . "Palatino-Roman") (bold . "Palatino-Bold") (italic . "Palatino-Italic") (bold-italic . "Palatino-BoldItalic")) (size . 10.0) (line-height . 12.1) (space-width . 2.5) (avg-char-width . 5.08676)) (Helvetica-Narrow (fonts (normal . "Helvetica-Narrow") (bold . "Helvetica-Narrow-Bold") (italic . "Helvetica-Narrow-Oblique") (bold-italic . "Helvetica-Narrow-BoldOblique")) (size . 10.0) (line-height . 11.56) (space-width . 2.2796) (avg-char-width . 4.17579)) (NewCenturySchlbk (fonts (normal . "NewCenturySchlbk-Roman") (bold . "NewCenturySchlbk-Bold") (italic . "NewCenturySchlbk-Italic") (bold-italic . "NewCenturySchlbk-BoldItalic")) (size . 10.0) (line-height . 12.15) (space-width . 2.78) (avg-char-width . 5.31162)) (AvantGarde-Book (fonts (normal . "AvantGarde-Book") (italic . "AvantGarde-BookOblique")) (size . 10.0) (line-height . 11.77) (space-width . 2.77) (avg-char-width . 5.45189)) (AvantGarde-Demi (fonts (normal . "AvantGarde-Demi") (italic . "AvantGarde-DemiOblique")) (size . 10.0) (line-height . 12.72) (space-width . 2.8) (avg-char-width . 5.51351)) (Bookman-Demi (fonts (normal . "Bookman-Demi") (italic . "Bookman-DemiItalic")) (size . 10.0) (line-height . 11.77) (space-width . 3.4) (avg-char-width . 6.05946)) (Bookman-Light (fonts (normal . "Bookman-Light") (italic . "Bookman-LightItalic")) (size . 10.0) (line-height . 11.79) (space-width . 3.2) (avg-char-width . 5.67027)) (Symbol (fonts (normal . "Symbol")) (size . 10.0) (line-height . 13.03) (space-width . 2.5) (avg-char-width . 3.24324)) (Zapf-Dingbats (fonts (normal . "Zapf-Dingbats")) (size . 10.0) (line-height . 9.63) (space-width . 2.78) (avg-char-width . 2.78)) (ZapfChancery-MediumItalic (fonts (normal . "ZapfChancery-MediumItalic")) (size . 10.0) (line-height . 11.45) (space-width . 2.2) (avg-char-width . 4.10811)) (Zapf-Chancery-MediumItalic (fonts (normal . "ZapfChancery-MediumItalic")) (size . 10.0) (line-height . 11.45) (space-width . 2.2) (avg-char-width . 4.10811)))))
  '(python-python-command "/opt/local/bin/python")
@@ -225,7 +271,7 @@ As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-plan
 As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html.  Note: buffer-file-name was checked in the default.")
  '(remember-handler-functions (quote (org-remember-handler)) nil nil "As prescribed by http://www.newartisans.com/2007/08/using-org-mode-as-a-day-planner.html.  Note: remember-append-to-file is checked in the default.")
  '(rmail-dont-reply-to-names "dave@\\(boost-consulting\\|boostpro\\)\\.com\\|dave\\.abrahams@rcn\\.com\\|boost\\.consulting@gmail\\.com\\|dave\\.boostpro@gmail\\.com\\|Undisclosed-recipients[:;]*")
- '(safe-local-variable-values (quote ((encoding . utf8) (folded-file . t))))
+ '(safe-local-variable-values (quote ((test-case-name . buildbot\.test\.test_sourcestamp) (test-case-name . buildbot\.test\.test_changes) (test-case-name . buildbot\.broken_test\.test_web_status_json) (encoding . utf8) (folded-file . t))))
  '(server-mode t nil nil "
 Always run a server so we can open files in existing emacs frames.")
  '(show-paren-mode t)
@@ -259,7 +305,7 @@ I never like being nannied by regular browsers either.")
  '(warning-suppress-types (quote ((\(undo\ discard-info\)))) nil nil "
 Without this, emacs pops up annoying warnings in, e.g., *shell* buffers
 where I don't expect it to be keeping undo history anyway")
- '(weblogger-config-alist (quote (("homepage" "http://techarcana.net/xmlrpc.php" "dave" "" "2"))))
+ '(weblogger-config-alist (quote (("homepage" "http://daveabrahams.com/xmlrpc.php" "dave" "" "2") ("techarcana" "http://techarcana.net/xmlrpc.php" "dave" "" "1") ("cpp-next" "http://cpp-next.com/xmlrpc.php" "dave" "" "1") ("ryppl" "http://ryppl.org/xmlrpc.php" "dave" "" "4") ("boostpro" "http://boostpro.com/xmlrpc.php" "dave" "" "1"))))
  '(weblogger-edit-entry-hook (quote ((lambda nil (switch-to-buffer "*weblogger-entry*")))))
  '(weblogger-edit-mode (quote my-weblogger-markdown-mode))
  '(weblogger-server-url "http://cpp-next.com/xmlrpc.php")
@@ -271,14 +317,26 @@ The range thing slows me down.  However, I'd still like to know how to force the
  '(wl-auto-check-folder-name "Inbox")
  '(wl-auto-select-next (quote skip-no-unread))
  '(wl-auto-uncheck-folder-list (quote ("\\$.*" "%zz_mairix.*" "%zz_archive.*" "%.*")))
+ '(wl-dispose-folder-alist (quote (("^-" . remove) ("^@" . remove) ("\\<All Mail\\>" . trash) ("^%" . remove))) nil nil "
+Only disposing of something in \"All Mail\" should actually move it to
+the trash (GMail will clean that up after 30 days).  Otherwise, we can
+fully delete it from the current folder because we always have a copy
+in \"All Mail.\"
+")
  '(wl-draft-always-delete-myself t)
  '(wl-draft-config-alist (quote (("" (part-bottom . "
 ") ("Bcc" . "Dave Abrahams <dave@boostpro.com>") (signature . "~/.signature")))))
  '(wl-draft-reply-buffer-style (quote full))
+ '(wl-draft-sendlog-max-size 100000 nil nil "
+Keep more sent messages around for quick/easy access
+")
+ '(wl-draft-use-cache t nil nil "
+This has to be on if I want the 'sendlog folder to contain anything
+")
  '(wl-fldmgr-add-complete-with-current-folder-list t)
  '(wl-folder-desktop-name #("Messages" 0 8 (wl-folder-is-group is-group wl-folder-entity-id 0)))
  '(wl-folder-notify-deleted t)
- '(wl-folder-petname-alist (quote (("%INBOX" . "Inbox") ("+drafts" . "Drafts") (#("%INBOX" 0 6 (wl-folder-entity-id 1 wl-folder-is-group nil)) . "Inbox") (#("+draft" 0 6 (wl-folder-entity-id 60 wl-folder-is-group nil)) . "Drafts") (#("%inbox:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 58 (wl-folder-entity-id 65 wl-folder-is-group nil)) . "Inbox") (#("%[Gmail]/Trash:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 66 (wl-folder-entity-id 67 wl-folder-is-group nil)) . "Trash") (#("%[Gmail]/Star:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 65 (wl-folder-entity-id 68 wl-folder-is-group nil)) . "With a Star") (#("%[Gmail]/Sent:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 65 (wl-folder-entity-id 69 wl-folder-is-group nil)) . "Sent") (#("%[Gmail]/Draft:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 66 (wl-folder-entity-id 70 wl-folder-is-group nil)) . "Draft") (#("%[Gmail]/All E-Mails:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 72 (wl-folder-entity-id 71 wl-folder-is-group nil)) . "All E-Mails") (#("%Org-Mode:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 61 (wl-folder-entity-id 72 wl-folder-is-group nil)) . "Org-Mode") ("%Trash" . "Trash"))))
+ '(wl-folder-petname-alist (quote (("%INBOX" . "Inbox") ("+drafts" . "Drafts") (#("%[Gmail]/Sent" 0 13 (wl-folder-entity-id 3 wl-folder-is-group nil)) . "Sent") (#("%inbox:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 58 (wl-folder-entity-id 72 wl-folder-is-group nil)) . "Inbox") (#("%[Gmail]/Trash:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 66 (wl-folder-entity-id 74 wl-folder-is-group nil)) . "Trash") (#("%[Gmail]/Star:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 65 (wl-folder-entity-id 75 wl-folder-is-group nil)) . "With a Star") (#("%[Gmail]/Sent:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 65 (wl-folder-entity-id 76 wl-folder-is-group nil)) . "Sent") (#("%[Gmail]/Draft:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 66 (wl-folder-entity-id 77 wl-folder-is-group nil)) . "Draft") (#("%[Gmail]/All E-Mails:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 72 (wl-folder-entity-id 78 wl-folder-is-group nil)) . "All E-Mails") (#("%Org-Mode:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 61 (wl-folder-entity-id 79 wl-folder-is-group nil)) . "Org-Mode") (#("%[Gmail]/Draft" 0 14 (wl-folder-entity-id 4 wl-folder-is-group nil)) . "Drafts") (#("%INBOX" 0 6 (wl-folder-entity-id 1 wl-folder-is-group nil)) . "Inbox") (#("%[Gmail]/Star" 0 13 (wl-folder-entity-id 2 wl-folder-is-group nil)) . "Flagged") (#("%[Gmail]/Sent Mail" 0 18 (wl-folder-entity-id 3 wl-folder-is-group nil)) . "Sent") (#("%[Gmail]/Drafts" 0 15 (wl-folder-entity-id 4 wl-folder-is-group nil)) . "Drafts") (#("%[Gmail]/All Mail" 0 17 (wl-folder-entity-id 5 wl-folder-is-group nil)) . "Archive") (#("%[Gmail]/Trash" 0 14 (wl-folder-entity-id 6 wl-folder-is-group nil)) . "Trash") (#("%[Gmail]/Spam" 0 13 (wl-folder-entity-id 8 wl-folder-is-group nil)) . "Spam") (#("+draft" 0 6 (wl-folder-entity-id 64 wl-folder-is-group nil)) . "Drafts") ("%Trash" . "Trash"))))
  '(wl-folder-process-duplicates-alist (quote (("^.*" . hide))) nil nil "
 Don't show me any duplicate messages")
  '(wl-folder-window-width 60)
@@ -303,7 +361,14 @@ can tolerate being out-of-sync occasionally.")
  '(wl-summary-showto-folder-regexp "^%" nil nil "Show recipient in place of sender in IMAP folders when I'm the sender")
  '(wl-summary-width nil)
  '(wl-thread-insert-opened t)
- '(wl-trash-folder "%Trash")
+ '(wl-trash-folder "%Trash" nil nil "
+wl-dispose-folder-alist is set up so the only messages sent to Trash
+have been marked disposed in an \"All Mail\" folder.  Any others should
+be deleted immediately since there is a copy in All Mail.
+")
+ '(wl-use-folder-petname (quote (modeline ask-folder read-folder)) nil nil "
+I have some hard-to-type folder names; why struggle?
+")
  '(wl-user-mail-address-list (quote ("dave@boostpro.com" "dave.abrahams@gmail.com" "daveabrahams@gmail.com" "boost.consulting@gmail.com" "david.abrahams@rcn.com" "dave@luannocracy.com")))
  '(x-select-enable-clipboard t))
 (custom-set-faces
@@ -317,6 +382,16 @@ can tolerate being out-of-sync occasionally.")
  '(italic ((t (:slant italic :family "Monaco"))))
  '(mode-line ((((class color) (min-colors 88)) (:inherit variable-pitch :background "lightblue" :foreground "black" :box (:line-width -1 :style released-button) :height 1.2))))
  '(org-mode-line-clock ((t (:inherit variable-pitch :background "green" :foreground "black" :box (:line-width -1 :style released-button) :height 1.2))) t)
+ '(org-habit-alert-face ((((background light)) (:background "#f5f946"))))
+ '(org-habit-alert-future-face ((((background light)) (:background "#fafca9"))))
+ '(org-habit-clear-face ((((background light)) (:background "#8270f9"))))
+ '(org-habit-clear-future-face ((((background light)) (:background "#d6e4fc"))))
+ '(org-habit-overdue-face ((((background light)) (:background "#f9372d"))))
+ '(org-habit-overdue-future-face ((((background light)) (:background "#fc9590"))))
+ '(org-habit-ready-face ((((background light)) (:background "#4df946"))))
+ '(org-habit-ready-future-face ((((background light)) (:background "#acfca9"))))
+ '(org-scheduled ((((class color) (min-colors 88) (background light)) nil)))
+ '(org-upcoming-deadline ((((class color) (min-colors 88) (background light)) (:foreground "Brown"))))
  '(rst-level-1-face ((t (:background "grey85" :foreground "black"))) t)
  '(rst-level-2-face ((t (:inherit nil :background "grey78" :foreground "black"))) t)
  '(rst-level-3-face ((t (:background "grey71" :foreground "black"))) t)

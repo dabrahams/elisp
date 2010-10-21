@@ -40,7 +40,7 @@ so we can watch errors as they come up
 ;;;***
 
 ;;;### (autoloads (git-reblame git-blame-mode) "git-blame" "../../../../elisp/package.d/git-contrib/git-blame.el"
-;;;;;;  (18853 51588))
+;;;;;;  (19442 59238))
 ;;; Generated autoloads from ../../../../elisp/package.d/git-contrib/git-blame.el
 
 (autoload 'git-blame-mode "git-blame" "\
@@ -52,6 +52,17 @@ With prefix ARG, turn the mode on if ARG is positive.
 
 (autoload 'git-reblame "git-blame" "\
 Recalculate all blame information in the current buffer
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (markdown-mode) "markdown-mode" "../../../../elisp/package.d/markdown-mode.el"
+;;;;;;  (18967 24446))
+;;; Generated autoloads from ../../../../elisp/package.d/markdown-mode.el
+
+(autoload 'markdown-mode "markdown-mode" "\
+Major mode for editing Markdown files.
 
 \(fn)" t nil)
 
@@ -151,7 +162,7 @@ If there is no .svn directory, examine if there is CVS and run
 
 ;;;### (autoloads (weblogger-fetch-entries weblogger-start-entry
 ;;;;;;  weblogger-setup-weblog weblogger-select-configuration) "weblogger"
-;;;;;;  "../../../../elisp/package.d/weblogger.el" (19299 19606))
+;;;;;;  "../../../../elisp/package.d/weblogger.el" (19562 5994))
 ;;; Generated autoloads from ../../../../elisp/package.d/weblogger.el
 
 (autoload 'weblogger-select-configuration "weblogger" "\
@@ -179,8 +190,43 @@ Sync the entry ring with what is on the weblog server.
 
 ;;;***
 
+;;;### (autoloads (yas/minor-mode yas/snippet-dirs) "yasnippet" "../../../../elisp/package.d/yasnippet.el"
+;;;;;;  (19518 36310))
+;;; Generated autoloads from ../../../../elisp/package.d/yasnippet.el
+
+(defvar yas/snippet-dirs nil "\
+Directory or list of snippet dirs for each major mode.
+
+The directory where user-created snippets are to be stored. Can
+also be a list of directories. In that case, when used for
+bulk (re)loading of snippets (at startup or via
+`yas/reload-all'), directories appearing earlier in the list
+shadow other dir's snippets. Also, the first directory is taken
+as the default for storing the user's new snippets.")
+
+(custom-autoload 'yas/snippet-dirs "yasnippet" nil)
+
+(autoload 'yas/minor-mode "yasnippet" "\
+Toggle YASnippet mode.
+
+When YASnippet mode is enabled, the `tas/trigger-key' key expands
+snippets of code depending on the mode.
+
+With no argument, this command toggles the mode.
+positive prefix argument turns on the mode.
+Negative prefix argument turns off the mode.
+
+You can customize the key through `yas/trigger-key'.
+
+Key bindings:
+\\{yas/minor-mode-map}
+
+\(fn &optional ARG)" t nil)
+
+;;;***
+
 ;;;### (autoloads (color-theme-zenburn) "zenburn" "../../../../elisp/package.d/zenburn.el"
-;;;;;;  (19366 38890))
+;;;;;;  (19369 4842))
 ;;; Generated autoloads from ../../../../elisp/package.d/zenburn.el
 
 (autoload 'color-theme-zenburn "zenburn" "\
@@ -191,11 +237,15 @@ Just some alien fruit salad to keep you in the zone.
 ;;;***
 
 ;;;### (autoloads nil nil ("../../../../elisp/package.d/ac-anything.el"
+;;;;;;  "../../../../elisp/package.d/ac-anything.el" "../../../../elisp/package.d/ahg.el"
 ;;;;;;  "../../../../elisp/package.d/any-ini-mode.el" "../../../../elisp/package.d/anything.el"
+;;;;;;  "../../../../elisp/package.d/anything.el" "../../../../elisp/package.d/cmake-mode.el"
 ;;;;;;  "../../../../elisp/package.d/cmake-mode.el" "../../../../elisp/package.d/cmake-mode.el"
-;;;;;;  "../../../../elisp/package.d/completion-selection.el" "../../../../elisp/package.d/dwa-c++.el"
+;;;;;;  "../../../../elisp/package.d/completion-selection.el" "../../../../elisp/package.d/completion-selection.el"
+;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-c++.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-compile.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-rectangle.el" "../../../../elisp/package.d/dwa-rectangle.el"
+;;;;;;  "../../../../elisp/package.d/dwa-rectangle.el" "../../../../elisp/package.d/dwa-util.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-util.el" "../../../../elisp/package.d/dwa-util.el"
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-1.4.6/elscreen.el"
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-color-theme-0.0.0/elscreen-color-theme.el"
@@ -208,24 +258,33 @@ Just some alien fruit salad to keep you in the zone.
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-speedbar-0.0.0/elscreen-speedbar.el"
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-w3m-0.2.2/elscreen-w3m.el"
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-wl-0.8.0/elscreen-wl.el"
-;;;;;;  "../../../../elisp/package.d/git-contrib/git-blame.el" "../../../../elisp/package.d/git-contrib/git.el"
+;;;;;;  "../../../../elisp/package.d/filladapt.el" "../../../../elisp/package.d/git-contrib/git-blame.el"
+;;;;;;  "../../../../elisp/package.d/git-contrib/git.el" "../../../../elisp/package.d/gravatar.el"
 ;;;;;;  "../../../../elisp/package.d/gravatar.el" "../../../../elisp/package.d/gravatar.el"
-;;;;;;  "../../../../elisp/package.d/initsplit.el" "../../../../elisp/package.d/initsplit.el"
+;;;;;;  "../../../../elisp/package.d/initsplit.el" "../../../../elisp/package.d/jam-mode.el"
 ;;;;;;  "../../../../elisp/package.d/jam-mode.el" "../../../../elisp/package.d/jam-mode.el"
 ;;;;;;  "../../../../elisp/package.d/markdown-mode.el" "../../../../elisp/package.d/markdown-mode.el"
+;;;;;;  "../../../../elisp/package.d/markdown-mode.el" "../../../../elisp/package.d/maxframe.el"
 ;;;;;;  "../../../../elisp/package.d/maxframe.el" "../../../../elisp/package.d/maxframe.el"
-;;;;;;  "../../../../elisp/package.d/misc-cmds.el" "../../../../elisp/package.d/muse-markdown.el"
+;;;;;;  "../../../../elisp/package.d/mercurial.el" "../../../../elisp/package.d/misc-cmds.el"
+;;;;;;  "../../../../elisp/package.d/muse-markdown.el" "../../../../elisp/package.d/muse-markdown.el"
 ;;;;;;  "../../../../elisp/package.d/muse-markdown.el" "../../../../elisp/package.d/my-xmlunicode.el"
+;;;;;;  "../../../../elisp/package.d/my-xmlunicode.el" "../../../../elisp/package.d/osx-plist.el"
 ;;;;;;  "../../../../elisp/package.d/osx-plist.el" "../../../../elisp/package.d/osx-plist.el"
 ;;;;;;  "../../../../elisp/package.d/php-mode.el" "../../../../elisp/package.d/policy-switch.el"
-;;;;;;  "../../../../elisp/package.d/psvn.el" "../../../../elisp/package.d/smartquotes.el"
+;;;;;;  "../../../../elisp/package.d/policy-switch.el" "../../../../elisp/package.d/psvn.el"
+;;;;;;  "../../../../elisp/package.d/smartquotes.el" "../../../../elisp/package.d/smartquotes.el"
 ;;;;;;  "../../../../elisp/package.d/smartquotes.el" "../../../../elisp/package.d/timeclock-x.el"
-;;;;;;  "../../../../elisp/package.d/timeclock-x.el" "../../../../elisp/package.d/unichars.el"
+;;;;;;  "../../../../elisp/package.d/timeclock-x.el" "../../../../elisp/package.d/timeclock-x.el"
+;;;;;;  "../../../../elisp/package.d/unichars.el" "../../../../elisp/package.d/unichars.el"
 ;;;;;;  "../../../../elisp/package.d/unichars.el" "../../../../elisp/package.d/weblogger.el"
-;;;;;;  "../../../../elisp/package.d/xml-rpc.el" "../../../../elisp/package.d/xmlunicode.el"
+;;;;;;  "../../../../elisp/package.d/wl-gravatar.el" "../../../../elisp/package.d/xml-rpc.el"
+;;;;;;  "../../../../elisp/package.d/xmlunicode.el" "../../../../elisp/package.d/xmlunicode.el"
 ;;;;;;  "../../../../elisp/package.d/xmlunicode.el" "../../../../elisp/package.d/yaoddmuse.el"
+;;;;;;  "../../../../elisp/package.d/yaoddmuse.el" "../../../../elisp/package.d/yasnippet-debug.el"
+;;;;;;  "../../../../elisp/package.d/yasnippet.el" "../../../../elisp/package.d/zenburn-wl.el"
 ;;;;;;  "../../../../elisp/package.d/zenburn-wl.el" "../../../../elisp/package.d/zenburn.el")
-;;;;;;  (19367 17492 905903))
+;;;;;;  (19600 11139 6063))
 
 ;;;***
 

@@ -49,7 +49,7 @@
 ;;
 ;; GTD-ish stuff
 ;;
-(define-key global-map [(control meta ?r)] 'remember)
+(define-key global-map [(control meta ?r)] 'org-capture)
 (define-key mode-specific-map [?a] 'org-agenda)
 
 (global-set-key "\C-cl" 'org-store-link)
