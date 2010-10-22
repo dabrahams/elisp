@@ -22,6 +22,147 @@ Turning on <any>.ini mode runs the normal hook `any-ini-mode-hook'.
 
 ;;;***
 
+;;;### (autoloads (boxquote-unbox boxquote-unbox-region boxquote-fill-paragraph
+;;;;;;  boxquote-kill boxquote-narrow-to-boxquote-content boxquote-narrow-to-boxquote
+;;;;;;  boxquote-text boxquote-where-is boxquote-shell-command boxquote-describe-key
+;;;;;;  boxquote-describe-variable boxquote-describe-function boxquote-boxquote
+;;;;;;  boxquote-paragraph boxquote-defun boxquote-yank boxquote-kill-ring-save
+;;;;;;  boxquote-insert-buffer boxquote-insert-file boxquote-buffer
+;;;;;;  boxquote-region boxquote-title) "boxquote" "../../../../elisp/package.d/boxquote.el"
+;;;;;;  (19634 24770))
+;;; Generated autoloads from ../../../../elisp/package.d/boxquote.el
+
+(autoload 'boxquote-title "boxquote" "\
+Set the title of the current boxquote to TITLE.
+
+If TITLE is an empty string the title is removed. Note that the title will
+be formatted using `boxquote-title-format'.
+
+\(fn TITLE)" t nil)
+
+(autoload 'boxquote-region "boxquote" "\
+Draw a box around the left hand side of a region bounding START and END.
+
+\(fn START END)" t nil)
+
+(autoload 'boxquote-buffer "boxquote" "\
+Apply `boxquote-region' to a whole buffer.
+
+\(fn)" t nil)
+
+(autoload 'boxquote-insert-file "boxquote" "\
+Insert the contents of a file, boxed with `boxquote-region'.
+
+If `boxquote-title-files' is non-nil the boxquote will be given a title that
+is the result of applying `boxquote-file-title-function' to FILENAME.
+
+\(fn FILENAME)" t nil)
+
+(autoload 'boxquote-insert-buffer "boxquote" "\
+Insert the contents of a buffer, boxes with `boxquote-region'.
+
+If `boxquote-title-buffers' is non-nil the boxquote will be given a title that
+is the result of applying `boxquote-buffer-title-function' to BUFFER.
+
+\(fn BUFFER)" t nil)
+
+(autoload 'boxquote-kill-ring-save "boxquote" "\
+Like `kill-ring-save' but remembers a title if possible.
+
+The title is acquired by calling `boxquote-kill-ring-save-title'. The title
+will be used by `boxquote-yank'.
+
+\(fn)" t nil)
+
+(autoload 'boxquote-yank "boxquote" "\
+Do a `yank' and box it in with `boxquote-region'.
+
+If the yanked entry was placed on the kill ring with
+`boxquote-kill-ring-save' the resulting boxquote will be titled with
+whatever `boxquote-kill-ring-save-title' returned at the time.
+
+\(fn)" t nil)
+
+(autoload 'boxquote-defun "boxquote" "\
+Apply `boxquote-region' the current defun.
+
+\(fn)" t nil)
+
+(autoload 'boxquote-paragraph "boxquote" "\
+Apply `boxquote-region' to the current paragraph.
+
+\(fn)" t nil)
+
+(autoload 'boxquote-boxquote "boxquote" "\
+Apply `boxquote-region' to the current boxquote.
+
+\(fn)" t nil)
+
+(autoload 'boxquote-describe-function "boxquote" "\
+Call `describe-function' and boxquote the output into the current buffer.
+
+\(fn)" t nil)
+
+(autoload 'boxquote-describe-variable "boxquote" "\
+Call `describe-variable' and boxquote the output into the current buffer.
+
+\(fn)" t nil)
+
+(autoload 'boxquote-describe-key "boxquote" "\
+Call `describe-key' and boxquote the output into the current buffer.
+
+If the call to this command is prefixed with \\[universal-argument] you will also be
+prompted for a buffer. The key defintion used will be taken from that buffer.
+
+\(fn KEY)" t nil)
+
+(autoload 'boxquote-shell-command "boxquote" "\
+Call `shell-command' with COMMAND and boxquote the output.
+
+\(fn COMMAND)" t nil)
+
+(autoload 'boxquote-where-is "boxquote" "\
+Call `where-is' with DEFINITION and boxquote the result.
+
+\(fn DEFINITION)" t nil)
+
+(autoload 'boxquote-text "boxquote" "\
+Insert TEXT, boxquoted.
+
+\(fn TEXT)" t nil)
+
+(autoload 'boxquote-narrow-to-boxquote "boxquote" "\
+Narrow the buffer to the current boxquote.
+
+\(fn)" t nil)
+
+(autoload 'boxquote-narrow-to-boxquote-content "boxquote" "\
+Narrow the buffer to the content of the current boxquote.
+
+\(fn)" t nil)
+
+(autoload 'boxquote-kill "boxquote" "\
+Kill the boxquote and its contents.
+
+\(fn)" t nil)
+
+(autoload 'boxquote-fill-paragraph "boxquote" "\
+Perform a `fill-paragraph' inside a boxquote.
+
+\(fn ARG)" t nil)
+
+(autoload 'boxquote-unbox-region "boxquote" "\
+Remove a box created with `boxquote-region'.
+
+\(fn START END)" t nil)
+
+(autoload 'boxquote-unbox "boxquote" "\
+Remove the boxquote that contains `point'.
+
+\(fn)" t nil)
+
+;;;***
+
 ;;;### (autoloads (my-recompile my-compile) "dwa-compile" "../../../../elisp/package.d/dwa-compile.el"
 ;;;;;;  (18915 22968))
 ;;; Generated autoloads from ../../../../elisp/package.d/dwa-compile.el
@@ -162,7 +303,7 @@ If there is no .svn directory, examine if there is CVS and run
 
 ;;;### (autoloads (weblogger-fetch-entries weblogger-start-entry
 ;;;;;;  weblogger-setup-weblog weblogger-select-configuration) "weblogger"
-;;;;;;  "../../../../elisp/package.d/weblogger.el" (19562 5994))
+;;;;;;  "../../../../elisp/package.d/weblogger.el" (19641 37748))
 ;;; Generated autoloads from ../../../../elisp/package.d/weblogger.el
 
 (autoload 'weblogger-select-configuration "weblogger" "\
@@ -226,7 +367,7 @@ Key bindings:
 ;;;***
 
 ;;;### (autoloads (color-theme-zenburn) "zenburn" "../../../../elisp/package.d/zenburn.el"
-;;;;;;  (19369 4842))
+;;;;;;  (19623 53521))
 ;;; Generated autoloads from ../../../../elisp/package.d/zenburn.el
 
 (autoload 'color-theme-zenburn "zenburn" "\
@@ -237,17 +378,21 @@ Just some alien fruit salad to keep you in the zone.
 ;;;***
 
 ;;;### (autoloads nil nil ("../../../../elisp/package.d/ac-anything.el"
-;;;;;;  "../../../../elisp/package.d/ac-anything.el" "../../../../elisp/package.d/ahg.el"
+;;;;;;  "../../../../elisp/package.d/ac-anything.el" "../../../../elisp/package.d/ac-anything.el"
+;;;;;;  "../../../../elisp/package.d/ahg.el" "../../../../elisp/package.d/ahg.el"
 ;;;;;;  "../../../../elisp/package.d/any-ini-mode.el" "../../../../elisp/package.d/anything.el"
-;;;;;;  "../../../../elisp/package.d/anything.el" "../../../../elisp/package.d/cmake-mode.el"
+;;;;;;  "../../../../elisp/package.d/anything.el" "../../../../elisp/package.d/anything.el"
+;;;;;;  "../../../../elisp/package.d/boxquote.el" "../../../../elisp/package.d/cmake-mode.el"
 ;;;;;;  "../../../../elisp/package.d/cmake-mode.el" "../../../../elisp/package.d/cmake-mode.el"
+;;;;;;  "../../../../elisp/package.d/cmake-mode.el" "../../../../elisp/package.d/completion-selection.el"
 ;;;;;;  "../../../../elisp/package.d/completion-selection.el" "../../../../elisp/package.d/completion-selection.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-c++.el"
-;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-compile.el"
+;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-c++.el"
+;;;;;;  "../../../../elisp/package.d/dwa-compile.el" "../../../../elisp/package.d/dwa-rectangle.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-rectangle.el" "../../../../elisp/package.d/dwa-rectangle.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-rectangle.el" "../../../../elisp/package.d/dwa-util.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-util.el" "../../../../elisp/package.d/dwa-util.el"
-;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-1.4.6/elscreen.el"
+;;;;;;  "../../../../elisp/package.d/dwa-util.el" "../../../../elisp/package.d/elscreen/elscreen-1.4.6/elscreen.el"
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-color-theme-0.0.0/elscreen-color-theme.el"
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-dired-0.1.0/elscreen-dired.el"
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-dnd-0.0.0/elscreen-dnd.el"
@@ -258,33 +403,41 @@ Just some alien fruit salad to keep you in the zone.
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-speedbar-0.0.0/elscreen-speedbar.el"
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-w3m-0.2.2/elscreen-w3m.el"
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-wl-0.8.0/elscreen-wl.el"
-;;;;;;  "../../../../elisp/package.d/filladapt.el" "../../../../elisp/package.d/git-contrib/git-blame.el"
-;;;;;;  "../../../../elisp/package.d/git-contrib/git.el" "../../../../elisp/package.d/gravatar.el"
+;;;;;;  "../../../../elisp/package.d/filladapt.el" "../../../../elisp/package.d/filladapt.el"
+;;;;;;  "../../../../elisp/package.d/git-contrib/git-blame.el" "../../../../elisp/package.d/git-contrib/git.el"
+;;;;;;  "../../../../elisp/package.d/gravatar.el" "../../../../elisp/package.d/gravatar.el"
 ;;;;;;  "../../../../elisp/package.d/gravatar.el" "../../../../elisp/package.d/gravatar.el"
 ;;;;;;  "../../../../elisp/package.d/initsplit.el" "../../../../elisp/package.d/jam-mode.el"
 ;;;;;;  "../../../../elisp/package.d/jam-mode.el" "../../../../elisp/package.d/jam-mode.el"
+;;;;;;  "../../../../elisp/package.d/jam-mode.el" "../../../../elisp/package.d/markdown-mode.el"
 ;;;;;;  "../../../../elisp/package.d/markdown-mode.el" "../../../../elisp/package.d/markdown-mode.el"
-;;;;;;  "../../../../elisp/package.d/markdown-mode.el" "../../../../elisp/package.d/maxframe.el"
 ;;;;;;  "../../../../elisp/package.d/maxframe.el" "../../../../elisp/package.d/maxframe.el"
-;;;;;;  "../../../../elisp/package.d/mercurial.el" "../../../../elisp/package.d/misc-cmds.el"
+;;;;;;  "../../../../elisp/package.d/maxframe.el" "../../../../elisp/package.d/maxframe.el"
+;;;;;;  "../../../../elisp/package.d/mercurial.el" "../../../../elisp/package.d/mercurial.el"
+;;;;;;  "../../../../elisp/package.d/misc-cmds.el" "../../../../elisp/package.d/muse-markdown.el"
 ;;;;;;  "../../../../elisp/package.d/muse-markdown.el" "../../../../elisp/package.d/muse-markdown.el"
 ;;;;;;  "../../../../elisp/package.d/muse-markdown.el" "../../../../elisp/package.d/my-xmlunicode.el"
-;;;;;;  "../../../../elisp/package.d/my-xmlunicode.el" "../../../../elisp/package.d/osx-plist.el"
+;;;;;;  "../../../../elisp/package.d/my-xmlunicode.el" "../../../../elisp/package.d/my-xmlunicode.el"
+;;;;;;  "../../../../elisp/package.d/osx-plist.el" "../../../../elisp/package.d/osx-plist.el"
 ;;;;;;  "../../../../elisp/package.d/osx-plist.el" "../../../../elisp/package.d/osx-plist.el"
 ;;;;;;  "../../../../elisp/package.d/php-mode.el" "../../../../elisp/package.d/policy-switch.el"
-;;;;;;  "../../../../elisp/package.d/policy-switch.el" "../../../../elisp/package.d/psvn.el"
+;;;;;;  "../../../../elisp/package.d/policy-switch.el" "../../../../elisp/package.d/policy-switch.el"
+;;;;;;  "../../../../elisp/package.d/psvn.el" "../../../../elisp/package.d/smartquotes.el"
 ;;;;;;  "../../../../elisp/package.d/smartquotes.el" "../../../../elisp/package.d/smartquotes.el"
 ;;;;;;  "../../../../elisp/package.d/smartquotes.el" "../../../../elisp/package.d/timeclock-x.el"
 ;;;;;;  "../../../../elisp/package.d/timeclock-x.el" "../../../../elisp/package.d/timeclock-x.el"
+;;;;;;  "../../../../elisp/package.d/timeclock-x.el" "../../../../elisp/package.d/unichars.el"
 ;;;;;;  "../../../../elisp/package.d/unichars.el" "../../../../elisp/package.d/unichars.el"
 ;;;;;;  "../../../../elisp/package.d/unichars.el" "../../../../elisp/package.d/weblogger.el"
 ;;;;;;  "../../../../elisp/package.d/wl-gravatar.el" "../../../../elisp/package.d/xml-rpc.el"
 ;;;;;;  "../../../../elisp/package.d/xmlunicode.el" "../../../../elisp/package.d/xmlunicode.el"
-;;;;;;  "../../../../elisp/package.d/xmlunicode.el" "../../../../elisp/package.d/yaoddmuse.el"
+;;;;;;  "../../../../elisp/package.d/xmlunicode.el" "../../../../elisp/package.d/xmlunicode.el"
+;;;;;;  "../../../../elisp/package.d/yaoddmuse.el" "../../../../elisp/package.d/yaoddmuse.el"
 ;;;;;;  "../../../../elisp/package.d/yaoddmuse.el" "../../../../elisp/package.d/yasnippet-debug.el"
-;;;;;;  "../../../../elisp/package.d/yasnippet.el" "../../../../elisp/package.d/zenburn-wl.el"
+;;;;;;  "../../../../elisp/package.d/yasnippet-debug.el" "../../../../elisp/package.d/yasnippet.el"
+;;;;;;  "../../../../elisp/package.d/zenburn-wl.el" "../../../../elisp/package.d/zenburn-wl.el"
 ;;;;;;  "../../../../elisp/package.d/zenburn-wl.el" "../../../../elisp/package.d/zenburn.el")
-;;;;;;  (19600 11139 6063))
+;;;;;;  (19649 63201 283104))
 
 ;;;***
 

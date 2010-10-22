@@ -54,3 +54,33 @@
       (local-set-key (kbd "C-'") 'unicode-smart-single-quote))))
 
 (add-hook 'after-change-major-mode-hook 'my-text-mode-smart-keys)
+
+;; Buffer initialization stuff
+(defcustom my-buffer-initialization-alist
+      '(
+        ("\\.[ih]\\(pp\\|xx\\)?$" . my-begin-cc-header)
+        ("\\.c\\(pp\\|xx\\)$" . my-begin-cc-source)
+        ("\\.\\(jam\\|\\html?\\|sh\\|py\\|rst\\|xml\\)$" . my-copyright)
+        )
+      "A list of pairs (PATTERN . FUNCTION) describing how to initialize an empty buffer whose
+file name matches PATTERN."
+      ':type 'alist
+      )
+
+(defadvice find-file (after my-prepare-code-contents activate)
+  ;; if the file doesn't exist yet and is empty
+  (if (and (equal (buffer-size) 0)
+           (not (file-exists-p (buffer-file-name))))
+
+      ;; try to find an initialization function
+      (let ((initializer
+             (find-if
+              (lambda (pair) (string-match (car pair) (buffer-file-name)))
+              my-buffer-initialization-alist)))
+
+        ;; if found, call it
+        (if initializer
+            (progn (eval (list (cdr initializer)))
+                   (set-buffer-modified-p nil)))
+      )))
+
