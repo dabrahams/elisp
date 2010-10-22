@@ -599,15 +599,17 @@ the filename in weblogger-config-file."
   (customize-save-variable 'weblogger-config-alist
                            weblogger-config-alist))
 
-(defun weblogger-change-server ()
-  "Change the server-url."
+(defun weblogger-change-server ( &optional url)
+  "Change the server-url to url."
   (interactive)
   (setq weblogger-server-url
-        (read-from-minibuffer "Server Endpoint (URL): "
-                              (if (stringp weblogger-server-url)
-                                  weblogger-server-url
-                                "")))
-  (weblogger-determine-capabilities))
+        (or url (read-from-minibuffer "Server Endpoint (URL): "
+                                      (if (stringp weblogger-server-url)
+                                          weblogger-server-url ""))))
+  (unwind-protect
+      (weblogger-determine-capabilities)
+    (setq weblogger-server-url "")
+    ))
 
 (defun weblogger-change-user ()
   "Change username and password."
