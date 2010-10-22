@@ -679,7 +679,7 @@ available."
   (when (assoc "entry-id" (ring-ref weblogger-entry-ring 0))
     (ring-insert weblogger-entry-ring (list (cons "content" ""))))
   (setq weblogger-ring-index 0)
-  (weblogger-edit-entry))
+  (weblogger-edit-entry t))
 
 (defun weblogger-entry-setup-headers (entry &optional body-line)
   "Add any pertinant headers to the weblog entry."
@@ -1013,8 +1013,7 @@ is set, then add it to the current index and go to that entry."
     (setq weblogger-ring-index entry-id))
   (if (ring-empty-p weblogger-entry-ring)
       (weblogger-api-list-entries weblogger-max-entries-in-ring))
-  (weblogger-edit-entry
-   (ring-ref weblogger-entry-ring weblogger-ring-index)))
+  (weblogger-edit-entry))
 
 (defun weblogger-next-entry ()
   "Edit the contents of the next entry."
@@ -1038,8 +1037,7 @@ is set, then add it to the current index and go to that entry."
                                       weblogger-ring-index)))))
       (funcall weblogger-api-delete-entry msgid)
       (ring-remove weblogger-entry-ring weblogger-ring-index)
-      (weblogger-edit-entry
-       (ring-ref weblogger-entry-ring weblogger-ring-index)))))
+      (weblogger-edit-entry))))
 
 (defun weblogger-api-new-entry (struct publishp)
   "Publish a new entry (STRUCT) using the best method available."
@@ -1052,7 +1050,7 @@ is set, then add it to the current index and go to that entry."
     'struct
     (cons "entry-id" (funcall weblogger-api-new-entry struct publishp))))
   (setq weblogger-ring-index 0)
-  (ring-ref weblogger-entry-ring weblogger-ring-index))
+  (weblogger-current-entry))
 
 (defun weblogger-api-send-edits (struct publishp)
   "Update an entry (in STRUCT) using the best method available."
@@ -1246,28 +1244,29 @@ specified, then the default is weblogger-max-entries-in-ring."
    (weblogger-server-password)
    t))
 
-(defun weblogger-edit-entry (&optional entry)
-  "Edit a entry.  If ENTRY is specified, then use that entry.
+(defun weblogger-edit-entry (&optional create)
+  "Edit an entry.  If CREATE is nil, then use the current entry.
 Otherwise, open a new entry."
-  (setq *weblogger-entry* (switch-to-buffer "*weblogger-entry*"))
-  (setq buffer-read-only nil)
-  (weblogger-entry-mode)
-  (erase-buffer)
-  (weblogger-entry-setup-headers entry t)
-  (if (and entry (cdr (assoc "content" entry)))
-      (insert (cdr (assoc "content" entry))))
-  (message-fetch-field "Tags")
-  (set-buffer-modified-p nil)
-  (run-hooks 'weblogger-start-edit-entry-hook) ; Force hooks to clear
-                                               ; the modified flag
-                                               ; themselves if they
-                                               ; want to.
-  (message-fetch-field "Summary")
-  (if (message-fetch-field "Subject")
-      (message-goto-body) ;; If Subject exists, move cursor to message
-                          ;; body
-    (message-goto-subject)) ;; Else, drop cursor on Subject header
-  (pop-to-buffer *weblogger-entry*))
+  (let ((entry (unless create (weblogger-current-entry))))
+    (setq *weblogger-entry* (switch-to-buffer "*weblogger-entry*"))
+    (setq buffer-read-only nil)
+    (weblogger-entry-mode)
+    (erase-buffer)
+    (weblogger-entry-setup-headers entry t)
+    (if (and entry (cdr (assoc "content" entry)))
+        (insert (cdr (assoc "content" entry))))
+    (weblogger-message-fetch-field "Tags")
+    (set-buffer-modified-p nil)
+    (run-hooks 'weblogger-start-edit-entry-hook) ; Force hooks to clear
+                                                 ; the modified flag
+                                                 ; themselves if they
+                                                 ; want to.
+    (weblogger-message-fetch-field "Summary")
+    (if (weblogger-message-fetch-field "Subject")
+        (message-goto-body) ;; If Subject exists, move cursor to message
+      ;; body
+      (message-goto-subject)) ;; Else, drop cursor on Subject header
+    (pop-to-buffer *weblogger-entry*)))
 
 (unless (fboundp 'assoc-string)
   (defun assoc-string (key list &optional fold)
@@ -1405,7 +1404,8 @@ request."
   (setq weblogger-category-ring (make-ring 20))
   (weblogger-api-list-categories)
   (weblogger-api-list-entries weblogger-max-entries-in-ring)
-  (setq weblogger-ring-index 0))
+  (setq weblogger-ring-index 0)
+  (weblogger-edit-entry))
 
 (defun weblogger-determine-capabilities ()
   "Determine the capabilities of the remote weblog server."
