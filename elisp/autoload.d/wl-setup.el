@@ -6,6 +6,44 @@
 (require 'filladapt)
 (require 'org-wl)
 
+(require 'wl-highlight)
+
+(loop for x in wl-highlight-citation-face-list do 
+      (set-face-background x "#F0F0F0"))
+
+
+;; from [[http://mid.gmane.org/87zktz1oso.wl%25egh@e6h.org][Erik Hetzner]]
+(add-to-list 'mime-image-format-alist '(image jpg jpeg))
+
+;;; ====
+
+;; From [[http://mid.gmane.org/87mxqjn7un.wl%25ucecesf@ucl.ac.uk][Eric S. Fraga]]
+;; use visual-line-mode for displaying message.  This is a customization of some
+;; code posted by lloyd zusman on the wanderlust mailing list
+(defun my-summary-redisplay-hook () 
+  (save-excursion
+    (save-restriction
+      (set-buffer wl-message-buffer)
+      (save-excursion
+	;; (visual-line-mode t) ;; code for reformating the message buffer goes here
+	(setq word-wrap t)
+	)            
+      )))
+
+(add-hook 'wl-summary-redisplay-hook 'my-summary-redisplay-hook)
+
+;; to have text flowing automatically in display of emails in wanderlust
+(autoload 'fill-flowed "flow-fill")
+(add-hook 'mime-display-text/plain-hook
+ 	  (lambda ()
+ 	    (when (string= "flowed"
+ 			   (cdr (assoc "format"
+ 				       (mime-content-type-parameters
+ 					(mime-entity-content-type entity)))))
+ 	      (fill-flowed))))
+
+;;; ====
+
 (defun wl-summary-fill-message (all)
   (interactive "P")
   (if (and wl-message-buffer (get-buffer-window wl-message-buffer))
@@ -119,7 +157,12 @@ non-nil, add `dmj/wl-send-html-message' to
 
 ;; --------
 
+;; From http://emacs-fu.blogspot.com/2009/09/wanderlust-tips-and-tricks.html
 
+(setq
+  wl-forward-subject-prefix "Fwd: " )    ;; use "Fwd: " not "Forward: "
+
+;;;--------
 (defun my-wl-highlight-hook (beg end len);   )(and nil
   (save-match-data
     (let ((beginning (save-excursion
@@ -127,7 +170,8 @@ non-nil, add `dmj/wl-send-html-message' to
                        (re-search-backward "^" nil t)))
           (ending (save-excursion
                     (goto-char end)
-                    (re-search-forward "$" nil t))))
+                    (re-search-forward "\\(\n\\|$\\)" nil t))
+                    ))
       (put-text-property beginning ending 'face nil)
       (wl-highlight-message beginning ending t nil)
       (wl-highlight-message beginning ending t t)
@@ -151,7 +195,13 @@ non-nil, add `dmj/wl-send-html-message' to
    ad-do-it
    (add-hook 'wl-draft-mode-hook 'my-wl-draft-install-change-hooks)))
 
-  (defadvice split-window (before wl-split-horizontally disable)
+
+;;
+;; Forcing horizontal window splitting
+;;
+(when t
+
+(defadvice split-window (before wl-split-horizontally disable)
     "When the system is going to split the summary buffer window
 to show a message, I want to split it horizontally!  The default
 of splitting vertically (i.e. with a horizontal divider) leaves
@@ -161,7 +211,7 @@ which kinda blows."
         (ad-set-arg 1 nil)
         )
 
-  (defadvice wl-message-select-buffer (around setup-wl-split-horizontally activate protect)
+(defadvice wl-message-select-buffer (around setup-wl-split-horizontally activate protect)
     "See split-window advice \"wl-split-horizontally\".  Make sure it only applies 
 when we need it."
     (ad-enable-advice 'split-window 'before 'wl-split-horizontally)
@@ -170,6 +220,11 @@ when we need it."
     (ad-disable-advice 'split-window 'before 'wl-split-horizontally)
     (ad-activate 'split-window)
     )
+
+(add-hook 'wl-message-redisplay-hook
+          (lambda () (let ((growth (- 80 (window-width)))) (> growth 0) (enlarge-window-horizontally growth))))
+)
+;;
 
 (setq-default mime-transfer-level 8)
 
@@ -183,6 +238,11 @@ when we need it."
       'wl-draft-send
       'wl-draft-kill
       'mail-send-hook))
+
+;;
+;; MAIRIX support
+;;
+(when nil
 
 (require 'mairix)
 
@@ -238,6 +298,8 @@ when we need it."
 (define-key my-mairix-map "i" 'mairix-use-saved-search)
 (define-key my-mairix-map "e" 'mairix-edit-saved-searches)
 
+)
+
 ;;; Use ~/.mailrc
 (setq wl-address-init-function 'my-wl-address-init)
 (defun my-wl-address-init ()
@@ -252,12 +314,17 @@ when we need it."
 (setq signature-delete-blank-lines-at-eof t)
 
 
+(when nil
+;;; Shows envelopes in the mode line, but I haven't really got biff
+;;; working yet and not sure I'd want this anyhow.
+
 (setq global-mode-string
       (cons
        '(wl-modeline-biff-status
          wl-modeline-biff-state-on
          wl-modeline-biff-state-off)
        global-mode-string))
+)
 
 ;; ----------------------------------------------------------------------------
 ;;; Extension Functions
@@ -636,7 +703,7 @@ so that the appropriate emacs mode is selected according to the file extension."
 ;; ----------------------------------------------------------------------------
 ;;; Key-bindings
 
-(global-set-key "\C-xm" 'my-wl-check-mail-primary)
+(global-set-key "\C-xM" 'my-wl-check-mail-primary)
 ;;(define-key bbdb-mode-map [(control f)] 'my-bbdb-insert-folder)
 
 ;; -----------
@@ -799,13 +866,17 @@ message and of the root of its thread (both surrounded by <...>)"
         (setq ad-return-value link)
     )))
 
-;; [[wl:/message-id:"<4C9F8638.702@gmail.com>"|references:"<4C9F8638.702@gmail.com>"/%%5BGmail%5D/All%20Mail#4CA6FDCB.7050703@michi7x7.de][Email from michi7x7: Re: {Boost-users} Users! Who'd]]
-(defun dwa:org-wl-capture ())
-  
+     ;; Use `bogofilter' as spam back end
+     ;; Set `scheme' here as the spam filter you will use.
+     ;; *Note Spam Filter Processors::.
+     (setq elmo-spam-scheme 'bogofilter)
+     (require 'wl-spam)
 
 (define-key wl-summary-mode-map "X" 'egh:wl-summary-visit-conversation)
 
 (when nil
+
+(require 'elmo-imap4)
 
 (defun elmo-imap4-search2-build-full-command (search)
   "Process charset at beginning of SEARCH and build a full IMAP
