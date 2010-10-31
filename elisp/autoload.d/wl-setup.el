@@ -12,8 +12,106 @@
       (set-face-background x "#F0F0F0"))
 
 
-;; from [[http://mid.gmane.org/87zktz1oso.wl%25egh@e6h.org][Erik Hetzner]]
-(add-to-list 'mime-image-format-alist '(image jpg jpeg))
+;; -----------
+;; From [[82wrozj05t.wl%25kzhr@d1.dion.ne.jp][Kazuhiro Ito]]
+(eval-after-load "mime-view"
+  '(progn
+     (autoload 'mime-w3m-preview-text/html "mime-w3m")
+     (ctree-set-calist-strictly
+      'mime-preview-condition
+      '((type . text)
+	(subtype . html)
+	(body . visible)
+	(body-presentation-method . mime-w3m-preview-text/html)))
+     (set-alist 'mime-view-type-subtype-score-alist
+		'(text . html) 3)
+     (set-alist 'mime-view-type-subtype-score-alist
+		'(text . plain) 4)))
+
+(defun mime-entity-text/plain-score (entity)
+  (let ((content (decode-mime-charset-string
+                  (mime-entity-content entity)
+                  (or (mime-content-type-parameter
+                       (mime-entity-content-type entity)
+                       "charset")
+                      default-mime-charset)
+                  'CRLF)))
+    ;; Modify as you like.
+    (if (and (< (length content) 160)
+             (string-match "[hH][tT][mM][lL]"
+                           content))
+        1 4)))
+
+(eval-after-load "mime-view"
+  ;; For hiding garbage alternate text/plain part.
+  '(progn
+     (defun mime-display-multipart/alternative (entity situation)
+       (let* ((children (mime-entity-children entity))
+	      (original-major-mode-cell (assq 'major-mode situation))
+	      (default-situation
+		(cdr (assq 'childrens-situation situation)))
+	      (i 0)
+	      (p 0)
+	      (max-score 0)
+	      situations)
+	 (if original-major-mode-cell
+	     (setq default-situation
+		   (cons original-major-mode-cell default-situation)))
+	 (setq situations
+	       (mapcar (function
+			(lambda (child)
+			  (let ((situation
+				 (mime-find-entity-preview-situation
+				  child default-situation)))
+			    (if (cdr (assq 'body-presentation-method situation))
+				(let ((score
+				       (cdr
+					(or (assoc
+					     (cons
+					      (cdr (assq 'type situation))
+					      (cdr (assq 'subtype situation)))
+					     mime-view-type-subtype-score-alist)
+					    (assq
+					     (cdr (assq 'type situation))
+					     mime-view-type-subtype-score-alist)
+					    (assq
+					     t
+					     mime-view-type-subtype-score-alist)
+					    ))))
+				  (when (functionp score)
+				    (setq score (funcall score child)))
+				  (if (> score max-score)
+				      (setq p i
+					    max-score score)
+				    )))
+			    (setq i (1+ i))
+			    situation)
+			  ))
+		       children))
+	 (setq i 0)
+	 (while children
+	   (let ((child (car children))
+		 (situation (car situations)))
+	     (mime-display-entity child (if (= i p)
+					    situation
+					  (put-alist 'body 'invisible
+						     (copy-alist situation)))))
+	   (setq children (cdr children)
+		 situations (cdr situations)
+		 i (1+ i)))))
+
+     (set-alist 'mime-view-type-subtype-score-alist
+		'(text . plain) 'mime-entity-text/plain-score)))
+
+;; from [[http://mid.gmane.org/82bp6fjj71.wl%25kzhr@d1.dion.ne.jp][Kazuhiro Ito]]
+(eval-after-load "mime-image"
+  '(let ((rule '(image jpg jpeg)))
+     (ctree-set-calist-strictly
+      'mime-preview-condition
+      (list (cons 'type (car rule))(cons 'subtype (nth 1 rule))
+	    '(body . visible)
+	    (cons 'body-presentation-method #'mime-display-image)
+	    (cons 'image-format (nth 2 rule))))))
 
 ;;; ====
 
@@ -706,8 +804,6 @@ so that the appropriate emacs mode is selected according to the file extension."
 (global-set-key "\C-xM" 'my-wl-check-mail-primary)
 ;;(define-key bbdb-mode-map [(control f)] 'my-bbdb-insert-folder)
 
-;; -----------
-(require 'mime-w3m)
 
 
 ;; ------------

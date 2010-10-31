@@ -21,3 +21,5 @@ CVS
 /3rd-party/w3m-el/configure
 /3rd-party/w3m-el/doc/Makefile
 /3rd-party/mailcrypt/mailcrypt.info
+/3rd-party/.disabled
+/3rd-party/w3m-el/w3m-load.el

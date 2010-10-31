@@ -232,6 +232,12 @@ tags when using the Blogger API."
   :group 'weblogger
   :type 'boolean)
 
+(defcustom weblogger-blogger-firstline-category nil
+  "Look for the category in the first line surrounded by <category>
+tags when using the Blogger API."
+  :group 'weblogger
+  :type 'boolean)
+
 (defcustom weblogger-config-name "default"
   "Name of the default configuration."
   :group 'weblogger
@@ -369,15 +375,6 @@ shouldn't be changed.")
                                       ("wp.editComment" . nil)
                                       ("wp.newComment" . nil)
                                       ("wp.getCommentStatusList" . nil)
-                                      ("blogger.getUsersBlogs" . nil)
-                                      ("blogger.getUserInfo" . nil)
-                                      ("blogger.getPost" . nil)
-                                      ("blogger.getRecentPosts" . nil)
-                                      ("blogger.getTemplate" . nil)
-                                      ("blogger.setTemplate" . nil)
-                                      ("blogger.newPost" . nil)
-                                      ("blogger.editPost" . nil)
-                                      ("blogger.deletePost" . nil)
                                       ("metaWeblog.newPost" . nil)
                                       ("metaWeblog.editPost" . nil)
                                       ("metaWeblog.getPost" . nil)
@@ -388,6 +385,15 @@ shouldn't be changed.")
                                       ("metaWeblog.getTemplate" . nil)
                                       ("metaWeblog.setTemplate" . nil)
                                       ("metaWeblog.getUsersBlogs" . nil)
+                                      ("blogger.getUsersBlogs" . nil)
+                                      ("blogger.getUserInfo" . nil)
+                                      ("blogger.getPost" . nil)
+                                      ("blogger.getRecentPosts" . nil)
+                                      ("blogger.getTemplate" . nil)
+                                      ("blogger.setTemplate" . nil)
+                                      ("blogger.newPost" . nil)
+                                      ("blogger.editPost" . nil)
+                                      ("blogger.deletePost" . nil)
                                       ("mt.getCategoryList" . nil)
                                       ("mt.getRecentPostTitles" . nil)
                                       ("mt.getPostCategories" . nil)
@@ -774,7 +780,7 @@ for the weblog to use."
           weblogger-config-alist)))
 
 (defun weblogger-save-entry (&optional publishp arg)
-  "Publish the current entry is publishp is set.  With optional
+  "Publish the current entry if publishp is set.  With optional
 argument, prompts for the weblog to use."
   (interactive)
   (if (not (equal (current-buffer) *weblogger-entry*))
@@ -1187,16 +1193,26 @@ entry as well."
    (weblogger-api-blogger-get-content struct)
    publishp))
 
-(defun weblogger-api-blogger-get-content (struct)
-  "Return the content for this post, optionally inserting the
-title in the first row if weblogger-blogger-firstline-title is
-set."
-  (if weblogger-blogger-firstline-title
-      (concat "<title>"
-              (cdr (assoc "title" struct))
-              "</title>\n"
-              (cdr (assoc "content" struct)))
-    (cdr (assoc "content" struct))))
+(defun weblogger-maybe-add-tag (add-it post tag property base-content)
+  "Returns: If ADD-IT is non-nil, the named PROPERTY from POST,
+suitably tagged, prepended to BASE-CONTENT.  Otherwise,
+BASE-CONTENT."
+  (let ((body (cdr (assoc property post))))
+    (if (and body add-it)
+        (concat "<" tag ">" body "</" tag ">" ;; Old version added \n here
+              base-content)
+    base-content)))
+
+(defun weblogger-api-blogger-get-content (post)
+  "Return the content for this POST, optionally inserting the
+title and/or category in the first row if
+weblogger-blogger-firstline-title and/or
+weblogger-blogger-firstline-category is set."
+  (weblogger-maybe-add-tag 
+   weblogger-blogger-firstline-title post "title" "title"
+   (weblogger-maybe-add-tag
+    weblogger-blogger-firstline-category post "category" "categories"
+    (cdr (assoc "content" post)))))
 
 (defun weblogger-api-blogger-send-edits (struct &optional publishp)
   "Blogger API method to post edits to an entry specified by
@@ -1234,6 +1250,10 @@ specified, then the default is weblogger-max-entries-in-ring."
           (weblogger-server-password)
           (or count weblogger-max-entries-in-ring)))))
 
+(defun weblogger-current-entry ()
+  "Get the entry at the current position in the entry ring"
+  (ring-ref weblogger-entry-ring weblogger-ring-index))
+
 (defun weblogger-api-blogger-delete-entry (msgid)
   (xml-rpc-method-call
    (weblogger-server-url)
@@ -1244,6 +1264,14 @@ specified, then the default is weblogger-max-entries-in-ring."
    (weblogger-server-password)
    t))
 
+(defun weblogger-message-fetch-field (header &optional not-all)
+  (let (deactivate-mark ret)
+    (save-restriction
+      (message-narrow-to-headers-or-head)
+      (setq ret (message-fetch-field header not-all)))
+    ret
+    ))
+  
 (defun weblogger-edit-entry (&optional create)
   "Edit an entry.  If CREATE is nil, then use the current entry.
 Otherwise, open a new entry."
@@ -1272,15 +1300,39 @@ Otherwise, open a new entry."
   (defun assoc-string (key list &optional fold)
     (assoc-string key list t)))
 
+(defun weblogger-response-extract-tag (tag content)
+  "If (cdr CONTENT) begins with a section delimited by
+<TAG>...</TAG>, remove that delimited section from (cdr CONTENT)
+and return its contents.  Otherwise, return nil."
+  (when (string-match (concat "^.*<" tag ">\\(.*\\)</" tag ">")
+                       (cdr content))
+    (let ( (ret (match-string 1 (cdr content))) )
+      (setcdr content
+              (with-temp-buffer
+                (insert (cdr content))
+                (goto-char (point-min))
+                (while (and (not (string=
+                                  "" (match-string
+                                      0 (cdr content))))
+                            (search-forward
+                             (match-string
+                              0 (cdr content)) nil t))
+                  (replace-match "" nil t))
+                (buffer-string)))
+      ret)))
+
 (defun weblogger-response-to-struct (response)
   "Convert the result of the xml-rpc call to a structure we
 like."
-  (let ((postid      (cdr (assoc-string "postid" response t)))
+  (let* ((postid      (cdr (assoc-string "postid" response t)))
         (authorName  (cdr (assoc-string "authorname" response t)))
         (userid      (cdr (assoc-string "userid" response t)))
-        (title       (cdr (assoc-string "title" response t)))
-        (dateCreated (cdr (assoc-string "datecreated" response t)))
         (content          (assoc-string "content" response))
+        (title       (or
+                      (cdr (assoc-string "title" response t))
+                      (and weblogger-blogger-firstline-title
+                           (weblogger-response-extract-tag "title" content))))
+        (dateCreated (cdr (assoc-string "datecreated" response t)))
         (trackbacks  (cdr (assoc-string "mt_tb_ping_urls" response t)))
         (textType
          (cdr (assoc-string "mt_convert_breaks" response t)))
@@ -1289,35 +1341,17 @@ like."
 	(extended         (assoc-string "mt_text_more" response t))
 	(tags        (cdr (assoc-string "mt_keywords" response t)))
 	(excerpt     (cdr (assoc-string "mt_excerpt" response t)))
-        (categories  (cdr (assoc-string "categories" response t))))
+        (categories  (or
+                      (cdr (assoc-string "categories" response t))
+                      (and weblogger-blogger-firstline-category
+                           (weblogger-response-extract-tag "category" content)))))
 
     (cond (content
            (delq nil (list
                       (when postid
                         (cons "entry-id"     postid))
-                      (if title
-                          (cons "title"        title)
-                        ;; See if we can extract the title from the
-                        ;; first line of the message body if it wasn't
-                        ;; in a header.
-                        (when (and
-                               weblogger-blogger-firstline-title
-                               (string-match "^<title>\\(.*\\)</title>.*\n"
-                                             (cdr content)))
-                          (setq title (match-string 1 (cdr content)))
-                          (setcdr content
-                                  (with-temp-buffer
-                                    (insert (cdr content))
-                                    (goto-char (point-min))
-                                    (while (and (not (string=
-                                                      "" (match-string
-                                                          0 (cdr content))))
-                                                (search-forward
-                                                 (match-string
-                                                  0 (cdr content)) nil t))
-                                      (replace-match "" nil t))
-                                    (buffer-string)))
-                          (cons "title" title)))
+                      (when title 
+                          (cons "title"        title))
                       (when authorName
                         (cons "authorName"   authorName))
                       (when userid
@@ -1422,11 +1456,11 @@ request."
                  (weblogger-server-url)
                  'mt.supportedMethods)))
       (error (setq has-mt-api nil))))
-  (cond ((cdr (assoc "metaWeblog.editPost" weblogger-capabilities))
-         (setq weblogger-api-send-edits 'weblogger-api-meta-send-edits))
+  (cond ((cdr (assoc "blogger.editPost" weblogger-capabilities))
+         (setq weblogger-api-send-edits 'weblogger-api-blogger-send-edits))
         (t
          (setq weblogger-api-send-edits
-               'weblogger-api-blogger-send-edits)))
+               'weblogger-api-meta-send-edits)))
   (cond ((cdr (assoc "metaWeblog.newPost" weblogger-capabilities))
          (setq weblogger-api-new-entry 'weblogger-api-meta-new-entry))
         (t
@@ -1455,25 +1489,25 @@ internally).  If BUFFER is not given, use the current buffer."
     (set-buffer buffer)
     (delq nil
           (list
-           (cons "authorName"   (message-fetch-field "From"))
+           (cons "authorName"   (weblogger-message-fetch-field "From"))
            (cons "dateCreated"
                  (list :datetime (date-to-time
-                                  (message-fetch-field "Date"))))
-           (cons "texttype"      (message-fetch-field "X-TextType"))
-           (cons "url"           (message-fetch-field "X-Url"))
-           (cons "title"     (or (message-fetch-field "Subject")
+                                  (weblogger-message-fetch-field "Date"))))
+           (cons "texttype"      (weblogger-message-fetch-field "X-TextType"))
+           (cons "url"           (weblogger-message-fetch-field "X-Url"))
+           (cons "title"     (or (weblogger-message-fetch-field "Subject")
                                  weblogger-default-title))
-	   (cons "tags" (message-fetch-field "Tags"))
-	   (cons "excerpt" (message-fetch-field "Summary"))
-           (when (message-fetch-field "In-Reply-To")
+	   (cons "tags" (weblogger-message-fetch-field "Tags"))
+	   (cons "excerpt" (weblogger-message-fetch-field "Summary"))
+           (when (weblogger-message-fetch-field "In-Reply-To")
              (cons "trackbacks"
                    (or (message-tokenize-header
-                        (message-fetch-field "In-Reply-To") ", ")
+                        (weblogger-message-fetch-field "In-Reply-To") ", ")
                        weblogger-default-categories)))
            (when (and weblogger-ring-index
                       (> (ring-length weblogger-entry-ring) 0))
              (cons "entry-id"
-                   (let ((msgid (message-fetch-field "Message-ID")))
+                   (let ((msgid (weblogger-message-fetch-field "Message-ID")))
                      (if (and msgid (string-match "<\\([0-9]+\\)/" msgid))
                          (match-string 1 msgid)
                        (cdr (assoc "entry-id"
