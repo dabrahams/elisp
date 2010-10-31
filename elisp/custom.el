@@ -156,7 +156,7 @@ Removed \"}\" from the allowable characters because I often type that when writi
 " nil nil "
 Always Bcc: myself")
  '(message-forward-ignored-headers (quote ("^Content-Transfer-Encoding:" "^X-Gnus" "^X-" "^Received:" "^User-Agent:" "^References:")))
- '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) t nil "
+ '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) nil nil "
 Automatically wrap text during email composition")
  '(message-send-mail-function (quote message-send-mail-with-sendmail))
  '(message-subject-re-regexp "^[ 	]*\\(\\([Rr][Ee]\\|[Aa][Ww]\\)\\(\\[[0-9]*\\]\\)*:[ 	]*\\)*[ 	]*" nil nil "
@@ -218,6 +218,7 @@ Wiegleymacs has some pretty long matchers
  '(org-capture-templates (quote (("t" "Task" entry (file+headline "~/Dropbox/todo.txt" "Inbox") "* TODO %?
   SCHEDULED: %t
   :PROPERTIES:
+  :Link: %a
   :ID:       %(shell-command-to-string \"uuidgen\")  :END:
   %U" :prepend t))))
  '(org-clock-idle-time 10)
@@ -237,7 +238,7 @@ Wiegleymacs has some pretty long matchers
  '(org-directory "~/Dropbox/Projects")
  '(org-ellipsis (quote org-habit-alert-face))
  '(org-enforce-todo-dependencies t)
- '(org-extend-today-until 8)
+ '(org-extend-today-until 2)
  '(org-fast-tag-selection-single-key (quote expert))
  '(org-footnote-section nil)
  '(org-habit-preceding-days 42)
@@ -257,7 +258,7 @@ Wiegleymacs has some pretty long matchers
  '(org-reverse-note-order t)
  '(org-speed-commands-user nil)
  '(org-stuck-projects (quote ("+LEVEL=1/-DONE" ("TODO" "STARTED" "NEXT" "NEXTACTION") nil "\\(Appointments\\|Notes\\|Anniversaries\\)")))
- '(org-tag-alist (quote ((#("NASIM" 0 5 (face nil)) . 110) (#("WORK" 0 4 (face nil)) . 119))))
+ '(org-tag-alist (quote ((#("LUANN" 0 5 (face nil)) . 110) (#("WORK" 0 4 (face nil)) . 119))))
  '(org-tags-column -97)
  '(org-time-clocksum-use-fractional t)
  '(org-todo-keyword-faces (quote (("TODO" :foreground "medium blue" :weight bold) ("APPT" :foreground "medium blue" :weight bold) ("NOTE" :foreground "brown" :weight bold) ("STARTED" :foreground "dark orange" :weight bold) ("WAITING" :foreground "red" :weight bold) ("DELEGATED" :foreground "dark violet" :weight bold) ("DEFERRED" :foreground "dark blue" :weight bold) ("SOMEDAY" :foreground "dark blue" :weight bold) ("PROJECT" :height 1.5 :weight bold :foreground "black"))))
@@ -383,7 +384,6 @@ I have some hard-to-type folder names; why struggle?
  '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:background "Beige" :foreground "DarkGreen" :slant italic))))
  '(italic ((t (:slant italic :family "Monaco"))))
  '(mode-line ((((class color) (min-colors 88)) (:inherit variable-pitch :background "lightblue" :foreground "black" :box (:line-width -1 :style released-button) :height 1.2))))
- '(org-mode-line-clock ((t (:inherit variable-pitch :background "green" :foreground "black" :box (:line-width -1 :style released-button) :height 1.2))) t)
  '(org-habit-alert-face ((((background light)) (:background "#f5f946"))))
  '(org-habit-alert-future-face ((((background light)) (:background "#fafca9"))))
  '(org-habit-clear-face ((((background light)) (:background "#8270f9"))))
@@ -392,6 +392,7 @@ I have some hard-to-type folder names; why struggle?
  '(org-habit-overdue-future-face ((((background light)) (:background "#fc9590"))))
  '(org-habit-ready-face ((((background light)) (:background "#4df946"))))
  '(org-habit-ready-future-face ((((background light)) (:background "#acfca9"))))
+ '(org-mode-line-clock ((t (:inherit variable-pitch :background "green" :foreground "black" :box (:line-width -1 :style released-button) :height 1.2))) t)
  '(org-scheduled ((((class color) (min-colors 88) (background light)) nil)))
  '(org-upcoming-deadline ((((class color) (min-colors 88) (background light)) (:foreground "Brown"))))
  '(rst-level-1-face ((t (:background "grey85" :foreground "black"))) t)
