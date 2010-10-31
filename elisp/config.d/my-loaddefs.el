@@ -303,7 +303,7 @@ If there is no .svn directory, examine if there is CVS and run
 
 ;;;### (autoloads (weblogger-fetch-entries weblogger-start-entry
 ;;;;;;  weblogger-setup-weblog weblogger-select-configuration) "weblogger"
-;;;;;;  "../../../../elisp/package.d/weblogger.el" (19641 37748))
+;;;;;;  "../../../../elisp/package.d/weblogger.el" (19661 49660))
 ;;; Generated autoloads from ../../../../elisp/package.d/weblogger.el
 
 (autoload 'weblogger-select-configuration "weblogger" "\
@@ -437,7 +437,7 @@ Just some alien fruit salad to keep you in the zone.
 ;;;;;;  "../../../../elisp/package.d/yasnippet-debug.el" "../../../../elisp/package.d/yasnippet.el"
 ;;;;;;  "../../../../elisp/package.d/zenburn-wl.el" "../../../../elisp/package.d/zenburn-wl.el"
 ;;;;;;  "../../../../elisp/package.d/zenburn-wl.el" "../../../../elisp/package.d/zenburn.el")
-;;;;;;  (19649 63201 283104))
+;;;;;;  (19661 49885 744150))
 
 ;;;***
 
