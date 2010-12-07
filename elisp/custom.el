@@ -6,12 +6,14 @@
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(ac-dictionary-directories (quote ("~/.emacs.d/3rd-party/package.d/auto-complete/ac-dict")))
  '(auto-save-file-name-transforms (quote (("\\`/[^/]*:\\([^/]*/\\)*\\([^/]*\\)\\'" "/tmp/\\2" t) ("\\`\\(?:[^/]*/\\)*\\([^/]*\\)\\'" "~/.emacs.d/auto-saves/\\1" t))) nil nil "
 Added a 2nd regexp to try to ensure that the auto-save files are
 always collected in a common directory")
  '(backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
  '(blink-cursor-mode nil nil nil "
 Blinking cursor just annoys me")
+ '(bookmark-save-flag 0)
  '(c-basic-offset 4)
  '(c-default-style (quote ((java-mode . "java") (awk-mode . "awk") (other . "bsd"))))
  '(canlock-password "963afd5a40a33c7f59217100af5a7c1648af74a1")
@@ -92,7 +94,6 @@ The default limit is so low that it always asks about messages that would fetch 
  '(erc-nick "bewst")
  '(erc-notify-mode t)
  '(erc-sound-mode t)
- '(exec-path (quote ("/usr/bin" "/bin" "/usr/sbin" "/sbin" "/Applications/Emacs.app/Contents/MacOS/bin" "/usr/local/git/bin" "/opt/local/bin" "/opt/local/sbin")))
  '(explicit-bash-args (quote ("--noediting" "-i" "-l")) nil nil "
 added -l so it would take things out of my .bash_profile, like (on boostpro.com) the prompt pattern.  Otherwise I get this abomination: ///bd5882fff11dd5c2900e1ce95b895e66")
  '(explicit-shell-file-name "bash" nil nil "
@@ -104,6 +105,7 @@ Invoking ffap without any prefix tends to do things I don't intend.")
  '(g-user-email "dave@boostpro.com")
  '(gdb-max-frames 100 nil nil "
 Increased the number of stack frames displayed from 40")
+ '(global-auto-complete-mode t)
  '(global-auto-revert-mode t nil nil "
 We want our file buffers to stay up-to-date with changes on disk")
  '(gnus-buttonized-mime-types (quote ("multipart/signed" "multipart/alternative" "application/msword")))
@@ -132,9 +134,11 @@ from macports.")
  '(imap-shell-program (quote ("dovecot --exec-mail imap")))
  '(indent-tabs-mode nil)
  '(inhibit-startup-screen t)
- '(initsplit-customizations-alist (quote (("\\`\\(org\\|calendar\\|diary\\)-" "~/Dropbox/.org.el" t))))
+ '(initsplit-customizations-alist (quote (("\\`\\(org\\|calendar\\|diary\\)-" "~/elisp/autoload.d/org-customization.el" t))))
  '(ispell-program-name "aspell")
  '(magit-git-executable "/opt/local/bin/git")
+ '(magit-process-popup-time 2)
+ '(magit-remote-ref-format (quote remote-slash-branch) nil nil "Otherwise, magit uses a funky `branch-name (remote-name)' syntax")
  '(magit-repo-dirs (quote ("/Users/dave/src" "/Users/dave/work/pipsync")))
  '(magit-repo-dirs-depth 1)
  '(mail-signature t)
@@ -153,7 +157,7 @@ Removed \"}\" from the allowable characters because I often type that when writi
 " nil nil "
 Always Bcc: myself")
  '(message-forward-ignored-headers (quote ("^Content-Transfer-Encoding:" "^X-Gnus" "^X-" "^Received:" "^User-Agent:" "^References:")))
- '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) nil nil "
+ '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) t nil "
 Automatically wrap text during email composition")
  '(message-send-mail-function (quote message-send-mail-with-sendmail))
  '(message-subject-re-regexp "^[ 	]*\\(\\([Rr][Ee]\\|[Aa][Ww]\\)\\(\\[[0-9]*\\]\\)*:[ 	]*\\)*[ 	]*" nil nil "
@@ -198,6 +202,7 @@ Always run a server so we can open files in existing emacs frames.")
 Tool bars take up valuable screen real-estate for icons whose meaning I forget")
  '(tramp-backup-directory-alist (quote (("." . "~/.emacs.d/backups"))))
  '(tramp-default-host "localhost")
+ '(tramp-default-method-alist nil)
  '(tramp-default-proxies-alist (quote (("\\`localhost\\'" nil nil) ("\\`206.217.198.21\\'" nil nil) ("\\`.+\\'" "\\`root\\'" "/ssh:%h:"))) nil nil "
 Gets around the common setting that prohibits ssh login as root.
 
@@ -209,6 +214,7 @@ then sudo on the remote host itself.")
  '(truncate-partial-width-windows nil)
  '(user-mail-address "dave@boostpro.com")
  '(vc-diff-switches "-du")
+ '(version-control t)
  '(w3m-confirm-leaving-secure-page t nil nil "
 I never like being nannied by regular browsers either.")
  '(w3m-default-display-inline-images t)
@@ -218,6 +224,8 @@ I never like being nannied by regular browsers either.")
  '(warning-suppress-types (quote ((\(undo\ discard-info\)))) nil nil "
 Without this, emacs pops up annoying warnings in, e.g., *shell* buffers
 where I don't expect it to be keeping undo history anyway")
+ '(weblogger-blogger-firstline-category t)
+ '(weblogger-blogger-firstline-title t)
  '(weblogger-config-alist (quote (("homepage" "http://daveabrahams.com/xmlrpc.php" "dave" "" "2") ("techarcana" "http://techarcana.net/xmlrpc.php" "dave" "" "1") ("cpp-next" "http://cpp-next.com/xmlrpc.php" "dave" "" "1") ("ryppl" "http://ryppl.org/xmlrpc.php" "dave" "" "4") ("boostpro" "http://boostpro.com/xmlrpc.php" "dave" "" "1"))))
  '(weblogger-edit-entry-hook (quote ((lambda nil (switch-to-buffer "*weblogger-entry*")))))
  '(weblogger-edit-mode (quote my-weblogger-markdown-mode))
@@ -247,9 +255,9 @@ Keep more sent messages around for quick/easy access
 This has to be on if I want the 'sendlog folder to contain anything
 ")
  '(wl-fldmgr-add-complete-with-current-folder-list t)
- '(wl-folder-desktop-name #("Messages" 0 8 (wl-folder-is-group is-group wl-folder-entity-id 0)))
+ '(wl-folder-desktop-name #("Messages" 0 8 (wl-folder-entity-id 0 wl-folder-is-group is-group)))
  '(wl-folder-notify-deleted t)
- '(wl-folder-petname-alist (quote (("%INBOX" . "Inbox") ("+drafts" . "Drafts") (#("%[Gmail]/Sent" 0 13 (wl-folder-entity-id 3 wl-folder-is-group nil)) . "Sent") (#("%inbox:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 58 (wl-folder-entity-id 72 wl-folder-is-group nil)) . "Inbox") (#("%[Gmail]/Trash:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 66 (wl-folder-entity-id 74 wl-folder-is-group nil)) . "Trash") (#("%[Gmail]/Star:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 65 (wl-folder-entity-id 75 wl-folder-is-group nil)) . "With a Star") (#("%[Gmail]/Sent:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 65 (wl-folder-entity-id 76 wl-folder-is-group nil)) . "Sent") (#("%[Gmail]/Draft:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 66 (wl-folder-entity-id 77 wl-folder-is-group nil)) . "Draft") (#("%[Gmail]/All E-Mails:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 72 (wl-folder-entity-id 78 wl-folder-is-group nil)) . "All E-Mails") (#("%Org-Mode:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 61 (wl-folder-entity-id 79 wl-folder-is-group nil)) . "Org-Mode") (#("%[Gmail]/Draft" 0 14 (wl-folder-entity-id 4 wl-folder-is-group nil)) . "Drafts") (#("%[Gmail]/Star" 0 13 (wl-folder-entity-id 2 wl-folder-is-group nil)) . "Flagged") ("%Trash" . "Trash") (#("%INBOX" 0 6 (wl-folder-entity-id 1 wl-folder-is-group nil)) . "Inbox") (#("%[Gmail]/Starred" 0 16 (wl-folder-entity-id 2 wl-folder-is-group nil)) . "Important") (#("%[Gmail]/Sent Mail" 0 18 (wl-folder-entity-id 3 wl-folder-is-group nil)) . "Sent") (#("%[Gmail]/Drafts" 0 15 (wl-folder-entity-id 4 wl-folder-is-group nil)) . "Drafts") (#("%[Gmail]/All Mail" 0 17 (wl-folder-entity-id 11 wl-folder-is-group nil)) . "Archive") (#("%[Gmail]/Trash" 0 14 (wl-folder-entity-id 12 wl-folder-is-group nil)) . "Trash") (#("%[Gmail]/Spam" 0 13 (wl-folder-entity-id 14 wl-folder-is-group nil)) . "Spam") (#("+draft" 0 6 (wl-folder-entity-id 15 wl-folder-is-group nil)) . "Drafts"))))
+ '(wl-folder-petname-alist (quote (("%INBOX" . "Inbox") ("+drafts" . "Drafts") (#("%[Gmail]/Sent" 0 13 (wl-folder-is-group nil wl-folder-entity-id 3)) . "Sent") (#("%inbox:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 58 (wl-folder-is-group nil wl-folder-entity-id 72)) . "Inbox") (#("%[Gmail]/Trash:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 66 (wl-folder-is-group nil wl-folder-entity-id 74)) . "Trash") (#("%[Gmail]/Star:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 65 (wl-folder-is-group nil wl-folder-entity-id 75)) . "With a Star") (#("%[Gmail]/Sent:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 65 (wl-folder-is-group nil wl-folder-entity-id 76)) . "Sent") (#("%[Gmail]/Draft:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 66 (wl-folder-is-group nil wl-folder-entity-id 77)) . "Draft") (#("%[Gmail]/All E-Mails:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 72 (wl-folder-is-group nil wl-folder-entity-id 78)) . "All E-Mails") (#("%Org-Mode:\"dave.abrahams@gmail.com\"/clear@imap.gmail.com:993!" 0 61 (wl-folder-is-group nil wl-folder-entity-id 79)) . "Org-Mode") (#("%[Gmail]/Draft" 0 14 (wl-folder-is-group nil wl-folder-entity-id 4)) . "Drafts") (#("%[Gmail]/Star" 0 13 (wl-folder-is-group nil wl-folder-entity-id 2)) . "Flagged") ("%Trash" . "Trash") (#("%INBOX" 0 6 (wl-folder-entity-id 1 wl-folder-is-group nil)) . "Inbox") (#("%[Gmail]/Starred" 0 16 (wl-folder-entity-id 2 wl-folder-is-group nil)) . "Important") (#("%[Gmail]/Sent Mail" 0 18 (wl-folder-entity-id 3 wl-folder-is-group nil)) . "Sent") (#("%[Gmail]/Drafts" 0 15 (wl-folder-entity-id 4 wl-folder-is-group nil)) . "Drafts") (#("%[Gmail]/All Mail" 0 17 (wl-folder-entity-id 5 wl-folder-is-group nil)) . "Archive") (#("%[Gmail]/Trash" 0 14 (wl-folder-entity-id 6 wl-folder-is-group nil)) . "Trash") (#("%[Gmail]/Spam" 0 13 (wl-folder-entity-id 8 wl-folder-is-group nil)) . "Spam") (#("+draft" 0 6 (wl-folder-entity-id 9 wl-folder-is-group nil)) . "Drafts"))))
  '(wl-folder-process-duplicates-alist (quote (("^.*" . hide))) nil nil "
 Don't show me any duplicate messages")
  '(wl-folder-window-width 60)
@@ -284,12 +292,14 @@ be deleted immediately since there is a copy in All Mail.
 I have some hard-to-type folder names; why struggle?
 ")
  '(wl-user-mail-address-list (quote ("dave@boostpro.com" "dave.abrahams@gmail.com" "daveabrahams@gmail.com" "boost.consulting@gmail.com" "david.abrahams@rcn.com" "dave@luannocracy.com")))
- '(x-select-enable-clipboard t))
+ '(x-select-enable-clipboard t)
+ '(yas/snippet-dirs "~/elisp/snippets" nil (yasnippet)))
 (custom-set-faces
   ;; custom-set-faces was added by Custom.
   ;; If you edit it by hand, you could mess it up, so be careful.
   ;; Your init file should contain only one such instance.
   ;; If there is more than one, they won't work right.
+ '(column-marker-1-face ((t (:background "red"))))
  '(cursor ((default (:background "brown")) (nil nil)))
  '(diff-refine-change ((default nil) (nil (:background "#FFFFC0"))))
  '(font-lock-string-face ((((class color) (min-colors 88) (background light)) (:background "Beige" :foreground "DarkGreen" :slant italic))))

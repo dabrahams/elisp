@@ -8,6 +8,7 @@
 ;;; There is one configurable variable, init-path.  I happen to put
 ;;; my elisp tree in ~/elisp.
 
+(require 'org-install)
 (defvar init-path (expand-file-name "~/elisp"))
 (defvar init-3rd-party-path (expand-file-name "~/.emacs.d/3rd-party"))
 
@@ -80,7 +81,8 @@ representation."
       init-config-path (expand-file-name "config.d" init-path)
       init-3rd-party-config-path (expand-file-name "config.d" init-3rd-party-path)
       init-autoload-path (expand-file-name "autoload.d" init-path)
-)
+     )
+
 
 (defun find-subdirs-containing (dir pattern)
   "Return a list of all deep subdirectories of DIR that contain files
@@ -127,9 +129,8 @@ $ emacs -l ~/.emacs -batch -f byte-recompile-init-path"
         (package-dirs
          (find-subdirs-containing-elisp init-package-path))
         (non-package-dirs
-         (append (find-subdirs-containing-elisp init-config-path)
-                 (find-subdirs-containing-elisp init-autoload-path)))
-        )
+         (mapcar 'find-subdirs-containing-elisp 
+                  (list init-config-path init-autoload-path))))
     
     (letf ((byte-compile-verbose nil) (font-lock-verbose nil) (noninteractive t))
 
@@ -165,15 +166,46 @@ initial load-path."
 (setq initial-load-path load-path)
 (add-init-path-to-load-path)
 
-(add-hook 'after-save-hook 'initsplit-byte-compile-files t)
 (setq custom-file (expand-file-name "custom.el" init-path))
 (load-optimized custom-file)
 
 (load "initsplit")
-;; Attempt to load up everything in the list of split initialization files
-(mapc (lambda (init-file-spec) (load (cadr init-file-spec) nil))
-      initsplit-customizations-alist)
+(add-hook 'after-save-hook 'initsplit-byte-compile-files t)
 
+;; For all files with names ending in -SUFFIX.el in
+;; init-autoload-path, call FN with the part of the filename before
+;; -SUFFIX.el and the full path to the file, sans extension
+(defun init-do-with-autoload-files (suffix fn)
+  (dolist 
+    (file-no-ext 
+     (let ((default-directory init-autoload-path)) ;; context for file-expand-wildcards
+       (mapcar 'strip-lisp-suffix
+               (file-expand-wildcards (concat "*-" suffix ".el"))))
+     )
+    (if (string-match (concat "^\\(.*\\)-" (regexp-quote suffix)) file-no-ext)
+        (funcall fn 
+                 (match-string 1 file-no-ext) 
+                 (expand-file-name file-no-ext init-autoload-path)))
+    ))
+
+(init-do-with-autoload-files 
+ "customization" 
+ (lambda (prefix el-path) 
+   ;; make sure new customizations are put there
+   (setq initsplit-customizations-alist
+         (append initsplit-customizations-alist
+                 (list (list (concat "\\`" (regexp-quote prefix) "-") (concat el-path ".el") t))))
+   ))
+
+;; Attempt to load up everything in the list of split initialization files
+(let ((loaded nil))
+  (mapc (lambda (init-file-spec) 
+          (let ((path (file-truename (cadr init-file-spec))))
+            (unless (memq path loaded)
+              (load-optimized path)
+              (setq loaded (cons path loaded))
+              )))
+        initsplit-customizations-alist))
 
 ; So you can tell the difference between GNU Emacs and XEmacs in your
 ; settings files
@@ -197,20 +229,8 @@ initial load-path."
 ; Prepare all autoloads.d/xxx-setup.el files to load automatically
 ; after the xxx library.  See
 ; http://www.emacsblog.org/2007/10/07/declaring-emacs-bankruptcy/#comment-5937
-(dolist 
-    ;; For file in (*-setup.el files in init-autoload-path)
-    (file 
-     (let ((default-directory init-autoload-path))
-       (mapcar 'file-name-sans-extension
-               (file-expand-wildcards "*-setup.el")))
-     )
-
-  (eval-after-load
-      ;; convert the first part of the filename to a symbol
-      ;; identifying the package on which we want to piggyback this
-      ;; setup file
-      (intern 
-       (and (string-match "^\\(.*\\)-setup" file) (match-string 1 file)))
-    `(load-optimized ,(expand-file-name file init-autoload-path))))
+(init-do-with-autoload-files 
+ "setup" 
+ (lambda (prefix el-path) (eval-after-load (intern prefix) `(load-optimized ,el-path))))
 
 (provide 'init)

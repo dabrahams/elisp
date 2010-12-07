@@ -48,6 +48,6 @@
                                (set-window-start (selected-window) old-window-start))
                      buf)))))
 
-(add-hook 'emacs-lisp-mode-hook
-          (lambda () (add-hook 'after-save-hook 'pj/auto-recompile-file-always nil t)))
+;;(add-hook 'emacs-lisp-mode-hook
+;;          (lambda () (add-hook 'after-save-hook 'pj/auto-recompile-file-always nil t)))
 

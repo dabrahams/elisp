@@ -1,6 +1,9 @@
 ;; This file contains autoloads that perhaps ought to have been
 ;; embedded in packages I'm using, but weren't.
 
+(autoload 'doc-mode "doc-mode")
+(add-to-list 'auto-mode-alist '("\\.asciidoc\\'". doc-mode))
+
 (autoload 'magit-status "magit"
   "magit package supplies no doc." t)
 

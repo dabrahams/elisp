@@ -84,3 +84,6 @@ file name matches PATTERN."
                    (set-buffer-modified-p nil)))
       )))
 
+(require 'auto-complete-config)
+(ac-config-default)
+

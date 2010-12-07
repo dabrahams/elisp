@@ -63,3 +63,6 @@
 (global-set-key [(control f4)] 'first-error)
 
 (global-set-key [(control shift u)] 'unicode-character-shortcut-insert)
+
+;; Version control
+(global-set-key [(control ?x) ?g] 'magit-status)

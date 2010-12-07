@@ -11,99 +11,9 @@
 (loop for x in wl-highlight-citation-face-list do 
       (set-face-background x "#F0F0F0"))
 
-
-;; -----------
-;; From [[82wrozj05t.wl%25kzhr@d1.dion.ne.jp][Kazuhiro Ito]]
-(eval-after-load "mime-view"
-  '(progn
-     (autoload 'mime-w3m-preview-text/html "mime-w3m")
-     (ctree-set-calist-strictly
-      'mime-preview-condition
-      '((type . text)
-	(subtype . html)
-	(body . visible)
-	(body-presentation-method . mime-w3m-preview-text/html)))
-     (set-alist 'mime-view-type-subtype-score-alist
-		'(text . html) 3)
-     (set-alist 'mime-view-type-subtype-score-alist
-		'(text . plain) 4)))
-
-(defun mime-entity-text/plain-score (entity)
-  (let ((content (decode-mime-charset-string
-                  (mime-entity-content entity)
-                  (or (mime-content-type-parameter
-                       (mime-entity-content-type entity)
-                       "charset")
-                      default-mime-charset)
-                  'CRLF)))
-    ;; Modify as you like.
-    (if (and (< (length content) 160)
-             (string-match "[hH][tT][mM][lL]"
-                           content))
-        1 4)))
-
-(eval-after-load "mime-view"
-  ;; For hiding garbage alternate text/plain part.
-  '(progn
-     (defun mime-display-multipart/alternative (entity situation)
-       (let* ((children (mime-entity-children entity))
-	      (original-major-mode-cell (assq 'major-mode situation))
-	      (default-situation
-		(cdr (assq 'childrens-situation situation)))
-	      (i 0)
-	      (p 0)
-	      (max-score 0)
-	      situations)
-	 (if original-major-mode-cell
-	     (setq default-situation
-		   (cons original-major-mode-cell default-situation)))
-	 (setq situations
-	       (mapcar (function
-			(lambda (child)
-			  (let ((situation
-				 (mime-find-entity-preview-situation
-				  child default-situation)))
-			    (if (cdr (assq 'body-presentation-method situation))
-				(let ((score
-				       (cdr
-					(or (assoc
-					     (cons
-					      (cdr (assq 'type situation))
-					      (cdr (assq 'subtype situation)))
-					     mime-view-type-subtype-score-alist)
-					    (assq
-					     (cdr (assq 'type situation))
-					     mime-view-type-subtype-score-alist)
-					    (assq
-					     t
-					     mime-view-type-subtype-score-alist)
-					    ))))
-				  (when (functionp score)
-				    (setq score (funcall score child)))
-				  (if (> score max-score)
-				      (setq p i
-					    max-score score)
-				    )))
-			    (setq i (1+ i))
-			    situation)
-			  ))
-		       children))
-	 (setq i 0)
-	 (while children
-	   (let ((child (car children))
-		 (situation (car situations)))
-	     (mime-display-entity child (if (= i p)
-					    situation
-					  (put-alist 'body 'invisible
-						     (copy-alist situation)))))
-	   (setq children (cdr children)
-		 situations (cdr situations)
-		 i (1+ i)))))
-
-     (set-alist 'mime-view-type-subtype-score-alist
-		'(text . plain) 'mime-entity-text/plain-score)))
-
-;; from [[http://mid.gmane.org/82bp6fjj71.wl%25kzhr@d1.dion.ne.jp][Kazuhiro Ito]]
+;;; ====
+;;; Adjustments to be able to display faulty jpg MIME type
+;;; per [[http://news.gmane.org/find-root.php?message_id=%3c82bp6fjj71.wl%25kzhr%40d1.dion.ne.jp%3e][Email from Kazuhiro Ito: Re: Counfounding MIME]]
 (eval-after-load "mime-image"
   '(let ((rule '(image jpg jpeg)))
      (ctree-set-calist-strictly
@@ -132,13 +42,13 @@
 
 ;; to have text flowing automatically in display of emails in wanderlust
 (autoload 'fill-flowed "flow-fill")
-(add-hook 'mime-display-text/plain-hook
- 	  (lambda ()
+(defun flow-fill-mime-display ()
  	    (when (string= "flowed"
  			   (cdr (assoc "format"
  				       (mime-content-type-parameters
  					(mime-entity-content-type entity)))))
- 	      (fill-flowed))))
+ 	      (fill-flowed)))
+(add-hook 'mime-display-text/plain-hook 'flow-fill-mime-display)
 
 ;;; ====
 
@@ -148,7 +58,7 @@
       (progn
         (wl-summary-toggle-disp-msg 'on)
         (save-excursion
-          (set-buffer wl-message-buffer)
+          (with-current-buffer wl-message-buffer
           (goto-char (point-min))
           (re-search-forward "^$")
           (while (or (looking-at "^\\[[1-9]") (looking-at "^$"))
@@ -169,7 +79,7 @@
             (save-restriction
               (narrow-to-region start end)
               (filladapt-mode 1)
-              (fill-region (point-min) (point-max)))))
+              (fill-region (point-min) (point-max))))))
         (message "Message re-filled"))
     (message "No message to re-fill")))
 
@@ -337,67 +247,6 @@ when we need it."
       'wl-draft-kill
       'mail-send-hook))
 
-;;
-;; MAIRIX support
-;;
-(when nil
-
-(require 'mairix)
-
-(add-to-list 'mairix-display-functions '(wl mairix-wl-display))
-(add-to-list 'mairix-get-mail-header-functions '(wl mairix-wl-fetch-field))
-
-(setq mairix-wl-search-folder-prefix "%")
-
-(defun mairix-wl-display (folder)
-  "Display FOLDER using Wanderlust."
-  ;; If Wanderlust is running (Folder buffer exists)...
-  (if (get-buffer wl-folder-buffer-name)
-      ;; Check if we are in the summary buffer, close it and
-      ;; goto the Folder buffer
-      (if (string= (buffer-name) wl-summary-buffer-name)
-          (progn
-            (wl-summary-exit t)
-            (set-buffer (get-buffer wl-folder-buffer-name))))
-    ;; Otherwise Wanderlust is not running so start it
-    (wl))
-  ;; From the Folder buffer goto FOLDER first stripping off mairix-file-path
-  ;; to leave the wl folder name
-  (when (string-match
-         (concat (regexp-quote (expand-file-name mairix-file-path)) "\\.*\\(.*\\)")
-         folder)
-    (wl-folder-goto-folder-subr
-     (concat mairix-wl-search-folder-prefix (match-string 1 folder)))))
-
-
-(defun mairix-wl-fetch-field (field)
-  "Get mail header FIELD for current message using Wanderlust."
-  (when wl-summary-buffer-elmo-folder
-    (let ((raw-field
-          (elmo-message-field
-           wl-summary-buffer-elmo-folder
-           (wl-summary-message-number)
-           (intern (downcase field)))))
-      (if (listp raw-field) (car raw-field) raw-field))))
-
-(defvar my-mairix-map
-  (let ((map (make-sparse-keymap)))
-    (define-key wl-summary-mode-map "\M-m" map)
-    map)
-  "Sub-keymap in the my keymap for the mairix commands")
-
-(define-key my-mairix-map "m" 'mairix-search)
-(define-key my-mairix-map "w" 'mairix-widget-search)
-(define-key my-mairix-map "u" 'mairix-update-database)
-(define-key my-mairix-map "f" 'mairix-search-from-this-article)
-(define-key my-mairix-map "t" 'mairix-search-thread-this-article)
-(define-key my-mairix-map "b" 'mairix-widget-search-based-on-article)
-(define-key my-mairix-map "s" 'mairix-save-search)
-(define-key my-mairix-map "i" 'mairix-use-saved-search)
-(define-key my-mairix-map "e" 'mairix-edit-saved-searches)
-
-)
-
 ;;; Use ~/.mailrc
 (setq wl-address-init-function 'my-wl-address-init)
 (defun my-wl-address-init ()
@@ -494,7 +343,7 @@ when we need it."
  'wl-folder-mode-hook
  '(lambda ()
     (hl-line-mode t)
-    (local-set-key "\M-m" 'mairix-search)
+;;    (local-set-key "\M-m" 'mairix-search)
     ))
 
 (add-hook
@@ -542,11 +391,6 @@ when we need it."
 
 ;; Add lots of goodies to the mail setup
 (add-hook 'wl-mail-setup-hook 'my-mail-setup)
-
-;; This is needed because mime-setup-enable-inline-html forces the
-;; score for html to 3
-(eval-after-load "semi-setup"
-  '(set-alist 'mime-view-type-subtype-score-alist '(text . html) 0))
 
 (add-hook
  'mime-view-mode-hook
@@ -793,9 +637,6 @@ so that the appropriate emacs mode is selected according to the file extension."
       (if func
           (apply func data))
       )))
-
-  (eval-after-load "semi-setup"
-    '(set-alist 'mime-view-type-subtype-score-alist '(text . html) 0))
 
 
 ;; ----------------------------------------------------------------------------
