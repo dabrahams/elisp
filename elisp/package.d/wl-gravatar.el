@@ -38,34 +38,24 @@
 (defun wl-gravatar-insert (&rest dummy)
   "Display Gravatar images."
   (let ((field (std11-fetch-field "From"))
-        (size (gravatar-make-query-size gravatar-icon-size))
-        filename
         image)
+    (message "wl-gravatar-insert: field=%s, address=%s" field (when field (wl-address-header-extract-address field)))
     (when field
-      (setq field (wl-address-header-extract-address field))
-      (setq filename (gravatar-make-store-filename field size))
+      (gravatar-retrieve 
 
-      (flet ((safe-create-image()(ignore-errors (create-image filename))))
+       (wl-address-header-extract-address field)
 
-        ;; If the file exists, is new enough, and can create an image, don't re-fetch
-        (unless (and wl-gravatar-retrieve-once
-                     (file-exists-p filename)
-                     (< (time-to-number-of-days
-                         (time-subtract 
-                          (current-time) (sixth (file-attributes filename))))
-                        90)
-                 (setq image (safe-create-image)))
-          (progn
-            (gravatar-retrieve filename (gravatar-make-url field size))
-            (setq image (safe-create-image))
-            ))
+       (lambda (image buffer)
+         (unless (eq image 'error)
+           (with-current-buffer buffer
+             (save-excursion
+               (goto-char (point-min))
+               (when (re-search-forward "^From: " nil t)
+                 (let ((inhibit-read-only t))
+                   ; (message "inserting gravatar in buffer %s" (buffer-name))
+                   (insert-image image)))))))
 
-        (when image
-          (save-excursion
-            (goto-char (point-min))
-            (when (re-search-forward "^From: " nil t)
-              (insert-image image))))
-      ))))
+       `(,(current-buffer))))))
 
 (provide 'wl-gravatar)
 ;;; wl-gravatar.el ends here
