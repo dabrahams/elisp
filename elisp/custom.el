@@ -53,6 +53,7 @@ get antialiasing.
 Had to evaluate (x-select-font) to find out the name of the
 font that emacs would recognize.
 ")
+ '(delete-old-versions t)
  '(delete-selection-mode t nil nil "
 Creates normal editor behavior: select a region and begin
 typing, the region is replaced")
@@ -157,7 +158,7 @@ Removed \"}\" from the allowable characters because I often type that when writi
 " nil nil "
 Always Bcc: myself")
  '(message-forward-ignored-headers (quote ("^Content-Transfer-Encoding:" "^X-Gnus" "^X-" "^Received:" "^User-Agent:" "^References:")))
- '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) t nil "
+ '(message-mode-hook (quote ((lambda nil (auto-fill-mode t)))) nil nil "
 Automatically wrap text during email composition")
  '(message-send-mail-function (quote message-send-mail-with-sendmail))
  '(message-subject-re-regexp "^[ 	]*\\(\\([Rr][Ee]\\|[Aa][Ww]\\)\\(\\[[0-9]*\\]\\)*:[ 	]*\\)*[ 	]*" nil nil "

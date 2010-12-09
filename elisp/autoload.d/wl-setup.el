@@ -658,6 +658,8 @@ so that the appropriate emacs mode is selected according to the file extension."
 
 ;; ------------------------------------------------
 
+(when nil
+
 (luna-define-method elmo-folder-synchronize ((folder elmo-folder)
 					     &optional
 					     disable-killed
@@ -740,6 +742,7 @@ so that the appropriate emacs mode is selected according to the file extension."
        (if before-append (elmo-folder-set-msgdb-internal folder old-msgdb))
        (elmo-folder-set-killed-list-internal folder killed-list)
        nil))))
+)
 
 (defun egh:wl-all-folder () "%[Gmail]/All Mail")
 
@@ -749,7 +752,7 @@ so that the appropriate emacs mode is selected according to the file extension."
 (defun dwa:wl-current-thread-location ()
   "Return a pair consisting of the message-id of the current
 message and of the root of its thread (both surrounded by <...>)"
-  (save-excursion
+  (save-window-excursion
     (wl-summary-set-message-buffer-or-redisplay)
     (set-buffer (wl-message-get-original-buffer))
 

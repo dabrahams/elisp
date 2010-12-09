@@ -6,7 +6,7 @@
 
 (define-prefix-command 'org-todo-state-map)
 (define-key org-mode-map "\C-cx" 'org-todo-state-map)
-(define-key org-mode-map "\M-/" 'org-complete)
+;; (define-key org-mode-map "\M-/" 'org-complete)
 
 (add-to-list 'auto-mode-alist '("\\.org$" . org-mode))
 

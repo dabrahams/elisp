@@ -163,6 +163,35 @@ Remove the boxquote that contains `point'.
 
 ;;;***
 
+;;;### (autoloads (browse-kill-ring browse-kill-ring-default-keybindings)
+;;;;;;  "browse-kill-ring" "../../../../elisp/package.d/browse-kill-ring.el"
+;;;;;;  (18429 49075))
+;;; Generated autoloads from ../../../../elisp/package.d/browse-kill-ring.el
+
+(autoload 'browse-kill-ring-default-keybindings "browse-kill-ring" "\
+Set up M-y (`yank-pop') so that it can invoke `browse-kill-ring'.
+Normally, if M-y was not preceeded by C-y, then it has no useful
+behavior.  This function sets things up so that M-y will invoke
+`browse-kill-ring'.
+
+\(fn)" t nil)
+
+(autoload 'browse-kill-ring "browse-kill-ring" "\
+Display items in the `kill-ring' in another buffer.
+
+\(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads nil "column-marker" "../../../../elisp/package.d/column-marker.el"
+;;;;;;  (18429 49075))
+;;; Generated autoloads from ../../../../elisp/package.d/column-marker.el
+
+(autoload 'column-marker-1 "column-marker" "\
+Highlight a column." t)
+
+;;;***
+
 ;;;### (autoloads (my-recompile my-compile) "dwa-compile" "../../../../elisp/package.d/dwa-compile.el"
 ;;;;;;  (18915 22968))
 ;;; Generated autoloads from ../../../../elisp/package.d/dwa-compile.el
@@ -195,6 +224,57 @@ With prefix ARG, turn the mode on if ARG is positive.
 Recalculate all blame information in the current buffer
 
 \(fn)" t nil)
+
+;;;***
+
+;;;### (autoloads (gravatar-retrieve) "gravatar" "../../../../elisp/package.d/gravatar.el"
+;;;;;;  (19709 19964))
+;;; Generated autoloads from ../../../../elisp/package.d/gravatar.el
+
+(autoload 'gravatar-retrieve "gravatar" "\
+Retrieve MAIL-ADDRESS gravatar and call CB on retrieval.
+You can provide a list of argument to pass to CB in CBARGS.
+
+\(fn MAIL-ADDRESS CB &optional CBARGS)" nil nil)
+
+;;;***
+
+;;;### (autoloads (global-linum-mode linum-mode linum-format) "linum"
+;;;;;;  "../../../../elisp/package.d/linum.el" (19516 48981))
+;;; Generated autoloads from ../../../../elisp/package.d/linum.el
+
+(defvar linum-format 'dynamic "\
+Format used to display line numbers. Either a format string
+like \"%7d\", 'dynamic to adapt the width as needed, or a
+function that is called with a line number as its argument and
+should evaluate to a string to be shown on that line. See also
+`linum-before-numbering-hook'.")
+
+(custom-autoload 'linum-format "linum" t)
+
+(autoload 'linum-mode "linum" "\
+Toggle display of line numbers in the left marginal area.
+
+\(fn &optional ARG)" t nil)
+
+(defvar global-linum-mode nil "\
+Non-nil if Global-Linum mode is enabled.
+See the command `global-linum-mode' for a description of this minor mode.
+Setting this variable directly does not take effect;
+either customize it (see the info node `Easy Customization')
+or call the function `global-linum-mode'.")
+
+(custom-autoload 'global-linum-mode "linum" nil)
+
+(autoload 'global-linum-mode "linum" "\
+Toggle Linum mode in every possible buffer.
+With prefix ARG, turn Global-Linum mode on if and only if
+ARG is positive.
+Linum mode is enabled in all buffers where
+`linum-on' would do it.
+See `linum-mode' for more information on Linum mode.
+
+\(fn &optional ARG)" t nil)
 
 ;;;***
 
@@ -301,6 +381,20 @@ If there is no .svn directory, examine if there is CVS and run
 
 ;;;***
 
+;;;### (autoloads (session-initialize) "session" "../../../../elisp/package.d/session.el"
+;;;;;;  (18429 49078))
+;;; Generated autoloads from ../../../../elisp/package.d/session.el
+
+(autoload 'session-initialize "session" "\
+Initialize package session and read previous session file.
+Setup hooks and load `session-save-file', see `session-initialize'.  At
+best, this function is called at the end of the Emacs startup, i.e., add
+this function to `after-init-hook'.
+
+\(fn &rest DUMMIES)" t nil)
+
+;;;***
+
 ;;;### (autoloads (weblogger-fetch-entries weblogger-start-entry
 ;;;;;;  weblogger-setup-weblog weblogger-select-configuration) "weblogger"
 ;;;;;;  "../../../../elisp/package.d/weblogger.el" (19661 49660))
@@ -377,22 +471,78 @@ Just some alien fruit salad to keep you in the zone.
 
 ;;;***
 
+;;;### (autoloads (zencoding-preview zencoding-expand-yas zencoding-mode
+;;;;;;  zencoding-expand-line) "zencoding-mode" "../../../../elisp/package.d/zencoding-mode.el"
+;;;;;;  (19516 48995))
+;;; Generated autoloads from ../../../../elisp/package.d/zencoding-mode.el
+
+(autoload 'zencoding-expand-line "zencoding-mode" "\
+Replace the current line's zencode expression with the corresponding expansion.
+If prefix ARG is given or region is visible call `zencoding-preview' to start an
+interactive preview.
+
+Otherwise expand line directly.
+
+For more information see `zencoding-mode'.
+
+\(fn ARG)" t nil)
+
+(autoload 'zencoding-mode "zencoding-mode" "\
+Minor mode for writing HTML and CSS markup.
+With zen coding for HTML and CSS you can write a line like
+
+  ul#name>li.item*2
+
+and have it expanded to
+
+  <ul id=\"name\">
+    <li class=\"item\"></li>
+    <li class=\"item\"></li>
+  </ul>
+
+This minor mode defines keys for quick access:
+
+\\{zencoding-mode-keymap}
+
+Home page URL `http://www.emacswiki.org/emacs/ZenCoding'.
+
+See also `zencoding-expand-line'.
+
+\(fn &optional ARG)" t nil)
+
+(autoload 'zencoding-expand-yas "zencoding-mode" "\
+Not documented
+
+\(fn)" t nil)
+
+(autoload 'zencoding-preview "zencoding-mode" "\
+Expand zencode between BEG and END interactively.
+This will show a preview of the expanded zen code and you can
+accept it or skip it.
+
+\(fn BEG END)" t nil)
+
+;;;***
+
 ;;;### (autoloads nil nil ("../../../../elisp/package.d/ac-anything.el"
 ;;;;;;  "../../../../elisp/package.d/ac-anything.el" "../../../../elisp/package.d/ac-anything.el"
 ;;;;;;  "../../../../elisp/package.d/ahg.el" "../../../../elisp/package.d/ahg.el"
 ;;;;;;  "../../../../elisp/package.d/any-ini-mode.el" "../../../../elisp/package.d/anything.el"
 ;;;;;;  "../../../../elisp/package.d/anything.el" "../../../../elisp/package.d/anything.el"
-;;;;;;  "../../../../elisp/package.d/boxquote.el" "../../../../elisp/package.d/cmake-mode.el"
+;;;;;;  "../../../../elisp/package.d/boxquote.el" "../../../../elisp/package.d/browse-kill-ring.el"
+;;;;;;  "../../../../elisp/package.d/byte-code-cache.el" "../../../../elisp/package.d/care-package.el"
 ;;;;;;  "../../../../elisp/package.d/cmake-mode.el" "../../../../elisp/package.d/cmake-mode.el"
-;;;;;;  "../../../../elisp/package.d/cmake-mode.el" "../../../../elisp/package.d/completion-selection.el"
+;;;;;;  "../../../../elisp/package.d/cmake-mode.el" "../../../../elisp/package.d/cmake-mode.el"
+;;;;;;  "../../../../elisp/package.d/column-marker.el" "../../../../elisp/package.d/completion-selection.el"
 ;;;;;;  "../../../../elisp/package.d/completion-selection.el" "../../../../elisp/package.d/completion-selection.el"
+;;;;;;  "../../../../elisp/package.d/doc-mode.el" "../../../../elisp/package.d/dwa-c++.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-c++.el"
-;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-c++.el"
-;;;;;;  "../../../../elisp/package.d/dwa-compile.el" "../../../../elisp/package.d/dwa-rectangle.el"
+;;;;;;  "../../../../elisp/package.d/dwa-c++.el" "../../../../elisp/package.d/dwa-compile.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-rectangle.el" "../../../../elisp/package.d/dwa-rectangle.el"
-;;;;;;  "../../../../elisp/package.d/dwa-rectangle.el" "../../../../elisp/package.d/dwa-util.el"
+;;;;;;  "../../../../elisp/package.d/dwa-rectangle.el" "../../../../elisp/package.d/dwa-rectangle.el"
 ;;;;;;  "../../../../elisp/package.d/dwa-util.el" "../../../../elisp/package.d/dwa-util.el"
-;;;;;;  "../../../../elisp/package.d/dwa-util.el" "../../../../elisp/package.d/elscreen/elscreen-1.4.6/elscreen.el"
+;;;;;;  "../../../../elisp/package.d/dwa-util.el" "../../../../elisp/package.d/dwa-util.el"
+;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-1.4.6/elscreen.el"
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-color-theme-0.0.0/elscreen-color-theme.el"
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-dired-0.1.0/elscreen-dired.el"
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-dnd-0.0.0/elscreen-dnd.el"
@@ -404,12 +554,12 @@ Just some alien fruit salad to keep you in the zone.
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-w3m-0.2.2/elscreen-w3m.el"
 ;;;;;;  "../../../../elisp/package.d/elscreen/elscreen-wl-0.8.0/elscreen-wl.el"
 ;;;;;;  "../../../../elisp/package.d/filladapt.el" "../../../../elisp/package.d/filladapt.el"
-;;;;;;  "../../../../elisp/package.d/git-contrib/git-blame.el" "../../../../elisp/package.d/git-contrib/git.el"
-;;;;;;  "../../../../elisp/package.d/gravatar.el" "../../../../elisp/package.d/gravatar.el"
-;;;;;;  "../../../../elisp/package.d/gravatar.el" "../../../../elisp/package.d/gravatar.el"
-;;;;;;  "../../../../elisp/package.d/initsplit.el" "../../../../elisp/package.d/jam-mode.el"
+;;;;;;  "../../../../elisp/package.d/gccsense.el" "../../../../elisp/package.d/git-contrib/git-blame.el"
+;;;;;;  "../../../../elisp/package.d/git-contrib/git.el" "../../../../elisp/package.d/gravatar.el"
+;;;;;;  "../../../../elisp/package.d/hide-search.el" "../../../../elisp/package.d/initsplit.el"
 ;;;;;;  "../../../../elisp/package.d/jam-mode.el" "../../../../elisp/package.d/jam-mode.el"
-;;;;;;  "../../../../elisp/package.d/jam-mode.el" "../../../../elisp/package.d/markdown-mode.el"
+;;;;;;  "../../../../elisp/package.d/jam-mode.el" "../../../../elisp/package.d/jam-mode.el"
+;;;;;;  "../../../../elisp/package.d/linum.el" "../../../../elisp/package.d/markdown-mode.el"
 ;;;;;;  "../../../../elisp/package.d/markdown-mode.el" "../../../../elisp/package.d/markdown-mode.el"
 ;;;;;;  "../../../../elisp/package.d/maxframe.el" "../../../../elisp/package.d/maxframe.el"
 ;;;;;;  "../../../../elisp/package.d/maxframe.el" "../../../../elisp/package.d/maxframe.el"
@@ -422,7 +572,9 @@ Just some alien fruit salad to keep you in the zone.
 ;;;;;;  "../../../../elisp/package.d/osx-plist.el" "../../../../elisp/package.d/osx-plist.el"
 ;;;;;;  "../../../../elisp/package.d/php-mode.el" "../../../../elisp/package.d/policy-switch.el"
 ;;;;;;  "../../../../elisp/package.d/policy-switch.el" "../../../../elisp/package.d/policy-switch.el"
-;;;;;;  "../../../../elisp/package.d/psvn.el" "../../../../elisp/package.d/smartquotes.el"
+;;;;;;  "../../../../elisp/package.d/psvn.el" "../../../../elisp/package.d/qbk-mode.el"
+;;;;;;  "../../../../elisp/package.d/regex-tool.el" "../../../../elisp/package.d/repeat-insert.el"
+;;;;;;  "../../../../elisp/package.d/session.el" "../../../../elisp/package.d/smartquotes.el"
 ;;;;;;  "../../../../elisp/package.d/smartquotes.el" "../../../../elisp/package.d/smartquotes.el"
 ;;;;;;  "../../../../elisp/package.d/smartquotes.el" "../../../../elisp/package.d/timeclock-x.el"
 ;;;;;;  "../../../../elisp/package.d/timeclock-x.el" "../../../../elisp/package.d/timeclock-x.el"
@@ -436,8 +588,9 @@ Just some alien fruit salad to keep you in the zone.
 ;;;;;;  "../../../../elisp/package.d/yaoddmuse.el" "../../../../elisp/package.d/yasnippet-debug.el"
 ;;;;;;  "../../../../elisp/package.d/yasnippet-debug.el" "../../../../elisp/package.d/yasnippet.el"
 ;;;;;;  "../../../../elisp/package.d/zenburn-wl.el" "../../../../elisp/package.d/zenburn-wl.el"
-;;;;;;  "../../../../elisp/package.d/zenburn-wl.el" "../../../../elisp/package.d/zenburn.el")
-;;;;;;  (19662 4821 628127))
+;;;;;;  "../../../../elisp/package.d/zenburn-wl.el" "../../../../elisp/package.d/zenburn.el"
+;;;;;;  "../../../../elisp/package.d/zencoding-mode.el") (19712 30152
+;;;;;;  75146))
 
 ;;;***
 
