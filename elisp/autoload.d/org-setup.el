@@ -4,6 +4,15 @@
   (local-set-key [(control ?,)] 'backward-word)
   ))
 
+(add-hook 'org-capture-mode-hook
+          (lambda ()
+            (define-key mode-specific-map [?f] 'org-capture-refile)
+            ;; Why doesn't this one seem to take effect?
+            ;; (define-key mode-specific-map [(control ?f)] 'org-capture-refile)
+            (define-key org-capture-mode-map "\C-c\C-f" 'org-capture-refile)
+            ))
+
+(define-key mode-specific-map [?c] 'compile)
 (define-prefix-command 'org-todo-state-map)
 (define-key org-mode-map "\C-cx" 'org-todo-state-map)
 ;; (define-key org-mode-map "\M-/" 'org-complete)
@@ -116,7 +125,7 @@ This can be 0 for immediate, or a floating point value.")
   (let ((begin (point)))
     (save-excursion
       (outline-next-heading)
-      (and (re-search-backward "\\(- State \"\\(DONE\\|DEFERRED\\|CANCELLED\\)\"\\s-+\\[\\(.+?\\)\\]\\|CLOSED: \\[\\(.+?\\)\\]\\)" begin t)
+      (and (re-search-backward "\\(- State \"\\(DONE\\|DEFERRED\\|CANCELED\\)\"\\s-+\\[\\(.+?\\)\\]\\|CLOSED: \\[\\(.+?\\)\\]\\)" begin t)
 	   (time-to-seconds (org-time-string-to-time (or (match-string 3)
 							 (match-string 4))))))))
 
@@ -364,7 +373,7 @@ end tell" (match-string 1))))
 (define-key mode-specific-map [?x ?w]
   #'(lambda nil (interactive) (org-todo "WAITING")))
 (define-key mode-specific-map [?x ?x]
-  #'(lambda nil (interactive) (org-todo "CANCELLED")))
+  #'(lambda nil (interactive) (org-todo "CANCELED")))
 
 (define-key mode-specific-map [?x ?L] 'org-set-dtp-link)
 (define-key mode-specific-map [?x ?M] 'org-set-message-link)
@@ -470,8 +479,8 @@ defined in `yas/fallback-behavior'" t)
          (interactive) (org-agenda-todo "TODO"))
        (defun org-todo-mark-waiting ()
          (interactive) (org-agenda-todo "WAITING"))
-       (defun org-todo-mark-cancelled ()
-         (interactive) (org-agenda-todo "CANCELLED"))
+       (defun org-todo-mark-canceled ()
+         (interactive) (org-agenda-todo "CANCELED"))
 
        (define-key org-todo-state-map "d" #'org-todo-mark-done)
        (define-key org-todo-state-map "r" #'org-todo-mark-deferred)
@@ -481,7 +490,7 @@ defined in `yas/fallback-behavior'" t)
        (define-key org-todo-state-map "s" #'org-todo-mark-started)
        (define-key org-todo-state-map "t" #'org-todo-mark-todo)
        (define-key org-todo-state-map "w" #'org-todo-mark-waiting)
-       (define-key org-todo-state-map "x" #'org-todo-mark-cancelled)
+       (define-key org-todo-state-map "x" #'org-todo-mark-canceled)
 
        (define-key org-todo-state-map "z" #'make-bug-link))))
 

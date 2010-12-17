@@ -39,7 +39,7 @@
   "Display Gravatar images."
   (let ((field (std11-fetch-field "From"))
         image)
-    (message "wl-gravatar-insert: field=%s, address=%s" field (when field (wl-address-header-extract-address field)))
+    ; (message "wl-gravatar-insert: field=%s, address=%s" field (when field (wl-address-header-extract-address field)))
     (when field
       (gravatar-retrieve 
 

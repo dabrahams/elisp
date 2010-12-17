@@ -589,8 +589,8 @@ accept it or skip it.
 ;;;;;;  "../../../../elisp/package.d/yasnippet-debug.el" "../../../../elisp/package.d/yasnippet.el"
 ;;;;;;  "../../../../elisp/package.d/zenburn-wl.el" "../../../../elisp/package.d/zenburn-wl.el"
 ;;;;;;  "../../../../elisp/package.d/zenburn-wl.el" "../../../../elisp/package.d/zenburn.el"
-;;;;;;  "../../../../elisp/package.d/zencoding-mode.el") (19712 30152
-;;;;;;  75146))
+;;;;;;  "../../../../elisp/package.d/zencoding-mode.el") (19722 9872
+;;;;;;  53561))
 
 ;;;***
 

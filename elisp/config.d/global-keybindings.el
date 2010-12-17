@@ -66,3 +66,6 @@
 
 ;; Version control
 (global-set-key [(control ?x) ?g] 'magit-status)
+
+(global-set-key [?\C-c ?g ?c] 'mo-git-blame-current)
+(global-set-key [?\C-c ?g ?f] 'mo-git-blame-file)

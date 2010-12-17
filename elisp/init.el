@@ -129,8 +129,9 @@ $ emacs -l ~/.emacs -batch -f byte-recompile-init-path"
         (package-dirs
          (find-subdirs-containing-elisp init-package-path))
         (non-package-dirs
-         (mapcar 'find-subdirs-containing-elisp 
-                  (list init-config-path init-autoload-path))))
+         (append (find-subdirs-containing-elisp init-config-path)
+                 (find-subdirs-containing-elisp init-autoload-path)))
+        )
     
     (letf ((byte-compile-verbose nil) (font-lock-verbose nil) (noninteractive t))
 

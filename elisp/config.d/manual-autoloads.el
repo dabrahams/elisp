@@ -1,6 +1,9 @@
 ;; This file contains autoloads that perhaps ought to have been
 ;; embedded in packages I'm using, but weren't.
 
+(autoload 'mo-git-blame-file "mo-git-blame" nil t)
+(autoload 'mo-git-blame-current "mo-git-blame" nil t)
+
 (autoload 'doc-mode "doc-mode")
 (add-to-list 'auto-mode-alist '("\\.asciidoc\\'". doc-mode))
 
