@@ -1,0 +1,19 @@
+#/usr/bin/env bash
+#
+# Usage ./test-initsplit [--relaunch]
+#
+# Supplying the --relaunch option means run the test with the same
+# home directory that was already prepared.  That allows us to test
+# what happens when emacs is launched after the customization files
+# are updated.
+set -e
+
+if [ "$1"x != "--relaunch"x ] ; then
+    cwd="`pwd`"
+    pushd /tmp
+    rm -rf test-initsplit
+    tar xzf "$cwd"/test-initsplit.tar.gz
+    popd
+fi
+
+HOME=/tmp/test-initsplit emacs2 --no-splash --debug-init -l `pwd`/test-initsplit.el
